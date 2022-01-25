@@ -27,6 +27,7 @@ class PersonCreatePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
+          backgroundColor: context.colors.mainBackground,
           title: Text(context.strings.notification),
           leading: IconButton(
             icon: Icon(

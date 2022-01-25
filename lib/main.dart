@@ -1,3 +1,4 @@
+import 'package:birthday_gift/app/main_page.dart';
 import 'package:birthday_gift/auth/presentation/auth_page.dart';
 import 'package:birthday_gift/generated/l10n.dart';
 import 'package:birthday_gift/person/data/datasource/model/note_entity.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
     return AppColors(
       child: Builder(
         builder: (context) => MaterialApp(
-          title: 'Bee',
+          title: 'BeeFam',
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -44,8 +45,10 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: S.delegate.supportedLocales,
           theme: ThemeData(
-            primaryColor: context.colors.primary,
-            primarySwatch: context.colors.primaryMaterialColor,
+            colorScheme: ColorScheme.light(
+              primary: context.colors.primary,
+              onPrimary: context.colors.textPrimary,
+            ),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
@@ -100,7 +103,7 @@ class MyApp extends StatelessWidget {
             ),
             scaffoldBackgroundColor: Colors.white,
           ),
-          home: PersonListPage(),
+          home: MainPage(),
         ),
       ),
     );

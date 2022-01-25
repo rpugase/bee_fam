@@ -1,4 +1,5 @@
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
+import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/injection_container.dart';
 import 'package:birthday_gift/person/presentation/person/list/person_list.dart';
@@ -17,6 +18,7 @@ class PersonListPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(context.strings.all_reminders),
           elevation: 0,
+          backgroundColor: context.colors.mainBackground,
         ),
         body: Stack(
           children: [
