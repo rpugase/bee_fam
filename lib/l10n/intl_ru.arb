@@ -1,0 +1,19 @@
+{
+  "@@locale": "ru",
+
+  "phoneNumber" : "Номер телефона",
+  "phoneCode" : "Код",
+  "login" : "Отправьте код",
+
+  "all_reminders" : "Все Напоминания",
+  "hello" : "Привет! \uD83C\uDF89",
+  "add_people" : "Добавляйте особенных людей,\n дни и события",
+  "birthday" : "День рождения",
+  "colleagues" : "Коллеги",
+  "short_days" : "дн.",
+
+  "notification" : "Напоминание",
+  "full_name" : "Имя, Фамилия",
+  "phone" : "Номер телефона",
+  "notes" : "Заметки"
+}

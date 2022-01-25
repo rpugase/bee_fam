@@ -1,0 +1,19 @@
+{
+  "@@locale": "en",
+
+  "phoneNumber" : "Phone Number",
+  "phoneCode" : "Code",
+  "login" : "Send Code",
+
+  "all_reminders" : "All Reminders",
+  "hello" : "Hello! 🎉",
+  "add_people" : "Add special people,\n days and events",
+  "birthday" : "Birthday",
+  "colleagues" : "Colleagues",
+  "short_days" : "dy",
+
+  "notification" : "Notification",
+  "full_name" : "Full Name",
+  "phone" : "Phone",
+  "notes" : "Notes"
+}

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "486237083507",
+    "firebase_url": "https://birthday-bom.firebaseio.com",
+    "project_id": "birthday-bom",
+    "storage_bucket": "birthday-bom.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486237083507:android:1d00309f06243c5274d706",
+        "android_client_info": {
+          "package_name": "com.andriih.birthday_gift"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486237083507-j3ih72m1pj0jje6ibfqo05padpg07agi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXeif5zO8IcVtFhEk45oiyKwd6O0VzsCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486237083507-j3ih72m1pj0jje6ibfqo05padpg07agi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
