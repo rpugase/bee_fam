@@ -6,6 +6,7 @@ import 'package:birthday_gift/core/ui/resources/app_icons.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/injection_container.dart';
 import 'package:birthday_gift/person/presentation/contact_service.dart';
+import 'package:birthday_gift/person/presentation/person/widget/note_input_text_widget.dart';
 import 'package:birthday_gift/person/presentation/person/widget/person_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -92,6 +93,13 @@ class PersonCreatePage extends StatelessWidget {
                       maxLines: 1,
                       autofocus: true,
                       labelText: context.strings.full_name,
+                      icon: Icon(AppIcons.profile),
+                    ),
+                    SizedBox(height: 16),
+                    PersonTextField(
+                      controller: _phoneController,
+                      labelText: context.strings.phone,
+                      icon: Icon(Icons.phone),
                     ),
                     SizedBox(height: 16),
                     PersonTextField(
@@ -99,26 +107,10 @@ class PersonCreatePage extends StatelessWidget {
                       controller: _birthdayController,
                       onTap: () => _showYearDialog(context),
                       labelText: context.strings.birthday,
+                      icon: Icon(Icons.calendar_today),
                     ),
-                    SizedBox(height: 16),
-                    PersonTextField(
-                      controller: _phoneController,
-                      labelText: context.strings.phone,
-                    ),
-                    SizedBox(height: 16),
-                    PersonTextField(
-                      controller: _noteController,
-                      minLines: 3,
-                      maxLines: 10,
-                      labelText: context.strings.notes,
-                    ),
-                    SizedBox(height: 16),
-                    PersonTextField(
-                      controller: _noteController,
-                      minLines: 3,
-                      maxLines: 10,
-                      labelText: context.strings.notes,
-                    ),
+                    SizedBox(height: 32),
+                    NotesField(),
                   ],
                 ),
               ),

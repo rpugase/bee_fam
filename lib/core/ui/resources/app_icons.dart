@@ -23,4 +23,5 @@ class AppIcons {
 
   static const IconData done = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData back = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData profile = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
