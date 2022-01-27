@@ -89,10 +89,6 @@ class NotesTextInputFormatter extends TextInputFormatter {
         text: newText,
         selection: TextSelection.collapsed(offset: newText.length),
       );
-      return TextEditingValue(
-        text: newText,
-        selection: TextSelection.collapsed(offset: newText.length),
-      );
     }
     return newValue;
   }

@@ -11,6 +11,7 @@ import 'package:birthday_gift/person/presentation/person/widget/person_widgets.d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import 'person_create_cubit.dart';
@@ -100,6 +101,13 @@ class PersonCreatePage extends StatelessWidget {
                       controller: _phoneController,
                       labelText: context.strings.phone,
                       icon: Icon(Icons.phone),
+                      hintText: "+38",
+                      inputFormatters: [
+                        MaskTextInputFormatter(
+                          mask: "+38 (###) ###-##-##",
+                          filter: {"#": RegExp(r'[0-9]')},
+                        )
+                      ],
                     ),
                     SizedBox(height: 16),
                     PersonTextField(

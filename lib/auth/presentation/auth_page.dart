@@ -1,7 +1,6 @@
 import 'package:birthday_gift/app/main_page.dart';
 import 'package:birthday_gift/auth/di/auth_di.dart';
 import 'package:birthday_gift/auth/presentation/auth_cubit.dart';
-import 'package:birthday_gift/person/presentation/person/list/person_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'widget/auth_widgets.dart';

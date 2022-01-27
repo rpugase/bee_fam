@@ -14,6 +14,7 @@ class PersonTextField extends StatelessWidget {
   final FloatingLabelBehavior? floatingLabelBehavior;
   final ValueChanged<String>? onChanged;
   final List<TextInputFormatter>? inputFormatters;
+  final String? hintText;
 
   const PersonTextField({
     Key? key,
@@ -29,6 +30,7 @@ class PersonTextField extends StatelessWidget {
     this.floatingLabelBehavior,
     this.onChanged,
     this.inputFormatters,
+    this.hintText,
   }) : super(key: key);
 
   @override
@@ -50,6 +52,7 @@ class PersonTextField extends StatelessWidget {
             icon: icon,
             floatingLabelBehavior: floatingLabelBehavior,
             counterText: '',
+            hintText: hintText,
           ),
     );
   }
