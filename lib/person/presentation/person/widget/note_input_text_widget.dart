@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/person/presentation/person/widget/person_widgets.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +81,14 @@ class NotesTextInputFormatter extends TextInputFormatter {
       );
     } else if (oldValue.text.length > newValue.text.length &&
         text.characters.last == POINT) {
-      final newText = text.substring(0, text.length - 2);
+      var newText = text.substring(0, max(0, text.length - 2));
+      if (!newText.contains('\n')) {
+        newText = newText.substring(2, max(0, text.length - 2));
+      }
+      return TextEditingValue(
+        text: newText,
+        selection: TextSelection.collapsed(offset: newText.length),
+      );
       return TextEditingValue(
         text: newText,
         selection: TextSelection.collapsed(offset: newText.length),
