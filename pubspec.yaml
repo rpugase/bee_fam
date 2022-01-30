@@ -28,10 +28,10 @@ dependencies:
   mask_text_input_formatter: ^2.0.0
 
   # Firebase
-  firebase_core: ^1.6.0
-  firebase_analytics: ^8.3.2
-  firebase_auth: ^3.1.1
-  cloud_firestore: ^2.5.3
+  firebase_core: ^1.12.0
+  firebase_analytics: ^9.1.0
+  firebase_auth: ^3.3.6
+  cloud_firestore: ^3.1.7
 
 dev_dependencies:
   hive_generator: ^1.1.0

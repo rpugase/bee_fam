@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "birthday": MessageLookupByLibrary.simpleMessage("Birthday"),
         "colleagues": MessageLookupByLibrary.simpleMessage("Colleagues"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full Name"),
+        "get_notification":
+            MessageLookupByLibrary.simpleMessage("Get notification"),
         "hello": MessageLookupByLibrary.simpleMessage("Hello! 🎉"),
         "login": MessageLookupByLibrary.simpleMessage("Send Code"),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),

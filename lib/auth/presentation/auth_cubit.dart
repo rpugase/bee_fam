@@ -19,7 +19,7 @@ class AuthCubit extends Cubit<AuthState> {
       _authWithPhoneNumber(phoneNumberOrCode)
           .then((stream) => stream.listen((event) =>
           event is Complete ? emit(SuccessCode()) : emit(EnterCode())
-      ).onError((_) {}))
+      ).onError((error) { emit(ErrorOnEnterPhoneNumber(error.toString())); }))
           .onError((error, stackTrace) => emit(ErrorOnEnterPhoneNumber(error.toString())));
     } else if (state is EnterCode || state is ErrorOnEnterCodeNumber) {
       emit(LoadingConfirmationCode());

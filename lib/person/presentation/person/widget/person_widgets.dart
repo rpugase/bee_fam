@@ -1,3 +1,4 @@
+import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -58,4 +59,19 @@ class PersonTextField extends StatelessWidget {
   }
 }
 
+class NotificationSettings extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '${context.strings.get_notification}:',
+          style: Theme.of(context).textTheme.headline6
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
+      ],
+    );
+  }
 }

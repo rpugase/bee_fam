@@ -43,8 +43,8 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.andriih.birthdayGift"
-        minSdkVersion flutter.minSdkVersion
+        applicationId "com.andriih.birthday_gift"
+        minSdkVersion 19
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

@@ -32,25 +32,32 @@ class FirebaseAuthDatastoreImpl implements FirebaseAuthDatastore {
 
   @override
   void startAuth(String phoneNumber) {
+    print("FirebaseAuthDatastore.startAuth phoneNumber=$phoneNumber; _verificationId=$_verificationId");
     if (_verificationId == null) {
       _auth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
         verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
+          print("verificationCompleted phoneAuthCredential=$phoneAuthCredential");
           final authUserCredentials = AuthUserCredentials.fromFirebase(await _auth.signInWithCredential(phoneAuthCredential));
           if (authUserCredentials.isValid) {
+            print("verificationCompleted Complete authUserCredentials=$authUserCredentials");
             _phoneStreamController.add(Complete(authUserCredentials));
           } else {
+            print("verificationCompleted Phone number no found");
             _phoneStreamController.addError(FirebaseAuthException(code: "", message: "Phone number no found"));
           }
         },
         verificationFailed: (FirebaseAuthException error) {
+          print("verificationFailed $error");
           _phoneStreamController.addError(error, error.stackTrace);
         },
         codeSent: (String verificationId, int? forceResendingToken) {
+          print("codeSent verificationId=$verificationId; forceResendingToken=$forceResendingToken");
           _verificationId = verificationId;
           _phoneStreamController.add(CodeSent());
         },
         codeAutoRetrievalTimeout: (String verificationId) {
+          print("codeAutoRetrievalTimeout verificationId=$verificationId");
           _verificationId = verificationId;
         },
         timeout: _SMS_TIMEOUT,

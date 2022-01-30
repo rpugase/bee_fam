@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "486237083507-o0vm8a4ogmtkbeukr2744me0li4b9rrd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andriih.birthday_gift",
+            "certificate_hash": "a5d7ee16940ef1752a5f57b4b0ad81f1c9eb66cd"
+          }
+        },
+        {
           "client_id": "486237083507-j3ih72m1pj0jje6ibfqo05padpg07agi.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -30,6 +38,13 @@
             {
               "client_id": "486237083507-j3ih72m1pj0jje6ibfqo05padpg07agi.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "486237083507-u2kcdda5o8vks513mo0pqgkbipf5kn6g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.andriih.birthdayGift"
+              }
             }
           ]
         }
