@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Все Напоминания"),
         "birthday": MessageLookupByLibrary.simpleMessage("День рождения"),
         "colleagues": MessageLookupByLibrary.simpleMessage("Коллеги"),
+        "enter_your_phone_number":
+            MessageLookupByLibrary.simpleMessage("Введите ваш номер телефона"),
         "full_name": MessageLookupByLibrary.simpleMessage("Имя, Фамилия"),
         "get_notification":
             MessageLookupByLibrary.simpleMessage("Получить уведомление"),

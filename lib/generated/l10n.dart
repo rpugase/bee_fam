@@ -189,6 +189,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Enter your phone number`
+  String get enter_your_phone_number {
+    return Intl.message(
+      'Enter your phone number',
+      name: 'enter_your_phone_number',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

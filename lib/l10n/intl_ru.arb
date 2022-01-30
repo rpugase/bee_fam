@@ -16,5 +16,6 @@
   "full_name" : "Имя, Фамилия",
   "phone" : "Номер телефона",
   "notes" : "Заметки",
-  "get_notification" : "Получить уведомление"
+  "get_notification" : "Получить уведомление",
+  "enter_your_phone_number" : "Введите ваш номер телефона"
 }
