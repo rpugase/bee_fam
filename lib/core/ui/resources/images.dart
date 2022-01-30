@@ -3,6 +3,7 @@ class Images {
   static const _svgFolder = 'assets/svg';
 
   static const beePng = "$_pngFolder/bee.png";
+  static const bgLoginPng = "$_pngFolder/bg_login.png";
 
   static const bgSvg = "$_svgFolder/bg.svg";
   static const sinusSvg = "$_svgFolder/sinus.svg";

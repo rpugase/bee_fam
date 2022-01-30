@@ -87,7 +87,7 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      height: 44.0,
+      height: 48.0,
       child: ElevatedButton(
         child: Text(context.strings.login),
         onPressed: onPressed,

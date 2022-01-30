@@ -1,6 +1,7 @@
 import 'package:birthday_gift/app/main_page.dart';
 import 'package:birthday_gift/auth/di/auth_di.dart';
 import 'package:birthday_gift/auth/presentation/auth_cubit.dart';
+import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'widget/auth_widgets.dart';
@@ -18,30 +19,56 @@ class AuthPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => sl<AuthCubit>(),
       child: Scaffold(
-        body: BlocConsumer<AuthCubit, AuthState>(
-          listener: (ctx, state) {
-            if (state is SuccessCode) {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (ctx) => MainPage()),
-                (route) => false,
-              );
-            }
-          },
-          builder: (ctx, state) {
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: state is EnterPhoneNumber ? _onEnterPhoneNumber(ctx, state) :
-                state is ErrorOnEnterPhoneNumber ? _onEnterPhoneNumber(ctx, state, state.error) :
-                state is LoadingPhoneNumber ? _onLoadingPhoneNumber(ctx, state) :
-                state is EnterCode ? _onEnterPhoneCode(ctx, state) :
-                state is ErrorOnEnterCodeNumber ? _onEnterPhoneCode(ctx, state, state.error) :
-                state is LoadingConfirmationCode ? _onLoadingConfirmationCode(ctx, state) : [],
-              ),
-            );
-          },
+        body: Stack(
+          children: [
+            Image.asset(Images.bgLoginPng, fit: BoxFit.fill, width: MediaQuery.of(context).size.width),
+            Column(
+              children: [
+                SizedBox(height: MediaQuery.of(context).size.height / 2.5),
+                Container(
+                  padding: EdgeInsets.all(20.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(30),
+                      topLeft: Radius.circular(30),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 20.0),
+                      Text('Введите ваш номер телефона:', style: Theme.of(context).textTheme.subtitle1),
+                      SizedBox(height: 20.0),
+                      BlocConsumer<AuthCubit, AuthState>(
+                        listener: (ctx, state) {
+                          if (state is SuccessCode) {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (ctx) => MainPage()),
+                              (route) => false,
+                            );
+                          }
+                        },
+                        builder: (ctx, state) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: state is EnterPhoneNumber ? _onEnterPhoneNumber(ctx, state)
+                                : state is ErrorOnEnterPhoneNumber ? _onEnterPhoneNumber(ctx, state, state.error)
+                                : state is LoadingPhoneNumber ? _onLoadingPhoneNumber(ctx, state)
+                                : state is EnterCode ? _onEnterPhoneCode(ctx, state)
+                                : state is ErrorOnEnterCodeNumber ? _onEnterPhoneCode(ctx, state, state.error)
+                                : state is LoadingConfirmationCode ? _onLoadingConfirmationCode(ctx, state)
+                                : [],
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -57,7 +84,7 @@ class AuthPage extends StatelessWidget {
           errorText: errorText,
           autoFocus: true,
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 20),
         LoginButton(_buttonLoginKey, _onAuthPressedCallback(ctx, state, true)),
       ];
 
@@ -67,7 +94,7 @@ class AuthPage extends StatelessWidget {
           readOnly: false,
           controller: _phoneNumberController,
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 20),
         LoginButton(_buttonLoginKey, _onAuthPressedCallback(ctx, state, false)),
       ];
 
@@ -87,7 +114,7 @@ class AuthPage extends StatelessWidget {
           errorText: errorText,
           autoFocus: true,
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 20),
         LoginButton(_buttonLoginKey, _onAuthPressedCallback(ctx, state, true)),
       ];
 
@@ -104,7 +131,7 @@ class AuthPage extends StatelessWidget {
           readOnly: true,
           controller: _confirmationCodeController,
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 20),
         LoginButton(_buttonLoginKey, _onAuthPressedCallback(ctx, state, false)),
       ];
 

@@ -4,7 +4,6 @@ import 'package:birthday_gift/generated/l10n.dart';
 import 'package:birthday_gift/person/data/datasource/model/note_entity.dart';
 import 'package:birthday_gift/person/data/datasource/model/person_entity.dart';
 import 'package:birthday_gift/person/data/datasource/model/user_entity.dart';
-import 'package:birthday_gift/person/presentation/person/list/person_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -51,23 +50,20 @@ class MyApp extends StatelessWidget {
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    context.colors.primary,
+                backgroundColor: MaterialStateProperty.all<Color>(context.colors.primary),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                textStyle: MaterialStateProperty.all<TextStyle>(
+                  TextStyle(
+                    fontSize: 15.0,
+                    fontFamily: AppFonts.SFProText,
                   ),
-                  foregroundColor: MaterialStateProperty.all<Color>(
-                    Colors.white,
+                ),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14.0),
                   ),
-                  textStyle: MaterialStateProperty.all<TextStyle>(
-                    TextStyle(
-                      fontSize: 15.0,
-                      fontFamily: AppFonts.SFProText,
-                    ),
-                  ),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  )),
+                ),
+              ),
             ),
             inputDecorationTheme: InputDecorationTheme(
               labelStyle: TextStyle(
