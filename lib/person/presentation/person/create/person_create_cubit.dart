@@ -9,7 +9,7 @@ class PersonCreateCubit extends Cubit<PersonCreateState> {
 
   PersonCreateCubit(this._createOrUpdatePerson) : super(ApplyData());
 
-  void createPerson(Person person) {
+  void createOrUpdatePerson(Person person) {
     emit(ApplyData());
     _createOrUpdatePerson(person)
         .then((_) => emit(Finish()))

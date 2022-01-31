@@ -19,7 +19,7 @@ class _MainPageState extends State<MainPage> {
 
   List<Widget> _pages = [
     PersonListPage(),
-    PersonCreatePage(),
+    PersonManagePage(),
     PersonListPage(),
   ];
 
@@ -37,9 +37,7 @@ class _MainPageState extends State<MainPage> {
   void _onItemTapped(int index) {
     setState(() {
       if (index == 1) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (ctx) => PersonCreatePage()));
-        // BlocProvider.of<PersonListCubit>(context).updatePersonList();
+        Navigator.push(context, MaterialPageRoute(builder: (ctx) => PersonManagePage()));
       } else {
         _selectedPageIndex = index;
       }
@@ -51,8 +49,7 @@ class BottomBar extends StatelessWidget {
   final selectedPageIndex;
   final ValueChanged<int> onTap;
 
-  const BottomBar(this.selectedPageIndex, this.onTap, {Key? key})
-      : super(key: key);
+  const BottomBar(this.selectedPageIndex, this.onTap, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

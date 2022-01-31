@@ -16,11 +16,23 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import 'person_create_cubit.dart';
 
-class PersonCreatePage extends StatelessWidget {
+class PersonManagePage extends StatelessWidget {
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _noteController = TextEditingController();
   final _birthdayController = TextEditingController();
+
+  final Person? person;
+
+  PersonManagePage({Key? key, this.person = null}) : super(key: key) {
+    final person = this.person;
+    if (person != null) {
+      _nameController.text = person.name;
+      _phoneController.text = person.phone;
+      _noteController.text = person.note;
+      _birthdayController.text = person.birthday.toUIBirthdayString();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +54,7 @@ class PersonCreatePage extends StatelessWidget {
             BlocConsumer<PersonCreateCubit, PersonCreateState>(
               listener: (ctx, state) {
                 if (state is ErrorFields) {
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text(state.message)));
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
                 } else if (state is Finish) {
                   Navigator.pop(context);
                 }
@@ -60,7 +71,7 @@ class PersonCreatePage extends StatelessWidget {
                             AppIcons.done,
                             color: context.colors.buttonsPrimarySecondary,
                           ),
-                          onPressed: () => _createPerson(context),
+                          onPressed: () => _createOrUpdatePerson(context),
                         );
                       } else {
                         return IconButton(
@@ -68,7 +79,7 @@ class PersonCreatePage extends StatelessWidget {
                             AppIcons.done,
                             color: context.colors.buttonsPrimarySecondary,
                           ),
-                          onPressed: () => _createPerson(context),
+                          onPressed: () => _createOrUpdatePerson(context),
                         );
                       }
                     },
@@ -132,9 +143,8 @@ class PersonCreatePage extends StatelessWidget {
   }
 
   _showYearDialog(BuildContext context) {
-    final birthdayDateTime = _birthdayController.text.isEmpty
-        ? Date().dateTime
-        : Date.uiBirthdayString(_birthdayController.text).dateTime;
+    final birthdayDateTime =
+        _birthdayController.text.isEmpty ? Date().dateTime : Date.uiBirthdayString(_birthdayController.text).dateTime;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -149,8 +159,7 @@ class PersonCreatePage extends StatelessWidget {
             initialSelectedDate: birthdayDateTime,
             onCancel: () => Navigator.pop(context),
             onSubmit: (args) {
-              _birthdayController.text =
-                  Date(args as DateTime).toUIBirthdayString();
+              _birthdayController.text = Date(args as DateTime).toUIBirthdayString();
               Navigator.pop(context);
             },
           ),
@@ -164,19 +173,18 @@ class PersonCreatePage extends StatelessWidget {
     if (contact != null) {
       _nameController.text = contact.name;
       _phoneController.text = contact.phone;
-      _birthdayController.text = contact.birthday == null
-          ? ""
-          : Date(contact.birthday).toUIBirthdayString();
+      _birthdayController.text = contact.birthday == null ? "" : Date(contact.birthday).toUIBirthdayString();
     }
   }
 
-  _createPerson(BuildContext context) {
+  _createOrUpdatePerson(BuildContext context) {
     final person = Person(
+      id: this.person?.id ?? Person.INVALID_ID,
       name: _nameController.text,
       birthday: Date.uiBirthdayString(_birthdayController.text),
       phone: _phoneController.text,
       note: _noteController.text,
     );
-    BlocProvider.of<PersonCreateCubit>(context).createPerson(person);
+    BlocProvider.of<PersonCreateCubit>(context).createOrUpdatePerson(person);
   }
 }

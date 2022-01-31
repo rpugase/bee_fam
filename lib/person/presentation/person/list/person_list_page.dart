@@ -2,6 +2,7 @@ import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/injection_container.dart';
+import 'package:birthday_gift/person/presentation/person/create/person_create_page.dart';
 import 'package:birthday_gift/person/presentation/person/list/person_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +36,12 @@ class PersonListPage extends StatelessWidget {
                 } else if (state is PersonsList) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
-                    child: PersonsListWidget(state.persons),
+                    child: PersonsListWidget(
+                      state.persons,
+                      onTap: (person) => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => PersonManagePage(person: person),
+                      )),
+                    ),
                   );
                 } else {
                   return _showNoPersons(context);
