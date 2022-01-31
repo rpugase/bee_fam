@@ -11,6 +11,7 @@
   "birthday" : "День рождения",
   "colleagues" : "Коллеги",
   "short_days" : "дн.",
+  "short_month" : "мес.",
 
   "notification" : "Напоминание",
   "full_name" : "Имя, Фамилия",

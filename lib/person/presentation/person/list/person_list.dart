@@ -1,3 +1,4 @@
+import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/model/person.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
@@ -25,8 +26,7 @@ class _PersonsListWidgetState extends State<PersonsListWidget> {
   void initState() {
     super.initState();
     _notification.onSelectNotification.listen((personId) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("PersonId: $personId")));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("PersonId: $personId")));
     });
   }
 
@@ -62,7 +62,8 @@ class _PersonsListWidgetState extends State<PersonsListWidget> {
                         color: context.colors.primary,
                         borderRadius: BorderRadius.all(Radius.circular(12.0)),
                       ),
-                      child: Center(child: Text(person.initials, style: TextStyle(color: Colors.white, fontSize: 16.0))),
+                      child:
+                          Center(child: Text(person.initials, style: TextStyle(color: Colors.white, fontSize: 16.0))),
                     ),
                   ),
                   Expanded(
@@ -76,7 +77,10 @@ class _PersonsListWidgetState extends State<PersonsListWidget> {
                         ),
                         Text(
                           "${context.strings.birthday}   $_POINT   ${context.strings.colleagues}",
-                          style: Theme.of(context).textTheme.bodyText2?.copyWith(color: context.colors.personTypeDescription),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2
+                              ?.copyWith(color: context.colors.personTypeDescription),
                         ),
                       ],
                     ),
@@ -85,8 +89,16 @@ class _PersonsListWidgetState extends State<PersonsListWidget> {
                     children: [
                       Column(
                         children: [
-                          Text(person.daysLeft.toString(), style: Theme.of(context).textTheme.headline5?.copyWith(color: context.colors.daysColor)),
-                          Text(context.strings.short_days, style: Theme.of(context).textTheme.bodyText1?.copyWith(color: context.colors.daysColor)),
+                          Text(
+                            person.leftPeriod.count.toString(),
+                            style: Theme.of(context).textTheme.headline5?.copyWith(color: context.colors.daysColor),
+                          ),
+                          Text(
+                            person.leftPeriod.leftType == LeftType.DAYS
+                                ? context.strings.short_days
+                                : context.strings.short_month,
+                            style: Theme.of(context).textTheme.bodyText1?.copyWith(color: context.colors.daysColor),
+                          ),
                         ],
                       ),
                       SizedBox(width: 14.0),

@@ -140,6 +140,16 @@ class S {
     );
   }
 
+  /// `month`
+  String get short_month {
+    return Intl.message(
+      'month',
+      name: 'short_month',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Notification`
   String get notification {
     return Intl.message(

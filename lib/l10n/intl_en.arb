@@ -11,6 +11,7 @@
   "birthday" : "Birthday",
   "colleagues" : "Colleagues",
   "short_days" : "dy",
+  "short_month" : "month",
 
   "notification" : "Notification",
   "full_name" : "Full Name",

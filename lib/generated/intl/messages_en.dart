@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "phoneCode": MessageLookupByLibrary.simpleMessage("Code"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
-        "short_days": MessageLookupByLibrary.simpleMessage("dy")
+        "short_days": MessageLookupByLibrary.simpleMessage("dy"),
+        "short_month": MessageLookupByLibrary.simpleMessage("month")
       };
 }

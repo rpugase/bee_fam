@@ -12,7 +12,7 @@ class Person extends Equatable {
   final int notificationOffsetDays;
   final String imgUrl;
 
-  int get daysLeft => Date().daysLeft(birthday);
+  LeftPeriod get leftPeriod => Date().dateLeft(birthday);
 
   String get initials {
     final split = name.split(RegExp(" "));

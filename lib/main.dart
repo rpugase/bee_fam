@@ -99,7 +99,7 @@ class MyApp extends StatelessWidget {
             ),
             scaffoldBackgroundColor: Colors.white,
           ),
-          home: AuthPage(),
+          home: MainPage(),
         ),
       ),
     );
