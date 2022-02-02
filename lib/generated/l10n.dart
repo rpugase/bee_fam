@@ -209,6 +209,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Create notification`
+  String get create_notification {
+    return Intl.message(
+      'Create notification',
+      name: 'create_notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create new`
+  String get create_new {
+    return Intl.message(
+      'Create new',
+      name: 'create_new',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create from contacts`
+  String get create_from_contact {
+    return Intl.message(
+      'Create from contacts',
+      name: 'create_from_contact',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

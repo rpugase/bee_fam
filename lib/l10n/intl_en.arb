@@ -18,5 +18,9 @@
   "phone" : "Phone",
   "notes" : "Notes",
   "get_notification" : "Get notification",
-  "enter_your_phone_number" : "Enter your phone number"
+  "enter_your_phone_number" : "Enter your phone number",
+
+  "create_notification" : "Create notification",
+  "create_new" : "Create new",
+  "create_from_contact" : "Create from contacts"
 }

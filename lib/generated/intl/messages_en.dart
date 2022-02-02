@@ -27,6 +27,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "all_reminders": MessageLookupByLibrary.simpleMessage("All Reminders"),
         "birthday": MessageLookupByLibrary.simpleMessage("Birthday"),
         "colleagues": MessageLookupByLibrary.simpleMessage("Colleagues"),
+        "create_from_contact":
+            MessageLookupByLibrary.simpleMessage("Create from contacts"),
+        "create_new": MessageLookupByLibrary.simpleMessage("Create new"),
+        "create_notification":
+            MessageLookupByLibrary.simpleMessage("Create notification"),
         "enter_your_phone_number":
             MessageLookupByLibrary.simpleMessage("Enter your phone number"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full Name"),

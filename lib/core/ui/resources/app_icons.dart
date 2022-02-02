@@ -24,4 +24,9 @@ class AppIcons {
   static const IconData done = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData back = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData profile = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData profile_plus = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData add = IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData arrow_right = IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData home = IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData settings = IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

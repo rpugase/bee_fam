@@ -37,6 +37,8 @@ abstract class AppColorsData {
   Color get personTypeDescription;
 
   Color get mainBackground;
+
+  Color get createNotification;
 }
 
 class LightAppColorsData implements AppColorsData {
@@ -67,6 +69,8 @@ class LightAppColorsData implements AppColorsData {
   Color get personTypeDescription => const Color(0xFFA1A4A9);
 
   Color get mainBackground => const Color(0xFFFFFFFF);
+
+  Color get createNotification => const Color(0xFFA1A4A9);
 }
 
 class AppColors extends InheritedWidget {

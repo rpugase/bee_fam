@@ -1,3 +1,4 @@
+import 'package:birthday_gift/app/create_notification_dialog.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/person/presentation/person/create/person_create_page.dart';
@@ -37,7 +38,10 @@ class _MainPageState extends State<MainPage> {
   void _onItemTapped(int index) {
     setState(() {
       if (index == 1) {
-        Navigator.push(context, MaterialPageRoute(builder: (ctx) => PersonManagePage()));
+        showModalBottomSheet(
+          context: context,
+          builder: (context) => SingleChildScrollView(child: CreateNotificationWidget()),
+        );
       } else {
         _selectedPageIndex = index;
       }

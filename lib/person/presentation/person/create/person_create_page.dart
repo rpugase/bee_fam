@@ -168,15 +168,6 @@ class PersonManagePage extends StatelessWidget {
     );
   }
 
-  _loadPerson(BuildContext context) async {
-    PhoneContact? contact = await openDeviceContactPicker(context);
-    if (contact != null) {
-      _nameController.text = contact.name;
-      _phoneController.text = contact.phone;
-      _birthdayController.text = contact.birthday == null ? "" : Date(contact.birthday).toUIBirthdayString();
-    }
-  }
-
   _createOrUpdatePerson(BuildContext context) {
     final person = Person(
       id: this.person?.id ?? Person.INVALID_ID,

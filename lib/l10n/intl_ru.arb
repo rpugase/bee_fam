@@ -18,5 +18,9 @@
   "phone" : "Номер телефона",
   "notes" : "Заметки",
   "get_notification" : "Получить уведомление",
-  "enter_your_phone_number" : "Введите ваш номер телефона"
+  "enter_your_phone_number" : "Введите ваш номер телефона",
+
+  "create_notification" : "Создать напоминание",
+  "create_new" : "Создать новое",
+  "create_from_contact" : "Добавить из контактов"
 }
