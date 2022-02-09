@@ -3,6 +3,7 @@ import 'package:birthday_gift/auth/presentation/auth_page.dart';
 import 'package:birthday_gift/generated/l10n.dart';
 import 'package:birthday_gift/person/data/datasource/model/note_entity.dart';
 import 'package:birthday_gift/person/data/datasource/model/person_entity.dart';
+import 'package:birthday_gift/person/data/datasource/model/remind_notification_entity.dart';
 import 'package:birthday_gift/person/data/datasource/model/user_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -20,10 +21,12 @@ void main() async {
   Hive.registerAdapter(PersonEntityAdapter());
   Hive.registerAdapter(NoteEntityAdapter());
   Hive.registerAdapter(UserEntityAdapter());
+  Hive.registerAdapter(RemindNotificationEntityAdapter());
   await di.init(
     await Hive.openBox<UserEntity>(UserEntity.TABLE_NAME),
     await Hive.openBox<PersonEntity>(PersonEntity.TABLE_NAME),
     await Hive.openBox<NoteEntity>(NoteEntity.TABLE_NAME),
+    await Hive.openBox<RemindNotificationEntity>(RemindNotificationEntity.TABLE_NAME),
   );
   await auth_di.init();
   runApp(MyApp());

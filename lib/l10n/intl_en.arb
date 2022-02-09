@@ -22,5 +22,8 @@
 
   "create_notification" : "Create notification",
   "create_new" : "Create new",
-  "create_from_contact" : "Create from contacts"
+  "create_from_contact" : "Create from contacts",
+  "in_day_birthday" : "In birthday",
+  "in_x_week" : "In {x} week",
+  "in_x_month" : "In {x} month"
 }

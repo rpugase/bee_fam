@@ -22,5 +22,8 @@
 
   "create_notification" : "Создать напоминание",
   "create_new" : "Создать новое",
-  "create_from_contact" : "Добавить из контактов"
+  "create_from_contact" : "Добавить из контактов",
+  "in_day_birthday" : "В день события",
+  "in_x_week" : "За {x} неделю",
+  "in_x_month" : "За {x} месяц"
 }

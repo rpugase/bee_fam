@@ -1,3 +1,4 @@
+import 'package:birthday_gift/person/data/datasource/model/remind_notification_entity.dart';
 import 'package:hive/hive.dart';
 
 import 'note_entity.dart';
@@ -28,7 +29,7 @@ class PersonEntity extends HiveObject {
   final List<NoteEntity>? note;
 
   @HiveField(6)
-  final int? notificationOffsetDays;
+  final List<RemindNotificationEntity> remindNotifications;
 
   @HiveField(7)
   final String createdDate;
@@ -43,8 +44,15 @@ class PersonEntity extends HiveObject {
     this.imgUrl,
     this.updateDate,
     this.note,
-    this.notificationOffsetDays,
+    this.remindNotifications,
     this.createdDate,
     this.updatedDate,
   );
+
+  @override
+  String toString() {
+    return "PersonEntity(name=$name, birthday=$birthday, phone=$phone, imgUrl=$imgUrl, updateDate=$updateDate, "
+        "note=$note, remindNotifications=${remindNotifications.toList()}, "
+        "createdDate=$createdDate, updatedDate=$updatedDate)";
+  }
 }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:birthday_gift/core/model/person.dart';
 import 'package:birthday_gift/person/domain/usecase/get_persons.dart';
 import 'package:birthday_gift/person/domain/usecase/listen_person.dart';
@@ -37,7 +39,7 @@ class PersonsList extends PersonListState {
   PersonsList(this.persons);
 
   @override
-  List<Object?> get props => persons;
+  List<Object?> get props => [persons.hashCode];
 }
 
 class Error extends PersonListState {

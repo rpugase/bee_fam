@@ -1,11 +1,9 @@
 import 'package:birthday_gift/app/create_notification_dialog.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
-import 'package:birthday_gift/person/presentation/person/create/person_create_page.dart';
-import 'package:birthday_gift/person/presentation/person/list/person_list_cubit.dart';
 import 'package:birthday_gift/person/presentation/person/list/person_list_page.dart';
+import 'package:birthday_gift/person/presentation/person/manage/person_manage_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 const _POINT = "⦁";

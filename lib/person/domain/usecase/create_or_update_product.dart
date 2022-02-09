@@ -11,7 +11,7 @@ class CreateOrUpdatePerson implements UseCase<void, Person> {
 
   @override
   Future<void> call(Person person) async {
-    print("Start create or update person: $person");
+    print("Start manage or update person: $person");
     final requireFields = <PersonRequireFields>[];
     if (person.name.isEmpty) requireFields.add(PersonRequireFields.NAME);
     if (person.birthday == Date.defaultBirthday())

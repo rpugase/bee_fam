@@ -1,4 +1,5 @@
 import 'package:birthday_gift/core/model/date.dart';
+import 'package:birthday_gift/core/model/remind_notification.dart';
 import 'package:birthday_gift/person/data/datasource/model/note_entity.dart';
 import 'package:birthday_gift/person/data/datasource/model/person_entity.dart';
 import 'package:equatable/equatable.dart';
@@ -9,7 +10,7 @@ class Person extends Equatable {
   final Date birthday;
   final String note;
   final String phone;
-  final int notificationOffsetDays;
+  final List<RemindNotification> remindNotifications;
   final String imgUrl;
 
   LeftPeriod get leftPeriod => Date().dateLeft(birthday);
@@ -32,7 +33,7 @@ class Person extends Equatable {
     this.phone = "",
     this.imgUrl = "",
     this.note = "",
-    this.notificationOffsetDays = 0,
+    this.remindNotifications = const [],
     this.id = INVALID_ID,
   });
 
@@ -43,7 +44,7 @@ class Person extends Equatable {
       phone: entity.phone ?? "",
       imgUrl: entity.imgUrl ?? "",
       note: entity.note?.first.text ?? "",
-      notificationOffsetDays: entity.notificationOffsetDays ?? 0,
+      remindNotifications: entity.remindNotifications.map((it) => RemindNotification.fromEntity(it)).toList(),
       id: id,
     );
   }
@@ -56,14 +57,20 @@ class Person extends Equatable {
       imgUrl.isEmpty ? null : imgUrl,
       Date().toIso8601String(),
       note.isEmpty ? null : [NoteEntity(note)],
-      notificationOffsetDays == 0 ? null : notificationOffsetDays,
+      remindNotifications.map((it) => it.toEntity()).toList(),
       Date().toIso8601String(),
       Date().toIso8601String(),
     );
   }
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, name, phone];
+
+  @override
+  String toString() {
+    return "Person(name=$name, birthday=$birthday, phone=$phone, imgUrl=$imgUrl, "
+        "note=$note,remindNotifications,id=$id)";
+  }
 }
 
 enum PersonRequireFields { NAME, BIRTHDAY }

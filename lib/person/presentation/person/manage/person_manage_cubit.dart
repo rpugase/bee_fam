@@ -4,21 +4,21 @@ import 'package:birthday_gift/person/domain/usecase/create_or_update_product.dar
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PersonCreateCubit extends Cubit<PersonCreateState> {
+class PersonManagerCubit extends Cubit<PersonCreateState> {
   final CreateOrUpdatePerson _createOrUpdatePerson;
 
-  PersonCreateCubit(this._createOrUpdatePerson) : super(ApplyData());
+  PersonManagerCubit(this._createOrUpdatePerson) : super(ApplyData());
 
   void createOrUpdatePerson(Person person) {
     emit(ApplyData());
-    _createOrUpdatePerson(person)
-        .then((_) => emit(Finish()))
-        .onError((error, stackTrace) => {
-              if (error is RequirePersonFiledException)
-                {emit(ErrorFields('Fill require fields'))}
-              else
-                {emit(ErrorFields('Another error'))}
-            });
+    _createOrUpdatePerson(person).then((_) => emit(Finish())).onError((error, stackTrace) {
+      print(error);
+      if (error is RequirePersonFiledException) {
+        emit(ErrorFields('Fill require fields'));
+      } else {
+        emit(ErrorFields('Another error'));
+      }
+    });
   }
 }
 

@@ -16,10 +16,12 @@ class DatabaseDatasource {
   }
 
   Future<int> addPerson(PersonEntity personEntity) async {
+    print("Add personEntity=$personEntity");
     return _boxPerson.add(personEntity);
   }
 
   Future<void> updatePerson(int index, PersonEntity personEntity) async {
+    print("Update personEntity=$personEntity");
     return _boxPerson.putAt(index, personEntity);
   }
 }

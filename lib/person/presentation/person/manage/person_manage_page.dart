@@ -1,11 +1,11 @@
 import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/model/person.dart';
+import 'package:birthday_gift/core/model/remind_notification.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/app_icons.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/injection_container.dart';
-import 'package:birthday_gift/person/presentation/contact_service.dart';
 import 'package:birthday_gift/person/presentation/person/widget/note_input_text_widget.dart';
 import 'package:birthday_gift/person/presentation/person/widget/person_widgets.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +14,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-import 'person_create_cubit.dart';
+import 'person_manage_cubit.dart';
 
 class PersonManagePage extends StatelessWidget {
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _noteController = TextEditingController();
   final _birthdayController = TextEditingController();
+
+  final List<RemindNotification> _pickedNotifications = [];
 
   final Person? person;
 
@@ -31,13 +33,16 @@ class PersonManagePage extends StatelessWidget {
       _phoneController.text = person.phone;
       _noteController.text = person.note;
       _birthdayController.text = person.birthday.toUIBirthdayString();
+      _pickedNotifications.addAll(person.remindNotifications);
+    } else {
+      _pickedNotifications.add(RemindNotification());
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<PersonCreateCubit>(),
+      create: (context) => sl<PersonManagerCubit>(),
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -51,7 +56,7 @@ class PersonManagePage extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
           ),
           actions: [
-            BlocConsumer<PersonCreateCubit, PersonCreateState>(
+            BlocConsumer<PersonManagerCubit, PersonCreateState>(
               listener: (ctx, state) {
                 if (state is ErrorFields) {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
@@ -129,9 +134,14 @@ class PersonManagePage extends StatelessWidget {
                       icon: Icon(Icons.calendar_today),
                     ),
                     SizedBox(height: 32),
-                    NotesField(),
+                    NotesField(controller: _noteController),
                     SizedBox(height: 32),
-                    // NotificationSettings(),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: NotificationSettings(
+                        pickedNotifications: _pickedNotifications,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -175,7 +185,8 @@ class PersonManagePage extends StatelessWidget {
       birthday: Date.uiBirthdayString(_birthdayController.text),
       phone: _phoneController.text,
       note: _noteController.text,
+      remindNotifications: _pickedNotifications,
     );
-    BlocProvider.of<PersonCreateCubit>(context).createOrUpdatePerson(person);
+    BlocProvider.of<PersonManagerCubit>(context).createOrUpdatePerson(person);
   }
 }

@@ -23,7 +23,7 @@ class PersonEntityAdapter extends TypeAdapter<PersonEntity> {
       fields[3] as String?,
       fields[4] as String,
       (fields[5] as List?)?.cast<NoteEntity>(),
-      fields[6] as int?,
+      (fields[6] as List).cast<RemindNotificationEntity>(),
       fields[7] as String,
       fields[8] as String,
     );
@@ -46,7 +46,7 @@ class PersonEntityAdapter extends TypeAdapter<PersonEntity> {
       ..writeByte(5)
       ..write(obj.note)
       ..writeByte(6)
-      ..write(obj.notificationOffsetDays)
+      ..write(obj.remindNotifications)
       ..writeByte(7)
       ..write(obj.createdDate)
       ..writeByte(8)

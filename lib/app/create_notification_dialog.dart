@@ -4,7 +4,7 @@ import 'package:birthday_gift/core/ui/resources/app_icons.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/person/presentation/contact_service.dart';
-import 'package:birthday_gift/person/presentation/person/create/person_create_page.dart';
+import 'package:birthday_gift/person/presentation/person/manage/person_manage_page.dart';
 import 'package:flutter/material.dart';
 
 class CreateNotificationWidget extends StatelessWidget {

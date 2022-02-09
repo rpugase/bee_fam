@@ -45,7 +45,6 @@ flutter_intl:
 
 flutter:
   uses-material-design: true
-  generate: true
 
   assets:
     - assets/svg/

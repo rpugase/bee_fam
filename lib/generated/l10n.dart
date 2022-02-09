@@ -239,6 +239,36 @@ class S {
       args: [],
     );
   }
+
+  /// `In birthday`
+  String get in_day_birthday {
+    return Intl.message(
+      'In birthday',
+      name: 'in_day_birthday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In {x} week`
+  String in_x_week(Object x) {
+    return Intl.message(
+      'In $x week',
+      name: 'in_x_week',
+      desc: '',
+      args: [x],
+    );
+  }
+
+  /// `In {x} month`
+  String in_x_month(Object x) {
+    return Intl.message(
+      'In $x month',
+      name: 'in_x_month',
+      desc: '',
+      args: [x],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
