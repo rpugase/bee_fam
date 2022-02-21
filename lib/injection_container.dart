@@ -1,3 +1,4 @@
+import 'package:birthday_gift/auth/data/user_dao.dart';
 import 'package:birthday_gift/core/model/remind_notification.dart';
 import 'package:birthday_gift/person/data/datasource/db/db_datasource.dart';
 import 'package:birthday_gift/person/data/datasource/model/note_entity.dart';
@@ -32,6 +33,7 @@ Future<void> init(
 
   sl.registerLazySingleton(() => PersonRepository(sl()));
   sl.registerLazySingleton(() => DatabaseDatasource(sl(), sl(), sl()));
+  sl.registerLazySingleton(() => UserDao(sl()));
 
   final notificationDatasource = NotificationDatasource();
   await notificationDatasource.request();

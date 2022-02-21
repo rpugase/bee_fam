@@ -14,7 +14,7 @@ abstract class FirebaseAuthDatastore {
 
   void startAuth(String phoneNumber);
 
-  void completeSmsCode(String smsCode);
+  Future<AuthUserCredentials?> completeSmsCode(String smsCode);
 }
 
 class FirebaseAuthDatastoreImpl implements FirebaseAuthDatastore {
@@ -69,7 +69,7 @@ class FirebaseAuthDatastoreImpl implements FirebaseAuthDatastore {
   }
 
   @override
-  void completeSmsCode(String smsCode) async {
+  Future<AuthUserCredentials?> completeSmsCode(String smsCode) async {
     if (_verificationId != null) {
       final userCredentials = await _auth.signInWithCredential(PhoneAuthProvider.credential(
         verificationId: _verificationId!,
@@ -78,11 +78,14 @@ class FirebaseAuthDatastoreImpl implements FirebaseAuthDatastore {
       final authUserCredentials = AuthUserCredentials.fromFirebase(userCredentials);
       if (authUserCredentials.isValid) {
         _phoneStreamController.add(Complete(authUserCredentials));
+        return authUserCredentials;
       } else {
         _phoneStreamController.addError(FirebaseAuthException(code: "", message: "Phone number no found"));
+        return null;
       }
     } else {
       print("Verification id must be null $_verificationId");
+      return null;
     }
   }
 }
@@ -110,13 +113,16 @@ class FirebaseAuthDatastoreMock implements FirebaseAuthDatastore {
   }
 
   @override
-  void completeSmsCode(String smsCode) async {
+  Future<AuthUserCredentials?> completeSmsCode(String smsCode) async {
     if (_verificationId != null) {
       await Future.delayed(Duration(seconds: 1));
       _verificationId = null;
-      _phoneStreamController.add(Complete(AuthUserCredentials(_phoneNumber!)));
+      final authUserCredentials = AuthUserCredentials(_phoneNumber!);
+      _phoneStreamController.add(Complete(authUserCredentials));
+      return authUserCredentials;
     } else {
       print("Verification id must be null $_verificationId");
+      return null;
     }
   }
 

@@ -3,6 +3,7 @@ import 'package:birthday_gift/auth/di/auth_di.dart';
 import 'package:birthday_gift/auth/presentation/auth_cubit.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
+import 'package:birthday_gift/core/ui/widget/core_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';

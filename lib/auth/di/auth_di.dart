@@ -11,6 +11,6 @@ Future<void> init() async {
   sl.registerSingleton(FirebaseAuth.instance);
   sl.registerSingleton<FirebaseAuthDatastore>(FirebaseAuthDatastoreImpl(sl()));
   sl.registerFactory(() => AuthWithPhoneNumber(sl()));
-  sl.registerFactory(() => ConfirmPhoneNumberCode(sl()));
+  sl.registerFactory(() => ConfirmPhoneNumberCode(sl(), sl()));
   sl.registerFactory(() => AuthCubit(sl(), sl()));
 }

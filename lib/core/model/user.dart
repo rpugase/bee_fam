@@ -1,13 +1,44 @@
+import 'package:birthday_gift/auth/data/auth_user_credentials.dart';
+import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/model/person.dart';
+import 'package:birthday_gift/person/data/datasource/model/user_entity.dart';
 import 'package:equatable/equatable.dart';
 
 class User extends Equatable {
   final int id;
   final String phone;
   final List<Person> persons;
-  final int notificationOffsetDays;
+  final Date createdDate;
+  final Date updatedDate;
+  final Date? lastSyncDate;
 
-  const User(this.id, this.phone, this.persons, this.notificationOffsetDays);
+  static const int INVALID_ID = -1;
+
+  User(this.phone, this.persons, this.createdDate, this.updatedDate, this.lastSyncDate, {this.id = INVALID_ID});
+
+  factory User.fromAuthUserCredentials(AuthUserCredentials authUserCredentials) => User(
+    authUserCredentials.phoneNumber,
+    [],
+    Date(),
+    Date(),
+    null,
+  );
+
+  factory User.fromEntity(UserEntity userEntity) => User(
+    userEntity.phone,
+    [],
+    Date.millis(userEntity.createdDate),
+    Date.millis(userEntity.updatedDate),
+    Date.millis(userEntity.lastSyncDate),
+  );
+
+  UserEntity toUserEntity() => UserEntity(
+        phone,
+        [],
+        createdDate.toMilliseconds(),
+        updatedDate.toMilliseconds(),
+        lastSyncDate?.toMilliseconds() ?? 0,
+      );
 
   @override
   List<Object?> get props => [];

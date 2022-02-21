@@ -1,4 +1,5 @@
 import 'package:birthday_gift/app/main_page.dart';
+import 'package:birthday_gift/auth/data/user_dao.dart';
 import 'package:birthday_gift/auth/presentation/auth_page.dart';
 import 'package:birthday_gift/generated/l10n.dart';
 import 'package:birthday_gift/person/data/datasource/model/note_entity.dart';
@@ -29,10 +30,15 @@ void main() async {
     await Hive.openBox<RemindNotificationEntity>(RemindNotificationEntity.TABLE_NAME),
   );
   await auth_di.init();
-  runApp(MyApp());
+  runApp(MyApp(usersCount: (await di.sl<UserDao>().getUsers()).length));
 }
 
 class MyApp extends StatelessWidget {
+
+  final int usersCount;
+
+  const MyApp({Key? key, required this.usersCount}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return AppColors(
@@ -102,7 +108,7 @@ class MyApp extends StatelessWidget {
             ),
             scaffoldBackgroundColor: Colors.white,
           ),
-          home: MainPage(),
+          home: usersCount == 0 ? AuthPage() : MainPage(),
         ),
       ),
     );

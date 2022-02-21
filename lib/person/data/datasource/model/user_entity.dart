@@ -4,27 +4,28 @@ part 'user_entity.g.dart';
 
 @HiveType(typeId: 0)
 class UserEntity extends HiveObject {
-
   static const String TABLE_NAME = "User";
 
   @HiveField(0)
-  final String? phone;
+  final String phone;
 
   @HiveField(1)
-  final String? password;
+  final List<String> notificationsIds;
 
   @HiveField(2)
-  final List<String> personIds;
+  final int createdDate;
 
   @HiveField(3)
-  final String createdDate;
+  final int updatedDate;
 
   @HiveField(4)
-  final String updatedDate;
+  final int lastSyncDate;
 
-  @HiveField(5)
-  final String notificationOffsetDays;
-
-  UserEntity(this.phone, this.password, this.personIds, this.createdDate,
-      this.updatedDate, this.notificationOffsetDays);
+  UserEntity(
+    this.phone,
+    this.notificationsIds,
+    this.createdDate,
+    this.updatedDate,
+    this.lastSyncDate,
+  );
 }
