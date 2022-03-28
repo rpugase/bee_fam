@@ -45,13 +45,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "in_day_birthday": MessageLookupByLibrary.simpleMessage("In birthday"),
         "in_x_month": m0,
         "in_x_week": m1,
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "last_synchronization":
+            MessageLookupByLibrary.simpleMessage("Last synchronization"),
         "login": MessageLookupByLibrary.simpleMessage("Send Code"),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
+        "notifications_time":
+            MessageLookupByLibrary.simpleMessage("Notifications time"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "phoneCode": MessageLookupByLibrary.simpleMessage("Code"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "short_days": MessageLookupByLibrary.simpleMessage("dy"),
-        "short_month": MessageLookupByLibrary.simpleMessage("month")
+        "short_month": MessageLookupByLibrary.simpleMessage("month"),
+        "soon": MessageLookupByLibrary.simpleMessage("Soon")
       };
 }

@@ -6,6 +6,14 @@
   "login" : "Отправьте код",
 
   "all_reminders" : "Все Напоминания",
+  "settings" : "Настройки",
+
+  "last_synchronization" : "Последняя синхронизация",
+  "notifications_time" : "Время нотификаций",
+  "language" : "Язык",
+  "logout" : "Выход",
+  "soon" : "Скоро",
+
   "hello" : "Привет! \uD83C\uDF89",
   "add_people" : "Добавляйте особенных людей,\n дни и события",
   "birthday" : "День рождения",

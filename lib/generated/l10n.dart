@@ -90,6 +90,66 @@ class S {
     );
   }
 
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last synchronization`
+  String get last_synchronization {
+    return Intl.message(
+      'Last synchronization',
+      name: 'last_synchronization',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications time`
+  String get notifications_time {
+    return Intl.message(
+      'Notifications time',
+      name: 'notifications_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Soon`
+  String get soon {
+    return Intl.message(
+      'Soon',
+      name: 'soon',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Hello! 🎉`
   String get hello {
     return Intl.message(

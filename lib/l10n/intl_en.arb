@@ -6,6 +6,14 @@
   "login" : "Send Code",
 
   "all_reminders" : "All Reminders",
+  "settings" : "Settings",
+
+  "last_synchronization" : "Last synchronization",
+  "notifications_time" : "Notifications time",
+  "language" : "Language",
+  "logout" : "Logout",
+  "soon" : "Soon",
+
   "hello" : "Hello! 🎉",
   "add_people" : "Add special people,\n days and events",
   "birthday" : "Birthday",

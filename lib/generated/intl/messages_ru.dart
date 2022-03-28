@@ -47,13 +47,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("В день события"),
         "in_x_month": m0,
         "in_x_week": m1,
+        "language": MessageLookupByLibrary.simpleMessage("Язык"),
+        "last_synchronization":
+            MessageLookupByLibrary.simpleMessage("Последняя синхронизация"),
         "login": MessageLookupByLibrary.simpleMessage("Отправьте код"),
+        "logout": MessageLookupByLibrary.simpleMessage("Выход"),
         "notes": MessageLookupByLibrary.simpleMessage("Заметки"),
         "notification": MessageLookupByLibrary.simpleMessage("Напоминание"),
+        "notifications_time":
+            MessageLookupByLibrary.simpleMessage("Время нотификаций"),
         "phone": MessageLookupByLibrary.simpleMessage("Номер телефона"),
         "phoneCode": MessageLookupByLibrary.simpleMessage("Код"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Номер телефона"),
+        "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "short_days": MessageLookupByLibrary.simpleMessage("дн."),
-        "short_month": MessageLookupByLibrary.simpleMessage("мес.")
+        "short_month": MessageLookupByLibrary.simpleMessage("мес."),
+        "soon": MessageLookupByLibrary.simpleMessage("Скоро")
       };
 }
