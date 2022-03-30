@@ -1,4 +1,4 @@
-import 'package:birthday_gift/auth/data/firebase_auth_datastore.dart';
+import 'package:birthday_gift/user/data/firebase_auth_datastore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

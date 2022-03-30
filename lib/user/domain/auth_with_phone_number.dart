@@ -1,4 +1,4 @@
-import 'package:birthday_gift/auth/data/firebase_auth_datastore.dart';
+import 'package:birthday_gift/user/data/firebase_auth_datastore.dart';
 import 'package:birthday_gift/core/use_case.dart';
 
 class AuthWithPhoneNumber implements UseCase<Stream<AuthEvent>, String> {

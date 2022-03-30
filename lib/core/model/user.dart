@@ -1,4 +1,4 @@
-import 'package:birthday_gift/auth/data/auth_user_credentials.dart';
+import 'package:birthday_gift/user/data/auth_user_credentials.dart';
 import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/model/person.dart';
 import 'package:birthday_gift/person/data/datasource/model/user_entity.dart';

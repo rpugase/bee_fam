@@ -1,5 +1,5 @@
-import 'package:birthday_gift/auth/data/firebase_auth_datastore.dart';
-import 'package:birthday_gift/auth/data/user_dao.dart';
+import 'package:birthday_gift/user/data/firebase_auth_datastore.dart';
+import 'package:birthday_gift/user/data/user_dao.dart';
 import 'package:birthday_gift/core/model/user.dart';
 import 'package:birthday_gift/core/use_case.dart';
 
