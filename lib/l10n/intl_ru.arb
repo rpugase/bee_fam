@@ -13,6 +13,7 @@
   "language" : "Язык",
   "logout" : "Выход",
   "soon" : "Скоро",
+  "error_number_not_found" : "Номер не найден",
 
   "hello" : "Привет! \uD83C\uDF89",
   "add_people" : "Добавляйте особенных людей,\n дни и события",

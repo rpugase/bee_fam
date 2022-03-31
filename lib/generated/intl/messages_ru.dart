@@ -39,6 +39,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Создать напоминание"),
         "enter_your_phone_number":
             MessageLookupByLibrary.simpleMessage("Введите ваш номер телефона"),
+        "error_number_not_found":
+            MessageLookupByLibrary.simpleMessage("Номер не найден"),
         "full_name": MessageLookupByLibrary.simpleMessage("Имя, Фамилия"),
         "get_notification":
             MessageLookupByLibrary.simpleMessage("Получить уведомление"),

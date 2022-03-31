@@ -13,6 +13,7 @@
   "language" : "Language",
   "logout" : "Logout",
   "soon" : "Soon",
+  "error_number_not_found" : "Number not found",
 
   "hello" : "Hello! 🎉",
   "add_people" : "Add special people,\n days and events",

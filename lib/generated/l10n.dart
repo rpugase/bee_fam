@@ -150,6 +150,16 @@ class S {
     );
   }
 
+  /// `Number not found`
+  String get error_number_not_found {
+    return Intl.message(
+      'Number not found',
+      name: 'error_number_not_found',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Hello! 🎉`
   String get hello {
     return Intl.message(

@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create notification"),
         "enter_your_phone_number":
             MessageLookupByLibrary.simpleMessage("Enter your phone number"),
+        "error_number_not_found":
+            MessageLookupByLibrary.simpleMessage("Number not found"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full Name"),
         "get_notification":
             MessageLookupByLibrary.simpleMessage("Get notification"),
