@@ -11,6 +11,7 @@ import 'package:birthday_gift/person/presentation/person/widget/note_input_text_
 import 'package:birthday_gift/person/presentation/person/widget/person_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -65,30 +66,45 @@ class PersonManagePage extends StatelessWidget {
                 }
               },
               builder: (context, state) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Builder(
-                    builder: (context) {
-                      if (state is ApplyData) {
-                        return IconButton(
-                          enableFeedback: false,
+                return Row(
+                  children: [
+                    Builder(
+                      builder: (context) {
+                        return person != null ? IconButton(
                           icon: Icon(
-                            AppIcons.done,
+                            Icons.call,
                             color: context.colors.buttonsPrimarySecondary,
                           ),
-                          onPressed: () => _createOrUpdatePerson(context),
-                        );
-                      } else {
-                        return IconButton(
-                          icon: Icon(
-                            AppIcons.done,
-                            color: context.colors.buttonsPrimarySecondary,
-                          ),
-                          onPressed: () => _createOrUpdatePerson(context),
-                        );
+                          onPressed: () => FlutterPhoneDirectCaller.callNumber(person!.phone),
+                        ) : Container();
                       }
-                    },
-                  ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 16.0),
+                      child: Builder(
+                        builder: (context) {
+                          if (state is ApplyData) {
+                            return IconButton(
+                              enableFeedback: false,
+                              icon: Icon(
+                                AppIcons.done,
+                                color: context.colors.buttonsPrimarySecondary,
+                              ),
+                              onPressed: () => _createOrUpdatePerson(context),
+                            );
+                          } else {
+                            return IconButton(
+                              icon: Icon(
+                                AppIcons.done,
+                                color: context.colors.buttonsPrimarySecondary,
+                              ),
+                              onPressed: () => _createOrUpdatePerson(context),
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                  ],
                 );
               },
             ),
