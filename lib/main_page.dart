@@ -1,9 +1,12 @@
+import 'package:birthday_gift/core/model/date.dart';
+import 'package:birthday_gift/core/model/person.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/core/ui/widget/create_notification_dialog.dart';
 import 'package:birthday_gift/feature/person/presentation/list/person_list_page.dart';
 import 'package:birthday_gift/feature/person/presentation/manage/person_manage_page.dart';
 import 'package:birthday_gift/feature/setting/settings_page.dart';
+import 'package:birthday_gift/utils/contact_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -39,12 +42,41 @@ class _MainPageState extends State<MainPage> {
       if (index == 1) {
         showModalBottomSheet(
           context: context,
-          builder: (context) => SingleChildScrollView(child: CreateNotificationWidget()),
+          builder: (context) => SingleChildScrollView(
+            child: CreateNotificationWidget(
+              onTapCreateNotification: () => _navigateToCreateNotification(context),
+              onTapCreateNotificationFromContacts: () => _navigateToPersonLoading(context),
+            ),
+          ),
         );
       } else {
         _selectedPageIndex = index;
       }
     });
+  }
+
+  void _navigateToCreateNotification(BuildContext context) {
+    Navigator.pop(context);
+    Navigator.push(context, MaterialPageRoute(builder: (ctx) => PersonManagePage()));
+  }
+
+  void _navigateToPersonLoading(BuildContext context) async {
+    PhoneContact? contact = await openDeviceContactPicker(context);
+    if (contact != null) {
+      Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (ctx) => PersonManagePage(
+            person: Person(
+              name: contact.name,
+              birthday: Date(contact.birthday),
+              phone: contact.phone,
+            ),
+          ),
+        ),
+      );
+    }
   }
 }
 

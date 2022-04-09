@@ -1,13 +1,22 @@
-import 'package:birthday_gift/core/model/date.dart';
-import 'package:birthday_gift/core/model/person.dart';
-import 'package:birthday_gift/core/ui/resources/app_icons.dart';
-import 'package:birthday_gift/core/ui/resources/app_translations.dart';
-import 'package:birthday_gift/core/ui/resources/colors.dart';
-import 'package:birthday_gift/feature/person/presentation/contact_service.dart';
-import 'package:birthday_gift/feature/person/presentation/manage/person_manage_page.dart';
 import 'package:flutter/material.dart';
 
+import '../resources/app_icons.dart';
+import '../resources/app_translations.dart';
+import '../resources/colors.dart';
+
+typedef OnTapCreateNotification = Function();
+typedef OnTapCreateNotificationFromContacts = Function();
+
 class CreateNotificationWidget extends StatelessWidget {
+  final OnTapCreateNotification onTapCreateNotification;
+  final OnTapCreateNotificationFromContacts onTapCreateNotificationFromContacts;
+
+  const CreateNotificationWidget({
+    Key? key,
+    required this.onTapCreateNotification,
+    required this.onTapCreateNotificationFromContacts,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,7 +32,7 @@ class CreateNotificationWidget extends StatelessWidget {
           ),
           SizedBox(height: 36.0),
           GestureDetector(
-            onTap: () => _navigateToCreateNotification(context),
+            onTap: onTapCreateNotification,
             child: Row(
               children: [
                 Icon(AppIcons.add, size: 24.0),
@@ -34,7 +43,7 @@ class CreateNotificationWidget extends StatelessWidget {
           ),
           SizedBox(height: 36.0),
           GestureDetector(
-            onTap: () => _navigateToPersonLoading(context),
+            onTap: onTapCreateNotificationFromContacts,
             child: Row(
               children: [
                 Icon(AppIcons.profile_plus, size: 24.0),
@@ -47,29 +56,5 @@ class CreateNotificationWidget extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  void _navigateToCreateNotification(BuildContext context) {
-    Navigator.pop(context);
-    Navigator.push(context, MaterialPageRoute(builder: (ctx) => PersonManagePage()));
-  }
-
-  void _navigateToPersonLoading(BuildContext context) async {
-    PhoneContact? contact = await openDeviceContactPicker(context);
-    if (contact != null) {
-      Navigator.pop(context);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (ctx) => PersonManagePage(
-            person: Person(
-              name: contact.name,
-              birthday: Date(contact.birthday),
-              phone: contact.phone,
-            ),
-          ),
-        ),
-      );
-    }
   }
 }

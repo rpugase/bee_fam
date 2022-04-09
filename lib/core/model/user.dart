@@ -1,8 +1,9 @@
-import 'package:birthday_gift/core/model/date.dart';
-import 'package:birthday_gift/core/model/person.dart';
 import 'package:birthday_gift/feature/user/data/auth_user_credentials.dart';
 import 'package:birthday_gift/utils/cache/entity/user_entity.dart';
 import 'package:equatable/equatable.dart';
+
+import 'date.dart';
+import 'person.dart';
 
 class User extends Equatable {
   final int id;

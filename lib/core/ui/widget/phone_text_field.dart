@@ -1,7 +1,8 @@
 import 'package:country_picker/country_picker.dart';
-import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+
+import '../resources/colors.dart';
 
 class PhoneNumberTextField extends StatefulWidget {
   final _readOnly;

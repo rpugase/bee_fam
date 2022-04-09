@@ -1,7 +1,8 @@
-import 'package:birthday_gift/core/model/date.dart';
-import 'package:birthday_gift/core/model/remind_notification.dart';
+import 'remind_notification.dart';
 import 'package:birthday_gift/utils/cache/entity/note_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/person_entity.dart';
+
+import 'date.dart';
 import 'package:equatable/equatable.dart';
 
 class Person extends Equatable {
