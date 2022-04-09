@@ -9,13 +9,13 @@ import 'package:birthday_gift/person/domain/usecase/create_or_update_product.dar
 import 'package:birthday_gift/person/domain/usecase/get_persons.dart';
 import 'package:birthday_gift/person/domain/usecase/listen_person.dart';
 import 'package:birthday_gift/person/domain/usecase/persons_sort.dart';
-import 'package:birthday_gift/person/presentation/person/list/person_list_cubit.dart';
+import 'package:birthday_gift/person/presentation/list/person_list_cubit.dart';
+import 'package:birthday_gift/person/presentation/manage/person_manage_cubit.dart';
 import 'package:birthday_gift/utils/notification/notification_datasource.dart';
 import 'package:birthday_gift/utils/worker/worker_datasource.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'person/presentation/person/manage/person_manage_cubit.dart';
 
 final sl = GetIt.instance;
 

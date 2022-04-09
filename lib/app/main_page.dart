@@ -1,8 +1,8 @@
 import 'package:birthday_gift/app/create_notification_dialog.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
-import 'package:birthday_gift/person/presentation/person/list/person_list_page.dart';
-import 'package:birthday_gift/person/presentation/person/manage/person_manage_page.dart';
+import 'package:birthday_gift/person/presentation/list/person_list_page.dart';
+import 'package:birthday_gift/person/presentation/manage/person_manage_page.dart';
 import 'package:birthday_gift/setting/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

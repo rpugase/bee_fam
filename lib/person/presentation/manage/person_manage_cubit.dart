@@ -1,8 +1,9 @@
 import 'package:birthday_gift/core/model/person.dart';
-import 'package:birthday_gift/person/domain/exception/require_person_field_exception.dart';
-import 'package:birthday_gift/person/domain/usecase/create_or_update_product.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../domain/usecase/create_or_update_product.dart';
+import '../../domain/exception/require_person_field_exception.dart';
 
 class PersonManagerCubit extends Cubit<PersonCreateState> {
   final CreateOrUpdatePerson _createOrUpdatePerson;

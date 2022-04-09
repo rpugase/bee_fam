@@ -7,14 +7,14 @@ import 'package:birthday_gift/core/ui/resources/app_icons.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/core/ui/widget/core_widget.dart';
 import 'package:birthday_gift/injection_container.dart';
-import 'package:birthday_gift/person/presentation/person/widget/note_input_text_widget.dart';
-import 'package:birthday_gift/person/presentation/person/widget/person_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
+import '../widget/note_input_text_widget.dart';
+import '../widget/person_widgets.dart';
 import 'person_manage_cubit.dart';
 
 class PersonManagePage extends StatelessWidget {

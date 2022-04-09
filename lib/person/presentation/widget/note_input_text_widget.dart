@@ -1,9 +1,9 @@
 import 'dart:math';
-
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
-import 'package:birthday_gift/person/presentation/person/widget/person_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'person_widgets.dart';
 
 class NotesField extends StatefulWidget {
   final TextEditingController? controller;

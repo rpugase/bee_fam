@@ -2,12 +2,12 @@ import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/injection_container.dart';
-import 'package:birthday_gift/person/presentation/person/list/person_list.dart';
-import 'package:birthday_gift/person/presentation/person/manage/person_manage_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../list/person_list.dart';
+import '../manage/person_manage_page.dart';
 import 'person_list_cubit.dart';
 
 class PersonListPage extends StatelessWidget {

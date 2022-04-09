@@ -1,6 +1,4 @@
 import 'package:birthday_gift/app/main_page.dart';
-import 'package:birthday_gift/user/di/user_di.dart';
-import 'package:birthday_gift/user/presentation/auth_cubit.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/core/ui/widget/core_widget.dart';
@@ -8,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'widget/auth_widgets.dart';
+
+import '../di/user_di.dart';
+import 'auth_cubit.dart';
 
 class AuthPage extends StatelessWidget {
   final _phoneNumberController = TextEditingController();

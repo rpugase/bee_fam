@@ -1,7 +1,7 @@
 import 'package:birthday_gift/core/model/person.dart';
 import 'package:birthday_gift/core/use_case.dart';
-import 'package:birthday_gift/person/data/repository/person_repository.dart';
 
+import '../../data/repository/person_repository.dart';
 import 'persons_sort.dart';
 
 class ListenPersons implements UseCaseStream<List<Person>, NoParams> {

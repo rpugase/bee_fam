@@ -1,10 +1,9 @@
 import 'package:birthday_gift/local_data_source/dao/user_dao.dart';
-import 'package:birthday_gift/user/data/firebase_auth_datastore.dart';
 import 'package:birthday_gift/core/model/user.dart';
 import 'package:birthday_gift/core/use_case.dart';
+import '../data/firebase_auth_datastore.dart';
 
 class ConfirmPhoneNumberCode extends UseCase<void, String> {
-
   final FirebaseAuthDatastore _firebaseAuthDatastore;
   final UserDao _userDao;
 

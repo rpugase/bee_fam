@@ -1,7 +1,7 @@
-import 'package:birthday_gift/user/data/firebase_auth_datastore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../data/firebase_auth_datastore.dart';
 import '../domain/auth_with_phone_number.dart';
 import '../domain/confirm_phone_number_code.dart';
 
