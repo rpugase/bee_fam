@@ -1,9 +1,9 @@
-import 'package:birthday_gift/local_data_source/dao/user_dao.dart';
-import 'package:birthday_gift/local_data_source/dao/person_dao.dart';
-import 'package:birthday_gift/local_data_source/entity/note_entity.dart';
-import 'package:birthday_gift/local_data_source/entity/person_entity.dart';
-import 'package:birthday_gift/local_data_source/entity/remind_notification_entity.dart';
-import 'package:birthday_gift/local_data_source/entity/user_entity.dart';
+import 'package:birthday_gift/utils/cache/dao/user_dao.dart';
+import 'package:birthday_gift/utils/cache/dao/person_dao.dart';
+import 'package:birthday_gift/utils/cache/entity/note_entity.dart';
+import 'package:birthday_gift/utils/cache/entity/person_entity.dart';
+import 'package:birthday_gift/utils/cache/entity/remind_notification_entity.dart';
+import 'package:birthday_gift/utils/cache/entity/user_entity.dart';
 import 'package:birthday_gift/feature/person/data/repository/person_repository.dart';
 import 'package:birthday_gift/feature/person/domain/usecase/create_or_update_product.dart';
 import 'package:birthday_gift/feature/person/domain/usecase/get_persons.dart';

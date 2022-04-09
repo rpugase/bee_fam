@@ -1,11 +1,11 @@
-import 'package:birthday_gift/app/main_page.dart';
-import 'package:birthday_gift/local_data_source/dao/user_dao.dart';
+import 'package:birthday_gift/main_page.dart';
+import 'package:birthday_gift/utils/cache/dao/user_dao.dart';
 import 'package:birthday_gift/feature/user/presentation/auth_page.dart';
 import 'package:birthday_gift/generated/l10n.dart';
-import 'package:birthday_gift/local_data_source/entity/note_entity.dart';
-import 'package:birthday_gift/local_data_source/entity/person_entity.dart';
-import 'package:birthday_gift/local_data_source/entity/remind_notification_entity.dart';
-import 'package:birthday_gift/local_data_source/entity/user_entity.dart';
+import 'package:birthday_gift/utils/cache/entity/note_entity.dart';
+import 'package:birthday_gift/utils/cache/entity/person_entity.dart';
+import 'package:birthday_gift/utils/cache/entity/remind_notification_entity.dart';
+import 'package:birthday_gift/utils/cache/entity/user_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

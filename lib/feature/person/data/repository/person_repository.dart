@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:birthday_gift/core/model/person.dart';
-import 'package:birthday_gift/local_data_source/dao/person_dao.dart';
+import 'package:birthday_gift/utils/cache/dao/person_dao.dart';
 
 class PersonRepository {
   final PersonDao _db;

@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+
 import '../entity/note_entity.dart';
 import '../entity/person_entity.dart';
 import '../entity/user_entity.dart';

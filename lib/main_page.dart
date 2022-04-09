@@ -1,6 +1,6 @@
-import 'package:birthday_gift/app/create_notification_dialog.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
+import 'package:birthday_gift/core/ui/widget/create_notification_dialog.dart';
 import 'package:birthday_gift/feature/person/presentation/list/person_list_page.dart';
 import 'package:birthday_gift/feature/person/presentation/manage/person_manage_page.dart';
 import 'package:birthday_gift/feature/setting/settings_page.dart';
