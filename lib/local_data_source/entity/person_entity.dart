@@ -1,4 +1,4 @@
-import 'package:birthday_gift/person/data/datasource/model/remind_notification_entity.dart';
+import 'package:birthday_gift/local_data_source/entity/remind_notification_entity.dart';
 import 'package:hive/hive.dart';
 
 import 'note_entity.dart';

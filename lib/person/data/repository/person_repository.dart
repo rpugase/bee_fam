@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:birthday_gift/core/model/person.dart';
-import 'package:birthday_gift/person/data/datasource/db/db_datasource.dart';
+import 'package:birthday_gift/local_data_source/dao/person_dao.dart';
 
 class PersonRepository {
-  final DatabaseDatasource _db;
+  final PersonDao _db;
 
   final _onUpdatePersonsList = StreamController<List<Person>>.broadcast();
 

@@ -1,10 +1,9 @@
-import 'package:birthday_gift/user/data/user_dao.dart';
-import 'package:birthday_gift/core/model/remind_notification.dart';
-import 'package:birthday_gift/person/data/datasource/db/db_datasource.dart';
-import 'package:birthday_gift/person/data/datasource/model/note_entity.dart';
-import 'package:birthday_gift/person/data/datasource/model/person_entity.dart';
-import 'package:birthday_gift/person/data/datasource/model/remind_notification_entity.dart';
-import 'package:birthday_gift/person/data/datasource/model/user_entity.dart';
+import 'package:birthday_gift/local_data_source/dao/user_dao.dart';
+import 'package:birthday_gift/local_data_source/dao/person_dao.dart';
+import 'package:birthday_gift/local_data_source/entity/note_entity.dart';
+import 'package:birthday_gift/local_data_source/entity/person_entity.dart';
+import 'package:birthday_gift/local_data_source/entity/remind_notification_entity.dart';
+import 'package:birthday_gift/local_data_source/entity/user_entity.dart';
 import 'package:birthday_gift/person/data/repository/person_repository.dart';
 import 'package:birthday_gift/person/domain/usecase/create_or_update_product.dart';
 import 'package:birthday_gift/person/domain/usecase/get_persons.dart';
@@ -32,7 +31,7 @@ Future<void> init(
   sl.registerSingleton<Box<RemindNotificationEntity>>(boxRemindNotification);
 
   sl.registerLazySingleton(() => PersonRepository(sl()));
-  sl.registerLazySingleton(() => DatabaseDatasource(sl(), sl(), sl()));
+  sl.registerLazySingleton(() => PersonDao(sl(), sl(), sl()));
   sl.registerLazySingleton(() => UserDao(sl()));
 
   final notificationDatasource = NotificationDatasource();

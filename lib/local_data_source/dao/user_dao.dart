@@ -1,4 +1,4 @@
-import 'package:birthday_gift/person/data/datasource/model/user_entity.dart';
+import 'package:birthday_gift/local_data_source/entity/user_entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class UserDao {

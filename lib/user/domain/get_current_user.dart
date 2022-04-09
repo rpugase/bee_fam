@@ -1,6 +1,6 @@
 import 'package:birthday_gift/core/model/user.dart';
 import 'package:birthday_gift/core/use_case.dart';
-import 'package:birthday_gift/user/data/user_dao.dart';
+import 'package:birthday_gift/local_data_source/dao/user_dao.dart';
 
 class GetCurrentUser implements UseCase<User?, NoParams> {
 
