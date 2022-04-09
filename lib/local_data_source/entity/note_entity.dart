@@ -4,7 +4,6 @@ part 'note_entity.g.dart';
 
 @HiveType(typeId: 2)
 class NoteEntity extends HiveObject {
-
   static const String TABLE_NAME = "Note";
 
   @HiveField(0)

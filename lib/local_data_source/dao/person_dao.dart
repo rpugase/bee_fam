@@ -1,7 +1,7 @@
-import 'package:birthday_gift/local_data_source/entity/note_entity.dart';
-import 'package:birthday_gift/local_data_source/entity/person_entity.dart';
-import 'package:birthday_gift/local_data_source/entity/user_entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import '../entity/note_entity.dart';
+import '../entity/person_entity.dart';
+import '../entity/user_entity.dart';
 
 class PersonDao {
   final Box<UserEntity> _boxUser;
@@ -11,8 +11,7 @@ class PersonDao {
   const PersonDao(this._boxPerson, this._boxNote, this._boxUser);
 
   Future<Map<int, PersonEntity>> getPersons() async {
-    return Map.fromIterable(_boxPerson.keys,
-        key: (key) => key as int, value: (value) => _boxPerson.get(value)!);
+    return Map.fromIterable(_boxPerson.keys, key: (key) => key as int, value: (value) => _boxPerson.get(value)!);
   }
 
   Future<int> addPerson(PersonEntity personEntity) async {

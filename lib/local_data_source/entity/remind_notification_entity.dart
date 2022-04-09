@@ -4,7 +4,6 @@ part 'remind_notification_entity.g.dart';
 
 @HiveType(typeId: 3)
 class RemindNotificationEntity extends HiveObject {
-
   static const String TABLE_NAME = "RemindNotification";
 
   @HiveField(0)

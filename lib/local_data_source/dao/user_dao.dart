@@ -1,5 +1,5 @@
-import 'package:birthday_gift/local_data_source/entity/user_entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import '../entity/user_entity.dart';
 
 class UserDao {
   final Box<UserEntity> _boxUser;
@@ -7,8 +7,7 @@ class UserDao {
   const UserDao(this._boxUser);
 
   Future<Map<int, UserEntity>> getUsers() async {
-    return Map.fromIterable(_boxUser.keys,
-        key: (key) => key as int, value: (value) => _boxUser.get(value)!);
+    return Map.fromIterable(_boxUser.keys, key: (key) => key as int, value: (value) => _boxUser.get(value)!);
   }
 
   Future<int> addUser(UserEntity userEntity) async {

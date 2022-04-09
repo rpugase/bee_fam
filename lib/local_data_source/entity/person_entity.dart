@@ -1,13 +1,11 @@
-import 'package:birthday_gift/local_data_source/entity/remind_notification_entity.dart';
 import 'package:hive/hive.dart';
-
+import 'remind_notification_entity.dart';
 import 'note_entity.dart';
 
 part 'person_entity.g.dart';
 
 @HiveType(typeId: 1)
 class PersonEntity extends HiveObject {
-
   static const String TABLE_NAME = "Person";
 
   @HiveField(0)
