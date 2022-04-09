@@ -1,6 +1,7 @@
 import 'package:birthday_gift/core/model/person.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../domain/usecase/create_or_update_product.dart';
 import '../../domain/exception/require_person_field_exception.dart';
@@ -20,6 +21,15 @@ class PersonManagerCubit extends Cubit<PersonCreateState> {
         emit(ErrorFields('Another error'));
       }
     });
+  }
+
+  void callNumber(String phoneNumber) async {
+    String url = 'tel:' + phoneNumber;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print('Could not launch $url');
+    }
   }
 }
 

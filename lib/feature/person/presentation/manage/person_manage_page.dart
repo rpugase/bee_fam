@@ -9,7 +9,6 @@ import 'package:birthday_gift/core/ui/widget/phone_text_field.dart';
 import 'package:birthday_gift/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -75,7 +74,7 @@ class PersonManagePage extends StatelessWidget {
                             Icons.call,
                             color: context.colors.buttonsPrimarySecondary,
                           ),
-                          onPressed: () => FlutterPhoneDirectCaller.callNumber(person!.phone),
+                          onPressed: () => BlocProvider.of<PersonManagerCubit>(context).callNumber(person!.phone),
                         ) : Container();
                       }
                     ),
