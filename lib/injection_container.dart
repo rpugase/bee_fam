@@ -4,18 +4,17 @@ import 'package:birthday_gift/local_data_source/entity/note_entity.dart';
 import 'package:birthday_gift/local_data_source/entity/person_entity.dart';
 import 'package:birthday_gift/local_data_source/entity/remind_notification_entity.dart';
 import 'package:birthday_gift/local_data_source/entity/user_entity.dart';
-import 'package:birthday_gift/person/data/repository/person_repository.dart';
-import 'package:birthday_gift/person/domain/usecase/create_or_update_product.dart';
-import 'package:birthday_gift/person/domain/usecase/get_persons.dart';
-import 'package:birthday_gift/person/domain/usecase/listen_person.dart';
-import 'package:birthday_gift/person/domain/usecase/persons_sort.dart';
-import 'package:birthday_gift/person/presentation/list/person_list_cubit.dart';
-import 'package:birthday_gift/person/presentation/manage/person_manage_cubit.dart';
+import 'package:birthday_gift/feature/person/data/repository/person_repository.dart';
+import 'package:birthday_gift/feature/person/domain/usecase/create_or_update_product.dart';
+import 'package:birthday_gift/feature/person/domain/usecase/get_persons.dart';
+import 'package:birthday_gift/feature/person/domain/usecase/listen_person.dart';
+import 'package:birthday_gift/feature/person/domain/usecase/persons_sort.dart';
+import 'package:birthday_gift/feature/person/presentation/list/person_list_cubit.dart';
+import 'package:birthday_gift/feature/person/presentation/manage/person_manage_cubit.dart';
 import 'package:birthday_gift/utils/notification/notification_datasource.dart';
 import 'package:birthday_gift/utils/worker/worker_datasource.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 
 final sl = GetIt.instance;
 

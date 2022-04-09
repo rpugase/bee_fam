@@ -1,6 +1,6 @@
 import 'package:birthday_gift/app/main_page.dart';
 import 'package:birthday_gift/local_data_source/dao/user_dao.dart';
-import 'package:birthday_gift/user/presentation/auth_page.dart';
+import 'package:birthday_gift/feature/user/presentation/auth_page.dart';
 import 'package:birthday_gift/generated/l10n.dart';
 import 'package:birthday_gift/local_data_source/entity/note_entity.dart';
 import 'package:birthday_gift/local_data_source/entity/person_entity.dart';
@@ -13,7 +13,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/ui/resources/colors.dart';
 import 'core/ui/resources/fonts.dart';
 import 'injection_container.dart' as di;
-import 'package:birthday_gift/user/di/user_di.dart' as auth_di;
+import 'package:birthday_gift/feature/user/di/user_di.dart' as auth_di;
+import 'package:birthday_gift/feature/setting/settings_di.dart' as settings_di;
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
@@ -30,6 +31,7 @@ void main() async {
     await Hive.openBox<RemindNotificationEntity>(RemindNotificationEntity.TABLE_NAME),
   );
   await auth_di.init();
+  await settings_di.init();
   runApp(MyApp(usersCount: (await di.sl<UserDao>().getUsers()).length));
 }
 

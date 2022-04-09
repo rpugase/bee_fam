@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../list/person_list.dart';
+import 'person_list.dart';
 import '../manage/person_manage_page.dart';
 import 'person_list_cubit.dart';
 

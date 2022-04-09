@@ -2,11 +2,11 @@ import 'package:birthday_gift/core/model/user.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
-import 'package:birthday_gift/user/di/user_di.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'settings_di.dart';
 import 'settings_cubit.dart';
 
 class SettingsPage extends StatelessWidget {

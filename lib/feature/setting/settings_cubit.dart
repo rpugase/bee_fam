@@ -1,5 +1,5 @@
 import 'package:birthday_gift/core/model/user.dart';
-import 'package:birthday_gift/user/domain/get_current_user.dart';
+import 'package:birthday_gift/feature/user/domain/get_current_user.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
