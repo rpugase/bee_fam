@@ -1,31 +1,29 @@
+import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/core/model/person.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/usecase/listen_person.dart';
 
-class PersonListCubit extends Cubit<PersonListState> {
+class PersonListCubit extends BaseCubit<PersonListState> {
   final ListenPersons _listenPersons;
 
-  PersonListCubit(this._listenPersons) : super(Loading()) {
-    _listenPersons().listen(_onPersonLoaded);
+  PersonListCubit(this._listenPersons) : super(Loading());
+
+  @override
+  void onInit() {
+    _listenPersons().handleError(addError).listen(_onPersonLoaded);
+  }
+
+  @override
+  BlocError getErrorTemplate(String errorMessage) {
+    return Error(errorMessage);
   }
 
   void _onPersonLoaded(List<Person> persons) {
     emit(persons.isEmpty ? EmptyList() : PersonsList(persons));
   }
-
-  @override
-  void onError(Object error, StackTrace stackTrace) {
-    emit(Error(stackTrace.toString()));
-    super.onError(error, stackTrace);
-  }
 }
 
-abstract class PersonListState extends Equatable {
-  @override
-  List<Object?> get props => const <dynamic>[];
-}
+abstract class PersonListState extends BlocState {}
 
 class Loading extends PersonListState {}
 
@@ -40,11 +38,6 @@ class PersonsList extends PersonListState {
   List<Object?> get props => [persons.hashCode];
 }
 
-class Error extends PersonListState {
-  final String errorMessage;
-
-  Error(this.errorMessage);
-
-  @override
-  List<Object?> get props => [errorMessage];
+class Error extends BlocError implements PersonListState {
+  Error(String errorMessage) : super(errorMessage);
 }

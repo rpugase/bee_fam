@@ -1,3 +1,4 @@
+import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
@@ -27,7 +28,7 @@ class PersonListPage extends StatelessWidget {
               Images.bgSvg,
               fit: BoxFit.fill,
             ),
-            BlocBuilder<PersonListCubit, PersonListState>(
+            BaseBlocConsumer<PersonListCubit, PersonListState>(
               builder: (context, state) {
                 if (state is EmptyList) {
                   return _showNoPersons(context);
@@ -41,9 +42,8 @@ class PersonListPage extends StatelessWidget {
                       state.persons,
                       onTap: (person) {
                         print("Show $person");
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PersonManagePage(person: person)
-                        ));
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) => PersonManagePage(person: person)));
                       },
                     ),
                   );

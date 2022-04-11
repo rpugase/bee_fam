@@ -9,9 +9,9 @@ class PersonRepository {
 
   PersonRepository(this._db);
 
-  Stream<List<Person>> listenPersons() {
-    getPersons().then((persons) => _onUpdatePersonsList.add(persons));
-    return _onUpdatePersonsList.stream;
+  Stream<List<Person>> listenPersons() async* {
+    yield await getPersons();
+    yield* _onUpdatePersonsList.stream;
   }
 
   Future<List<Person>> getPersons() async {
