@@ -1,6 +1,8 @@
 {
   "@@locale": "ru",
 
+  "ok" : "Ок",
+
   "phoneNumber" : "Номер телефона",
   "phoneCode" : "Код",
   "login" : "Отправьте код",
@@ -34,5 +36,8 @@
   "create_from_contact" : "Добавить из контактов",
   "in_day_birthday" : "В день события",
   "in_x_week" : "За {x} неделю",
-  "in_x_month" : "За {x} месяц"
+  "in_x_month" : "За {x} месяц",
+
+  "error_name_require" : "Введите имя",
+  "error_birthday_require" : "Введите дату рождения"
 }

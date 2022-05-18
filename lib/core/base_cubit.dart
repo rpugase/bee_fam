@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'ui/widget/error_dialog.dart';
+
 abstract class BaseCubit<State extends BlocState> extends Cubit<State> {
 
   BaseCubit(State initialState) : super(initialState) {
@@ -12,13 +14,17 @@ abstract class BaseCubit<State extends BlocState> extends Cubit<State> {
     }
   }
 
-  void onInit();
+  @protected
+  void onInit() {/*NOP*/}
 
-  BlocError getErrorTemplate(String errorMessage);
+  @protected
+  BlocError getErrorTemplate(Exception errorMessage);
 
   @override
   void onError(Object error, StackTrace stackTrace) {
-    emit(getErrorTemplate(error.toString()) as State);
+    if (error is Exception) {
+      emit(getErrorTemplate(error) as State);
+    }
     super.onError(error, stackTrace);
   }
 }
@@ -31,10 +37,16 @@ class BaseBlocConsumer<B extends BlocBase<S>, S> extends BlocConsumer<B, S> {
     bool handleBaseErrorMessage = true,
   }) : super(builder: builder, listener: (context, state) {
     if (handleBaseErrorMessage && state is BlocError) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+      showDialog(context: context, builder: (context) {
+        return ErrorDialog(state.errorHandler.getErrorMessage(context, state.exception));
+      });
     }
     listener?.call(context, state);
   });
+}
+
+abstract class ErrorHandler {
+  String getErrorMessage(BuildContext context, Exception exception);
 }
 
 abstract class BlocState extends Equatable {
@@ -43,10 +55,11 @@ abstract class BlocState extends Equatable {
 }
 
 abstract class BlocError extends BlocState {
-  final String errorMessage;
+  final Exception exception;
+  final ErrorHandler errorHandler;
 
-  BlocError(this.errorMessage);
+  BlocError(this.exception, this.errorHandler);
 
   @override
-  List<Object?> get props => [errorMessage];
+  List<Object?> get props => [errorHandler];
 }

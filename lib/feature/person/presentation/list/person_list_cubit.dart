@@ -1,5 +1,6 @@
 import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/core/model/person.dart';
+import 'package:birthday_gift/feature/person/domain/person_error_handler.dart';
 
 import '../../domain/usecase/listen_person.dart';
 
@@ -14,8 +15,8 @@ class PersonListCubit extends BaseCubit<PersonListState> {
   }
 
   @override
-  BlocError getErrorTemplate(String errorMessage) {
-    return Error(errorMessage);
+  BlocError getErrorTemplate(Exception exception) {
+    return Error(exception, PersonErrorHandler());
   }
 
   void _onPersonLoaded(List<Person> persons) {
@@ -39,5 +40,5 @@ class PersonsList extends PersonListState {
 }
 
 class Error extends BlocError implements PersonListState {
-  Error(String errorMessage) : super(errorMessage);
+  Error(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
 }

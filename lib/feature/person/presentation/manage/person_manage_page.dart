@@ -1,3 +1,4 @@
+import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/model/person.dart';
 import 'package:birthday_gift/core/model/remind_notification.dart';
@@ -56,7 +57,7 @@ class PersonManagePage extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
           ),
           actions: [
-            BlocConsumer<PersonManagerCubit, PersonCreateState>(
+            BaseBlocConsumer<PersonManagerCubit, PersonCreateState>(
               listener: (ctx, state) {
                 if (state is ErrorFields) {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));

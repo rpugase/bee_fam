@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `ok`
+  String get ok {
+    return Intl.message(
+      'ok',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Phone Number`
   String get phoneNumber {
     return Intl.message(
@@ -337,6 +347,26 @@ class S {
       name: 'in_x_month',
       desc: '',
       args: [x],
+    );
+  }
+
+  /// `Name is require`
+  String get error_name_require {
+    return Intl.message(
+      'Name is require',
+      name: 'error_name_require',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Birthday is require`
+  String get error_birthday_require {
+    return Intl.message(
+      'Birthday is require',
+      name: 'error_birthday_require',
+      desc: '',
+      args: [],
     );
   }
 }

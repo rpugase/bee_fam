@@ -38,6 +38,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create notification"),
         "enter_your_phone_number":
             MessageLookupByLibrary.simpleMessage("Enter your phone number"),
+        "error_birthday_require":
+            MessageLookupByLibrary.simpleMessage("Birthday is require"),
+        "error_name_require":
+            MessageLookupByLibrary.simpleMessage("Name is require"),
         "error_number_not_found":
             MessageLookupByLibrary.simpleMessage("Number not found"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full Name"),
@@ -56,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "notifications_time":
             MessageLookupByLibrary.simpleMessage("Notifications time"),
+        "ok": MessageLookupByLibrary.simpleMessage("ok"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "phoneCode": MessageLookupByLibrary.simpleMessage("Code"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),

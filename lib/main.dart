@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:birthday_gift/main_page.dart';
 import 'package:birthday_gift/utils/cache/dao/user_dao.dart';
 import 'package:birthday_gift/feature/user/presentation/auth_page.dart';
@@ -33,6 +35,68 @@ void main() async {
   await auth_di.init();
   await settings_di.init();
   runApp(MyApp(usersCount: (await di.sl<UserDao>().getUsers()).length));
+}
+
+class AppTest extends StatefulWidget {
+  @override
+  State<AppTest> createState() => _AppTestState();
+}
+
+class _AppTestState extends State<AppTest> {
+
+  List<Widget> widgets = [];
+  final key = UniqueKey();
+
+  @override
+  void initState() {
+    super.initState();
+    widgets = [
+      // colorBloc,
+      // colorBloc,
+      ColorBlock(key),
+      ColorBlock(key),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              widgets.insert(1, widgets.removeAt(0));
+            });
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: widgets,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget get colorBloc => Container(
+    width: 100,
+    height: 100,
+    color: Color.fromARGB(255, Random().nextInt(255), Random().nextInt(255), Random().nextInt(255)),
+  );
+}
+
+class ColorBlock extends StatelessWidget {
+
+  ColorBlock(Key key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      key: key,
+      width: 100,
+      height: 100,
+      color: Color.fromARGB(255, Random().nextInt(255), Random().nextInt(255), Random().nextInt(255)),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {

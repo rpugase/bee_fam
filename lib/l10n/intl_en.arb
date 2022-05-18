@@ -1,6 +1,8 @@
 {
   "@@locale": "en",
 
+  "ok" : "ok",
+
   "phoneNumber" : "Phone Number",
   "phoneCode" : "Code",
   "login" : "Send Code",
@@ -34,5 +36,8 @@
   "create_from_contact" : "Create from contacts",
   "in_day_birthday" : "In birthday",
   "in_x_week" : "In {x} week",
-  "in_x_month" : "In {x} month"
+  "in_x_month" : "In {x} month",
+
+  "error_name_require" : "Name is require",
+  "error_birthday_require" : "Birthday is require"
 }

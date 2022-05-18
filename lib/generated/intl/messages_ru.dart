@@ -39,6 +39,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Создать напоминание"),
         "enter_your_phone_number":
             MessageLookupByLibrary.simpleMessage("Введите ваш номер телефона"),
+        "error_birthday_require":
+            MessageLookupByLibrary.simpleMessage("Введите дату рождения"),
+        "error_name_require":
+            MessageLookupByLibrary.simpleMessage("Введите имя"),
         "error_number_not_found":
             MessageLookupByLibrary.simpleMessage("Номер не найден"),
         "full_name": MessageLookupByLibrary.simpleMessage("Имя, Фамилия"),
@@ -58,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notification": MessageLookupByLibrary.simpleMessage("Напоминание"),
         "notifications_time":
             MessageLookupByLibrary.simpleMessage("Время нотификаций"),
+        "ok": MessageLookupByLibrary.simpleMessage("Ок"),
         "phone": MessageLookupByLibrary.simpleMessage("Номер телефона"),
         "phoneCode": MessageLookupByLibrary.simpleMessage("Код"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Номер телефона"),

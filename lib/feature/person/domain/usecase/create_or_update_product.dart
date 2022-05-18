@@ -15,7 +15,7 @@ class CreateOrUpdatePerson implements UseCase<void, Person> {
     print("Start manage or update person: $person");
     final requireFields = <PersonRequireFields>[];
     if (person.name.isEmpty) requireFields.add(PersonRequireFields.NAME);
-    if (person.birthday == Date.defaultBirthday())
+    if (!person.birthday.isValid || person.birthday == Date.defaultBirthday())
       requireFields.add(PersonRequireFields.BIRTHDAY);
     if (requireFields.isNotEmpty)
       throw RequirePersonFiledException(requireFields);

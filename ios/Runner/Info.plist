@@ -68,5 +68,7 @@
     <array>
       <string>tel</string>
     </array>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 </dict>
 </plist>

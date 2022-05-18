@@ -6,6 +6,8 @@ class Date extends Equatable {
 
   Date([DateTime? _dateTime]) : dateTime = _dateTime?.toUtc() ?? DateTime.now().toUtc();
 
+  bool get isValid => dateTime.year != INVALID_DATE_TIME.year;
+
   // millis
   Date.millis(int milliseconds) : dateTime = DateTime.fromMillisecondsSinceEpoch(milliseconds).toUtc();
 
@@ -13,9 +15,9 @@ class Date extends Equatable {
 
   Date.defaultBirthday() : dateTime = DateTime.now().toUtc();
 
-  Date.birthdayString(String birthday) : dateTime = DateFormat.yMd().parse(birthday);
+  Date.birthdayString(String birthday) : dateTime = DateFormat.yMd().parseCustom(birthday);
 
-  Date.uiBirthdayString(String birthday) : dateTime = DateFormat.yMd().parse(birthday);
+  Date.uiBirthdayString(String birthday) : dateTime = DateFormat.yMd().parseCustom(birthday);
 
   bool isToday() {
     final now = DateTime.now();
@@ -70,3 +72,16 @@ class LeftPeriod {
 enum LeftType {
   DAYS, MONTH
 }
+
+extension DateTimeParsing on DateFormat {
+  DateTime parseCustom(String date) {
+    try {
+      return this.parse(date);
+    } on Exception catch(e) {
+      print("ParseException $e");
+    }
+    return INVALID_DATE_TIME;
+  }
+}
+
+final DateTime INVALID_DATE_TIME = DateTime(-1);
