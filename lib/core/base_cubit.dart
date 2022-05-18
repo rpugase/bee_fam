@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'ui/widget/error_dialog.dart';
 
+typedef BaseBlocWidgetListener<S> = bool Function(BuildContext context, S state);
+
 abstract class BaseCubit<State extends BlocState> extends Cubit<State> {
 
   BaseCubit(State initialState) : super(initialState) {
@@ -18,7 +20,7 @@ abstract class BaseCubit<State extends BlocState> extends Cubit<State> {
   void onInit() {/*NOP*/}
 
   @protected
-  BlocError getErrorTemplate(Exception errorMessage);
+  BlocError getErrorTemplate(Exception exception);
 
   @override
   void onError(Object error, StackTrace stackTrace) {
@@ -27,21 +29,26 @@ abstract class BaseCubit<State extends BlocState> extends Cubit<State> {
     }
     super.onError(error, stackTrace);
   }
+
+  @override
+  void emit(State state) {
+    print(state);
+    super.emit(state);
+  }
 }
 
 class BaseBlocConsumer<B extends BlocBase<S>, S> extends BlocConsumer<B, S> {
 
   BaseBlocConsumer({
     required BlocWidgetBuilder<S> builder,
-    BlocWidgetListener<S>? listener,
+    BaseBlocWidgetListener<S>? listener,
     bool handleBaseErrorMessage = true,
   }) : super(builder: builder, listener: (context, state) {
-    if (handleBaseErrorMessage && state is BlocError) {
+    if (listener?.call(context, state) == true && handleBaseErrorMessage && state is BlocError) {
       showDialog(context: context, builder: (context) {
         return ErrorDialog(state.errorHandler.getErrorMessage(context, state.exception));
       });
     }
-    listener?.call(context, state);
   });
 }
 
@@ -61,5 +68,5 @@ abstract class BlocError extends BlocState {
   BlocError(this.exception, this.errorHandler);
 
   @override
-  List<Object?> get props => [errorHandler];
+  List<Object?> get props => [exception];
 }

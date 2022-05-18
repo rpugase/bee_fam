@@ -39,5 +39,8 @@
   "in_x_month" : "In {x} month",
 
   "error_name_require" : "Name is require",
-  "error_birthday_require" : "Birthday is require"
+  "error_birthday_require" : "Birthday is require",
+  "error_phone_number_empty" : "Phone number is require",
+  "error_code_empty" : "Code is require",
+  "error_code_incorrect" : "Code is incorrect"
 }

@@ -40,10 +40,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter your phone number"),
         "error_birthday_require":
             MessageLookupByLibrary.simpleMessage("Birthday is require"),
+        "error_code_empty":
+            MessageLookupByLibrary.simpleMessage("Code is require"),
+        "error_code_incorrect":
+            MessageLookupByLibrary.simpleMessage("Code is incorrect"),
         "error_name_require":
             MessageLookupByLibrary.simpleMessage("Name is require"),
         "error_number_not_found":
             MessageLookupByLibrary.simpleMessage("Number not found"),
+        "error_phone_number_empty":
+            MessageLookupByLibrary.simpleMessage("Phone number is require"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full Name"),
         "get_notification":
             MessageLookupByLibrary.simpleMessage("Get notification"),

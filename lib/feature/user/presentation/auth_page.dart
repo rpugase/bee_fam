@@ -1,3 +1,4 @@
+import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/main_page.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
@@ -56,7 +57,7 @@ class AuthPage extends StatelessWidget {
                                   .subtitle1,
                             ),
                             SizedBox(height: 20.0),
-                            BlocConsumer<AuthCubit, AuthState>(
+                            BaseBlocConsumer<AuthCubit, AuthState>(
                               listener: (ctx, state) {
                                 if (state is SuccessCode) {
                                   Navigator.pushAndRemoveUntil(
@@ -65,15 +66,20 @@ class AuthPage extends StatelessWidget {
                                         (route) => false,
                                   );
                                 }
+                                return (
+                                    state is Error &&
+                                        !(state is ErrorOnEnterPhoneNumber) &&
+                                        !(state is ErrorOnEnterCodeNumber)
+                                ) || state is SuccessCode;
                               },
                               builder: (ctx, state) {
                                 return Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: state is EnterPhoneNumber ? _onEnterPhoneNumber(ctx, state)
-                                      : state is ErrorOnEnterPhoneNumber ? _onEnterPhoneNumber(ctx, state, state.error)
+                                      : state is ErrorOnEnterPhoneNumber ? _onEnterPhoneNumber(ctx, state)
                                       : state is LoadingPhoneNumber ? _onLoadingPhoneNumber(ctx, state)
                                       : state is EnterCode ? _onEnterPhoneCode(ctx, state)
-                                      : state is ErrorOnEnterCodeNumber ? _onEnterPhoneCode(ctx, state, state.error)
+                                      : state is ErrorOnEnterCodeNumber ? _onEnterPhoneCode(ctx, state)
                                       : state is LoadingConfirmationCode ? _onLoadingConfirmationCode(ctx, state)
                                       : [],
                                 );
@@ -93,13 +99,13 @@ class AuthPage extends StatelessWidget {
     );
   }
 
-  List<Widget> _onEnterPhoneNumber(BuildContext ctx, AuthState state, [String? errorText]) =>
+  List<Widget> _onEnterPhoneNumber(BuildContext ctx, AuthState state) =>
       [
         PhoneNumberTextField(
           key: _phoneNumberKey,
           readOnly: false,
           controller: _phoneNumberController,
-          errorText: errorText,
+          errorText: state is Error ? state.errorHandler.getErrorMessage(ctx, state.exception) : null,
           autoFocus: true,
         ),
         SizedBox(height: 20),
@@ -117,7 +123,7 @@ class AuthPage extends StatelessWidget {
         LoginButton(_buttonLoginKey, _onAuthPressedCallback(ctx, state, false)),
       ];
 
-  List<Widget> _onEnterPhoneCode(BuildContext ctx, AuthState state, [String? errorText]) =>
+  List<Widget> _onEnterPhoneCode(BuildContext ctx, AuthState state) =>
       [
         PhoneNumberTextField(
           key: _phoneNumberKey,
@@ -129,7 +135,7 @@ class AuthPage extends StatelessWidget {
           key: _codeConfirmationKey,
           readOnly: false,
           controller: _confirmationCodeController,
-          errorText: errorText,
+          errorText: state is Error ? state.errorHandler.getErrorMessage(ctx, state.exception) : null,
           autoFocus: true,
         ),
         SizedBox(height: 20),

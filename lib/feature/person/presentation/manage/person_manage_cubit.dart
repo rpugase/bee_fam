@@ -37,12 +37,6 @@ class ApplyData extends PersonCreateState {}
 
 class NoApplyData extends PersonCreateState {}
 
-class ErrorFields extends PersonCreateState {
-  final String message;
-
-  ErrorFields(this.message);
-}
-
 class Error extends BlocError implements PersonCreateState {
   Error(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
 }

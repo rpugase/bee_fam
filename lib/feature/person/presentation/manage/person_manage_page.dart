@@ -59,11 +59,11 @@ class PersonManagePage extends StatelessWidget {
           actions: [
             BaseBlocConsumer<PersonManagerCubit, PersonCreateState>(
               listener: (ctx, state) {
-                if (state is ErrorFields) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-                } else if (state is Finish) {
+                if (state is Finish) {
                   Navigator.pop(context);
                 }
+
+                return state is Finish;
               },
               builder: (context, state) {
                 return Row(

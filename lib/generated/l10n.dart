@@ -369,6 +369,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Phone number is require`
+  String get error_phone_number_empty {
+    return Intl.message(
+      'Phone number is require',
+      name: 'error_phone_number_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Code is require`
+  String get error_code_empty {
+    return Intl.message(
+      'Code is require',
+      name: 'error_code_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Code is incorrect`
+  String get error_code_incorrect {
+    return Intl.message(
+      'Code is incorrect',
+      name: 'error_code_incorrect',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

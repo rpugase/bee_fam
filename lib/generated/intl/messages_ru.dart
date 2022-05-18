@@ -41,10 +41,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Введите ваш номер телефона"),
         "error_birthday_require":
             MessageLookupByLibrary.simpleMessage("Введите дату рождения"),
+        "error_code_empty": MessageLookupByLibrary.simpleMessage("Введите код"),
+        "error_code_incorrect":
+            MessageLookupByLibrary.simpleMessage("Код не правильный"),
         "error_name_require":
             MessageLookupByLibrary.simpleMessage("Введите имя"),
         "error_number_not_found":
             MessageLookupByLibrary.simpleMessage("Номер не найден"),
+        "error_phone_number_empty":
+            MessageLookupByLibrary.simpleMessage("Введите номер телефона"),
         "full_name": MessageLookupByLibrary.simpleMessage("Имя, Фамилия"),
         "get_notification":
             MessageLookupByLibrary.simpleMessage("Получить уведомление"),

@@ -6,6 +6,7 @@ import '../data/firebase_auth_datastore.dart';
 import '../domain/auth_with_phone_number.dart';
 import '../domain/confirm_phone_number_code.dart';
 import '../domain/get_current_user.dart';
+import '../domain/user_error_handler.dart';
 import '../presentation/auth_cubit.dart';
 
 final sl = GetIt.instance;
@@ -18,6 +19,7 @@ Future<void> init() async {
       isPhysicalDevice ? FirebaseAuthDatastoreImpl(sl()) : FirebaseAuthDatastoreMock());
   sl.registerFactory(() => AuthWithPhoneNumber(sl()));
   sl.registerFactory(() => ConfirmPhoneNumberCode(sl(), sl()));
-  sl.registerFactory(() => AuthCubit(sl(), sl()));
+  sl.registerFactory(() => AuthCubit(sl(), sl(), sl()));
   sl.registerFactory(() => GetCurrentUser(sl()));
+  sl.registerFactory(() => UserErrorHandler());
 }

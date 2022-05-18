@@ -1,44 +1,59 @@
+import 'package:birthday_gift/core/base_cubit.dart';
+import 'package:birthday_gift/feature/user/domain/exception/user_exceptions.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../data/firebase_auth_datastore.dart';
 import '../domain/auth_with_phone_number.dart';
 import '../domain/confirm_phone_number_code.dart';
+import '../domain/user_error_handler.dart';
 
-class AuthCubit extends Cubit<AuthState> {
-
+class AuthCubit extends BaseCubit<AuthState> {
   final AuthWithPhoneNumber _authWithPhoneNumber;
   final ConfirmPhoneNumberCode _confirmPhoneNumberCode;
+  final UserErrorHandler _userErrorHandler;
 
-  AuthCubit(this._authWithPhoneNumber, this._confirmPhoneNumberCode) : super(EnterPhoneNumber());
+  AuthCubit(
+    this._authWithPhoneNumber,
+    this._confirmPhoneNumberCode,
+    this._userErrorHandler,
+  ) : super(EnterPhoneNumber());
+
+  @override
+  BlocError getErrorTemplate(Exception exception) {
+    return Error(exception, _userErrorHandler);
+  }
 
   void onAuth(String phoneNumberOrCode) {
     print("$phoneNumberOrCode $state");
     if (state is EnterPhoneNumber || state is ErrorOnEnterPhoneNumber) {
       emit(LoadingPhoneNumber());
       _authWithPhoneNumber(phoneNumberOrCode)
-          .then((stream) => stream.listen((event) =>
-          event is Complete ? emit(SuccessCode()) : emit(EnterCode())
-      ).onError((error) { emit(ErrorOnEnterPhoneNumber(error.toString())); }))
-          .onError((error, stackTrace) => emit(ErrorOnEnterPhoneNumber(error.toString())));
+          .then((stream) =>
+              stream
+                  .listen((event) => event is Complete ? emit(SuccessCode()) : emit(EnterCode()))
+                  .onError((error) => _handleUserException(error, phone: true)))
+          .onError((error, stackTrace) => _handleUserException(error ?? Object(), phone: true));
     } else if (state is EnterCode || state is ErrorOnEnterCodeNumber) {
       emit(LoadingConfirmationCode());
       _confirmPhoneNumberCode(phoneNumberOrCode)
-          .onError((error, stackTrace) => emit(ErrorOnEnterCodeNumber(error.toString())));
+          .onError((error, stackTrace) => _handleUserException(error ?? Object(), code: true));
     }
   }
 
-  @override
-  void emit(AuthState state) {
-    print(state);
-    super.emit(state);
+  void _handleUserException(Object error, {bool phone = false, bool code = false}) {
+    if (error is UserException) {
+      if (phone) emit(ErrorOnEnterPhoneNumber(error, _userErrorHandler));
+      else if (code) emit(ErrorOnEnterCodeNumber(error, _userErrorHandler));
+      else addError(error);
+    } else {
+      addError(error);
+    }
   }
 }
 
-abstract class AuthState extends Equatable {
-  @override
-  List<Object?> get props => const <dynamic>[];
-}
+abstract class AuthState extends BlocState {}
 
 class LoadingPhoneNumber extends AuthState {}
 
@@ -50,19 +65,14 @@ class EnterCode extends AuthState {}
 
 class SuccessCode extends AuthState {}
 
-class Error extends AuthState {
-  final String error;
-
-  Error(this.error);
-
-  @override
-  List<Object?> get props => [error];
+class Error extends BlocError implements AuthState {
+  Error(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
 }
 
 class ErrorOnEnterPhoneNumber extends Error {
-  ErrorOnEnterPhoneNumber(String error) : super(error);
+  ErrorOnEnterPhoneNumber(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
 }
 
 class ErrorOnEnterCodeNumber extends Error {
-  ErrorOnEnterCodeNumber(String error) : super(error);
+  ErrorOnEnterCodeNumber(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
 }
