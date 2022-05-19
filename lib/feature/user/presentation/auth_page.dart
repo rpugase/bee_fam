@@ -29,13 +29,14 @@ class AuthPage extends StatelessWidget {
             Image.asset(Images.bgLoginPng, fit: BoxFit.fill, width: MediaQuery.of(context).size.width),
             KeyboardVisibilityBuilder(
               builder: (context, isKeyboardVisible) {
-                final heightMainContainerCoefficient = isKeyboardVisible ? 5 : 2.5;
+                final screenSize = MediaQuery.of(context).size.height;
+                final paddingBottom = isKeyboardVisible ? .0 : screenSize / 4.5;
                 return AnimatedContainer(
                   curve: Curves.easeOut,
                   duration: Duration(milliseconds: 400),
                   child: Column(
                     children: [
-                      SizedBox(height: MediaQuery.of(context).size.height / heightMainContainerCoefficient),
+                      Expanded(child: SizedBox()),
                       Container(
                         padding: EdgeInsets.all(20.0),
                         decoration: BoxDecoration(
@@ -88,6 +89,7 @@ class AuthPage extends StatelessWidget {
                           ],
                         ),
                       ),
+                      SizedBox(height: paddingBottom),
                     ],
                   ),
                 );
