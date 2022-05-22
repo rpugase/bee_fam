@@ -24,9 +24,8 @@ _selectPhoneNumber(BuildContext context, Iterable<Phone> phones) {
     context: context,
     builder: (context) => AlertDialog(
       content: SizedBox(
-        width: 250,
-        height: 300,
         child: ListView(
+          shrinkWrap: true,
           children: phones.map((phone) =>
               ListTile(
                 title: Text(phone.number),
