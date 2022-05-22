@@ -1,20 +1,25 @@
-import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 
 Future<PhoneContact?> openDeviceContactPicker(BuildContext context) async {
-  Contact? contact = await ContactsService.openDeviceContactPicker();
-  if (contact != null) {
-    final name = contact.displayName ?? '';
-    var phone = contact.phones?.first.value ?? '';
-    final birthday = contact.birthday;
-    if ((contact.phones?.length ?? 0) > 1) {
-      phone = await _selectPhoneNumber(context, contact.phones ?? []);
+  if (await FlutterContacts.requestPermission()) {
+    Contact? contact = await FlutterContacts.openExternalPick();
+    if (contact != null) {
+      final name = contact.displayName;
+      var phone = contact.phones.first;
+      if ((contact.phones.length) > 1) {
+        phone = await _selectPhoneNumber(context, contact.phones);
+      }
+      return PhoneContact(name, phone.number);
+    } else {
+      return null;
     }
-    return PhoneContact(name, phone, birthday);
+  } else {
+    return null;
   }
 }
 
-_selectPhoneNumber(BuildContext context, Iterable<Item> items) {
+_selectPhoneNumber(BuildContext context, Iterable<Phone> phones) {
   return showDialog<String>(
     context: context,
     builder: (context) => AlertDialog(
@@ -22,13 +27,10 @@ _selectPhoneNumber(BuildContext context, Iterable<Item> items) {
         width: 250,
         height: 300,
         child: ListView(
-          children: items
-              .map((item) => item.value)
-              .where((value) => value != null)
-              .map((value) =>
+          children: phones.map((phone) =>
               ListTile(
-                title: Text(value ?? ""),
-                onTap: () => Navigator.pop(context, value),
+                title: Text(phone.number),
+                onTap: () => Navigator.pop(context, phone.number),
               )).toList(),
         ),
       ),
@@ -41,5 +43,5 @@ class PhoneContact {
   final String phone;
   final DateTime? birthday;
 
-  const PhoneContact(this.name, this.phone, this.birthday);
+  const PhoneContact(this.name, this.phone, {this.birthday = null});
 }

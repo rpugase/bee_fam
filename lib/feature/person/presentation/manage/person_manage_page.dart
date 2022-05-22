@@ -29,11 +29,12 @@ class PersonManagePage extends StatelessWidget {
 
   PersonManagePage({Key? key, this.person = null}) : super(key: key) {
     final person = this.person;
+    print(person);
     if (person != null) {
       _nameController.text = person.name;
       _phoneController.text = person.phone;
       _noteController.text = person.note;
-      _birthdayController.text = person.birthday.toUIBirthdayString();
+      _birthdayController.text = person.birthday.isValid ? person.birthday.toUIBirthdayString() : "";
       _pickedNotifications.addAll(person.remindNotifications);
     } else {
       _pickedNotifications.add(RemindNotification());

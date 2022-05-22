@@ -70,7 +70,7 @@ class _MainPageState extends State<MainPage> {
           builder: (ctx) => PersonManagePage(
             person: Person(
               name: contact.name,
-              birthday: Date(contact.birthday),
+              birthday: contact.birthday == null ? Date(INVALID_DATE_TIME) : Date(contact.birthday),
               phone: contact.phone,
             ),
           ),
