@@ -35,13 +35,11 @@ class PersonListPage extends StatelessWidget {
                 } else if (state is Loading) {
                   return Center(child: CircularProgressIndicator());
                 } else if (state is PersonsList) {
-                  print(state);
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
                     child: PersonsListWidget(
                       state.persons,
                       onTap: (person) {
-                        print("Show $person");
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) => PersonManagePage(person: person)));
                       },

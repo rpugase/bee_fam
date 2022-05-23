@@ -1,5 +1,6 @@
 import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/feature/user/domain/exception/user_exceptions.dart';
+import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +27,7 @@ class AuthCubit extends BaseCubit<AuthState> {
   }
 
   void onAuth(String phoneNumberOrCode) {
-    print("$phoneNumberOrCode $state");
+    Log.i("$phoneNumberOrCode $state");
     if (state is EnterPhoneNumber || state is ErrorOnEnterPhoneNumber) {
       emit(LoadingPhoneNumber());
       _authWithPhoneNumber(phoneNumberOrCode)

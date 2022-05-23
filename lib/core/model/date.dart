@@ -1,3 +1,4 @@
+import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 
@@ -78,7 +79,7 @@ extension DateTimeParsing on DateFormat {
     try {
       return this.parse(date);
     } on Exception catch(e) {
-      print("ParseException $e");
+      Log.e(e);
     }
     return INVALID_DATE_TIME;
   }

@@ -1,6 +1,7 @@
 import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/core/model/person.dart';
 import 'package:birthday_gift/feature/person/domain/person_error_handler.dart';
+import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../domain/usecase/create_or_update_product.dart';
@@ -25,7 +26,7 @@ class PersonManagerCubit extends BaseCubit<PersonCreateState> {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      print('Could not launch $url');
+      Log.e('Could not launch $url');
       addError(Exception("No find "));
     }
   }

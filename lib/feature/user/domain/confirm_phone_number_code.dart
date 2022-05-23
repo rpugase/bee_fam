@@ -2,6 +2,7 @@ import 'package:birthday_gift/feature/user/domain/exception/user_exceptions.dart
 import 'package:birthday_gift/utils/cache/dao/user_dao.dart';
 import 'package:birthday_gift/core/model/user.dart' as core;
 import 'package:birthday_gift/core/use_case.dart';
+import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../data/firebase_auth_datastore.dart';
@@ -23,7 +24,7 @@ class ConfirmPhoneNumberCode extends UseCase<void, String> {
         throw IncorrectCodeException();
       }
     } on FirebaseAuthException catch(e) {
-      print("FirebaseAuthException $e");
+      Log.e(e, e.stackTrace);
       throw IncorrectCodeException();
     }
   }

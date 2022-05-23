@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -32,39 +33,39 @@ class FirebaseAuthDatastoreImpl implements FirebaseAuthDatastore {
 
   @override
   void startAuth(String phoneNumber) {
-    print("FirebaseAuthDatastore.startAuth phoneNumber=$phoneNumber; _verificationId=$_verificationId");
+    Log.i("FirebaseAuthDatastore.startAuth phoneNumber=$phoneNumber; _verificationId=$_verificationId");
     if (_verificationId == null) {
       _auth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
         verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
-          print("verificationCompleted phoneAuthCredential=$phoneAuthCredential");
+          Log.i("verificationCompleted phoneAuthCredential=$phoneAuthCredential");
           final authUserCredentials = AuthUserCredentials.fromFirebase(await _auth.signInWithCredential(phoneAuthCredential));
           if (authUserCredentials.isValid) {
-            print("verificationCompleted Complete authUserCredentials=$authUserCredentials");
+            Log.i("verificationCompleted Complete authUserCredentials=$authUserCredentials");
             _phoneStreamController.add(Complete(authUserCredentials));
           } else {
-            print("verificationCompleted Phone number no found");
+            Log.i("verificationCompleted Phone number no found");
             _phoneStreamController.addError(FirebaseAuthException(code: "", message: "Phone number no found"));
           }
         },
         verificationFailed: (FirebaseAuthException error) {
-          print("verificationFailed $error");
+          Log.w("verificationFailed $error");
           _phoneStreamController.addError(error, error.stackTrace);
         },
         codeSent: (String verificationId, int? forceResendingToken) {
-          print("codeSent verificationId=$verificationId; forceResendingToken=$forceResendingToken");
+          Log.i("codeSent verificationId=$verificationId; forceResendingToken=$forceResendingToken");
           _verificationId = verificationId;
           _phoneStreamController.add(CodeSent());
         },
         codeAutoRetrievalTimeout: (String verificationId) {
-          print("codeAutoRetrievalTimeout verificationId=$verificationId");
+          Log.i("codeAutoRetrievalTimeout verificationId=$verificationId");
           _verificationId = verificationId;
         },
         timeout: _SMS_TIMEOUT,
         forceResendingToken: _COUNTER_FORCE_RESENDING_TOKEN
       );
     } else {
-      print("Verification id must be null $_verificationId");
+      Log.e("Verification id must be null $_verificationId");
     }
   }
 
@@ -84,7 +85,7 @@ class FirebaseAuthDatastoreImpl implements FirebaseAuthDatastore {
         return null;
       }
     } else {
-      print("Verification id must be null $_verificationId");
+      Log.e("Verification id must be null $_verificationId");
       return null;
     }
   }
@@ -108,7 +109,7 @@ class FirebaseAuthDatastoreMock implements FirebaseAuthDatastore {
       _phoneNumber = phoneNumber;
       _phoneStreamController.add(CodeSent());
     } else {
-      print("Verification id must be null $_verificationId");
+      Log.e("Verification id must be null $_verificationId");
     }
   }
 
@@ -121,7 +122,7 @@ class FirebaseAuthDatastoreMock implements FirebaseAuthDatastore {
       _phoneStreamController.add(Complete(authUserCredentials));
       return authUserCredentials;
     } else {
-      print("Verification id must be null $_verificationId");
+      Log.e("Verification id must be null $_verificationId");
       return null;
     }
   }

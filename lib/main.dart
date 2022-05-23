@@ -8,6 +8,7 @@ import 'package:birthday_gift/utils/cache/entity/note_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/person_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/remind_notification_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/user_entity.dart';
+import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -22,6 +23,7 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   await Hive.initFlutter();
   await Firebase.initializeApp();
+  Log.initialize([ConsolePrintLogger()]);
   Hive.registerAdapter(PersonEntityAdapter());
   Hive.registerAdapter(NoteEntityAdapter());
   Hive.registerAdapter(UserEntityAdapter());

@@ -171,10 +171,7 @@ class _BottomBarSvgItem extends StatelessWidget {
       padding: EdgeInsets.all(24.0),
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: () {
-          print("$index");
-          onTap(index);
-        },
+        onTap: () => onTap(index),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SvgPicture.asset(
             assetName,

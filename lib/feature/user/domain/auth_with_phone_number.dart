@@ -1,4 +1,5 @@
 import 'package:birthday_gift/core/use_case.dart';
+import 'package:birthday_gift/utils/logger/logger.dart';
 import '../data/firebase_auth_datastore.dart';
 import 'exception/user_exceptions.dart';
 
@@ -9,7 +10,7 @@ class AuthWithPhoneNumber implements UseCase<Stream<AuthEvent>, String> {
 
   @override
   Future<Stream<AuthEvent>> call(String phoneNumber) async {
-    print("AuthWithPhoneNumber phoneNumber=$phoneNumber");
+    Log.i("phoneNumber=$phoneNumber");
     if (phoneNumber.isEmpty) throw EmptyPhoneNumberException();
     _firebaseAuthDatastore.startAuth(phoneNumber);
     return _firebaseAuthDatastore.phoneStream;

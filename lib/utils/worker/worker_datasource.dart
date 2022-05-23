@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:workmanager/workmanager.dart';
 
 class WorkerDatasource {
@@ -15,7 +16,7 @@ class WorkerDatasource {
   }
 
   executeTask() async {
-    print("executeTask");
+    Log.i("executeTask");
     await _workManager.registerOneOffTask(
         "uniqueName_ONE",
         "taskName_ONE",
@@ -30,7 +31,7 @@ class WorkerDatasource {
 
 _callbackDispatcher() {
   Workmanager().executeTask((task, inputData) {
-    print("Native called background task: $task");
+    Log.i("Native called background task: $task");
     return Future.value(true);
   });
 }

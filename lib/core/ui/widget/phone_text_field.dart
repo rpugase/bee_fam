@@ -1,3 +1,4 @@
+import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -42,7 +43,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
                 phoneCode = country.phoneCode;
                 countryCode = country.countryCode;
                 widget.controller?.text = "+$phoneCode";
-                print(country.e164Key);
+                Log.i(country.e164Key);
               });
             },
           ),

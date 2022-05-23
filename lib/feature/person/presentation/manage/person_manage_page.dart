@@ -8,6 +8,7 @@ import 'package:birthday_gift/core/ui/resources/app_icons.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/core/ui/widget/phone_text_field.dart';
 import 'package:birthday_gift/injection_container.dart';
+import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,7 +30,7 @@ class PersonManagePage extends StatelessWidget {
 
   PersonManagePage({Key? key, this.person = null}) : super(key: key) {
     final person = this.person;
-    print(person);
+    Log.i("Person to manage: $person");
     if (person != null) {
       _nameController.text = person.name;
       _phoneController.text = person.phone;

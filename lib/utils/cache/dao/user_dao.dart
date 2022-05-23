@@ -1,3 +1,4 @@
+import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../entity/user_entity.dart';
@@ -12,17 +13,17 @@ class UserDao {
   }
 
   Future<int> addUser(UserEntity userEntity) async {
-    print("Add userEntity=$userEntity");
+    Log.i("Add userEntity=$userEntity");
     return _boxUser.add(userEntity);
   }
 
   Future<void> updateUser(int index, UserEntity userEntity) async {
-    print("Update userEntity=$userEntity");
+    Log.i("Update userEntity=$userEntity");
     return _boxUser.putAt(index, userEntity);
   }
 
   Future<void> deleteUser(int index) async {
-    print("Update userEntity=$index");
+    Log.i("Delete userEntity=$index");
     return _boxUser.deleteAt(index);
   }
 }
