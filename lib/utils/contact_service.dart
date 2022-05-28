@@ -20,7 +20,7 @@ Future<PhoneContact?> openDeviceContactPicker(BuildContext context) async {
 }
 
 _selectPhoneNumber(BuildContext context, Iterable<Phone> phones) {
-  return showDialog<String>(
+  return showDialog<Phone>(
     context: context,
     builder: (context) => AlertDialog(
       content: SizedBox(
@@ -29,7 +29,7 @@ _selectPhoneNumber(BuildContext context, Iterable<Phone> phones) {
           children: phones.map((phone) =>
               ListTile(
                 title: Text(phone.number),
-                onTap: () => Navigator.pop(context, phone.number),
+                onTap: () => Navigator.pop(context, phone),
               )).toList(),
         ),
       ),

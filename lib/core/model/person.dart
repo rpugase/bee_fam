@@ -14,8 +14,6 @@ class Person extends Equatable {
   final List<RemindNotification> remindNotifications;
   final String imgUrl;
 
-  LeftPeriod get leftPeriod => Date().dateLeft(birthday);
-
   String get initials {
     final split = name.split(RegExp(" "));
     if (split.length == 1) {

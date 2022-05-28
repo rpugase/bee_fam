@@ -95,13 +95,11 @@ class _PersonsListWidgetState extends State<PersonsListWidget> {
                         Column(
                           children: [
                             Text(
-                              person.leftPeriod.count.toString(),
+                              person.birthday.toDay(),
                               style: Theme.of(context).textTheme.headline5?.copyWith(color: context.colors.daysColor),
                             ),
                             Text(
-                              person.leftPeriod.leftType == LeftType.DAYS
-                                  ? context.strings.short_days
-                                  : context.strings.short_month,
+                              person.birthday.toMonth(),
                               style: Theme.of(context).textTheme.bodyText1?.copyWith(color: context.colors.daysColor),
                             ),
                           ],

@@ -33,41 +33,22 @@ class Date extends Equatable {
 
   String toUIBirthdayString() => toBirthdayString();
 
-  int daysLeft(Date date) {
-    return date.dateTime.difference(dateTime).inDays;
-  }
+  String toDay() => DateFormat.d().format(dateTime);
 
-  LeftPeriod dateLeft(Date date) {
-    final inDateTime = date.dateTime;
-    final outDateTime = DateTime(
-      dateTime.year,
-      inDateTime.month,
-      inDateTime.day,
-      inDateTime.hour,
-      inDateTime.minute,
-      inDateTime.second,
-      inDateTime.millisecond,
-      inDateTime.microsecond,
-    );
-
-    final dayDifference = outDateTime.difference(dateTime).inDays + 1;
-
-    if (dayDifference < 31) {
-      return LeftPeriod(dayDifference, LeftType.DAYS);
-    } else {
-      return LeftPeriod((date.dateTime.month - dateTime.month).abs(), LeftType.MONTH);
-    }
-  }
+  String toMonth() => DateFormat.MMM().format(dateTime);
 
   @override
   List<Object?> get props => [dateTime];
 }
 
-class LeftPeriod {
+class LeftPeriod extends Equatable {
   final int count;
   final LeftType leftType;
 
   const LeftPeriod(this.count, this.leftType);
+
+  @override
+  List<Object?> get props => [count, leftType];
 }
 
 enum LeftType {

@@ -92,7 +92,7 @@ class BottomBar extends StatelessWidget {
       height: 108,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topRight: Radius.circular(14),
           topLeft: Radius.circular(14),
         ),
@@ -101,7 +101,7 @@ class BottomBar extends StatelessWidget {
             color: context.colors.shadow,
             spreadRadius: 0,
             blurRadius: 15,
-            offset: Offset(0, 4), // changes position of shadow
+            offset: const Offset(0, 4), // changes position of shadow
           ),
         ],
       ),
