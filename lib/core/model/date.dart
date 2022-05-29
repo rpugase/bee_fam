@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 class Date extends Equatable {
   final DateTime dateTime;
 
-  Date([DateTime? _dateTime]) : dateTime = _dateTime?.toUtc() ?? DateTime.now().toUtc();
+  Date([DateTime? _dateTime, bool toUtc = true])
+      : dateTime = (toUtc ? _dateTime?.toUtc() : _dateTime) ?? DateTime.now().toUtc();
 
   bool get isValid => dateTime.year != INVALID_DATE_TIME.year;
 

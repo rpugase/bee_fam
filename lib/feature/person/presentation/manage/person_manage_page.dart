@@ -64,7 +64,6 @@ class PersonManagePage extends StatelessWidget {
                 if (state is Finish) {
                   Navigator.pop(context);
                 }
-
                 return state is Finish;
               },
               builder: (context, state) {
@@ -179,7 +178,7 @@ class PersonManagePage extends StatelessWidget {
             initialSelectedDate: birthdayDateTime,
             onCancel: () => Navigator.pop(context),
             onSubmit: (args) {
-              _birthdayController.text = Date(args as DateTime).toUIBirthdayString();
+              _birthdayController.text = Date(args as DateTime, false).toUIBirthdayString();
               Navigator.pop(context);
             },
           ),
