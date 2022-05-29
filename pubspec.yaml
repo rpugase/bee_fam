@@ -23,6 +23,7 @@ dependencies:
   flutter_keyboard_visibility: ^5.1.1
   device_info_plus: ^3.2.2
   url_launcher: ^6.0.20
+  collection: ^1.16.0
 
   # UI
   syncfusion_flutter_datepicker: ^20.1.56

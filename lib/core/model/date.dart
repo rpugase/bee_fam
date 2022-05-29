@@ -35,7 +35,9 @@ class Date extends Equatable {
 
   String toDay() => DateFormat.d().format(dateTime);
 
-  String toMonth() => DateFormat.MMM().format(dateTime);
+  String toShortMonth() => DateFormat.MMM().format(dateTime);
+
+  String toMonth() => DateFormat.MMMM().format(dateTime);
 
   @override
   List<Object?> get props => [dateTime];

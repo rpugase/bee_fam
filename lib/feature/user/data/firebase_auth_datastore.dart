@@ -33,7 +33,7 @@ class FirebaseAuthDatastoreImpl implements FirebaseAuthDatastore {
 
   @override
   void startAuth(String phoneNumber) {
-    Log.i("FirebaseAuthDatastore.startAuth phoneNumber=$phoneNumber; _verificationId=$_verificationId");
+    Log.i("phoneNumber=$phoneNumber; _verificationId=$_verificationId");
     if (_verificationId == null) {
       _auth.verifyPhoneNumber(
         phoneNumber: phoneNumber,

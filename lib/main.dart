@@ -124,6 +124,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.light(
               primary: context.colors.primary,
               onPrimary: context.colors.textPrimary,
+              secondary: context.colors.primary,
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
