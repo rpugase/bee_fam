@@ -55,21 +55,21 @@ class SettingsPage extends StatelessWidget {
             title: Text(context.strings.last_synchronization),
             subtitle: Text(context.strings.soon),
           ),
-          Divider(),
-          ListTile(
-            title: Text(context.strings.notifications_time),
-            subtitle: Text(context.strings.soon),
-          ),
-          Divider(),
-          ListTile(
-            title: Text(context.strings.language),
-            subtitle: Text(context.strings.soon),
-          ),
-          Divider(),
-          ListTile(
-            title: Text(context.strings.logout),
-            subtitle: Text(context.strings.soon),
-          ),
+          // Divider(),
+          // ListTile(
+          //   title: Text(context.strings.notifications_time),
+          //   subtitle: Text(context.strings.soon),
+          // ),
+          // Divider(),
+          // ListTile(
+          //   title: Text(context.strings.language),
+          //   subtitle: Text(context.strings.soon),
+          // ),
+          // Divider(),
+          // ListTile(
+          //   title: Text(context.strings.logout),
+          //   subtitle: Text(context.strings.soon),
+          // ),
         ],
       );
 }
