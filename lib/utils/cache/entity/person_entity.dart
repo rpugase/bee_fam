@@ -1,12 +1,13 @@
 import 'package:hive/hive.dart';
+import '../hive_constants.dart';
 import 'remind_notification_entity.dart';
 import 'note_entity.dart';
 
 part 'person_entity.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: HiveConst.personTypeId)
 class PersonEntity extends HiveObject {
-  static const String TABLE_NAME = "Person";
+  static const String TABLE_NAME = HiveConst.personTableName;
 
   @HiveField(0)
   final String name;

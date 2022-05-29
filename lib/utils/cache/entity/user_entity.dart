@@ -1,10 +1,12 @@
 import 'package:hive/hive.dart';
 
+import '../hive_constants.dart';
+
 part 'user_entity.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: HiveConst.userTypeId)
 class UserEntity extends HiveObject {
-  static const String TABLE_NAME = "User";
+  static const String TABLE_NAME = HiveConst.userTableName;
 
   @HiveField(0)
   final String phone;
