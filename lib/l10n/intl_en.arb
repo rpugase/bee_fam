@@ -15,6 +15,7 @@
   "language" : "Language",
   "logout" : "Logout",
   "soon" : "Soon",
+  "last_version" : "Version",
   "error_number_not_found" : "Number not found",
 
   "hello" : "Hello! 🎉",

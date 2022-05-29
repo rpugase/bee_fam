@@ -1,3 +1,4 @@
+import 'package:birthday_gift/core/cubit/version/get_version_with_update_cubit.dart';
 import 'package:birthday_gift/core/model/user.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
@@ -12,8 +13,11 @@ import 'settings_cubit.dart';
 class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<SettingsCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => sl<SettingsCubit>()),
+        BlocProvider(create: (context) => sl<GetVersionWithUpdateCubit>()),
+      ],
       child: Scaffold(
         appBar: AppBar(
           title: Text(context.strings.settings),
@@ -26,16 +30,32 @@ class SettingsPage extends StatelessWidget {
               Images.bgSvg,
               fit: BoxFit.fill,
             ),
-            BlocBuilder<SettingsCubit, SettingsState>(
-              builder: (context, state) {
-                if (state is Loading) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (state is ShowData) {
-                  return _showSettingsList(context, state.user);
-                } else {
-                  return _showSettingsList(context, null);
-                }
-              },
+            ListView(
+              children: [
+                _phoneNumber(context),
+                Divider(),
+                _version(context),
+                Divider(),
+                ListTile(
+                  title: Text(context.strings.last_synchronization),
+                  subtitle: Text(context.strings.soon),
+                ),
+                // Divider(),
+                // ListTile(
+                //   title: Text(context.strings.notifications_time),
+                //   subtitle: Text(context.strings.soon),
+                // ),
+                // Divider(),
+                // ListTile(
+                //   title: Text(context.strings.language),
+                //   subtitle: Text(context.strings.soon),
+                // ),
+                // Divider(),
+                // ListTile(
+                //   title: Text(context.strings.logout),
+                //   subtitle: Text(context.strings.soon),
+                // ),
+              ],
             ),
           ],
         ),
@@ -43,33 +63,35 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  _showSettingsList(BuildContext context, User? user) =>
-      ListView(
-        children: [
-          ListTile(
+  Widget _phoneNumber(BuildContext context) {
+    return BlocBuilder<SettingsCubit, SettingsState>(
+      builder: (context, state) {
+        if (state is Loading) {
+          return Center(child: CircularProgressIndicator());
+        } else if (state is ShowData) {
+          return ListTile(
             title: Text(context.strings.phoneNumber),
-            subtitle: Text(user?.phone ?? context.strings.error_number_not_found),
-          ),
-          Divider(),
-          ListTile(
-            title: Text(context.strings.last_synchronization),
-            subtitle: Text(context.strings.soon),
-          ),
-          // Divider(),
-          // ListTile(
-          //   title: Text(context.strings.notifications_time),
-          //   subtitle: Text(context.strings.soon),
-          // ),
-          // Divider(),
-          // ListTile(
-          //   title: Text(context.strings.language),
-          //   subtitle: Text(context.strings.soon),
-          // ),
-          // Divider(),
-          // ListTile(
-          //   title: Text(context.strings.logout),
-          //   subtitle: Text(context.strings.soon),
-          // ),
-        ],
-      );
+            subtitle: Text(state.user.phone),
+          );
+        } else {
+          return SizedBox();
+        }
+      },
+    );
+  }
+
+  Widget _version(BuildContext context) {
+    return BlocBuilder<GetVersionWithUpdateCubit, VersionState>(
+      builder: (context, state) {
+        if (state is HandledVersionState) {
+          return ListTile(
+            title: Text(context.strings.last_version),
+            subtitle: Text(state.version),
+          );
+        } else {
+          return SizedBox();
+        }
+      },
+    );
+  }
 }

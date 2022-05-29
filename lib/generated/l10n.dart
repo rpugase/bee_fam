@@ -160,6 +160,16 @@ class S {
     );
   }
 
+  /// `Version`
+  String get last_version {
+    return Intl.message(
+      'Version',
+      name: 'last_version',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Number not found`
   String get error_number_not_found {
     return Intl.message(

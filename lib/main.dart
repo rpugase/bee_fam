@@ -12,6 +12,7 @@ import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/ui/resources/colors.dart';
 import 'core/ui/resources/fonts.dart';
@@ -33,6 +34,7 @@ void main() async {
     await Hive.openBox<PersonEntity>(PersonEntity.TABLE_NAME),
     await Hive.openBox<NoteEntity>(NoteEntity.TABLE_NAME),
     await Hive.openBox<RemindNotificationEntity>(RemindNotificationEntity.TABLE_NAME),
+    await SharedPreferences.getInstance(),
   );
   await auth_di.init();
   await settings_di.init();

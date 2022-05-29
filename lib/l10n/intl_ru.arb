@@ -15,6 +15,7 @@
   "language" : "Язык",
   "logout" : "Выход",
   "soon" : "Скоро",
+  "last_version" : "Версия ПО",
   "error_number_not_found" : "Номер не найден",
 
   "hello" : "Привет! \uD83C\uDF89",

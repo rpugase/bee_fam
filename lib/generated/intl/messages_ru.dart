@@ -61,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
         "last_synchronization":
             MessageLookupByLibrary.simpleMessage("Последняя синхронизация"),
+        "last_version": MessageLookupByLibrary.simpleMessage("Версия ПО"),
         "login": MessageLookupByLibrary.simpleMessage("Отправьте код"),
         "logout": MessageLookupByLibrary.simpleMessage("Выход"),
         "notes": MessageLookupByLibrary.simpleMessage("Заметки"),

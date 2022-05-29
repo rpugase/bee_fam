@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../domain/usecase/create_or_update_product.dart';
 
-class PersonManagerCubit extends BaseCubit<PersonCreateState> {
+class PersonManagerCubit extends BaseCubit<PersonManageState> {
   final CreateOrUpdatePerson _createOrUpdatePerson;
 
   PersonManagerCubit(this._createOrUpdatePerson) : super(ApplyData());
@@ -32,14 +32,14 @@ class PersonManagerCubit extends BaseCubit<PersonCreateState> {
   }
 }
 
-abstract class PersonCreateState extends BlocState {}
+abstract class PersonManageState extends BlocState {}
 
-class ApplyData extends PersonCreateState {}
+class ApplyData extends PersonManageState {}
 
-class NoApplyData extends PersonCreateState {}
+class NoApplyData extends PersonManageState {}
 
-class Error extends BlocError implements PersonCreateState {
+class Error extends BlocError implements PersonManageState {
   Error(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
 }
 
-class Finish extends PersonCreateState {}
+class Finish extends PersonManageState {}
