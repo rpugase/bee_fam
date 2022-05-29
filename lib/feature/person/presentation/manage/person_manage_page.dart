@@ -36,7 +36,9 @@ class PersonManagePage extends StatelessWidget {
       _phoneController.text = person.phone;
       _noteController.text = person.note;
       _birthdayController.text = person.birthday.isValid ? person.birthday.toUIBirthdayString() : "";
-      _pickedNotifications.addAll(person.remindNotifications);
+      final notifications = person.remindNotifications;
+      _pickedNotifications
+          .addAll(person.id == Person.INVALID_ID && notifications.isEmpty ? [RemindNotification()] : notifications);
     } else {
       _pickedNotifications.add(RemindNotification());
     }
@@ -69,17 +71,17 @@ class PersonManagePage extends StatelessWidget {
               builder: (context, state) {
                 return Row(
                   children: [
-                    Builder(
-                      builder: (context) {
-                        return person != null ? IconButton(
-                          icon: Icon(
-                            Icons.call,
-                            color: context.colors.buttonsPrimarySecondary,
-                          ),
-                          onPressed: () => BlocProvider.of<PersonManagerCubit>(context).callNumber(person!.phone),
-                        ) : Container();
-                      }
-                    ),
+                    Builder(builder: (context) {
+                      return person != null
+                          ? IconButton(
+                              icon: Icon(
+                                Icons.call,
+                                color: context.colors.buttonsPrimarySecondary,
+                              ),
+                              onPressed: () => BlocProvider.of<PersonManagerCubit>(context).callNumber(person!.phone),
+                            )
+                          : Container();
+                    }),
                     Padding(
                       padding: EdgeInsets.only(right: 16.0),
                       child: Builder(
