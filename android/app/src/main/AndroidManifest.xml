@@ -7,7 +7,7 @@
 
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="birthday_gift"
+        android:label="BeeFam"
         android:extractNativeLibs="false">
         <activity
             android:name=".MainActivity"

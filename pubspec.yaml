@@ -44,8 +44,16 @@ dependencies:
 dev_dependencies:
   hive_generator: ^1.1.0
   build_runner: ^2.0.5
+  flutter_launcher_icons: ^0.9.2
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  ios: true
+  android: true
+  image_path: "assets/icon/ic_launcher.png"
+  adaptive_icon_foreground: "assets/icon/ic_launcher_foreground.png"
+  adaptive_icon_background: "assets/icon/ic_launcher_background.png"
 
 flutter_intl:
   enabled: true
