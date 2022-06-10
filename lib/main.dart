@@ -1,43 +1,19 @@
-import 'dart:math';
-
+import 'package:birthday_gift/app_initialization.dart';
 import 'package:birthday_gift/main_page.dart';
 import 'package:birthday_gift/utils/cache/dao/user_dao.dart';
 import 'package:birthday_gift/feature/user/presentation/auth_page.dart';
 import 'package:birthday_gift/generated/l10n.dart';
-import 'package:birthday_gift/utils/cache/entity/note_entity.dart';
-import 'package:birthday_gift/utils/cache/entity/person_entity.dart';
-import 'package:birthday_gift/utils/cache/entity/remind_notification_entity.dart';
-import 'package:birthday_gift/utils/cache/entity/user_entity.dart';
-import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/ui/resources/colors.dart';
 import 'core/ui/resources/fonts.dart';
 import 'injection_container.dart' as di;
-import 'package:birthday_gift/feature/user/di/user_di.dart' as auth_di;
-import 'package:birthday_gift/feature/setting/settings_di.dart' as settings_di;
-import 'package:firebase_core/firebase_core.dart';
+
 
 void main() async {
-  await Hive.initFlutter();
-  await Firebase.initializeApp();
-  Log.initialize([ConsolePrintLogger()]);
-  Hive.registerAdapter(PersonEntityAdapter());
-  Hive.registerAdapter(NoteEntityAdapter());
-  Hive.registerAdapter(UserEntityAdapter());
-  Hive.registerAdapter(RemindNotificationEntityAdapter());
-  await di.init(
-    await Hive.openBox<UserEntity>(UserEntity.TABLE_NAME),
-    await Hive.openBox<PersonEntity>(PersonEntity.TABLE_NAME),
-    await Hive.openBox<NoteEntity>(NoteEntity.TABLE_NAME),
-    await Hive.openBox<RemindNotificationEntity>(RemindNotificationEntity.TABLE_NAME),
-    await SharedPreferences.getInstance(),
-  );
-  await auth_di.init();
-  await settings_di.init();
+  WidgetsFlutterBinding.ensureInitialized();
+  await initApp();
   runApp(MyApp(usersCount: (await di.sl<UserDao>().getUsers()).length));
 }
 
