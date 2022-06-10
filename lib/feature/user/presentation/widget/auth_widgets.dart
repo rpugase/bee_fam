@@ -46,36 +46,23 @@ class LoginButton extends StatefulWidget {
   State<LoginButton> createState() => _LoginButtonState();
 }
 
-class _LoginButtonState extends State<LoginButton> {
-  late Timer _timer;
+class _LoginButtonState extends State<LoginButton> with SingleTickerProviderStateMixin {
   final _animationDuration = Duration(milliseconds: 150);
-  double _increaseCoefficient = 1.0;
-  late double _width;
-  late double _height;
+  late final _animationController = AnimationController(
+    vsync: this,
+    duration: _animationDuration,
+    lowerBound: 0.95,
+    upperBound: 1.0,
+  );
 
-  void _increaseButton() {
-    setState(() {
-      _increaseCoefficient = 1.0;
-    });
-  }
-
-  void _decreaseButton() {
-    setState(() {
-      _increaseCoefficient = 0.98;
-    });
-  }
-
-  void _onTap() {
-    _decreaseButton();
-    _timer = Timer(_animationDuration, () {
-      _increaseButton();
-    });
+  @override
+  void initState() {
+    super.initState();
+    _animationController.addListener(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    _width = MediaQuery.of(context).size.width * _increaseCoefficient;
-    _height = 48.0 * _increaseCoefficient;
     return GestureDetector(
       onTapUp: (TapUpDetails tapUpDetails) {
         _increaseButton();
@@ -83,22 +70,47 @@ class _LoginButtonState extends State<LoginButton> {
       onTapDown: (TapDownDetails tapDownDetails) {
         _decreaseButton();
       },
-      child: AnimatedContainer(
-        duration: _animationDuration,
-        width: _width,
-        height: _height,
-        padding: EdgeInsets.symmetric(
-          vertical: 48.0 - _height,
-          horizontal: MediaQuery.of(context).size.width - _width,
-        ),
-        child: ElevatedButton(
-          child: Text(context.strings.login),
-          onPressed: () {
-            _onTap();
-            widget.onPressed?.call();
-          },
+      child: AnimatedBuilder(
+        animation: _animationController.view,
+        builder: (context, child) {
+          return Transform.scale(
+            scale: _animationController.value,
+            child: child,
+          );
+        },
+        child: SizedBox(
+          width: MediaQuery.of(context).size.height,
+          height: 48.0,
+          child: ElevatedButton(
+            child: Text(context.strings.login),
+            onPressed: () {
+              _onTap();
+              widget.onPressed?.call();
+            },
+          ),
         ),
       ),
     );
+  }
+
+  void _onTap() {
+    _decreaseButton();
+    Timer(_animationDuration, () {
+      _increaseButton();
+    });
+  }
+
+  void _increaseButton() {
+    _animationController.forward();
+  }
+
+  void _decreaseButton() {
+    _animationController.reverse();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 }
