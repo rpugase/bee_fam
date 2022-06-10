@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
+import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class ConfirmationCodeTextField extends StatelessWidget {
   final bool readOnly;
@@ -42,26 +46,42 @@ class LoginButton extends StatefulWidget {
   State<LoginButton> createState() => _LoginButtonState();
 }
 
-class _LoginButtonState extends State<LoginButton> with SingleTickerProviderStateMixin {
-  // late AnimationController _controller;
+class _LoginButtonState extends State<LoginButton> {
+  late Timer _timer;
   final _animationDuration = Duration(milliseconds: 150);
   double _increaseCoefficient = 1.0;
   late double _width;
   late double _height;
+
+  void _increaseButton() {
+    setState(() {
+      _increaseCoefficient = 1.0;
+    });
+  }
+
+  void _decreaseButton() {
+    setState(() {
+      _increaseCoefficient = 0.98;
+    });
+  }
+
+  void _onTap() {
+    _decreaseButton();
+    _timer = Timer(_animationDuration, () {
+      _increaseButton();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     _width = MediaQuery.of(context).size.width * _increaseCoefficient;
     _height = 48.0 * _increaseCoefficient;
     return GestureDetector(
-      onTapDown: (details) {
-        setState(() => _increaseCoefficient = .98);
+      onTapUp: (TapUpDetails tapUpDetails) {
+        _increaseButton();
       },
-      onTapUp: (details) {
-        setState(() => _increaseCoefficient = 1);
-      },
-      onTapCancel: () {
-        setState(() => _increaseCoefficient = 1);
+      onTapDown: (TapDownDetails tapDownDetails) {
+        _decreaseButton();
       },
       child: AnimatedContainer(
         duration: _animationDuration,
@@ -73,7 +93,10 @@ class _LoginButtonState extends State<LoginButton> with SingleTickerProviderStat
         ),
         child: ElevatedButton(
           child: Text(context.strings.login),
-          onPressed: widget.onPressed,
+          onPressed: () {
+            _onTap();
+            widget.onPressed?.call();
+          },
         ),
       ),
     );
