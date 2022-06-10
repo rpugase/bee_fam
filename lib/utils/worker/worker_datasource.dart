@@ -1,37 +1,48 @@
 import 'dart:async';
 
-import 'package:birthday_gift/utils/logger/logger.dart';
+import 'package:birthday_gift/core/sync/show_today_notification.dart';
+import 'package:flutter/foundation.dart';
 import 'package:workmanager/workmanager.dart';
 
+import '../logger/logger.dart';
+
 class WorkerDatasource {
+
+  static const String everyDayTask = "com.andriih.bee_fam.every_day";
 
   final Workmanager _workManager = Workmanager();
 
   init() async {
     await _workManager.initialize(
-        _callbackDispatcher,
-        isInDebugMode: true,
+      callbackDispatcher,
+      isInDebugMode: false,
     );
-    await executeTask();
+    await executeEveryHourTask();
   }
 
-  executeTask() async {
-    Log.i("executeTask");
-    await _workManager.registerOneOffTask(
-        "uniqueName_ONE",
-        "taskName_ONE",
-        initialDelay: Duration(seconds: 30),
-        constraints: Constraints(
-          networkType: NetworkType.not_required,
-        ),
-        inputData: {} // fully supported
+  executeEveryHourTask() async {
+    await _workManager.cancelByUniqueName(everyDayTask);
+    await _workManager.registerPeriodicTask(
+      everyDayTask,
+      everyDayTask,
+      // initialDelay: Duration(
+      //   minutes: 60 - DateTime.now().minute,
+      // ),
+      frequency: Duration(minutes: 15),
+      constraints: Constraints(
+        networkType: NetworkType.not_required,
+      ),
     );
   }
 }
 
-_callbackDispatcher() {
-  Workmanager().executeTask((task, inputData) {
-    Log.i("Native called background task: $task");
+callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) async {
+    Log.initialize([ConsolePrintLogger()]);
+    if (task == WorkerDatasource.everyDayTask) {
+      await (await ShowTodayNotification.init()).call();
+    }
+    print("Native called background task: $task");
     return Future.value(true);
   });
 }

@@ -7,7 +7,10 @@ part 'person_entity.g.dart';
 
 @HiveType(typeId: HiveConst.personTypeId)
 class PersonEntity extends HiveObject {
-  static const String TABLE_NAME = HiveConst.personTableName;
+
+  static Future<Box<PersonEntity>> createBox() async {
+    return Hive.openBox<PersonEntity>(HiveConst.personTableName);
+  }
 
   @HiveField(0)
   final String name;

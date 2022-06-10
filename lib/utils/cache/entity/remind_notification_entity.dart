@@ -6,7 +6,10 @@ part 'remind_notification_entity.g.dart';
 
 @HiveType(typeId: HiveConst.remindNotificationTypeId)
 class RemindNotificationEntity extends HiveObject {
-  static const String TABLE_NAME = HiveConst.remindNotificationTableName;
+
+  static Future<Box<RemindNotificationEntity>> createBox() async {
+    return Hive.openBox<RemindNotificationEntity>(HiveConst.remindNotificationTableName);
+  }
 
   @HiveField(0)
   final int offsetDaysFromBirthday;

@@ -10,6 +10,27 @@ class Date extends Equatable {
 
   bool get isValid => dateTime.year != INVALID_DATE_TIME.year;
 
+  Date copy({int? year,
+    int? month,
+    int? day,
+    int? hour,
+    int? minute,
+    int? second,
+    int? millisecond,
+    int? microsecond,
+  }) => Date(
+      DateTime(
+      year ?? dateTime.year,
+        month ?? dateTime.month,
+        hour ?? dateTime.hour,
+        minute ?? dateTime.minute,
+        second ?? dateTime.second,
+        millisecond ?? dateTime.millisecond,
+        microsecond ?? dateTime.microsecond,
+      ));
+
+  Date add(Duration duration) => Date(dateTime.add(duration));
+
   // millis
   Date.millis(int milliseconds) : dateTime = DateTime.fromMillisecondsSinceEpoch(milliseconds).toUtc();
 
@@ -55,14 +76,15 @@ class LeftPeriod extends Equatable {
 }
 
 enum LeftType {
-  DAYS, MONTH
+  DAYS,
+  MONTH
 }
 
 extension DateTimeParsing on DateFormat {
   DateTime parseCustom(String date) {
     try {
       return this.parse(date);
-    } on Exception catch(e) {
+    } on Exception catch (e) {
       Log.e(e);
     }
     return INVALID_DATE_TIME;

@@ -17,11 +17,26 @@ class Person extends Equatable {
   String get initials {
     final split = name.split(RegExp(" "));
     if (split.length == 1) {
-      if (name.length > 2) return name.substring(0, 2);
-      else return name;
+      if (name.length > 2)
+        return name.substring(0, 2);
+      else
+        return name;
     } else {
       return "${split[0].substring(0, 1)}${split[1].substring(0, 1)}";
     }
+  }
+
+  String getNotificationMessage() {
+    return birthday.isToday() ? "Make happy $name today!" : "$name's birthday is coming soon";
+  }
+
+  bool isIncludeRemindNotificationForToday() {
+    return remindNotifications.map((remind) {
+      final offsetDay = remind.offsetDaysFromBirthday * -1 + remind.offsetMonthFromBirthday * -30;
+      return birthday.add(Duration(
+        days: offsetDay + 1,
+      ));
+    }).where((remindDate) => remindDate.isToday()).isNotEmpty;
   }
 
   static const int INVALID_ID = -1;
@@ -68,7 +83,7 @@ class Person extends Equatable {
   @override
   String toString() {
     return "Person(name=$name, birthday=$birthday, phone=$phone, imgUrl=$imgUrl, "
-        "note=$note,remindNotifications,id=$id)";
+        "note=$note,remindNotifications=$remindNotifications,id=$id)";
   }
 }
 
