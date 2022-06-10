@@ -31,26 +31,19 @@ class AuthCubit extends BaseCubit<AuthState> {
     if (state is EnterPhoneNumber || state is ErrorOnEnterPhoneNumber) {
       emit(LoadingPhoneNumber());
       _authWithPhoneNumber(phoneNumberOrCode)
-          .then((stream) =>
-              stream
-                  .listen((event) => event is Complete ? emit(SuccessCode()) : emit(EnterCode()))
-                  .onError((error) => _handleUserException(error, phone: true)))
-          .onError((error, stackTrace) => _handleUserException(error ?? Object(), phone: true));
+          .listen((event) => event is Complete ? emit(SuccessCode()) : emit(EnterCode()))
+          .onError((error) => _handleUserException(error, phone: true));
     } else if (state is EnterCode || state is ErrorOnEnterCodeNumber) {
       emit(LoadingConfirmationCode());
       _confirmPhoneNumberCode(phoneNumberOrCode)
-          .onError((error, stackTrace) => _handleUserException(error ?? Object(), code: true));
+          .onError((error, stackTrace) => _handleUserException(error is Exception ? error : Exception(), code: true));
     }
   }
 
-  void _handleUserException(Object error, {bool phone = false, bool code = false}) {
-    if (error is UserException) {
+  void _handleUserException(Exception error, {bool phone = false, bool code = false}) {
       if (phone) emit(ErrorOnEnterPhoneNumber(error, _userErrorHandler));
       else if (code) emit(ErrorOnEnterCodeNumber(error, _userErrorHandler));
       else addError(error);
-    } else {
-      addError(error);
-    }
   }
 }
 
