@@ -31,7 +31,7 @@ class ConfirmationCodeTextField extends StatelessWidget {
   }
 }
 
-class LoginButton extends StatelessWidget {
+class LoginButton extends StatefulWidget {
   final VoidCallback? onPressed;
 
   LoginButton(Key? key, VoidCallback? onPressed)
@@ -39,13 +39,42 @@ class LoginButton extends StatelessWidget {
         super(key: key);
 
   @override
+  State<LoginButton> createState() => _LoginButtonState();
+}
+
+class _LoginButtonState extends State<LoginButton> with SingleTickerProviderStateMixin {
+  // late AnimationController _controller;
+  final _animationDuration = Duration(milliseconds: 150);
+  double _increaseCoefficient = 1.0;
+  late double _width;
+  late double _height;
+
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: 48.0,
-      child: ElevatedButton(
-        child: Text(context.strings.login),
-        onPressed: onPressed,
+    _width = MediaQuery.of(context).size.width * _increaseCoefficient;
+    _height = 48.0 * _increaseCoefficient;
+    return GestureDetector(
+      onTapDown: (details) {
+        setState(() => _increaseCoefficient = .98);
+      },
+      onTapUp: (details) {
+        setState(() => _increaseCoefficient = 1);
+      },
+      onTapCancel: () {
+        setState(() => _increaseCoefficient = 1);
+      },
+      child: AnimatedContainer(
+        duration: _animationDuration,
+        width: _width,
+        height: _height,
+        padding: EdgeInsets.symmetric(
+          vertical: 48.0 - _height,
+          horizontal: MediaQuery.of(context).size.width - _width,
+        ),
+        child: ElevatedButton(
+          child: Text(context.strings.login),
+          onPressed: widget.onPressed,
+        ),
       ),
     );
   }
