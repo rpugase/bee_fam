@@ -1,4 +1,5 @@
 import 'package:birthday_gift/core/base_cubit.dart';
+import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/feature/user/domain/exception/user_exceptions.dart';
 import 'package:birthday_gift/main_page.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
@@ -63,7 +64,7 @@ class AuthPage extends StatelessWidget {
                                   Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(builder: (ctx) => MainPage()),
-                                        (route) => false,
+                                    (route) => false,
                                   );
                                 }
                                 return !(state is SuccessCode || state.error is UserException);
@@ -71,11 +72,15 @@ class AuthPage extends StatelessWidget {
                               builder: (ctx, state) {
                                 return Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: state is EnterPhoneNumber ? _onEnterPhoneNumber(ctx, state)
-                                      : state is LoadingPhoneNumber ? _onLoadingPhoneNumber(ctx, state)
-                                      : state is EnterCode ? _onEnterPhoneCode(ctx, state)
-                                      : state is LoadingConfirmationCode ? _onLoadingConfirmationCode(ctx, state)
-                                      : [],
+                                  children: state is EnterPhoneNumber
+                                      ? _onEnterPhoneNumber(ctx, state)
+                                      : state is LoadingPhoneNumber
+                                          ? _onLoadingPhoneNumber(ctx, state)
+                                          : state is EnterCode
+                                              ? _onEnterPhoneCode(ctx, state)
+                                              : state is LoadingConfirmationCode
+                                                  ? _onLoadingConfirmationCode(ctx, state)
+                                                  : [],
                                 );
                               },
                             ),
@@ -120,16 +125,7 @@ class AuthPage extends StatelessWidget {
           controller: _phoneNumberController,
         ),
         SizedBox(height: 20),
-        Stack(
-          alignment: AlignmentDirectional.bottomCenter,
-          children: [
-            LoginButton(
-              key: _buttonLoginKey,
-              onPressed: _onAuthPressedCallback(ctx, state, false),
-            ),
-            LinearProgressIndicator(),
-          ],
-        ),
+        CircularProgressIndicator(),
       ];
 
   List<Widget> _onEnterPhoneCode(BuildContext ctx, AuthState state) => [
@@ -166,16 +162,14 @@ class AuthPage extends StatelessWidget {
           controller: _confirmationCodeController,
         ),
         SizedBox(height: 20),
-        LoginButton(
-          key: _buttonLoginKey,
-          onPressed: _onAuthPressedCallback(ctx, state, false),
-        ),
+        CircularProgressIndicator(),
       ];
 
   VoidCallback? _onAuthPressedCallback(BuildContext ctx, AuthState state, bool enable) {
     return !enable
         ? null
-        : () => ctx.read<AuthCubit>()
+        : () => ctx
+            .read<AuthCubit>()
             .onAuth(state is EnterPhoneNumber ? _phoneNumberController.text : _confirmationCodeController.text);
   }
 }
