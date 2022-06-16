@@ -1,4 +1,7 @@
+import 'package:birthday_gift/core/ui/resources/app_translations.dart';
+import 'package:birthday_gift/feature/user/presentation/auth_cubit.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
+import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +20,22 @@ abstract class BaseCubit<State extends BlocState> extends Cubit<State> {
     }
   }
 
+  void collect<T>(Stream<T> stream, Future onNext(T event), Future onError(Exception error)?) {
+    stream.listen((event) {
+      onNext(event).then((value) => null);
+    }).onError((error) async {
+      await onError?.call(error);
+      addError(error);
+    });
+  }
+
+  void launch(Future f(), Future onError(Exception error)?) {
+    f.call().onError<Exception>((error, stacktrace) async {
+      await onError?.call(error);
+      addError(error);
+    });
+  }
+
   @protected
   void onInit() {/*NOP*/}
 
@@ -26,14 +45,14 @@ abstract class BaseCubit<State extends BlocState> extends Cubit<State> {
   @override
   void onError(Object error, StackTrace stackTrace) {
     if (error is Exception) {
-      emit(getErrorTemplate(error) as State);
+      emit(state..withError(error));
     }
     super.onError(error, stackTrace);
   }
 
   @override
   void emit(State state) {
-    Log.i(state);
+    Log.i("Emit bloc state: $state");
     super.emit(state);
   }
 }
@@ -41,28 +60,60 @@ abstract class BaseCubit<State extends BlocState> extends Cubit<State> {
 class BaseBlocConsumer<B extends BlocBase<S>, S> extends BlocConsumer<B, S> {
 
   BaseBlocConsumer({
+    required BuildContext context,
     required BlocWidgetBuilder<S> builder,
     BaseBlocWidgetListener<S>? listener,
     bool handleBaseErrorMessage = true,
   }) : super(builder: builder, listener: (context, state) {
-    if (listener?.call(context, state) == true && handleBaseErrorMessage && state is BlocError) {
+    final cubit = (context.read<B>() as BaseCubit);
+    final error = (state as BlocState).error;
+    if (listener?.call(context, state) == true && handleBaseErrorMessage && error != null) {
       showDialog(context: context, builder: (context) {
-        return ErrorDialog(state.errorHandler.getErrorMessage(context, state.exception));
+        final errorTemplate = cubit.getErrorTemplate(error);
+        return ErrorDialog(errorTemplate.errorHandler.getErrorMessage(context, errorTemplate.exception));
       });
     }
   });
 }
 
 abstract class ErrorHandler {
-  String getErrorMessage(BuildContext context, Exception exception);
+
+  static List<ErrorHandler> _errorHandlers = [];
+  static String? _message = null;
+
+  static void setDefaultErrorMessage(String message) {
+    _message = message;
+  }
+
+  static void setErrorHandlers(Iterable<ErrorHandler> errorHandlers) {
+    if (_errorHandlers.isNotEmpty) {
+      throw Exception("You are shouldn't to init handlers twice");
+    }
+    _errorHandlers.addAll(errorHandlers);
+  }
+
+  String getErrorMessage(BuildContext context, Exception exception) {
+    return _errorHandlers.firstWhereOrNull((handler) => handler.getErrorMessage(context, exception).isNotEmpty)
+        ?.getErrorMessage(context, exception) ?? _message ?? context.strings.error_unknown;
+  }
 }
 
-abstract class BlocState extends Equatable {
+abstract class BlocState {
+
+  Exception? _inError = null;
+  Exception? get error => _inError;
+
+  void withError(Exception? error) {
+    this._inError = error;
+  }
+}
+
+class UseContainsMethodException implements Exception {
   @override
-  List<Object?> get props => const <dynamic>[];
+  String toString() => "Use state.containsError for checking";
 }
 
-abstract class BlocError extends BlocState {
+class BlocError extends Equatable implements Exception {
   final Exception exception;
   final ErrorHandler errorHandler;
 

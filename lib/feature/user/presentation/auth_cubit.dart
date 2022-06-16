@@ -23,27 +23,22 @@ class AuthCubit extends BaseCubit<AuthState> {
 
   @override
   BlocError getErrorTemplate(Exception exception) {
-    return Error(exception, _userErrorHandler);
+    return AuthError(exception, _userErrorHandler);
   }
 
   void onAuth(String phoneNumberOrCode) {
     Log.i("$phoneNumberOrCode $state");
-    if (state is EnterPhoneNumber || state is ErrorOnEnterPhoneNumber) {
+    if (state is EnterPhoneNumber) {
       emit(LoadingPhoneNumber());
-      _authWithPhoneNumber(phoneNumberOrCode)
-          .listen((event) => event is Complete ? emit(SuccessCode()) : emit(EnterCode()))
-          .onError((error) => _handleUserException(error, phone: true));
-    } else if (state is EnterCode || state is ErrorOnEnterCodeNumber) {
-      emit(LoadingConfirmationCode());
-      _confirmPhoneNumberCode(phoneNumberOrCode)
-          .onError((error, stackTrace) => _handleUserException(error is Exception ? error : Exception(), code: true));
+      collect(_authWithPhoneNumber(phoneNumberOrCode), (event) async {
+        event is Complete ? emit(SuccessCode()) : emit(EnterCode());
+      }, (err) async => emit(EnterPhoneNumber()..withError(err)));
+    } else if (state is EnterCode) {
+      launch(() async {
+        emit(LoadingConfirmationCode());
+        await _confirmPhoneNumberCode(phoneNumberOrCode);
+      }, (error) async => emit(EnterCode()..withError(error)));
     }
-  }
-
-  void _handleUserException(Exception error, {bool phone = false, bool code = false}) {
-      if (phone) emit(ErrorOnEnterPhoneNumber(error, _userErrorHandler));
-      else if (code) emit(ErrorOnEnterCodeNumber(error, _userErrorHandler));
-      else addError(error);
   }
 }
 
@@ -59,14 +54,6 @@ class EnterCode extends AuthState {}
 
 class SuccessCode extends AuthState {}
 
-class Error extends BlocError implements AuthState {
-  Error(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
-}
-
-class ErrorOnEnterPhoneNumber extends Error {
-  ErrorOnEnterPhoneNumber(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
-}
-
-class ErrorOnEnterCodeNumber extends Error {
-  ErrorOnEnterCodeNumber(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
+class AuthError extends BlocError {
+  AuthError(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
 }

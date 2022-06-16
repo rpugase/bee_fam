@@ -42,6 +42,9 @@
   "error_name_require" : "Name is require",
   "error_birthday_require" : "Birthday is require",
   "error_phone_number_empty" : "Phone number is require",
+  "error_phone_incorrect" : "Phone number is incorrect",
   "error_code_empty" : "Code is require",
-  "error_code_incorrect" : "Code is incorrect"
+  "error_code_incorrect" : "Code is incorrect",
+  "error_unknown" : "Something went wrong. Try again",
+  "error_no_internet" : "No internet connection"
 }

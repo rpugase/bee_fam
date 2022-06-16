@@ -38,9 +38,10 @@ class ConfirmationCodeTextField extends StatelessWidget {
 class LoginButton extends StatefulWidget {
   final VoidCallback? onPressed;
 
-  LoginButton(Key? key, VoidCallback? onPressed)
-      : onPressed = onPressed,
-        super(key: key);
+  LoginButton({
+    Key? key,
+    this.onPressed,
+  }) : super(key: key);
 
   @override
   State<LoginButton> createState() => _LoginButtonState();
@@ -83,10 +84,10 @@ class _LoginButtonState extends State<LoginButton> with SingleTickerProviderStat
           height: 48.0,
           child: ElevatedButton(
             child: Text(context.strings.login),
-            onPressed: () {
+            onPressed: widget.onPressed != null ? () {
               _onTap();
               widget.onPressed?.call();
-            },
+            } : null,
           ),
         ),
       ),

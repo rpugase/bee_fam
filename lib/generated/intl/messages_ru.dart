@@ -46,10 +46,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Код не правильный"),
         "error_name_require":
             MessageLookupByLibrary.simpleMessage("Введите имя"),
+        "error_no_internet": MessageLookupByLibrary.simpleMessage("Нет сети"),
         "error_number_not_found":
             MessageLookupByLibrary.simpleMessage("Номер не найден"),
+        "error_phone_incorrect": MessageLookupByLibrary.simpleMessage(
+            "Номер телефона не правильного формата"),
         "error_phone_number_empty":
             MessageLookupByLibrary.simpleMessage("Введите номер телефона"),
+        "error_unknown": MessageLookupByLibrary.simpleMessage(
+            "Что-то пошло не так, попробуйте ещё раз"),
         "full_name": MessageLookupByLibrary.simpleMessage("Имя, Фамилия"),
         "get_notification":
             MessageLookupByLibrary.simpleMessage("Получить уведомление"),

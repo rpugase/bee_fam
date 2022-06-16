@@ -1,4 +1,5 @@
 import 'package:birthday_gift/core/base_cubit.dart';
+import 'package:birthday_gift/feature/user/domain/exception/user_exceptions.dart';
 import 'package:birthday_gift/main_page.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
@@ -52,13 +53,11 @@ class AuthPage extends StatelessWidget {
                             SizedBox(height: 20.0),
                             Text(
                               '${context.strings.enter_your_phone_number}:',
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .subtitle1,
+                              style: Theme.of(context).textTheme.subtitle1,
                             ),
                             SizedBox(height: 20.0),
                             BaseBlocConsumer<AuthCubit, AuthState>(
+                              context: context,
                               listener: (ctx, state) {
                                 if (state is SuccessCode) {
                                   Navigator.pushAndRemoveUntil(
@@ -67,20 +66,14 @@ class AuthPage extends StatelessWidget {
                                         (route) => false,
                                   );
                                 }
-                                return (
-                                    state is Error &&
-                                        !(state is ErrorOnEnterPhoneNumber) &&
-                                        !(state is ErrorOnEnterCodeNumber)
-                                ) || state is SuccessCode;
+                                return !(state is SuccessCode || state.error is UserException);
                               },
                               builder: (ctx, state) {
                                 return Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: state is EnterPhoneNumber ? _onEnterPhoneNumber(ctx, state)
-                                      : state is ErrorOnEnterPhoneNumber ? _onEnterPhoneNumber(ctx, state)
                                       : state is LoadingPhoneNumber ? _onLoadingPhoneNumber(ctx, state)
                                       : state is EnterCode ? _onEnterPhoneCode(ctx, state)
-                                      : state is ErrorOnEnterCodeNumber ? _onEnterPhoneCode(ctx, state)
                                       : state is LoadingConfirmationCode ? _onLoadingConfirmationCode(ctx, state)
                                       : [],
                                 );
@@ -101,32 +94,45 @@ class AuthPage extends StatelessWidget {
     );
   }
 
-  List<Widget> _onEnterPhoneNumber(BuildContext ctx, AuthState state) =>
-      [
+  String _getErrorMessage(BuildContext context, Exception exception) {
+    return context.read<AuthCubit>().getErrorTemplate(exception).errorHandler.getErrorMessage(context, exception);
+  }
+
+  List<Widget> _onEnterPhoneNumber(BuildContext ctx, AuthState state) => [
         PhoneNumberTextField(
           key: _phoneNumberKey,
           readOnly: false,
           controller: _phoneNumberController,
-          errorText: state is Error ? state.errorHandler.getErrorMessage(ctx, state.exception) : null,
+          errorText: state.error is UserException ? _getErrorMessage(ctx, state.error!) : null,
           autoFocus: true,
         ),
         SizedBox(height: 20),
-        LoginButton(_buttonLoginKey, _onAuthPressedCallback(ctx, state, true)),
+        LoginButton(
+          key: _buttonLoginKey,
+          onPressed: _onAuthPressedCallback(ctx, state, true),
+        ),
       ];
 
-  List<Widget> _onLoadingPhoneNumber(BuildContext ctx, AuthState state) =>
-      [
+  List<Widget> _onLoadingPhoneNumber(BuildContext ctx, AuthState state) => [
         PhoneNumberTextField(
           key: _phoneNumberKey,
-          readOnly: false,
+          readOnly: true,
           controller: _phoneNumberController,
         ),
         SizedBox(height: 20),
-        LoginButton(_buttonLoginKey, _onAuthPressedCallback(ctx, state, false)),
+        Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          children: [
+            LoginButton(
+              key: _buttonLoginKey,
+              onPressed: _onAuthPressedCallback(ctx, state, false),
+            ),
+            LinearProgressIndicator(),
+          ],
+        ),
       ];
 
-  List<Widget> _onEnterPhoneCode(BuildContext ctx, AuthState state) =>
-      [
+  List<Widget> _onEnterPhoneCode(BuildContext ctx, AuthState state) => [
         PhoneNumberTextField(
           key: _phoneNumberKey,
           readOnly: true,
@@ -137,15 +143,17 @@ class AuthPage extends StatelessWidget {
           key: _codeConfirmationKey,
           readOnly: false,
           controller: _confirmationCodeController,
-          errorText: state is Error ? state.errorHandler.getErrorMessage(ctx, state.exception) : null,
+          errorText: state.error is UserException ? _getErrorMessage(ctx, state.error!) : null,
           autoFocus: true,
         ),
         SizedBox(height: 20),
-        LoginButton(_buttonLoginKey, _onAuthPressedCallback(ctx, state, true)),
+        LoginButton(
+          key: _buttonLoginKey,
+          onPressed: _onAuthPressedCallback(ctx, state, true),
+        ),
       ];
 
-  List<Widget> _onLoadingConfirmationCode(BuildContext ctx, AuthState state) =>
-      [
+  List<Widget> _onLoadingConfirmationCode(BuildContext ctx, AuthState state) => [
         PhoneNumberTextField(
           key: _phoneNumberKey,
           readOnly: true,
@@ -158,15 +166,16 @@ class AuthPage extends StatelessWidget {
           controller: _confirmationCodeController,
         ),
         SizedBox(height: 20),
-        LoginButton(_buttonLoginKey, _onAuthPressedCallback(ctx, state, false)),
+        LoginButton(
+          key: _buttonLoginKey,
+          onPressed: _onAuthPressedCallback(ctx, state, false),
+        ),
       ];
 
   VoidCallback? _onAuthPressedCallback(BuildContext ctx, AuthState state, bool enable) {
     return !enable
         ? null
-        : () =>
-        BlocProvider.of<AuthCubit>(ctx).onAuth(state is EnterPhoneNumber || state is ErrorOnEnterPhoneNumber
-            ? _phoneNumberController.text
-            : _confirmationCodeController.text);
+        : () => ctx.read<AuthCubit>()
+            .onAuth(state is EnterPhoneNumber ? _phoneNumberController.text : _confirmationCodeController.text);
   }
 }

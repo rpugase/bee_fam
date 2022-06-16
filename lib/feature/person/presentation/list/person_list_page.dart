@@ -29,6 +29,7 @@ class PersonListPage extends StatelessWidget {
               fit: BoxFit.fill,
             ),
             BaseBlocConsumer<PersonListCubit, PersonListState>(
+              context: context,
               builder: (context, state) {
                 if (state is EmptyList) {
                   return _showNoPersons(context);

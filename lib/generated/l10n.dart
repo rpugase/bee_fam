@@ -390,6 +390,16 @@ class S {
     );
   }
 
+  /// `Phone number is incorrect`
+  String get error_phone_incorrect {
+    return Intl.message(
+      'Phone number is incorrect',
+      name: 'error_phone_incorrect',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Code is require`
   String get error_code_empty {
     return Intl.message(
@@ -405,6 +415,26 @@ class S {
     return Intl.message(
       'Code is incorrect',
       name: 'error_code_incorrect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong. Try again`
+  String get error_unknown {
+    return Intl.message(
+      'Something went wrong. Try again',
+      name: 'error_unknown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No internet connection`
+  String get error_no_internet {
+    return Intl.message(
+      'No internet connection',
+      name: 'error_no_internet',
       desc: '',
       args: [],
     );

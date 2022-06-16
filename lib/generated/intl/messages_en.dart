@@ -46,10 +46,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Code is incorrect"),
         "error_name_require":
             MessageLookupByLibrary.simpleMessage("Name is require"),
+        "error_no_internet":
+            MessageLookupByLibrary.simpleMessage("No internet connection"),
         "error_number_not_found":
             MessageLookupByLibrary.simpleMessage("Number not found"),
+        "error_phone_incorrect":
+            MessageLookupByLibrary.simpleMessage("Phone number is incorrect"),
         "error_phone_number_empty":
             MessageLookupByLibrary.simpleMessage("Phone number is require"),
+        "error_unknown": MessageLookupByLibrary.simpleMessage(
+            "Something went wrong. Try again"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full Name"),
         "get_notification":
             MessageLookupByLibrary.simpleMessage("Get notification"),

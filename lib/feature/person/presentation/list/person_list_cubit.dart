@@ -1,6 +1,7 @@
 import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/core/model/person.dart';
 import 'package:birthday_gift/feature/person/domain/person_error_handler.dart';
+import 'package:equatable/equatable.dart';
 
 import '../../domain/usecase/listen_person.dart';
 
@@ -11,15 +12,15 @@ class PersonListCubit extends BaseCubit<PersonListState> {
 
   @override
   void onInit() {
-    _listenPersons().handleError(addError).listen(_onPersonLoaded);
+    collect<List<Person>>(_listenPersons(), _onPersonLoaded, null);
   }
 
   @override
   BlocError getErrorTemplate(Exception exception) {
-    return Error(exception, PersonErrorHandler());
+    return NotificationError(exception, PersonErrorHandler());
   }
 
-  void _onPersonLoaded(List<Person> persons) {
+  Future _onPersonLoaded(List<Person> persons) async {
     emit(persons.isEmpty ? EmptyList() : PersonsList(persons));
   }
 }
@@ -30,15 +31,18 @@ class Loading extends PersonListState {}
 
 class EmptyList extends PersonListState {}
 
-class PersonsList extends PersonListState {
+class PersonsList extends PersonListState implements Equatable {
   final List<Person> persons;
 
   PersonsList(this.persons);
 
   @override
   List<Object?> get props => [persons.hashCode];
+
+  @override
+  bool? get stringify => true;
 }
 
-class Error extends BlocError implements PersonListState {
-  Error(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
+class NotificationError extends BlocError {
+  NotificationError(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
 }

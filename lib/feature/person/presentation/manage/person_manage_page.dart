@@ -62,6 +62,7 @@ class PersonManagePage extends StatelessWidget {
           ),
           actions: [
             BaseBlocConsumer<PersonManagerCubit, PersonManageState>(
+              context: context,
               listener: (ctx, state) {
                 if (state is Finish) {
                   Navigator.pop(context);

@@ -42,6 +42,6 @@ class HandledVersionState extends VersionState {
   HandledVersionState(this.version, this.changed);
 }
 
-class VersionErrorState extends BlocError implements VersionState {
+class VersionErrorState extends BlocError {
   VersionErrorState(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
 }

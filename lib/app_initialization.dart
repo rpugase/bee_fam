@@ -1,3 +1,5 @@
+import 'package:birthday_gift/core/base_cubit.dart';
+import 'package:birthday_gift/feature/user/data/auth_firebase_error_handler.dart';
 import 'package:birthday_gift/utils/cache/entity/note_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/person_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/remind_notification_entity.dart';
@@ -15,6 +17,7 @@ import 'package:birthday_gift/feature/setting/settings_di.dart' as settings_di;
 Future initApp() async {
   await Firebase.initializeApp();
   Log.initialize([ConsolePrintLogger()]);
+  ErrorHandler.setErrorHandlers([AuthFirebaseErrorHandler()]);
   await initHive();
   await _initDi();
 }

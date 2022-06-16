@@ -42,6 +42,9 @@
   "error_name_require" : "Введите имя",
   "error_birthday_require" : "Введите дату рождения",
   "error_phone_number_empty" : "Введите номер телефона",
+  "error_phone_incorrect" : "Номер телефона не правильного формата",
   "error_code_empty" : "Введите код",
-  "error_code_incorrect" : "Код не правильный"
+  "error_code_incorrect" : "Код не правильный",
+  "error_unknown" : "Что-то пошло не так, попробуйте ещё раз",
+  "error_no_internet" : "Нет сети"
 }
