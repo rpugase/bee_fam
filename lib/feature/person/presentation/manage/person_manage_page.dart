@@ -67,7 +67,7 @@ class PersonManagePage extends StatelessWidget {
                 if (state is Finish) {
                   Navigator.pop(context);
                 }
-                return state is Finish;
+                return !(state is Finish);
               },
               builder: (context, state) {
                 return Row(
@@ -79,7 +79,7 @@ class PersonManagePage extends StatelessWidget {
                                 Icons.call,
                                 color: context.colors.buttonsPrimarySecondary,
                               ),
-                              onPressed: () => BlocProvider.of<PersonManagerCubit>(context).callNumber(person!.phone),
+                              onPressed: () => context.read<PersonManagerCubit>().callNumber(person!.phone),
                             )
                           : Container();
                     }),
@@ -199,6 +199,6 @@ class PersonManagePage extends StatelessWidget {
       note: _noteController.text,
       remindNotifications: _pickedNotifications,
     );
-    BlocProvider.of<PersonManagerCubit>(context).createOrUpdatePerson(person);
+    context.read<PersonManagerCubit>().createOrUpdatePerson(person);
   }
 }

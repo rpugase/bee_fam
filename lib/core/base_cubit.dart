@@ -47,7 +47,7 @@ abstract class BaseCubit<State extends BlocState> extends Cubit<State> {
     if (error is Exception) {
       emit(state..withError(error));
     }
-    super.onError(error, stackTrace);
+    Bloc.observer.onError(this, error, stackTrace);
   }
 
   @override
@@ -70,7 +70,7 @@ class BaseBlocConsumer<B extends BlocBase<S>, S> extends BlocConsumer<B, S> {
     if (listener?.call(context, state) == true && handleBaseErrorMessage && error != null) {
       showDialog(context: context, builder: (context) {
         final errorTemplate = cubit.getErrorTemplate(error);
-        return ErrorDialog(errorTemplate.errorHandler.getErrorMessage(context, errorTemplate.exception));
+        return ErrorDialog(errorTemplate.errorHandler.getErrorMessage(context, error));
       });
     }
   });
@@ -106,6 +106,12 @@ abstract class BlocState {
   void withError(Exception? error) {
     this._inError = error;
   }
+
+  @override
+  bool operator ==(Object other) => false;
+
+  @override
+  String toString() => "${runtimeType} ${_inError?.runtimeType ?? "no error"}";
 }
 
 class UseContainsMethodException implements Exception {
