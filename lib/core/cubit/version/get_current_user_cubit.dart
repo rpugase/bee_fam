@@ -3,27 +3,25 @@ import 'package:birthday_gift/feature/user/domain/get_current_user.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SettingsCubit extends Cubit<SettingsState> {
+class CurrentUserCubit extends Cubit<CurrentUserState> {
 
   final GetCurrentUser _getCurrentUser;
 
-  SettingsCubit(this._getCurrentUser) : super(Loading()) {
+  CurrentUserCubit(this._getCurrentUser) : super(NoUser()) {
     _getCurrentUser().then((user) => _onUserLoaded(user));
   }
 
   _onUserLoaded(User? user) {
-    emit(user != null ? ShowData(user) : Error());
+    emit(user != null ? ShowData(user) : NoUser());
   }
 }
 
-abstract class SettingsState extends Equatable {
+abstract class CurrentUserState extends Equatable {
   @override
   List<Object?> get props => const <dynamic>[];
 }
 
-class Loading extends SettingsState {}
-
-class ShowData extends SettingsState {
+class ShowData extends CurrentUserState {
   final User user;
 
   ShowData(this.user);
@@ -32,4 +30,6 @@ class ShowData extends SettingsState {
   List<Object?> get props => [user];
 }
 
-class Error extends SettingsState {}
+class NoUser extends CurrentUserState {}
+
+class Error extends CurrentUserState {}

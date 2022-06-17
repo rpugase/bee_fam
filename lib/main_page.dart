@@ -18,6 +18,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
+  static const int _addNotificationIndex = 1;
   int _selectedPageIndex = 0;
 
   List<Widget> _pages = [
@@ -39,7 +41,7 @@ class _MainPageState extends State<MainPage> {
 
   void _onItemTapped(int index) {
     setState(() {
-      if (index == 1) {
+      if (index == _addNotificationIndex) {
         showModalBottomSheet(
           context: context,
           builder: (context) => SingleChildScrollView(

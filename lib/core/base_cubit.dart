@@ -1,5 +1,4 @@
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
-import 'package:birthday_gift/feature/user/presentation/auth_cubit.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';

@@ -1,20 +1,17 @@
 import 'package:birthday_gift/app_initialization.dart';
 import 'package:birthday_gift/main_page.dart';
-import 'package:birthday_gift/utils/cache/dao/user_dao.dart';
-import 'package:birthday_gift/feature/user/presentation/auth_page.dart';
 import 'package:birthday_gift/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/ui/resources/colors.dart';
 import 'core/ui/resources/fonts.dart';
-import 'injection_container.dart' as di;
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initApp();
-  runApp(MyApp(usersCount: (await di.sl<UserDao>().getUsers()).length));
+  runApp(MyApp(usersCount: 0));
 }
 
 class MyApp extends StatelessWidget {
@@ -93,7 +90,7 @@ class MyApp extends StatelessWidget {
             ),
             scaffoldBackgroundColor: Colors.white,
           ),
-          home: usersCount == 0 ? AuthPage() : MainPage(),
+          home: /*usersCount == 0 ? AuthPage() : */MainPage(),
         ),
       ),
     );

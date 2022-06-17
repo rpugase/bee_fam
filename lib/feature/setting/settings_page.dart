@@ -1,5 +1,5 @@
+import 'package:birthday_gift/core/cubit/version/get_current_user_cubit.dart';
 import 'package:birthday_gift/core/cubit/version/get_version_with_update_cubit.dart';
-import 'package:birthday_gift/core/model/user.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
@@ -8,14 +8,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'settings_di.dart';
-import 'settings_cubit.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => sl<SettingsCubit>()),
+        BlocProvider(create: (context) => sl<CurrentUserCubit>()),
         BlocProvider(create: (context) => sl<GetVersionWithUpdateCubit>()),
       ],
       child: Scaffold(
@@ -33,9 +32,7 @@ class SettingsPage extends StatelessWidget {
             ListView(
               children: [
                 _phoneNumber(context),
-                Divider(),
                 _version(context),
-                Divider(),
                 ListTile(
                   title: Text(context.strings.last_synchronization),
                   subtitle: Text(context.strings.soon),
@@ -64,14 +61,17 @@ class SettingsPage extends StatelessWidget {
   }
 
   Widget _phoneNumber(BuildContext context) {
-    return BlocBuilder<SettingsCubit, SettingsState>(
+    return BlocBuilder<CurrentUserCubit, CurrentUserState>(
       builder: (context, state) {
-        if (state is Loading) {
-          return Center(child: CircularProgressIndicator());
-        } else if (state is ShowData) {
-          return ListTile(
-            title: Text(context.strings.phoneNumber),
-            subtitle: Text(state.user.phone),
+        if (state is ShowData) {
+          return Column(
+            children: [
+              ListTile(
+                title: Text(context.strings.phoneNumber),
+                subtitle: Text(state.user.phone),
+              ),
+              Divider(),
+            ],
           );
         } else {
           return SizedBox();
@@ -84,9 +84,14 @@ class SettingsPage extends StatelessWidget {
     return BlocBuilder<GetVersionWithUpdateCubit, VersionState>(
       builder: (context, state) {
         if (state is HandledVersionState) {
-          return ListTile(
-            title: Text(context.strings.last_version),
-            subtitle: Text(state.version),
+          return Column(
+            children: [
+              ListTile(
+                title: Text(context.strings.last_version),
+                subtitle: Text(state.version),
+              ),
+              Divider(),
+            ],
           );
         } else {
           return SizedBox();
