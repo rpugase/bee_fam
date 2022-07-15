@@ -62,7 +62,7 @@ class Date extends Equatable {
 
   String toBirthdayString() => DateFormat.yMd().format(dateTime);
 
-  String toUIBirthdayString() => toBirthdayString();
+  String toUIBirthdayString() => DateFormat.MMMd().format(dateTime);
 
   String toDay() => DateFormat.d().format(dateTime);
 

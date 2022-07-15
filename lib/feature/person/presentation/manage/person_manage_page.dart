@@ -169,15 +169,14 @@ class PersonManagePage extends StatelessWidget {
         _birthdayController.text.isEmpty ? Date().dateTime : Date.uiBirthdayString(_birthdayController.text).dateTime;
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        content: SizedBox(
-          width: 250,
-          height: 400,
-          child: SfDateRangePicker(
+      builder: (context) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 48.0),
+        child: AlertDialog(
+          content: SfDateRangePicker(
             toggleDaySelection: true,
             showNavigationArrow: true,
             showActionButtons: true,
-            view: DateRangePickerView.decade,
+            view: DateRangePickerView.year,
             initialSelectedDate: birthdayDateTime,
             onCancel: () => Navigator.pop(context),
             onSubmit: (args) {
