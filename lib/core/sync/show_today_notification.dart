@@ -1,4 +1,5 @@
 import 'package:birthday_gift/app_initialization.dart';
+import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/use_case.dart';
 import 'package:birthday_gift/feature/person/data/repository/person_repository.dart';
 import 'package:birthday_gift/utils/cache/dao/person_dao.dart';
@@ -7,9 +8,9 @@ import 'package:birthday_gift/utils/cache/entity/person_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/shown_notification_entity.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:birthday_gift/utils/notification/notification_service.dart';
+import 'package:collection/collection.dart';
 
 class ShowTodayNotification extends UseCase<void, NoParams> {
-
   final NotificationService notificationService;
   final PersonRepository personRepository;
   final ShownNotificationDao shownNotificationDao;
@@ -26,24 +27,30 @@ class ShowTodayNotification extends UseCase<void, NoParams> {
     );
   }
 
-  // 1. Получить нотификации которые нужно запустить сегодня
-  // 2. Проверить список запущенных нотификаций сегодня
-  // 3. Отфильтровать список тех, что нужно запустить по списку тех, что были запущенны за сегодня
-  // 4. Запустить нотификации
   @override
   Future<void> call([NoParams? noParams]) async {
-    Log.i("START");
-    final notifications = (await personRepository.getPersons())
+    Log.i("Start birthday notification service");
+    final notificationsForToday = (await personRepository.getPersons())
         .where((notification) => notification.isIncludeRemindNotificationForToday())
         .toList();
 
-    Log.i(await personRepository.getPersons());
-    Log.i(notifications);
+    final shownNotifications = await shownNotificationDao.getAllShownNotifications();
+    final showNotificationsToday = shownNotifications.values
+        .where((shownNotification) => Date.remote(shownNotification.shownDate).isToday());
 
-    notifications.forEach((notification) {
-      Log.i("notificationId=${notification.id}");
+    final notificationsForShowing = notificationsForToday.where((notification) =>
+        showNotificationsToday.firstWhereOrNull((sn) => notification.id == sn.notificationId) == null);
+
+    Log.i("Notifications for today: $notificationsForToday");
+    Log.i("Today shown notificationsId: ${showNotificationsToday.map((e) => e.notificationId)}");
+    Log.i("Notifications for showing: $notificationsForShowing");
+
+    notificationsForShowing.forEach((notification) {
       notificationService.show(notification.id, "Birthday!", notification.getNotificationMessage());
+      if (!notification.birthday.isTodayWithoutYear()) {
+        shownNotificationDao.addShownNotification(ShownNotificationEntity(notification.id, Date().toIso8601String()));
+      }
     });
-    Log.i("END");
+    Log.i("End birthday notification service");
   }
 }

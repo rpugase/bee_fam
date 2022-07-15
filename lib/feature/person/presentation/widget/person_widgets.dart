@@ -74,9 +74,9 @@ class NotificationSettings extends StatefulWidget {
 
 class _NotificationSettingsState extends State<NotificationSettings> {
   final List<RemindNotification> remindNotifications = [
-    RemindNotification(),
-    RemindNotification(offsetDaysFromBirthday: 7),
-    RemindNotification(offsetMonthFromBirthday: 1),
+    RemindNotification.inBirthday(),
+    RemindNotification.inWeek(),
+    RemindNotification.inMonth(),
   ];
 
   @override

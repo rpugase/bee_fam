@@ -5,8 +5,8 @@ import 'package:intl/intl.dart';
 class Date extends Equatable {
   final DateTime dateTime;
 
-  Date([DateTime? _dateTime, bool toUtc = true])
-      : dateTime = (toUtc ? _dateTime?.toUtc() : _dateTime) ?? DateTime.now().toUtc();
+  Date([DateTime? _dateTime, bool toUtc = false])
+      : dateTime = (toUtc ? _dateTime?.toUtc() : _dateTime) ?? (toUtc ? DateTime.now() : DateTime.now().toUtc());
 
   bool get isValid => dateTime.year != INVALID_DATE_TIME.year;
 
@@ -42,9 +42,18 @@ class Date extends Equatable {
 
   Date.uiBirthdayString(String birthday) : dateTime = DateFormat.yMd().parseCustom(birthday);
 
-  bool isToday() {
+  String getOffset() => dateTime.timeZoneOffset.toString();
+
+  bool isTodayWithoutYear() {
     final now = DateTime.now();
     return dateTime.day == now.day && dateTime.month == now.month;
+  }
+
+  bool isToday() {
+    final now = DateTime.now();
+    return dateTime.day == now.day &&
+        dateTime.month == now.month &&
+        dateTime.year == now.year;
   }
 
   int toMilliseconds() => dateTime.millisecond;

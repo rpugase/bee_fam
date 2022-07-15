@@ -27,16 +27,14 @@ class Person extends Equatable {
   }
 
   String getNotificationMessage() {
-    return birthday.isToday() ? "Make happy $name today!" : "$name's birthday is coming soon";
+    return birthday.isTodayWithoutYear() ? "Make happy $name today!" : "$name's birthday is coming soon";
   }
 
   bool isIncludeRemindNotificationForToday() {
     return remindNotifications.map((remind) {
-      final offsetDay = remind.offsetDaysFromBirthday * -1 + remind.offsetMonthFromBirthday * -30;
-      return birthday.add(Duration(
-        days: offsetDay + 1,
-      ));
-    }).where((remindDate) => remindDate.isToday()).isNotEmpty;
+      final offsetDay = remind.offsetDaysFromBirthday + remind.offsetMonthFromBirthday * 30;
+      return birthday.add(Duration(days: offsetDay));
+    }).where((remindDate) => remindDate.isTodayWithoutYear()).isNotEmpty;
   }
 
   static const int INVALID_ID = -1;
@@ -50,6 +48,9 @@ class Person extends Equatable {
     this.remindNotifications = const [],
     this.id = INVALID_ID,
   });
+
+  factory Person.forTest(Date birthday, List<RemindNotification> remindNotifications) =>
+      Person(name: "", birthday: birthday, remindNotifications: remindNotifications);
 
   factory Person.fromEntity(PersonEntity entity, int id) {
     return Person(

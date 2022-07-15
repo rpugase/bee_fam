@@ -12,6 +12,18 @@ class RemindNotification extends Equatable {
     this.offsetMonthFromBirthday = 0,
   });
 
+  factory RemindNotification.inBirthday() {
+    return RemindNotification();
+  }
+
+  factory RemindNotification.inWeek() {
+    return RemindNotification(offsetDaysFromBirthday: 7);
+  }
+
+  factory RemindNotification.inMonth() {
+    return RemindNotification(offsetMonthFromBirthday: 1);
+  }
+
   factory RemindNotification.fromEntity(RemindNotificationEntity entity) {
     return RemindNotification(
       offsetDaysFromBirthday: entity.offsetDaysFromBirthday,
