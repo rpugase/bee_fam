@@ -23,7 +23,7 @@ class MessageDialog extends StatelessWidget {
       ),
       actions: [
         TextButton(
-          child: Text(onPressedCancel == null ? "" : context.strings.birthday),
+          child: Text(onPressedCancel == null ? "" : context.strings.not_now),
           onPressed: onPressedCancel,
         ),
         TextButton(

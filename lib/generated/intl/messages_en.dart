@@ -69,11 +69,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "last_version": MessageLookupByLibrary.simpleMessage("Version"),
         "login": MessageLookupByLibrary.simpleMessage("Send Code"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "not_now": MessageLookupByLibrary.simpleMessage("Not now"),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "notifications_time":
             MessageLookupByLibrary.simpleMessage("Notifications time"),
-        "ok": MessageLookupByLibrary.simpleMessage("ok"),
+        "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "phoneCode": MessageLookupByLibrary.simpleMessage("Code"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),

@@ -50,11 +50,21 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `ok`
+  /// `Ok`
   String get ok {
     return Intl.message(
-      'ok',
+      'Ok',
       name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not now`
+  String get not_now {
+    return Intl.message(
+      'Not now',
+      name: 'not_now',
       desc: '',
       args: [],
     );

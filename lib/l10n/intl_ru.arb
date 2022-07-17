@@ -1,7 +1,8 @@
 {
   "@@locale": "ru",
 
-  "ok" : "Ок",
+  "ok" : "Ok",
+  "not_now" : "Не сейчас",
 
   "phoneNumber" : "Номер телефона",
   "phoneCode" : "Код",

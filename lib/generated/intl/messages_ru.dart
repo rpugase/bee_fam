@@ -69,11 +69,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "last_version": MessageLookupByLibrary.simpleMessage("Версия ПО"),
         "login": MessageLookupByLibrary.simpleMessage("Отправьте код"),
         "logout": MessageLookupByLibrary.simpleMessage("Выход"),
+        "not_now": MessageLookupByLibrary.simpleMessage("Не сейчас"),
         "notes": MessageLookupByLibrary.simpleMessage("Заметки"),
         "notification": MessageLookupByLibrary.simpleMessage("Напоминание"),
         "notifications_time":
             MessageLookupByLibrary.simpleMessage("Время нотификаций"),
-        "ok": MessageLookupByLibrary.simpleMessage("Ок"),
+        "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "phone": MessageLookupByLibrary.simpleMessage("Номер телефона"),
         "phoneCode": MessageLookupByLibrary.simpleMessage("Код"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Номер телефона"),

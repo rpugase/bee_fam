@@ -15,13 +15,13 @@ class NotificationApproveDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (ctx) => sl<NotificationApproveCubit>(),
+      create: (context) => sl<NotificationApproveCubit>(),
       child: BaseBlocConsumer<NotificationApproveCubit, NotificationApproveState>(
         context: context,
-        listener: (ctx, state) {
+        listener: (context, state) {
           return true;
         },
-        builder: (ctx, state) => MessageDialog(
+        builder: (context, state) => MessageDialog(
           message: "Did you wish ${notification.name} a happy birthday?",
           onPressedOk: () {
             BlocProvider.of<NotificationApproveCubit>(context).approve(notification);
