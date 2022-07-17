@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-class NotificationService {
+class NotificationDataSource {
   final _plugin = FlutterLocalNotificationsPlugin();
   final _onSelectNotification = StreamController<String>.broadcast();
   Stream<String> get onSelectNotification => _onSelectNotification.stream;

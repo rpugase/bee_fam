@@ -1,17 +1,17 @@
-import 'package:birthday_gift/app_initialization.dart';
+import 'package:birthday_gift/app/app_initialization.dart';
+import 'package:birthday_gift/app/data/repository/person_repository.dart';
 import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/use_case.dart';
-import 'package:birthday_gift/feature/person/data/repository/person_repository.dart';
 import 'package:birthday_gift/utils/cache/dao/person_dao.dart';
 import 'package:birthday_gift/utils/cache/dao/shown_notification_dao.dart';
 import 'package:birthday_gift/utils/cache/entity/person_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/shown_notification_entity.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
-import 'package:birthday_gift/utils/notification/notification_service.dart';
+import 'package:birthday_gift/app/data/datasource/notification_datasource.dart';
 import 'package:collection/collection.dart';
 
 class ShowTodayNotification extends UseCase<void, NoParams> {
-  final NotificationService notificationService;
+  final NotificationDataSource notificationService;
   final PersonRepository personRepository;
   final ShownNotificationDao shownNotificationDao;
 
@@ -21,7 +21,7 @@ class ShowTodayNotification extends UseCase<void, NoParams> {
     await initHive();
 
     return ShowTodayNotification(
-      NotificationService()..init(),
+      NotificationDataSource()..init(),
       PersonRepository(PersonDao(await PersonEntity.createBox())),
       ShownNotificationDao(await ShownNotificationEntity.createBox()),
     );

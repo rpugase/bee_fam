@@ -1,3 +1,4 @@
+import 'package:birthday_gift/app/di/injection_container.dart';
 import 'package:birthday_gift/core/cubit/version/get_current_user_cubit.dart';
 import 'package:birthday_gift/core/cubit/version/get_version_with_update_cubit.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
@@ -6,8 +7,6 @@ import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'settings_di.dart';
 
 class SettingsPage extends StatelessWidget {
   @override

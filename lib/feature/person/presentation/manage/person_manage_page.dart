@@ -7,7 +7,7 @@ import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/app_icons.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/core/ui/widget/phone_text_field.dart';
-import 'package:birthday_gift/injection_container.dart';
+import 'package:birthday_gift/app/di/injection_container.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

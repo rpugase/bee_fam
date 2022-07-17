@@ -1,7 +1,8 @@
+import 'package:birthday_gift/app/di/injection_container.dart';
 import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/feature/user/domain/exception/user_exceptions.dart';
-import 'package:birthday_gift/main_page.dart';
+import 'package:birthday_gift/app/main_page.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/core/ui/widget/phone_text_field.dart';
@@ -9,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'widget/auth_widgets.dart';
-
-import '../di/user_di.dart';
 import 'auth_cubit.dart';
 
 class AuthPage extends StatelessWidget {

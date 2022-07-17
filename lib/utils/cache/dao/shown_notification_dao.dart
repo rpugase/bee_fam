@@ -16,8 +16,8 @@ class ShownNotificationDao {
     );
   }
 
-  Future<int> addShownNotification(ShownNotificationEntity personEntity) async {
-    Log.i("Shown notification=$personEntity");
-    return _boxShownNotification.add(personEntity);
+  Future<int> addShownNotification(ShownNotificationEntity shownNotificationEntity) async {
+    Log.i("Shown notification=$shownNotificationEntity");
+    return _boxShownNotification.add(shownNotificationEntity);
   }
 }

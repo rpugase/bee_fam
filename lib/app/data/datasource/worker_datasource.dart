@@ -1,10 +1,9 @@
 import 'dart:async';
-
-import 'package:birthday_gift/core/sync/show_today_notification.dart';
+import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:flutter/foundation.dart';
 import 'package:workmanager/workmanager.dart';
 
-import '../logger/logger.dart';
+import '../../domain/show_today_notification.dart';
 
 class WorkerDatasource {
 
@@ -21,14 +20,15 @@ class WorkerDatasource {
   }
 
   executeEveryHourTask() async {
+    final initialDelay = kDebugMode ? Duration.zero : Duration(minutes: 60 - DateTime.now().minute);
+    final duration = kDebugMode ? Duration(minutes: 15) : Duration(hours: 1);
+
     await _workManager.cancelByUniqueName(everyDayTask);
     await _workManager.registerPeriodicTask(
       everyDayTask,
       everyDayTask,
-      // initialDelay: Duration(
-      //   minutes: 60 - DateTime.now().minute,
-      // ),
-      frequency: Duration(minutes: 15),
+      initialDelay: initialDelay,
+      frequency: duration,
       constraints: Constraints(
         networkType: NetworkType.not_required,
       ),

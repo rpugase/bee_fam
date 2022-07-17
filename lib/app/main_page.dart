@@ -3,17 +3,17 @@ import 'package:birthday_gift/core/model/person.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/core/ui/widget/create_notification_dialog.dart';
-import 'package:birthday_gift/feature/person/data/repository/person_repository.dart';
 import 'package:birthday_gift/feature/person/presentation/approve/notification_approve_dialog.dart';
 import 'package:birthday_gift/feature/person/presentation/list/person_list_page.dart';
 import 'package:birthday_gift/feature/person/presentation/manage/person_manage_page.dart';
 import 'package:birthday_gift/feature/setting/settings_page.dart';
-import 'package:birthday_gift/injection_container.dart';
+import 'package:birthday_gift/app/di/injection_container.dart';
 import 'package:birthday_gift/utils/contact_service.dart';
-import 'package:birthday_gift/utils/notification/notification_service.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'data/repository/person_repository.dart';
 
 const _POINT = "⦁";
 

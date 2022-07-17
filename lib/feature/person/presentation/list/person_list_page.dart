@@ -2,7 +2,7 @@ import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
-import 'package:birthday_gift/injection_container.dart';
+import 'package:birthday_gift/app/di/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';

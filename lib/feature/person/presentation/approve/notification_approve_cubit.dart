@@ -1,6 +1,6 @@
+import 'package:birthday_gift/app/data/repository/person_repository.dart';
 import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/core/model/person.dart';
-import 'package:birthday_gift/feature/person/data/repository/person_repository.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import '../../domain/usecase/approve_notification.dart';
