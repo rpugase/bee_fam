@@ -1,6 +1,6 @@
 import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
-import 'package:birthday_gift/feature/person/domain/notification_error_handler.dart';
+import 'package:birthday_gift/feature/notification/domain/notification_error_handler.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart' as urlLauncher;
 
