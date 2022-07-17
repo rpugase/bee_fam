@@ -26,8 +26,9 @@ class ShowTodayNotification extends UseCase<void, NoParams> {
   static Future<ShowTodayNotification> init() async {
     await initHive();
     final personRepository = NotificationRepository(PersonDao(await PersonEntity.createBox()));
-    final shownNotificationRepository =
-        ShownNotificationRepository(ShownNotificationDao(await ShownNotificationEntity.createBox()));
+    final shownNotificationRepository = ShownNotificationRepository(
+      ShownNotificationDao(await ShownNotificationEntity.createBox()),
+    );
 
     return ShowTodayNotification(
       NotificationDataSource()..init(),
@@ -40,8 +41,12 @@ class ShowTodayNotification extends UseCase<void, NoParams> {
   Future<void> call([NoParams? noParams]) async {
     Log.i("Start birthday notification service");
 
-    (await getNotificationsForShowing()).forEach((notification) {
-      notificationService.show(notification.id, "Birthday!", notification.getNotificationMessage());
+    final notificationsForShowing = await getNotificationsForShowing();
+
+    notificationService.show(notificationsForShowing.map((nfs) {
+      return PushNotificationModel(nfs.id, "Birthday!", nfs.getNotificationMessage(), nfs.name);
+    }));
+    notificationsForShowing.forEach((notification) {
       if (!notification.birthday.isTodayWithoutYear()) {
         approveNotification(notification.id);
       }
