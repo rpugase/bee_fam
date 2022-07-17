@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'ui/widget/error_dialog.dart';
+import 'ui/widget/message_dialog.dart';
 
 typedef BaseBlocWidgetListener<S> = bool Function(BuildContext context, S state);
 
@@ -69,7 +69,10 @@ class BaseBlocConsumer<B extends BlocBase<S>, S> extends BlocConsumer<B, S> {
     if (listener?.call(context, state) == true && handleBaseErrorMessage && error != null) {
       showDialog(context: context, builder: (context) {
         final errorTemplate = cubit.getErrorTemplate(error);
-        return ErrorDialog(errorTemplate.errorHandler.getErrorMessage(context, error));
+        return MessageDialog(
+          message: errorTemplate.errorHandler.getErrorMessage(context, error),
+          onPressedOk: () => Navigator.of(context).pop(),
+        );
       });
     }
   });

@@ -40,7 +40,7 @@ class Date extends Equatable {
 
   Date.birthdayString(String birthday) : dateTime = DateFormat.yMd().parseCustom(birthday);
 
-  Date.uiBirthdayString(String birthday) : dateTime = DateFormat.yMd().parseCustom(birthday);
+  Date.uiBirthdayString(String birthday) : dateTime = DateFormat.MMMd().parseCustom(birthday);
 
   String getOffset() => dateTime.timeZoneOffset.toString();
 

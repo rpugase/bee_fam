@@ -1,5 +1,7 @@
 import 'package:birthday_gift/core/cubit/version/get_version_with_update_cubit.dart';
+import 'package:birthday_gift/feature/person/domain/usecase/approve_notification.dart';
 import 'package:birthday_gift/utils/cache/dao/settings_dao.dart';
+import 'package:birthday_gift/utils/cache/dao/shown_notification_dao.dart';
 import 'package:birthday_gift/utils/cache/dao/user_dao.dart';
 import 'package:birthday_gift/utils/cache/dao/person_dao.dart';
 import 'package:birthday_gift/utils/cache/entity/note_entity.dart';
@@ -20,6 +22,8 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'feature/person/presentation/approve/notification_approve_cubit.dart';
+
 final sl = GetIt.instance;
 
 Future<void> init(
@@ -37,6 +41,7 @@ Future<void> init(
   sl.registerLazySingleton(() => PersonDao(sl()));
   sl.registerLazySingleton(() => UserDao(sl()));
   sl.registerLazySingleton(() => SettingsDao(sl()));
+  sl.registerLazySingleton(() => ShownNotificationDao(sl()));
 
   final notificationDatasource = NotificationService();
   await notificationDatasource.requestPermission();
@@ -52,7 +57,9 @@ Future<void> init(
   sl.registerFactory(() => GetPersons(sl(), sl()));
   sl.registerFactory(() => ListenPersons(sl(), sl()));
   sl.registerFactory(() => PersonsSort());
+  sl.registerFactory(() => ApproveNotification(sl()));
 
   sl.registerFactory(() => PersonListCubit(sl()));
   sl.registerFactory(() => PersonManagerCubit(sl()));
+  sl.registerFactory(() => NotificationApproveCubit(sl(), sl()));
 }

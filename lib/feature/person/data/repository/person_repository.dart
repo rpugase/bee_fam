@@ -21,6 +21,11 @@ class PersonRepository {
         .toList();
   }
 
+  Future<Person?> getPerson(int personId) async {
+    final personEntity = (await _db.getPersons())[personId];
+    return personEntity != null ? Person.fromEntity(personEntity, personId) : null;
+  }
+
   Future<void> createPerson(Person person) async {
     await _db.addPerson(person.toEntity());
     _onUpdatePersonsList.add(await getPersons());
