@@ -13,13 +13,13 @@ class User extends Equatable {
   final Date updatedDate;
   final Date? lastSyncDate;
 
-  static const int INVALID_ID = -1;
+  static const int invalidId = -1;
 
-  User(this.phone, this.notifications, this.createdDate, this.updatedDate, this.lastSyncDate, {this.id = INVALID_ID});
+  const User(this.phone, this.notifications, this.createdDate, this.updatedDate, this.lastSyncDate, {this.id = invalidId});
 
   factory User.fromAuthUserCredentials(AuthUserCredentials authUserCredentials) => User(
     authUserCredentials.phoneNumber,
-    [],
+    const [],
     Date(),
     Date(),
     null,
@@ -27,7 +27,7 @@ class User extends Equatable {
 
   factory User.fromEntity(UserEntity userEntity) => User(
     userEntity.phone,
-    [],
+    const [],
     Date.millis(userEntity.createdDate),
     Date.millis(userEntity.updatedDate),
     Date.millis(userEntity.lastSyncDate),
@@ -35,12 +35,12 @@ class User extends Equatable {
 
   UserEntity toUserEntity() => UserEntity(
         phone,
-        [],
+        const [],
         createdDate.toMilliseconds(),
         updatedDate.toMilliseconds(),
         lastSyncDate?.toMilliseconds() ?? 0,
       );
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => const [];
 }

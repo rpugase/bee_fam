@@ -2,7 +2,7 @@ import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/feature/notification/domain/notification_error_handler.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
-import 'package:url_launcher/url_launcher.dart' as urlLauncher;
+import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 import '../../domain/usecase/create_or_update_product.dart';
 
@@ -25,9 +25,9 @@ class NotificationManagerCubit extends BaseCubit<NotificationManageState> {
   }
 
   void callNumber(String phoneNumber) async {
-    String url = 'tel:' + phoneNumber;
-    if (await urlLauncher.canLaunch(url)) {
-      await urlLauncher.launch(url);
+    String url = 'tel:$phoneNumber';
+    if (await url_launcher.canLaunch(url)) {
+      await url_launcher.launch(url);
     } else {
       Log.e('Could not launch $url');
       addError(Exception("No find "));
@@ -42,7 +42,7 @@ class ApplyData extends NotificationManageState {}
 class NoApplyData extends NotificationManageState {}
 
 class NotificationError extends BlocError {
-  NotificationError(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
+  const NotificationError(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
 }
 
 class Finish extends NotificationManageState {}

@@ -42,5 +42,5 @@ class PhoneContact {
   final String phone;
   final DateTime? birthday;
 
-  const PhoneContact(this.name, this.phone, {this.birthday = null});
+  const PhoneContact(this.name, this.phone, {this.birthday});
 }

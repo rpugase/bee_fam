@@ -6,12 +6,12 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../resources/colors.dart';
 
 class PhoneNumberTextField extends StatefulWidget {
-  final _readOnly;
+  final bool _readOnly;
   final TextEditingController? controller;
   final String? errorText;
-  final autoFocus;
+  final bool autoFocus;
 
-  PhoneNumberTextField({
+  const PhoneNumberTextField({
     Key? key,
     required bool readOnly,
     this.controller,
@@ -33,7 +33,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
     return Row(
       children: [
         Icon(Icons.phone, color: context.colors.textPrimary),
-        SizedBox(width: 14),
+        const SizedBox(width: 14),
         GestureDetector(
           onTap: () => showCountryPicker(
             context: context,
@@ -52,7 +52,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
             height: 56,
             decoration: BoxDecoration(
               border: Border.all(color: context.colors.border),
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              borderRadius: const BorderRadius.all(Radius.circular(8.0)),
             ),
             child: Center(
               child: Text(
@@ -62,7 +62,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
             ),
           ),
         ),
-        SizedBox(width: 16),
+        const SizedBox(width: 16),
         Expanded(
           child: TextField(
             controller: widget.controller,
@@ -76,7 +76,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
                 filter: {"#": RegExp(r'[0-9]')},
               )
             ],
-            decoration: InputDecoration().applyDefaults(Theme.of(context).inputDecorationTheme).copyWith(
+            decoration: const InputDecoration().applyDefaults(Theme.of(context).inputDecorationTheme).copyWith(
                   errorText: widget.errorText,
                   hintText: "+$phoneCode",
                   hintStyle:

@@ -44,5 +44,5 @@ class NotificationsList extends NotificationsListState implements Equatable {
 }
 
 class NotificationError extends BlocError {
-  NotificationError(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
+  const NotificationError(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
 }

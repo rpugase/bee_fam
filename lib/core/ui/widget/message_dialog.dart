@@ -23,12 +23,12 @@ class MessageDialog extends StatelessWidget {
       ),
       actions: [
         TextButton(
-          child: Text(onPressedCancel == null ? "" : context.strings.not_now),
           onPressed: onPressedCancel,
+          child: Text(onPressedCancel == null ? "" : context.strings.not_now),
         ),
         TextButton(
-          child: Text(onPressedOk == null ? "" : context.strings.ok),
           onPressed: onPressedOk,
+          child: Text(onPressedOk == null ? "" : context.strings.ok),
         ),
       ],
     );

@@ -1,8 +1,7 @@
-import 'package:birthday_gift/app/data/repository/notification_repository.dart';
 import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:birthday_gift/app/domain/approve_notification.dart';
+import 'package:flutter/material.dart';
 
 class NotificationApproveCubit extends BaseCubit<NotificationApproveState> implements ErrorHandler {
   final _notificationErrorHandler = NotificationApproveErrorHandler();

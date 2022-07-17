@@ -13,12 +13,13 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'data/repository/notification_repository.dart';
 import 'domain/get_notifications_for_showing.dart';
 
-const _POINT = "⦁";
+const _point = "⦁";
 
 class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
+
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -27,10 +28,10 @@ class _MainPageState extends State<MainPage> {
   static const int _addNotificationIndex = 1;
   int _selectedPageIndex = 0;
 
-  List<Widget> _pages = [
-    NotificationListPage(),
+  final List<Widget> _pages = [
+    const NotificationListPage(),
     NotificationManagePage(),
-    SettingsPage(),
+    const SettingsPage(),
   ];
 
 
@@ -82,28 +83,29 @@ class _MainPageState extends State<MainPage> {
     Navigator.push(context, MaterialPageRoute(builder: (ctx) => NotificationManagePage()));
   }
 
-  void _navigateToPersonLoading(BuildContext context) async {
-    PhoneContact? contact = await openDeviceContactPicker(context);
-    if (contact != null) {
-      Navigator.pop(context);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (ctx) => NotificationManagePage(
-            notification: NotificationModel(
-              name: contact.name,
-              birthday: contact.birthday == null ? Date(INVALID_DATE_TIME) : Date(contact.birthday),
-              phone: contact.phone,
+  void _navigateToPersonLoading(BuildContext context) {
+    openDeviceContactPicker(context).then((contact) {
+      if (contact != null) {
+        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (ctx) => NotificationManagePage(
+              notification: NotificationModel(
+                name: contact.name,
+                birthday: contact.birthday == null ? Date(invalidDateTime) : Date(contact.birthday),
+                phone: contact.phone,
+              ),
             ),
           ),
-        ),
-      );
-    }
+        );
+      }
+    });
   }
 }
 
 class BottomBar extends StatelessWidget {
-  final selectedPageIndex;
+  final int selectedPageIndex;
   final ValueChanged<int> onTap;
 
   const BottomBar(this.selectedPageIndex, this.onTap, {Key? key}) : super(key: key);
@@ -190,7 +192,7 @@ class _BottomBarSvgItem extends StatelessWidget {
   Widget build(BuildContext context) {
     bool checkedCopy = checked ?? false;
     return Padding(
-      padding: EdgeInsets.all(24.0),
+      padding: const EdgeInsets.all(24.0),
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () => onTap(index),
@@ -203,7 +205,7 @@ class _BottomBarSvgItem extends StatelessWidget {
                     : context.colors.inactiveBottomItem
                 : null,
           ),
-          Text(checkedCopy ? _POINT : ""),
+          Text(checkedCopy ? _point : ""),
         ]),
       ),
     );

@@ -21,7 +21,7 @@ class WorkerDatasource {
 
   executeEveryHourTask() async {
     final initialDelay = kDebugMode ? Duration.zero : Duration(minutes: 60 - DateTime.now().minute);
-    final duration = kDebugMode ? Duration(minutes: 15) : Duration(hours: 1);
+    const duration = kDebugMode ? Duration(minutes: 15) : Duration(hours: 1);
 
     await _workManager.cancelByUniqueName(everyDayTask);
     await _workManager.registerPeriodicTask(

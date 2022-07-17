@@ -11,7 +11,7 @@ import '../core/ui/resources/fonts.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initApp();
-  runApp(MyApp(usersCount: 0));
+  runApp(const MyApp(usersCount: 0));
 }
 
 class MyApp extends StatelessWidget {
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       child: Builder(
         builder: (context) => MaterialApp(
           title: 'BeeFam',
-          localizationsDelegates: [
+          localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
@@ -44,9 +44,9 @@ class MyApp extends StatelessWidget {
                 backgroundColor: MaterialStateProperty.all<Color>(context.colors.primary),
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                 textStyle: MaterialStateProperty.all<TextStyle>(
-                  TextStyle(
+                  const TextStyle(
                     fontSize: 15.0,
-                    fontFamily: AppFonts.SFProText,
+                    fontFamily: AppFonts.sfProText,
                   ),
                 ),
                 shape: MaterialStateProperty.all(
@@ -66,22 +66,22 @@ class MyApp extends StatelessWidget {
                 fontSize: 14.0,
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                borderRadius: const BorderRadius.all(Radius.circular(7.0)),
                 borderSide: BorderSide(
                   style: BorderStyle.solid,
                   color: context.colors.border,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                borderRadius: const BorderRadius.all(Radius.circular(7.0)),
                 borderSide: BorderSide(
                   style: BorderStyle.solid,
                   color: context.colors.primary,
                 ),
               ),
-              hintStyle: TextStyle(fontSize: 16.0),
+              hintStyle: const TextStyle(fontSize: 16.0),
             ),
-            textTheme: TextTheme(
+            textTheme: const TextTheme(
               headline5: TextStyle(fontSize: 24),
               headline6: TextStyle(fontSize: 18),
               subtitle1: TextStyle(fontSize: 16),

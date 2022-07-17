@@ -38,7 +38,7 @@ class ShowTodayNotification extends UseCase<void, NoParams> {
   }
 
   @override
-  Future<void> call([NoParams? noParams]) async {
+  Future<void> call([NoParams? params]) async {
     Log.i("Start birthday notification service");
 
     final notificationsForShowing = await getNotificationsForShowing();
@@ -46,11 +46,11 @@ class ShowTodayNotification extends UseCase<void, NoParams> {
     notificationService.show(notificationsForShowing.map((nfs) {
       return PushNotificationModel(nfs.id, "Birthday!", nfs.getNotificationMessage(), nfs.name);
     }));
-    notificationsForShowing.forEach((notification) {
+    for (var notification in notificationsForShowing) {
       if (!notification.birthday.isTodayWithoutYear()) {
         approveNotification(notification.id);
       }
-    });
+    }
     Log.i("End birthday notification service");
   }
 }

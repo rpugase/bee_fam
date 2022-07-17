@@ -47,7 +47,7 @@ class PersonTextField extends StatelessWidget {
       onChanged: onChanged,
       maxLength: maxLength,
       inputFormatters: inputFormatters,
-      decoration: InputDecoration().applyDefaults(Theme.of(context).inputDecorationTheme).copyWith(
+      decoration: const InputDecoration().applyDefaults(Theme.of(context).inputDecorationTheme).copyWith(
             labelText: labelText,
             icon: icon,
             floatingLabelBehavior: floatingLabelBehavior,
@@ -59,14 +59,12 @@ class PersonTextField extends StatelessWidget {
 }
 
 class NotificationSettings extends StatefulWidget {
-  List<RemindNotification> _pickedNotifications = [];
+  final List<RemindNotification> pickedNotifications;
 
-  NotificationSettings({
+  const NotificationSettings({
     Key? key,
-    List<RemindNotification> pickedNotifications = const [],
-  }) : super(key: key) {
-    this._pickedNotifications = pickedNotifications;
-  }
+    this.pickedNotifications = const [],
+  }) : super(key: key);
 
   @override
   State<NotificationSettings> createState() => _NotificationSettingsState();
@@ -89,16 +87,16 @@ class _NotificationSettingsState extends State<NotificationSettings> {
           '${context.strings.get_notification}:',
           style: Theme.of(context).textTheme.headline6?.copyWith(fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Column(
           children: remindNotifications
               .map((remindNotification) => SwitchListTile(
                     title: Text(remindNotification.getTitle(context)),
-                    value: widget._pickedNotifications.contains(remindNotification),
+                    value: widget.pickedNotifications.contains(remindNotification),
                     onChanged: (isChecked) => setState(() {
                       isChecked
-                          ? widget._pickedNotifications.add(remindNotification)
-                          : widget._pickedNotifications.remove(remindNotification);
+                          ? widget.pickedNotifications.add(remindNotification)
+                          : widget.pickedNotifications.remove(remindNotification);
                     }),
                   ))
               .toList(growable: false),

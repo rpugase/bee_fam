@@ -58,7 +58,7 @@ class NotificationItem extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
               color: context.colors.mainBackground,
-              borderRadius: BorderRadius.all(Radius.circular(14.0)),
+              borderRadius: const BorderRadius.all(Radius.circular(14.0)),
               border: Border.all(
                 color: context.colors.border,
                 width: 1.0,
@@ -73,10 +73,10 @@ class NotificationItem extends StatelessWidget {
                     height: 44.0,
                     decoration: BoxDecoration(
                       color: context.colors.primary,
-                      borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                      borderRadius: const BorderRadius.all(Radius.circular(12.0)),
                     ),
                     child:
-                        Center(child: Text(notification.initials, style: TextStyle(color: Colors.white, fontSize: 16.0))),
+                        Center(child: Text(notification.initials, style: const TextStyle(color: Colors.white, fontSize: 16.0))),
                   ),
                 ),
                 Expanded(
@@ -89,7 +89,7 @@ class NotificationItem extends StatelessWidget {
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                       Text(
-                        "${context.strings.birthday}",
+                        context.strings.birthday,
                         style:
                             Theme.of(context).textTheme.bodyText2?.copyWith(color: context.colors.personTypeDescription),
                       ),
@@ -110,7 +110,7 @@ class NotificationItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(width: 14.0),
+                    const SizedBox(width: 14.0),
                     SvgPicture.asset(Images.arrowRightSvg),
                   ],
                 ),

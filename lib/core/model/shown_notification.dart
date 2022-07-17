@@ -7,7 +7,7 @@ class ShownNotification extends Equatable {
   final int notificationId;
   final Date shownDate;
 
-  ShownNotification(this.notificationId, this.shownDate);
+  const ShownNotification(this.notificationId, this.shownDate);
 
   factory ShownNotification.fromEntity(ShownNotificationEntity shownNotificationEntity) {
     return ShownNotification(

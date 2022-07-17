@@ -9,11 +9,7 @@ class ShownNotificationDao {
   ShownNotificationDao(this._boxShownNotification);
 
   Future<Map<int, ShownNotificationEntity>> getAllShownNotifications() async {
-    return Map.fromIterable(
-      _boxShownNotification.keys,
-      key: (key) => key as int,
-      value: (value) => _boxShownNotification.get(value)!,
-    );
+    return { for (var e in _boxShownNotification.keys) e as int : _boxShownNotification.get(e)! };
   }
 
   Future<int> addShownNotification(ShownNotificationEntity shownNotificationEntity) async {

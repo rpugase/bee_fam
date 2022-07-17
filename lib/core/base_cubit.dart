@@ -19,7 +19,7 @@ abstract class BaseCubit<State extends BlocState> extends Cubit<State> {
     }
   }
 
-  void collect<T>(Stream<T> stream, Future onNext(T event), Future onError(Exception error)?) {
+  void collect<T>(Stream<T> stream, Future Function(T event) onNext, Future Function(Exception error)? onError) {
     stream.listen((event) {
       onNext(event).then((value) => null);
     }).onError((error) async {
@@ -28,7 +28,7 @@ abstract class BaseCubit<State extends BlocState> extends Cubit<State> {
     });
   }
 
-  void launch(Future f(), Future onError(Exception error)?) {
+  void launch(Future Function() f, Future Function(Exception error)? onError) {
     f.call().onError<Exception>((error, stacktrace) async {
       await onError?.call(error);
       addError(error);
@@ -59,11 +59,12 @@ abstract class BaseCubit<State extends BlocState> extends Cubit<State> {
 class BaseBlocConsumer<B extends BlocBase<S>, S> extends BlocConsumer<B, S> {
 
   BaseBlocConsumer({
+    Key? key,
     required BuildContext context,
     required BlocWidgetBuilder<S> builder,
     BaseBlocWidgetListener<S>? listener,
     bool handleBaseErrorMessage = true,
-  }) : super(builder: builder, listener: (context, state) {
+  }) : super(key: key, builder: builder, listener: (context, state) {
     final cubit = (context.read<B>() as BaseCubit);
     final error = (state as BlocState).error;
     if (listener?.call(context, state) == true && handleBaseErrorMessage && error != null) {
@@ -80,8 +81,8 @@ class BaseBlocConsumer<B extends BlocBase<S>, S> extends BlocConsumer<B, S> {
 
 abstract class ErrorHandler {
 
-  static List<ErrorHandler> _errorHandlers = [];
-  static String? _message = null;
+  static final List<ErrorHandler> _errorHandlers = [];
+  static String? _message;
 
   static void setDefaultErrorMessage(String message) {
     _message = message;
@@ -102,18 +103,18 @@ abstract class ErrorHandler {
 
 abstract class BlocState {
 
-  Exception? _inError = null;
+  Exception? _inError;
   Exception? get error => _inError;
 
   void withError(Exception? error) {
-    this._inError = error;
+    _inError = error;
   }
 
   @override
   bool operator ==(Object other) => false;
 
   @override
-  String toString() => "${runtimeType} ${_inError?.runtimeType ?? "no error"}";
+  String toString() => "$runtimeType ${_inError?.runtimeType ?? "no error"}";
 }
 
 class UseContainsMethodException implements Exception {
@@ -125,7 +126,7 @@ class BlocError extends Equatable implements Exception {
   final Exception exception;
   final ErrorHandler errorHandler;
 
-  BlocError(this.exception, this.errorHandler);
+  const BlocError(this.exception, this.errorHandler);
 
   @override
   List<Object?> get props => [exception];

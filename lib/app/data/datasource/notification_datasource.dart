@@ -9,10 +9,10 @@ class NotificationDataSource {
   Stream<String> get onSelectNotification => _onSelectNotification.stream;
 
   init() async {
-    final initializationSettingsAndroid = AndroidInitializationSettings('ic_launcher_foreground');
-    final initializationSettingsIOS = IOSInitializationSettings();
-    final initializationSettingsMacOS = MacOSInitializationSettings();
-    final InitializationSettings initializationSettings = InitializationSettings(
+    const initializationSettingsAndroid = AndroidInitializationSettings('ic_launcher_foreground');
+    const initializationSettingsIOS = IOSInitializationSettings();
+    const initializationSettingsMacOS = MacOSInitializationSettings();
+    const InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
       macOS: initializationSettingsMacOS,
@@ -30,7 +30,7 @@ class NotificationDataSource {
   }
 
   show(Iterable<PushNotificationModel> pushNotifications) {
-    pushNotifications.forEach((notification) {
+    for (var notification in pushNotifications) {
       _plugin.show(
         notification.id,
         notification.title,
@@ -38,7 +38,7 @@ class NotificationDataSource {
         _notificationDetails(setAsGroupSummary: false),
         payload: notification.id.toString(),
       );
-    });
+    }
     if (pushNotifications.isNotEmpty) {
       _plugin.show(
         0,

@@ -5,10 +5,10 @@ import 'package:intl/intl.dart';
 class Date extends Equatable {
   final DateTime dateTime;
 
-  Date([DateTime? _dateTime, bool toUtc = false])
-      : dateTime = (toUtc ? _dateTime?.toUtc() : _dateTime) ?? (toUtc ? DateTime.now() : DateTime.now().toUtc());
+  Date([DateTime? dateTime, bool toUtc = false])
+      : dateTime = (toUtc ? dateTime?.toUtc() : dateTime) ?? (toUtc ? DateTime.now() : DateTime.now().toUtc());
 
-  bool get isValid => dateTime.year != INVALID_DATE_TIME.year;
+  bool get isValid => dateTime.year != invalidDateTime.year;
 
   Date copy({int? year,
     int? month,
@@ -85,19 +85,19 @@ class LeftPeriod extends Equatable {
 }
 
 enum LeftType {
-  DAYS,
-  MONTH
+  days,
+  month
 }
 
 extension DateTimeParsing on DateFormat {
   DateTime parseCustom(String date) {
     try {
-      return this.parse(date);
+      return parse(date);
     } on Exception catch (e) {
       Log.e(e);
     }
-    return INVALID_DATE_TIME;
+    return invalidDateTime;
   }
 }
 
-final DateTime INVALID_DATE_TIME = DateTime(-1);
+final DateTime invalidDateTime = DateTime(-1);

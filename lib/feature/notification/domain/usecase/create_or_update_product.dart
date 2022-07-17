@@ -15,13 +15,15 @@ class CreateOrUpdateNotification implements UseCase<void, NotificationModel> {
   Future<void> call(NotificationModel notification) async {
     Log.i("Start manage or update notification: $notification");
     final requireFields = <NotificationRequireFields>[];
-    if (notification.name.isEmpty) requireFields.add(NotificationRequireFields.NAME);
-    if (!notification.birthday.isValid || notification.birthday == Date.defaultBirthday())
-      requireFields.add(NotificationRequireFields.BIRTHDAY);
-    if (requireFields.isNotEmpty)
+    if (notification.name.isEmpty) requireFields.add(NotificationRequireFields.name);
+    if (!notification.birthday.isValid || notification.birthday == Date.defaultBirthday()) {
+      requireFields.add(NotificationRequireFields.birthday);
+    }
+    if (requireFields.isNotEmpty) {
       throw RequireNotificationFiledException(requireFields);
+    }
 
-    if (notification.id == NotificationModel.INVALID_ID) {
+    if (notification.id == NotificationModel.invalidId) {
       Log.i("Create notification: $notification");
       await _notificationRepository.createNotification(notification);
     } else {

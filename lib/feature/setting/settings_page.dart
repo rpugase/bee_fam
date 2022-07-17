@@ -9,6 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SettingsPage extends StatelessWidget {
+  const SettingsPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -69,11 +71,11 @@ class SettingsPage extends StatelessWidget {
                 title: Text(context.strings.phoneNumber),
                 subtitle: Text(state.user.phone),
               ),
-              Divider(),
+              const Divider(),
             ],
           );
         } else {
-          return SizedBox();
+          return const SizedBox();
         }
       },
     );
@@ -89,11 +91,11 @@ class SettingsPage extends StatelessWidget {
                 title: Text(context.strings.last_version),
                 subtitle: Text(state.version),
               ),
-              Divider(),
+              const Divider(),
             ],
           );
         } else {
-          return SizedBox();
+          return const SizedBox();
         }
       },
     );

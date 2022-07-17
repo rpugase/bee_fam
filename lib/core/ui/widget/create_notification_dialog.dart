@@ -20,7 +20,7 @@ class CreateNotificationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,29 +30,29 @@ class CreateNotificationWidget extends StatelessWidget {
                   color: AppColors.of(context).createNotification,
                 ),
           ),
-          SizedBox(height: 36.0),
+          const SizedBox(height: 36.0),
           GestureDetector(
             onTap: onTapCreateNotification,
             child: Row(
               children: [
-                Icon(AppIcons.add, size: 24.0),
-                SizedBox(width: 36.0),
+                const Icon(AppIcons.add, size: 24.0),
+                const SizedBox(width: 36.0),
                 Text(context.strings.create_new, style: Theme.of(context).textTheme.subtitle1),
               ],
             ),
           ),
-          SizedBox(height: 36.0),
+          const SizedBox(height: 36.0),
           GestureDetector(
             onTap: onTapCreateNotificationFromContacts,
             child: Row(
               children: [
-                Icon(AppIcons.profile_plus, size: 24.0),
-                SizedBox(width: 36.0),
+                const Icon(AppIcons.profilePlus, size: 24.0),
+                const SizedBox(width: 36.0),
                 Text(context.strings.create_from_contact, style: Theme.of(context).textTheme.subtitle1),
               ],
             ),
           ),
-          SizedBox(height: 24.0),
+          const SizedBox(height: 24.0),
         ],
       ),
     );

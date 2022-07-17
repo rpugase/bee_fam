@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 abstract class AppColorsData {
   factory AppColorsData.fromBrightness(Brightness brightness) {
     if (brightness == Brightness.light) {
-      return LightAppColorsData();
+      return const LightAppColorsData();
     } else {
       throw UnimplementedError('AppColors for $brightness not implemented');
     }
@@ -41,32 +41,46 @@ abstract class AppColorsData {
 class LightAppColorsData implements AppColorsData {
   const LightAppColorsData();
 
+  @override
   String get tag => 'light';
 
+  @override
   Color get primary => const Color(0xFF8D88F2);
 
+  @override
   MaterialColor get primaryMaterialColor => MaterialColor(0xFFFFFFFF, _getSwatch(primary));
 
+  @override
   Color get buttonsPrimary => const Color(0xFFFFB301);
 
+  @override
   Color get buttonsPrimarySecondary => const Color(0xFF8D88F2);
 
+  @override
   Color get textPrimary => const Color(0xFF121212);
 
+  @override
   Color get shadow => const Color(0xFFCDCDCD).withOpacity(0.5);
 
+  @override
   Color get activeBottomItem => const Color(0xFF121212);
 
+  @override
   Color get inactiveBottomItem => const Color(0xFFC4C6CA);
 
+  @override
   Color get border => const Color(0xFFE7E7E7);
 
+  @override
   Color get daysColor => const Color(0xFF5B636C);
 
+  @override
   Color get personTypeDescription => const Color(0xFFA1A4A9);
 
+  @override
   Color get mainBackground => const Color(0xFFFFFFFF);
 
+  @override
   Color get createNotification => const Color(0xFFA1A4A9);
 }
 
@@ -87,7 +101,7 @@ class AppColors extends InheritedWidget {
   final AppColorsData colors;
 
   @override
-  bool updateShouldNotify(AppColors old) => old.colors.tag == colors.tag;
+  bool updateShouldNotify(AppColors oldWidget) => oldWidget.colors.tag == colors.tag;
 }
 
 extension AppColorsExtension on BuildContext {
@@ -105,12 +119,12 @@ Map<int, Color> _getSwatch(Color color) {
   /// divisor of 5 would mean [50] is a lightness of 1.0 or
   /// a color of #ffffff. A value of six would be near white
   /// but not quite.
-  final lowDivisor = 6;
+  const lowDivisor = 6;
 
   /// if [500] is the default color, there are at LEAST four
   /// steps above [500]. A divisor of 4 would mean [900] is
   /// a lightness of 0.0 or color of #000000
-  final highDivisor = 5;
+  const highDivisor = 5;
 
   final lowStep = (1.0 - lightness) / lowDivisor;
   final highStep = lightness / highDivisor;

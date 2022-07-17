@@ -17,10 +17,11 @@ class NotificationModel extends Equatable {
   String get initials {
     final split = name.split(RegExp(" "));
     if (split.length == 1) {
-      if (name.length > 2)
+      if (name.length > 2) {
         return name.substring(0, 2);
-      else
+      } else {
         return name;
+      }
     } else {
       return "${split[0].substring(0, 1)}${split[1].substring(0, 1)}";
     }
@@ -37,7 +38,7 @@ class NotificationModel extends Equatable {
     }).where((remindDate) => remindDate.isTodayWithoutYear()).isNotEmpty;
   }
 
-  static const int INVALID_ID = -1;
+  static const int invalidId = -1;
 
   const NotificationModel({
     required this.name,
@@ -46,7 +47,7 @@ class NotificationModel extends Equatable {
     this.imgUrl = "",
     this.note = "",
     this.remindNotifications = const [],
-    this.id = INVALID_ID,
+    this.id = invalidId,
   });
 
   factory NotificationModel.forTest(Date birthday, List<RemindNotification> remindNotifications) =>
@@ -88,4 +89,4 @@ class NotificationModel extends Equatable {
   }
 }
 
-enum NotificationRequireFields { NAME, BIRTHDAY }
+enum NotificationRequireFields { name, birthday }

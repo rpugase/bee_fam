@@ -13,15 +13,15 @@ class RemindNotification extends Equatable {
   });
 
   factory RemindNotification.inBirthday() {
-    return RemindNotification();
+    return const RemindNotification();
   }
 
   factory RemindNotification.inWeek() {
-    return RemindNotification(offsetDaysFromBirthday: 7);
+    return const RemindNotification(offsetDaysFromBirthday: 7);
   }
 
   factory RemindNotification.inMonth() {
-    return RemindNotification(offsetMonthFromBirthday: 1);
+    return const RemindNotification(offsetMonthFromBirthday: 1);
   }
 
   factory RemindNotification.fromEntity(RemindNotificationEntity entity) {

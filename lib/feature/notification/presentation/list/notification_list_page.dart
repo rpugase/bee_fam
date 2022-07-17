@@ -13,6 +13,8 @@ import '../manage/notification_manage_page.dart';
 import 'notification_list_cubit.dart';
 
 class NotificationListPage extends StatelessWidget {
+  const NotificationListPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -35,7 +37,7 @@ class NotificationListPage extends StatelessWidget {
                 if (state is EmptyList) {
                   return _showNoPersons(context);
                 } else if (state is Loading) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (state is NotificationsList) {
                   return NotificationListWidget(
                     listItems: state.notifications.toListItems() as List<ListItem>,
@@ -67,7 +69,7 @@ class NotificationListPage extends StatelessWidget {
                     context.strings.hello,
                     style: Theme.of(context).textTheme.headline5,
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Text(
                     context.strings.add_people,
                     style: Theme.of(context).textTheme.subtitle1,

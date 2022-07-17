@@ -5,12 +5,12 @@ import 'package:birthday_gift/core/use_case.dart';
 
 class ApproveNotification implements UseCase<void, int> {
 
-  final ShownNotificationRepository shownNotificationRepository;
+  final ShownNotificationRepository _shownNotificationRepository;
 
-  ApproveNotification(this.shownNotificationRepository);
+  const ApproveNotification(this._shownNotificationRepository);
 
   @override
   Future<void> call(int notificationId) async {
-    await shownNotificationRepository.addNotification(ShownNotification(notificationId, Date()));
+    await _shownNotificationRepository.addNotification(ShownNotification(notificationId, Date()));
   }
 }

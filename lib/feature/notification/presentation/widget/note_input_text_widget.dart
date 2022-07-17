@@ -30,7 +30,7 @@ class _NotesFieldState extends State<NotesField> {
           children: [
             Expanded(
                 child: Text(
-                  context.strings.notes + ":",
+                  "${context.strings.notes}:",
                   style: Theme.of(context).textTheme.bodyText1,
                 )),
             Text(
@@ -39,7 +39,7 @@ class _NotesFieldState extends State<NotesField> {
             )
           ],
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         PersonTextField(
           controller: widget.controller,
           minLines: 3,
@@ -53,7 +53,7 @@ class _NotesFieldState extends State<NotesField> {
           onChanged: (text) => setState(() {
             _textCount = text.length;
             _ignoreCount = _textCount -
-                text.replaceAll('${NotesTextInputFormatter.POINT} ', '').length;
+                text.replaceAll('${NotesTextInputFormatter.point} ', '').length;
           }),
         )
       ],
@@ -62,7 +62,7 @@ class _NotesFieldState extends State<NotesField> {
 }
 
 class NotesTextInputFormatter extends TextInputFormatter {
-  static const String POINT = '•';
+  static const String point = '•';
 
   @override
   TextEditingValue formatEditUpdate(
@@ -73,14 +73,14 @@ class NotesTextInputFormatter extends TextInputFormatter {
     if (oldValue.text.length < newValue.text.length && text.contains('\n')) {
       final newText = text
           .split('\n')
-          .map((line) => line.startsWith(POINT) ? line : '${POINT} $line')
+          .map((line) => line.startsWith(point) ? line : '$point $line')
           .join('\n');
       return TextEditingValue(
         text: newText,
         selection: TextSelection.collapsed(offset: newText.length),
       );
     } else if (oldValue.text.length > newValue.text.length &&
-        text.characters.last == POINT) {
+        text.characters.last == point) {
       var newText = text.substring(0, max(0, text.length - 2));
       if (!newText.contains('\n')) {
         newText = newText.substring(2, max(0, text.length - 2));

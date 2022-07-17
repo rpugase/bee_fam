@@ -10,7 +10,7 @@ class NotificationErrorHandler extends ErrorHandler {
   String getErrorMessage(BuildContext context, Exception exception) {
     if (exception is RequireNotificationFiledException) {
       return exception.requireFields.map((notificationRequireFields) {
-        return notificationRequireFields == NotificationRequireFields.NAME
+        return notificationRequireFields == NotificationRequireFields.name
             ? context.strings.error_name_require
             : context.strings.error_birthday_require;
       }).join("\n");

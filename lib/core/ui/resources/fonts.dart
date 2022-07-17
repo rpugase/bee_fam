@@ -1,4 +1,4 @@
 class AppFonts {
 
-  static const String SFProText = "SFProText";
+  static const String sfProText = "SFProText";
 }

@@ -1,6 +1,6 @@
 import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/utils/cache/dao/settings_dao.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class GetVersionWithUpdateCubit extends BaseCubit<VersionState> implements ErrorHandler {

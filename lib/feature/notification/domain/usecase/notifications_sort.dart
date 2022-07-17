@@ -1,4 +1,3 @@
-import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/use_case.dart';
 import 'package:collection/collection.dart';

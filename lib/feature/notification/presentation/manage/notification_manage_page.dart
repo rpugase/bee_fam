@@ -28,7 +28,7 @@ class NotificationManagePage extends StatelessWidget {
 
   final NotificationModel? notification;
 
-  NotificationManagePage({Key? key, this.notification = null}) : super(key: key) {
+  NotificationManagePage({Key? key, this.notification}) : super(key: key) {
     final notification = this.notification;
     Log.i("Notification to manage: $notification");
     if (notification != null) {
@@ -38,9 +38,9 @@ class NotificationManagePage extends StatelessWidget {
       _birthdayController.text = notification.birthday.isValid ? notification.birthday.toUIBirthdayString() : "";
       final notifications = notification.remindNotifications;
       _pickedNotifications
-          .addAll(notification.id == NotificationModel.INVALID_ID && notifications.isEmpty ? [RemindNotification()] : notifications);
+          .addAll(notification.id == NotificationModel.invalidId && notifications.isEmpty ? [const RemindNotification()] : notifications);
     } else {
-      _pickedNotifications.add(RemindNotification());
+      _pickedNotifications.add(const RemindNotification());
     }
   }
 
@@ -67,7 +67,7 @@ class NotificationManagePage extends StatelessWidget {
                 if (state is Finish) {
                   Navigator.pop(context);
                 }
-                return !(state is Finish);
+                return state is! Finish;
               },
               builder: (context, state) {
                 return Row(
@@ -84,7 +84,7 @@ class NotificationManagePage extends StatelessWidget {
                           : Container();
                     }),
                     Padding(
-                      padding: EdgeInsets.only(right: 16.0),
+                      padding: const EdgeInsets.only(right: 16.0),
                       child: Builder(
                         builder: (context) {
                           if (state is ApplyData) {
@@ -122,7 +122,7 @@ class NotificationManagePage extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
                     PersonTextField(
@@ -130,25 +130,25 @@ class NotificationManagePage extends StatelessWidget {
                       maxLines: 1,
                       autofocus: true,
                       labelText: context.strings.full_name,
-                      icon: Icon(AppIcons.profile),
+                      icon: const Icon(AppIcons.profile),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     PhoneNumberTextField(
                       controller: _phoneController,
                       readOnly: false,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     PersonTextField(
                       readOnly: true,
                       controller: _birthdayController,
                       onTap: () => _showYearDialog(context),
                       labelText: context.strings.birthday,
-                      icon: Icon(Icons.calendar_today),
+                      icon: const Icon(Icons.calendar_today),
                     ),
-                    SizedBox(height: 32),
+                    const SizedBox(height: 32),
                     NotesField(controller: _noteController),
-                    SizedBox(height: 32),
-                    Container(
+                    const SizedBox(height: 32),
+                    SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: NotificationSettings(
                         pickedNotifications: _pickedNotifications,
@@ -191,7 +191,7 @@ class NotificationManagePage extends StatelessWidget {
 
   _createOrUpdateNotification(BuildContext context) {
     final notification = NotificationModel(
-      id: this.notification?.id ?? NotificationModel.INVALID_ID,
+      id: this.notification?.id ?? NotificationModel.invalidId,
       name: _nameController.text,
       birthday: Date.uiBirthdayString(_birthdayController.text),
       phone: _phoneController.text,

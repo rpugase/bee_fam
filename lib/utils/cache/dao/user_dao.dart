@@ -9,7 +9,7 @@ class UserDao {
   const UserDao(this._boxUser);
 
   Future<Map<int, UserEntity>> getUsers() async {
-    return Map.fromIterable(_boxUser.keys, key: (key) => key as int, value: (value) => _boxUser.get(value)!);
+    return { for (var e in _boxUser.keys) e as int : _boxUser.get(e)! };
   }
 
   Future<int> addUser(UserEntity userEntity) async {
