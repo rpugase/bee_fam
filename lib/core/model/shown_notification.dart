@@ -5,9 +5,9 @@ import 'date.dart';
 
 class ShownNotification extends Equatable {
   final int notificationId;
-  final Date notificationDate;
+  final Date shownDate;
 
-  ShownNotification(this.notificationId, this.notificationDate);
+  ShownNotification(this.notificationId, this.shownDate);
 
   factory ShownNotification.fromEntity(ShownNotificationEntity shownNotificationEntity) {
     return ShownNotification(
@@ -17,9 +17,9 @@ class ShownNotification extends Equatable {
   }
 
   ShownNotificationEntity toEntity() => ShownNotificationEntity(
-    notificationId, notificationDate.toIso8601String()
+    notificationId, shownDate.toIso8601String()
   );
 
   @override
-  List<Object?> get props => [notificationId, notificationDate];
+  List<Object?> get props => [notificationId, shownDate];
 }

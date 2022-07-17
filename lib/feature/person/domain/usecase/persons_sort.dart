@@ -3,11 +3,11 @@ import 'package:birthday_gift/core/model/person.dart';
 import 'package:birthday_gift/core/use_case.dart';
 import 'package:collection/collection.dart';
 
-class PersonsSort implements UseCase<List<Person>, List<Person>> {
+class PersonsSort implements UseCase<Iterable<Person>, Iterable<Person>> {
   static const int monthsInYear = 12;
 
   @override
-  Future<List<Person>> call(List<Person> personsList) {
+  Future<Iterable<Person>> call(Iterable<Person> personsList) {
     final currentMonth = DateTime.now().month;
     return Future.value(personsList.sortedByCompare<int>((person) => person.birthday.dateTime.month, (a, b) {
       final aM = a < currentMonth ? a + monthsInYear : a;

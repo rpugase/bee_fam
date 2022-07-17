@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'data/repository/person_repository.dart';
+import 'domain/get_notifications_for_showing.dart';
 
 const _POINT = "⦁";
 
@@ -36,7 +37,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    sl<PersonRepository>().getPersons().then((persons) {
+    sl<GetNotificationsForShowing>().call().then((persons) {
       final todayPerson = persons.where((person) => person.isIncludeRemindNotificationForToday()).firstOrNull;
       if (todayPerson != null) {
         showDialog(

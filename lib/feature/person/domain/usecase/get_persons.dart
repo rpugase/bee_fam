@@ -5,14 +5,14 @@ import 'package:birthday_gift/utils/logger/logger.dart';
 
 import 'persons_sort.dart';
 
-class GetPersons implements UseCase<List<Person>, NoParams> {
+class GetPersons implements UseCase<Iterable<Person>, NoParams> {
   final PersonRepository _personRepository;
   final PersonsSort _personsSort;
 
   const GetPersons(this._personRepository, this._personsSort);
 
   @override
-  Future<List<Person>> call([NoParams? params]) async {
+  Future<Iterable<Person>> call([NoParams? params]) async {
     final persons = await _personsSort(await _personRepository.getPersons());
     Log.i("Persons: $persons");
     return persons;

@@ -12,7 +12,7 @@ class PersonListCubit extends BaseCubit<PersonListState> {
 
   @override
   void onInit() {
-    collect<List<Person>>(_listenPersons(), _onPersonLoaded, null);
+    collect<Iterable<Person>>(_listenPersons(), _onPersonLoaded, null);
   }
 
   @override
@@ -20,7 +20,7 @@ class PersonListCubit extends BaseCubit<PersonListState> {
     return NotificationError(exception, PersonErrorHandler());
   }
 
-  Future _onPersonLoaded(List<Person> persons) async {
+  Future _onPersonLoaded(Iterable<Person> persons) async {
     emit(persons.isEmpty ? EmptyList() : PersonsList(persons));
   }
 }
@@ -32,7 +32,7 @@ class Loading extends PersonListState {}
 class EmptyList extends PersonListState {}
 
 class PersonsList extends PersonListState implements Equatable {
-  final List<Person> persons;
+  final Iterable<Person> persons;
 
   PersonsList(this.persons);
 

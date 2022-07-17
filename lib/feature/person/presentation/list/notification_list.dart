@@ -34,7 +34,7 @@ class NotificationListWidget extends StatelessWidget {
 }
 
 extension NotificationListMapper on Iterable<Person> {
-  List<ListItem> toListItems() {
+  Iterable<ListItem> toListItems() {
     final List<ListItem> items = [];
     final personsByMonth = groupListsBy((element) => element.birthday.toMonth());
 

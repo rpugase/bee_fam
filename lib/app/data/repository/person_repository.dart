@@ -5,16 +5,16 @@ import 'package:birthday_gift/utils/cache/dao/person_dao.dart';
 class PersonRepository {
   final PersonDao _db;
 
-  final _onUpdatePersonsList = StreamController<List<Person>>.broadcast();
+  final _onUpdatePersonsList = StreamController<Iterable<Person>>.broadcast();
 
   PersonRepository(this._db);
 
-  Stream<List<Person>> listenPersons() async* {
+  Stream<Iterable<Person>> listenPersons() async* {
     yield await getPersons();
     yield* _onUpdatePersonsList.stream;
   }
 
-  Future<List<Person>> getPersons() async {
+  Future<Iterable<Person>> getPersons() async {
     return (await _db.getPersons())
         .entries
         .map((person) => Person.fromEntity(person.value, person.key))

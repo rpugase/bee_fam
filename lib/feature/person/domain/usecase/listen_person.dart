@@ -5,14 +5,14 @@ import 'package:birthday_gift/utils/logger/logger.dart';
 
 import 'persons_sort.dart';
 
-class ListenPersons implements UseCaseStream<List<Person>, NoParams> {
+class ListenPersons implements UseCaseStream<Iterable<Person>, NoParams> {
   final PersonRepository _personRepository;
   final PersonsSort _personsSort;
 
   const ListenPersons(this._personRepository, this._personsSort);
 
   @override
-  Stream<List<Person>> call([NoParams? params]) {
+  Stream<Iterable<Person>> call([NoParams? params]) {
     return _personRepository.listenPersons().asyncMap((personsList) async {
       final personsResult = await _personsSort(personsList);
       Log.i("Persons: $personsResult");

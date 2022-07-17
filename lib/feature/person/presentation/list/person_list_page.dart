@@ -1,4 +1,5 @@
 import 'package:birthday_gift/core/base_cubit.dart';
+import 'package:birthday_gift/core/list/list_item.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
@@ -37,7 +38,7 @@ class PersonListPage extends StatelessWidget {
                   return Center(child: CircularProgressIndicator());
                 } else if (state is PersonsList) {
                   return NotificationListWidget(
-                    listItems: state.persons.toListItems(),
+                    listItems: state.persons.toListItems() as List<ListItem>,
                     onNotificationTap: (notification) {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) => PersonManagePage(person: notification.person)));

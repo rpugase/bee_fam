@@ -1,6 +1,8 @@
+import 'package:birthday_gift/app/data/repository/shown_notification_repository.dart';
+import 'package:birthday_gift/app/domain/get_notifications_for_showing.dart';
 import 'package:birthday_gift/core/cubit/version/get_current_user_cubit.dart';
 import 'package:birthday_gift/core/cubit/version/get_version_with_update_cubit.dart';
-import 'package:birthday_gift/feature/person/domain/usecase/approve_notification.dart';
+import 'package:birthday_gift/app/domain/approve_notification.dart';
 import 'package:birthday_gift/feature/user/data/firebase_auth_datastore.dart';
 import 'package:birthday_gift/feature/user/domain/auth_with_phone_number.dart';
 import 'package:birthday_gift/feature/user/domain/confirm_phone_number_code.dart';
@@ -32,48 +34,68 @@ import 'package:birthday_gift/feature/person/presentation/approve/notification_a
 
 import '../data/datasource/worker_datasource.dart';
 import '../data/repository/person_repository.dart';
+import '../domain/show_today_notification.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init(
   SharedPreferences sharedPreferences,
 ) async {
-  sl.registerSingleton<Box<UserEntity>>(await UserEntity.createBox());
-  sl.registerSingleton<Box<PersonEntity>>(await PersonEntity.createBox());
-  sl.registerSingleton<Box<NoteEntity>>(await NoteEntity.createBox());
-  sl.registerSingleton<Box<RemindNotificationEntity>>(await RemindNotificationEntity.createBox());
-  sl.registerSingleton<Box<ShownNotificationEntity>>(await ShownNotificationEntity.createBox());
 
+  // Datasource
   sl.registerSingleton(await SharedPreferences.getInstance());
+  await _initDao();
+  await _initWorker();
+  await _initNotificationService();
 
+  // Repository
   sl.registerLazySingleton(() => PersonRepository(sl()));
-  sl.registerLazySingleton(() => PersonDao(sl()));
-  sl.registerLazySingleton(() => UserDao(sl()));
-  sl.registerLazySingleton(() => SettingsDao(sl()));
-  sl.registerLazySingleton(() => ShownNotificationDao(sl()));
+  sl.registerLazySingleton(() => ShownNotificationRepository(sl()));
 
-  final notificationDatasource = NotificationDataSource();
-  await notificationDatasource.requestPermission();
-  await notificationDatasource.init();
-  sl.registerSingleton(notificationDatasource);
-
-  final WorkerDatasource workerDatasource = WorkerDatasource();
-  await workerDatasource.init();
-  sl.registerSingleton(workerDatasource);
-
-  sl.registerFactory(() => GetVersionWithUpdateCubit(sl()));
+  // UseCase
   sl.registerFactory(() => CreateOrUpdatePerson(sl()));
   sl.registerFactory(() => GetPersons(sl(), sl()));
   sl.registerFactory(() => ListenPersons(sl(), sl()));
   sl.registerFactory(() => PersonsSort());
   sl.registerFactory(() => ApproveNotification(sl()));
+  sl.registerFactory(() => ShowTodayNotification(sl(), sl(), sl()));
+  sl.registerFactory(() => GetNotificationsForShowing(sl(), sl()));
+  sl.registerFactory(() => ApproveNotification(sl()));
 
+  // Service Cubit
+  sl.registerFactory(() => GetVersionWithUpdateCubit(sl()));
   sl.registerFactory(() => PersonListCubit(sl()));
   sl.registerFactory(() => PersonManagerCubit(sl()));
   sl.registerFactory(() => NotificationApproveCubit(sl(), sl()));
   sl.registerFactory(() => CurrentUserCubit(sl()));
 
   await _initUser();
+}
+
+Future<void> _initNotificationService() async {
+  final notificationDatasource = NotificationDataSource();
+  await notificationDatasource.requestPermission();
+  await notificationDatasource.init();
+  sl.registerSingleton(notificationDatasource);
+}
+
+Future<void> _initWorker() async {
+  final WorkerDatasource workerDatasource = WorkerDatasource();
+  await workerDatasource.init();
+  sl.registerSingleton(workerDatasource);
+}
+
+Future<void> _initDao() async {
+  sl.registerSingleton<Box<UserEntity>>(await UserEntity.createBox());
+  sl.registerSingleton<Box<PersonEntity>>(await PersonEntity.createBox());
+  sl.registerSingleton<Box<NoteEntity>>(await NoteEntity.createBox());
+  sl.registerSingleton<Box<RemindNotificationEntity>>(await RemindNotificationEntity.createBox());
+  sl.registerSingleton<Box<ShownNotificationEntity>>(await ShownNotificationEntity.createBox());
+
+  sl.registerLazySingleton(() => PersonDao(sl()));
+  sl.registerLazySingleton(() => UserDao(sl()));
+  sl.registerLazySingleton(() => SettingsDao(sl()));
+  sl.registerLazySingleton(() => ShownNotificationDao(sl()));
 }
 
 Future<void> _initUser() async {

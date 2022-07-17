@@ -7,6 +7,12 @@ class ShownNotificationRepository {
 
   const ShownNotificationRepository(this.shownNotificationDao);
 
+  Future<Iterable<ShownNotification>> getNotifications() async {
+    return (await shownNotificationDao.getAllShownNotifications())
+        .values
+        .map((snEntity) => ShownNotification.fromEntity(snEntity));
+  }
+
   Future<ShownNotification?> getNotification(int notificationId) async {
     final notificationEntity = (await shownNotificationDao.getAllShownNotifications())[notificationId];
     return notificationEntity == null ? null : ShownNotification.fromEntity(notificationEntity);
