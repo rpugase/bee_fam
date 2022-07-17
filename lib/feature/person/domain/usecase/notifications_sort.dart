@@ -1,15 +1,15 @@
 import 'package:birthday_gift/core/model/date.dart';
-import 'package:birthday_gift/core/model/person.dart';
+import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/use_case.dart';
 import 'package:collection/collection.dart';
 
-class PersonsSort implements UseCase<Iterable<Person>, Iterable<Person>> {
+class NotificationsSort implements UseCase<Iterable<NotificationModel>, Iterable<NotificationModel>> {
   static const int monthsInYear = 12;
 
   @override
-  Future<Iterable<Person>> call(Iterable<Person> personsList) {
+  Future<Iterable<NotificationModel>> call(Iterable<NotificationModel> notificationsList) {
     final currentMonth = DateTime.now().month;
-    return Future.value(personsList.sortedByCompare<int>((person) => person.birthday.dateTime.month, (a, b) {
+    return Future.value(notificationsList.sortedByCompare<int>((notification) => notification.birthday.dateTime.month, (a, b) {
       final aM = a < currentMonth ? a + monthsInYear : a;
       final bM = b < currentMonth ? b + monthsInYear : b;
       return aM - bM;

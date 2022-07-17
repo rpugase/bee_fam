@@ -1,17 +1,15 @@
-import 'package:birthday_gift/app/data/repository/person_repository.dart';
+import 'package:birthday_gift/app/data/repository/notification_repository.dart';
 import 'package:birthday_gift/core/base_cubit.dart';
-import 'package:birthday_gift/core/model/person.dart';
+import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:birthday_gift/app/domain/approve_notification.dart';
 
 class NotificationApproveCubit extends BaseCubit<NotificationApproveState> implements ErrorHandler {
   final _notificationErrorHandler = NotificationApproveErrorHandler();
-  final ApproveNotification approveNotification;
-  final PersonRepository personRepository;
+  final ApproveNotification _approveNotification;
 
   NotificationApproveCubit(
-    this.approveNotification,
-    this.personRepository,
+    this._approveNotification,
   ) : super(NotificationApproveState());
 
   @override
@@ -24,9 +22,9 @@ class NotificationApproveCubit extends BaseCubit<NotificationApproveState> imple
     return _notificationErrorHandler.getErrorMessage(context, exception);
   }
 
-  void approve(Person person) {
+  void approve(NotificationModel notification) {
     launch(() async {
-      await approveNotification(person.id);
+      await _approveNotification(notification.id);
     }, null);
   }
 }

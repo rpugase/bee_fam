@@ -1,6 +1,6 @@
 import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/core/model/date.dart';
-import 'package:birthday_gift/core/model/person.dart';
+import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/model/remind_notification.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
@@ -16,9 +16,9 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../widget/note_input_text_widget.dart';
 import '../widget/person_widgets.dart';
-import 'person_manage_cubit.dart';
+import 'notification_manage_cubit.dart';
 
-class PersonManagePage extends StatelessWidget {
+class NotificationManagePage extends StatelessWidget {
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _noteController = TextEditingController();
@@ -26,19 +26,19 @@ class PersonManagePage extends StatelessWidget {
 
   final List<RemindNotification> _pickedNotifications = [];
 
-  final Person? person;
+  final NotificationModel? notification;
 
-  PersonManagePage({Key? key, this.person = null}) : super(key: key) {
-    final person = this.person;
-    Log.i("Person to manage: $person");
-    if (person != null) {
-      _nameController.text = person.name;
-      _phoneController.text = person.phone;
-      _noteController.text = person.note;
-      _birthdayController.text = person.birthday.isValid ? person.birthday.toUIBirthdayString() : "";
-      final notifications = person.remindNotifications;
+  NotificationManagePage({Key? key, this.notification = null}) : super(key: key) {
+    final notification = this.notification;
+    Log.i("Notification to manage: $notification");
+    if (notification != null) {
+      _nameController.text = notification.name;
+      _phoneController.text = notification.phone;
+      _noteController.text = notification.note;
+      _birthdayController.text = notification.birthday.isValid ? notification.birthday.toUIBirthdayString() : "";
+      final notifications = notification.remindNotifications;
       _pickedNotifications
-          .addAll(person.id == Person.INVALID_ID && notifications.isEmpty ? [RemindNotification()] : notifications);
+          .addAll(notification.id == NotificationModel.INVALID_ID && notifications.isEmpty ? [RemindNotification()] : notifications);
     } else {
       _pickedNotifications.add(RemindNotification());
     }
@@ -47,7 +47,7 @@ class PersonManagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<PersonManagerCubit>(),
+      create: (context) => sl<NotificationManagerCubit>(),
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -61,7 +61,7 @@ class PersonManagePage extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
           ),
           actions: [
-            BaseBlocConsumer<PersonManagerCubit, PersonManageState>(
+            BaseBlocConsumer<NotificationManagerCubit, NotificationManageState>(
               context: context,
               listener: (ctx, state) {
                 if (state is Finish) {
@@ -73,13 +73,13 @@ class PersonManagePage extends StatelessWidget {
                 return Row(
                   children: [
                     Builder(builder: (context) {
-                      return person != null
+                      return notification != null
                           ? IconButton(
                               icon: Icon(
                                 Icons.call,
                                 color: context.colors.buttonsPrimarySecondary,
                               ),
-                              onPressed: () => context.read<PersonManagerCubit>().callNumber(person!.phone),
+                              onPressed: () => context.read<NotificationManagerCubit>().callNumber(notification!.phone),
                             )
                           : Container();
                     }),
@@ -94,7 +94,7 @@ class PersonManagePage extends StatelessWidget {
                                 AppIcons.done,
                                 color: context.colors.buttonsPrimarySecondary,
                               ),
-                              onPressed: () => _createOrUpdatePerson(context),
+                              onPressed: () => _createOrUpdateNotification(context),
                             );
                           } else {
                             return IconButton(
@@ -102,7 +102,7 @@ class PersonManagePage extends StatelessWidget {
                                 AppIcons.done,
                                 color: context.colors.buttonsPrimarySecondary,
                               ),
-                              onPressed: () => _createOrUpdatePerson(context),
+                              onPressed: () => _createOrUpdateNotification(context),
                             );
                           }
                         },
@@ -189,15 +189,15 @@ class PersonManagePage extends StatelessWidget {
     );
   }
 
-  _createOrUpdatePerson(BuildContext context) {
-    final person = Person(
-      id: this.person?.id ?? Person.INVALID_ID,
+  _createOrUpdateNotification(BuildContext context) {
+    final notification = NotificationModel(
+      id: this.notification?.id ?? NotificationModel.INVALID_ID,
       name: _nameController.text,
       birthday: Date.uiBirthdayString(_birthdayController.text),
       phone: _phoneController.text,
       note: _noteController.text,
       remindNotifications: _pickedNotifications,
     );
-    context.read<PersonManagerCubit>().createOrUpdatePerson(person);
+    context.read<NotificationManagerCubit>().createOrUpdateNotification(notification);
   }
 }

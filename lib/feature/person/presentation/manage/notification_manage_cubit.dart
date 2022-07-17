@@ -1,25 +1,25 @@
 import 'package:birthday_gift/core/base_cubit.dart';
-import 'package:birthday_gift/core/model/person.dart';
-import 'package:birthday_gift/feature/person/domain/person_error_handler.dart';
+import 'package:birthday_gift/core/model/notification_model.dart';
+import 'package:birthday_gift/feature/person/domain/notification_error_handler.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart' as urlLauncher;
 
 import '../../domain/usecase/create_or_update_product.dart';
 
-class PersonManagerCubit extends BaseCubit<PersonManageState> {
-  final CreateOrUpdatePerson _createOrUpdatePerson;
+class NotificationManagerCubit extends BaseCubit<NotificationManageState> {
+  final CreateOrUpdateNotification _createOrUpdateNotification;
 
-  PersonManagerCubit(this._createOrUpdatePerson) : super(ApplyData());
+  NotificationManagerCubit(this._createOrUpdateNotification) : super(ApplyData());
 
   @override
   BlocError getErrorTemplate(Exception exception) {
-    return NotificationError(exception, PersonErrorHandler());
+    return NotificationError(exception, NotificationErrorHandler());
   }
 
-  void createOrUpdatePerson(Person person) {
+  void createOrUpdateNotification(NotificationModel notification) {
     launch(() async {
       emit(ApplyData());
-      await _createOrUpdatePerson(person);
+      await _createOrUpdateNotification(notification);
       emit(Finish());
     }, null);
   }
@@ -35,14 +35,14 @@ class PersonManagerCubit extends BaseCubit<PersonManageState> {
   }
 }
 
-abstract class PersonManageState extends BlocState {}
+abstract class NotificationManageState extends BlocState {}
 
-class ApplyData extends PersonManageState {}
+class ApplyData extends NotificationManageState {}
 
-class NoApplyData extends PersonManageState {}
+class NoApplyData extends NotificationManageState {}
 
 class NotificationError extends BlocError {
   NotificationError(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
 }
 
-class Finish extends PersonManageState {}
+class Finish extends NotificationManageState {}

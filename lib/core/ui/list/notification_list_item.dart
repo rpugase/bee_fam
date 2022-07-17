@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../list/list_item.dart';
-import '../../model/person.dart';
+import '../../model/notification_model.dart';
 import '../resources/colors.dart';
 import '../resources/images.dart';
 import '../resources/app_translations.dart';
@@ -17,20 +17,20 @@ class NotificationListItem implements ListItem {
   final String initials;
   final String day;
   final String month;
-  final Person person;
+  final NotificationModel notification;
   final bool firstInMonthBlock;
   final bool lastInMonthBlock;
 
   NotificationListItem({
-    required this.person,
+    required this.notification,
     required this.firstInMonthBlock,
     required this.lastInMonthBlock,
   }
-  )   : id = person.id,
-        name = person.name,
-        initials = person.initials,
-        day = person.birthday.toDay(),
-        month = person.birthday.toShortMonth();
+  )   : id = notification.id,
+        name = notification.name,
+        initials = notification.initials,
+        day = notification.birthday.toDay(),
+        month = notification.birthday.toShortMonth();
 }
 
 class NotificationItem extends StatelessWidget {

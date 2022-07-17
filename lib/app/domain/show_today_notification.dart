@@ -1,5 +1,5 @@
 import 'package:birthday_gift/app/app_initialization.dart';
-import 'package:birthday_gift/app/data/repository/person_repository.dart';
+import 'package:birthday_gift/app/data/repository/notification_repository.dart';
 import 'package:birthday_gift/app/data/repository/shown_notification_repository.dart';
 import 'package:birthday_gift/core/use_case.dart';
 import 'package:birthday_gift/utils/cache/dao/person_dao.dart';
@@ -25,7 +25,7 @@ class ShowTodayNotification extends UseCase<void, NoParams> {
 
   static Future<ShowTodayNotification> init() async {
     await initHive();
-    final personRepository = PersonRepository(PersonDao(await PersonEntity.createBox()));
+    final personRepository = NotificationRepository(PersonDao(await PersonEntity.createBox()));
     final shownNotificationRepository =
         ShownNotificationRepository(ShownNotificationDao(await ShownNotificationEntity.createBox()));
 

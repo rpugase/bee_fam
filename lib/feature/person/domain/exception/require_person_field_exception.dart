@@ -1,7 +1,7 @@
-import 'package:birthday_gift/core/model/person.dart';
+import 'package:birthday_gift/core/model/notification_model.dart';
 
-class RequirePersonFiledException implements Exception {
-  final List<PersonRequireFields> requireFields;
+class RequireNotificationFiledException implements Exception {
+  final List<NotificationRequireFields> requireFields;
 
-  const RequirePersonFiledException(this.requireFields);
+  const RequireNotificationFiledException(this.requireFields);
 }

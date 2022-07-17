@@ -19,11 +19,10 @@ import 'package:birthday_gift/utils/cache/entity/remind_notification_entity.dart
 import 'package:birthday_gift/utils/cache/entity/shown_notification_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/user_entity.dart';
 import 'package:birthday_gift/feature/person/domain/usecase/create_or_update_product.dart';
-import 'package:birthday_gift/feature/person/domain/usecase/get_persons.dart';
-import 'package:birthday_gift/feature/person/domain/usecase/listen_person.dart';
-import 'package:birthday_gift/feature/person/domain/usecase/persons_sort.dart';
-import 'package:birthday_gift/feature/person/presentation/list/person_list_cubit.dart';
-import 'package:birthday_gift/feature/person/presentation/manage/person_manage_cubit.dart';
+import 'package:birthday_gift/feature/person/domain/usecase/listen_notifications.dart';
+import 'package:birthday_gift/feature/person/domain/usecase/notifications_sort.dart';
+import 'package:birthday_gift/feature/person/presentation/list/notification_list_cubit.dart';
+import 'package:birthday_gift/feature/person/presentation/manage/notification_manage_cubit.dart';
 import 'package:birthday_gift/app/data/datasource/notification_datasource.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,7 +32,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:birthday_gift/feature/person/presentation/approve/notification_approve_cubit.dart';
 
 import '../data/datasource/worker_datasource.dart';
-import '../data/repository/person_repository.dart';
+import '../data/repository/notification_repository.dart';
 import '../domain/show_today_notification.dart';
 
 final sl = GetIt.instance;
@@ -49,24 +48,22 @@ Future<void> init(
   await _initNotificationService();
 
   // Repository
-  sl.registerLazySingleton(() => PersonRepository(sl()));
+  sl.registerLazySingleton(() => NotificationRepository(sl()));
   sl.registerLazySingleton(() => ShownNotificationRepository(sl()));
 
   // UseCase
-  sl.registerFactory(() => CreateOrUpdatePerson(sl()));
-  sl.registerFactory(() => GetPersons(sl(), sl()));
-  sl.registerFactory(() => ListenPersons(sl(), sl()));
-  sl.registerFactory(() => PersonsSort());
+  sl.registerFactory(() => CreateOrUpdateNotification(sl()));
+  sl.registerFactory(() => ListenNotifications(sl(), sl()));
+  sl.registerFactory(() => NotificationsSort());
   sl.registerFactory(() => ApproveNotification(sl()));
   sl.registerFactory(() => ShowTodayNotification(sl(), sl(), sl()));
   sl.registerFactory(() => GetNotificationsForShowing(sl(), sl()));
-  sl.registerFactory(() => ApproveNotification(sl()));
 
   // Service Cubit
   sl.registerFactory(() => GetVersionWithUpdateCubit(sl()));
-  sl.registerFactory(() => PersonListCubit(sl()));
-  sl.registerFactory(() => PersonManagerCubit(sl()));
-  sl.registerFactory(() => NotificationApproveCubit(sl(), sl()));
+  sl.registerFactory(() => NotificationListCubit(sl()));
+  sl.registerFactory(() => NotificationManagerCubit(sl()));
+  sl.registerFactory(() => NotificationApproveCubit(sl()));
   sl.registerFactory(() => CurrentUserCubit(sl()));
 
   await _initUser();

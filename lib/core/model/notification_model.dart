@@ -5,7 +5,7 @@ import 'package:birthday_gift/utils/cache/entity/person_entity.dart';
 import 'date.dart';
 import 'package:equatable/equatable.dart';
 
-class Person extends Equatable {
+class NotificationModel extends Equatable {
   final int id;
   final String name;
   final Date birthday;
@@ -39,7 +39,7 @@ class Person extends Equatable {
 
   static const int INVALID_ID = -1;
 
-  const Person({
+  const NotificationModel({
     required this.name,
     required this.birthday,
     this.phone = "",
@@ -49,11 +49,11 @@ class Person extends Equatable {
     this.id = INVALID_ID,
   });
 
-  factory Person.forTest(Date birthday, List<RemindNotification> remindNotifications) =>
-      Person(name: "", birthday: birthday, remindNotifications: remindNotifications);
+  factory NotificationModel.forTest(Date birthday, List<RemindNotification> remindNotifications) =>
+      NotificationModel(name: "", birthday: birthday, remindNotifications: remindNotifications);
 
-  factory Person.fromEntity(PersonEntity entity, int id) {
-    return Person(
+  factory NotificationModel.fromEntity(PersonEntity entity, int id) {
+    return NotificationModel(
       name: entity.name,
       birthday: Date.birthdayString(entity.birthday),
       phone: entity.phone ?? "",
@@ -88,4 +88,4 @@ class Person extends Equatable {
   }
 }
 
-enum PersonRequireFields { NAME, BIRTHDAY }
+enum NotificationRequireFields { NAME, BIRTHDAY }

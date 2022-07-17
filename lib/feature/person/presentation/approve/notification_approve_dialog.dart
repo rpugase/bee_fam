@@ -1,4 +1,4 @@
-import 'package:birthday_gift/core/model/person.dart';
+import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:birthday_gift/core/base_cubit.dart';
@@ -8,9 +8,9 @@ import 'notification_approve_cubit.dart';
 
 class NotificationApproveDialog extends StatelessWidget {
 
-  final Person person;
+  final NotificationModel notification;
 
-  const NotificationApproveDialog({Key? key, required this.person}) : super(key: key);
+  const NotificationApproveDialog({Key? key, required this.notification}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,9 @@ class NotificationApproveDialog extends StatelessWidget {
           return true;
         },
         builder: (ctx, state) => MessageDialog(
-          message: "Did you wish ${person.name} a happy birthday?",
+          message: "Did you wish ${notification.name} a happy birthday?",
           onPressedOk: () {
-            BlocProvider.of<NotificationApproveCubit>(context).approve(person);
+            BlocProvider.of<NotificationApproveCubit>(context).approve(notification);
             Navigator.of(context).pop();
           },
           onPressedCancel: () => Navigator.of(context).pop(),

@@ -9,14 +9,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'notification_list.dart';
-import '../manage/person_manage_page.dart';
-import 'person_list_cubit.dart';
+import '../manage/notification_manage_page.dart';
+import 'notification_list_cubit.dart';
 
-class PersonListPage extends StatelessWidget {
+class NotificationListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<PersonListCubit>(),
+      create: (context) => sl<NotificationListCubit>(),
       child: Scaffold(
         appBar: AppBar(
           title: Text(context.strings.all_reminders),
@@ -29,19 +29,19 @@ class PersonListPage extends StatelessWidget {
               Images.bgSvg,
               fit: BoxFit.fill,
             ),
-            BaseBlocConsumer<PersonListCubit, PersonListState>(
+            BaseBlocConsumer<NotificationListCubit, NotificationsListState>(
               context: context,
               builder: (context, state) {
                 if (state is EmptyList) {
                   return _showNoPersons(context);
                 } else if (state is Loading) {
                   return Center(child: CircularProgressIndicator());
-                } else if (state is PersonsList) {
+                } else if (state is NotificationsList) {
                   return NotificationListWidget(
-                    listItems: state.persons.toListItems() as List<ListItem>,
+                    listItems: state.notifications.toListItems() as List<ListItem>,
                     onNotificationTap: (notification) {
                       Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) => PersonManagePage(person: notification.person)));
+                          .push(MaterialPageRoute(builder: (context) => NotificationManagePage(notification: notification.notification)));
                     },
                   );
                 } else {

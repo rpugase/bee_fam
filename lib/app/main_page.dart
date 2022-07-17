@@ -1,11 +1,11 @@
 import 'package:birthday_gift/core/model/date.dart';
-import 'package:birthday_gift/core/model/person.dart';
+import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/core/ui/widget/create_notification_dialog.dart';
 import 'package:birthday_gift/feature/person/presentation/approve/notification_approve_dialog.dart';
-import 'package:birthday_gift/feature/person/presentation/list/person_list_page.dart';
-import 'package:birthday_gift/feature/person/presentation/manage/person_manage_page.dart';
+import 'package:birthday_gift/feature/person/presentation/list/notification_list_page.dart';
+import 'package:birthday_gift/feature/person/presentation/manage/notification_manage_page.dart';
 import 'package:birthday_gift/feature/setting/settings_page.dart';
 import 'package:birthday_gift/app/di/injection_container.dart';
 import 'package:birthday_gift/utils/contact_service.dart';
@@ -13,7 +13,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'data/repository/person_repository.dart';
+import 'data/repository/notification_repository.dart';
 import 'domain/get_notifications_for_showing.dart';
 
 const _POINT = "⦁";
@@ -28,8 +28,8 @@ class _MainPageState extends State<MainPage> {
   int _selectedPageIndex = 0;
 
   List<Widget> _pages = [
-    PersonListPage(),
-    PersonManagePage(),
+    NotificationListPage(),
+    NotificationManagePage(),
     SettingsPage(),
   ];
 
@@ -37,12 +37,12 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    sl<GetNotificationsForShowing>().call().then((persons) {
-      final todayPerson = persons.where((person) => person.isIncludeRemindNotificationForToday()).firstOrNull;
-      if (todayPerson != null) {
+    sl<GetNotificationsForShowing>().call().then((notifications) {
+      final todayNotification = notifications.where((notification) => notification.isIncludeRemindNotificationForToday()).firstOrNull;
+      if (todayNotification != null) {
         showDialog(
           context: context,
-          builder: (context) => NotificationApproveDialog(person: todayPerson),
+          builder: (context) => NotificationApproveDialog(notification: todayNotification),
         );
       }
     });
@@ -79,7 +79,7 @@ class _MainPageState extends State<MainPage> {
 
   void _navigateToCreateNotification(BuildContext context) {
     Navigator.pop(context);
-    Navigator.push(context, MaterialPageRoute(builder: (ctx) => PersonManagePage()));
+    Navigator.push(context, MaterialPageRoute(builder: (ctx) => NotificationManagePage()));
   }
 
   void _navigateToPersonLoading(BuildContext context) async {
@@ -89,8 +89,8 @@ class _MainPageState extends State<MainPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (ctx) => PersonManagePage(
-            person: Person(
+          builder: (ctx) => NotificationManagePage(
+            notification: NotificationModel(
               name: contact.name,
               birthday: contact.birthday == null ? Date(INVALID_DATE_TIME) : Date(contact.birthday),
               phone: contact.phone,

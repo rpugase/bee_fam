@@ -1,32 +1,32 @@
-import 'package:birthday_gift/app/data/repository/person_repository.dart';
+import 'package:birthday_gift/app/data/repository/notification_repository.dart';
 import 'package:birthday_gift/core/model/date.dart';
-import 'package:birthday_gift/core/model/person.dart';
+import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/use_case.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 
 import '../exception/require_person_field_exception.dart';
 
-class CreateOrUpdatePerson implements UseCase<void, Person> {
-  final PersonRepository _personRepository;
+class CreateOrUpdateNotification implements UseCase<void, NotificationModel> {
+  final NotificationRepository _notificationRepository;
 
-  const CreateOrUpdatePerson(this._personRepository);
+  const CreateOrUpdateNotification(this._notificationRepository);
 
   @override
-  Future<void> call(Person person) async {
-    Log.i("Start manage or update person: $person");
-    final requireFields = <PersonRequireFields>[];
-    if (person.name.isEmpty) requireFields.add(PersonRequireFields.NAME);
-    if (!person.birthday.isValid || person.birthday == Date.defaultBirthday())
-      requireFields.add(PersonRequireFields.BIRTHDAY);
+  Future<void> call(NotificationModel notification) async {
+    Log.i("Start manage or update notification: $notification");
+    final requireFields = <NotificationRequireFields>[];
+    if (notification.name.isEmpty) requireFields.add(NotificationRequireFields.NAME);
+    if (!notification.birthday.isValid || notification.birthday == Date.defaultBirthday())
+      requireFields.add(NotificationRequireFields.BIRTHDAY);
     if (requireFields.isNotEmpty)
-      throw RequirePersonFiledException(requireFields);
+      throw RequireNotificationFiledException(requireFields);
 
-    if (person.id == Person.INVALID_ID) {
-      Log.i("Create person: $person");
-      await _personRepository.createPerson(person);
+    if (notification.id == NotificationModel.INVALID_ID) {
+      Log.i("Create notification: $notification");
+      await _notificationRepository.createNotification(notification);
     } else {
-      Log.i("Update person: $person");
-      await _personRepository.updatePerson(person);
+      Log.i("Update notification: $notification");
+      await _notificationRepository.updateNotification(notification);
     }
   }
 }

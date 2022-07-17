@@ -1,20 +1,20 @@
-import 'package:birthday_gift/app/data/repository/person_repository.dart';
+import 'package:birthday_gift/app/data/repository/notification_repository.dart';
 import 'package:birthday_gift/app/data/repository/shown_notification_repository.dart';
-import 'package:birthday_gift/core/model/person.dart';
+import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/use_case.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:collection/collection.dart';
 
-class GetNotificationsForShowing implements UseCase<Iterable<Person>, NoParams> {
-  final PersonRepository personRepository;
+class GetNotificationsForShowing implements UseCase<Iterable<NotificationModel>, NoParams> {
+  final NotificationRepository notificationRepository;
   final ShownNotificationRepository shownNotificationRepository;
 
-  const GetNotificationsForShowing(this.personRepository, this.shownNotificationRepository);
+  const GetNotificationsForShowing(this.notificationRepository, this.shownNotificationRepository);
 
   @override
-  Future<Iterable<Person>> call([NoParams? params]) async {
+  Future<Iterable<NotificationModel>> call([NoParams? params]) async {
     // Get all notifications which need to show by RemindNotification
-    final notificationsForToday = (await personRepository.getPersons())
+    final notificationsForToday = (await notificationRepository.getNotifications())
         .where((notification) => notification.isIncludeRemindNotificationForToday());
 
     // Take all shownNotification which shown today
