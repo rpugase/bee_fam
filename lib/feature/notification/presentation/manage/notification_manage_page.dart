@@ -37,8 +37,9 @@ class NotificationManagePage extends StatelessWidget {
       _noteController.text = notification.note;
       _birthdayController.text = notification.birthday.isValid ? notification.birthday.toUIBirthdayString() : "";
       final notifications = notification.remindNotifications;
-      _pickedNotifications
-          .addAll(notification.id == NotificationModel.invalidId && notifications.isEmpty ? [const RemindNotification()] : notifications);
+      _pickedNotifications.addAll(notification.id == NotificationModel.invalidId && notifications.isEmpty
+          ? [const RemindNotification()]
+          : notifications);
     } else {
       _pickedNotifications.add(const RemindNotification());
     }
@@ -149,10 +150,20 @@ class NotificationManagePage extends StatelessWidget {
                     NotesField(controller: _noteController),
                     const SizedBox(height: 32),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width,
+                      width: double.infinity,
                       child: NotificationSettings(
                         pickedNotifications: _pickedNotifications,
                       ),
+                    ),
+                    const SizedBox(height: 12),
+                    Builder(
+                      builder: (context) => notification == null
+                          ? const SizedBox()
+                          : OutlinedButton(
+                              onPressed: () =>
+                                  context.read<NotificationManagerCubit>().deleteNotification(notification!),
+                              child: Text(context.strings.delete_notification),
+                            ),
                     ),
                   ],
                 ),

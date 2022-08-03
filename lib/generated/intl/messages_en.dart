@@ -36,6 +36,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_new": MessageLookupByLibrary.simpleMessage("Create new"),
         "create_notification":
             MessageLookupByLibrary.simpleMessage("Create notification"),
+        "delete_notification":
+            MessageLookupByLibrary.simpleMessage("Delete notification"),
         "enter_your_phone_number":
             MessageLookupByLibrary.simpleMessage("Enter your phone number"),
         "error_birthday_require":

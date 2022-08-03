@@ -34,6 +34,7 @@
   "enter_your_phone_number" : "Enter your phone number",
 
   "create_notification" : "Create notification",
+  "delete_notification" : "Delete notification",
   "create_new" : "Create new",
   "create_from_contact" : "Create from contacts",
   "in_day_birthday" : "In birthday",

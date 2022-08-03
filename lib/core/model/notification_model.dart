@@ -1,6 +1,9 @@
+import 'package:birthday_gift/utils/dart_extensions.dart';
+import 'package:collection/collection.dart';
+
 import 'remind_notification.dart';
 import 'package:birthday_gift/utils/cache/entity/note_entity.dart';
-import 'package:birthday_gift/utils/cache/entity/person_entity.dart';
+import 'package:birthday_gift/utils/cache/entity/notification_entity.dart';
 
 import 'date.dart';
 import 'package:equatable/equatable.dart';
@@ -53,26 +56,26 @@ class NotificationModel extends Equatable {
   factory NotificationModel.forTest(Date birthday, List<RemindNotification> remindNotifications) =>
       NotificationModel(name: "", birthday: birthday, remindNotifications: remindNotifications);
 
-  factory NotificationModel.fromEntity(PersonEntity entity, int id) {
+  factory NotificationModel.fromEntity(NotificationEntity entity, int id) {
     return NotificationModel(
       name: entity.name,
       birthday: Date.birthdayString(entity.birthday),
       phone: entity.phone ?? "",
       imgUrl: entity.imgUrl ?? "",
-      note: entity.note?.first.text ?? "",
+      note: entity.note.firstOrNull?.text.ifEmpty(() => "") ?? "",
       remindNotifications: entity.remindNotifications.map((it) => RemindNotification.fromEntity(it)).toList(),
       id: id,
     );
   }
 
-  PersonEntity toEntity() {
-    return PersonEntity(
+  NotificationEntity toEntity() {
+    return NotificationEntity(
       name,
       birthday.toBirthdayString(),
       phone.isEmpty ? null : phone,
       imgUrl.isEmpty ? null : imgUrl,
       Date().toIso8601String(),
-      note.isEmpty ? null : [NoteEntity(note)],
+      note.isEmpty ? [] : [NoteEntity(note)],
       remindNotifications.map((it) => it.toEntity()).toList(),
       Date().toIso8601String(),
       Date().toIso8601String(),

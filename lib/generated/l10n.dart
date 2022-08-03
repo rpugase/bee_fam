@@ -320,6 +320,16 @@ class S {
     );
   }
 
+  /// `Delete notification`
+  String get delete_notification {
+    return Intl.message(
+      'Delete notification',
+      name: 'delete_notification',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Create new`
   String get create_new {
     return Intl.message(

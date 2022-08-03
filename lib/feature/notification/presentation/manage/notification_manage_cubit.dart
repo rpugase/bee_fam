@@ -3,13 +3,14 @@ import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/feature/notification/domain/notification_error_handler.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
-
+import '../../domain/usecase/delete_notification.dart';
 import '../../domain/usecase/create_or_update_product.dart';
 
 class NotificationManagerCubit extends BaseCubit<NotificationManageState> {
   final CreateOrUpdateNotification _createOrUpdateNotification;
+  final DeleteNotification _deleteNotification;
 
-  NotificationManagerCubit(this._createOrUpdateNotification) : super(ApplyData());
+  NotificationManagerCubit(this._createOrUpdateNotification, this._deleteNotification) : super(ApplyData());
 
   @override
   BlocError getErrorTemplate(Exception exception) {
@@ -20,6 +21,14 @@ class NotificationManagerCubit extends BaseCubit<NotificationManageState> {
     launch(() async {
       emit(ApplyData());
       await _createOrUpdateNotification(notification);
+      emit(Finish());
+    }, null);
+  }
+
+  void deleteNotification(NotificationModel notificationModel) {
+    launch(() async {
+      emit(ApplyData());
+      await _deleteNotification(notificationModel);
       emit(Finish());
     }, null);
   }

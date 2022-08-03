@@ -3,13 +3,13 @@ import '../hive_constants.dart';
 import 'remind_notification_entity.dart';
 import 'note_entity.dart';
 
-part 'person_entity.g.dart';
+part 'notification_entity.g.dart';
 
 @HiveType(typeId: HiveConst.personTypeId)
-class PersonEntity extends HiveObject {
+class NotificationEntity extends HiveObject {
 
-  static Future<Box<PersonEntity>> createBox() async {
-    return Hive.openBox<PersonEntity>(HiveConst.personTableName);
+  static Future<Box<NotificationEntity>> createBox() async {
+    return Hive.openBox<NotificationEntity>(HiveConst.personTableName);
   }
 
   @HiveField(0)
@@ -28,7 +28,7 @@ class PersonEntity extends HiveObject {
   final String updateDate;
 
   @HiveField(5)
-  final List<NoteEntity>? note;
+  final List<NoteEntity> note;
 
   @HiveField(6)
   final List<RemindNotificationEntity> remindNotifications;
@@ -39,7 +39,7 @@ class PersonEntity extends HiveObject {
   @HiveField(8)
   final String updatedDate;
 
-  PersonEntity(
+  NotificationEntity(
     this.name,
     this.birthday,
     this.phone,

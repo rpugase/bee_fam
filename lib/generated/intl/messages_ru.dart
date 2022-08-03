@@ -37,6 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_new": MessageLookupByLibrary.simpleMessage("Создать новое"),
         "create_notification":
             MessageLookupByLibrary.simpleMessage("Создать напоминание"),
+        "delete_notification":
+            MessageLookupByLibrary.simpleMessage("Удалить напоминание"),
         "enter_your_phone_number":
             MessageLookupByLibrary.simpleMessage("Введите ваш номер телефона"),
         "error_birthday_require":

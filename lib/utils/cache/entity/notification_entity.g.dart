@@ -1,28 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'person_entity.dart';
+part of 'notification_entity.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class PersonEntityAdapter extends TypeAdapter<PersonEntity> {
+class NotificationEntityAdapter extends TypeAdapter<NotificationEntity> {
   @override
   final int typeId = 1;
 
   @override
-  PersonEntity read(BinaryReader reader) {
+  NotificationEntity read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return PersonEntity(
+    return NotificationEntity(
       fields[0] as String,
       fields[1] as String,
       fields[2] as String?,
       fields[3] as String?,
       fields[4] as String,
-      (fields[5] as List?)?.cast<NoteEntity>(),
+      (fields[5] as List).cast<NoteEntity>(),
       (fields[6] as List).cast<RemindNotificationEntity>(),
       fields[7] as String,
       fields[8] as String,
@@ -30,7 +30,7 @@ class PersonEntityAdapter extends TypeAdapter<PersonEntity> {
   }
 
   @override
-  void write(BinaryWriter writer, PersonEntity obj) {
+  void write(BinaryWriter writer, NotificationEntity obj) {
     writer
       ..writeByte(9)
       ..writeByte(0)
@@ -59,7 +59,7 @@ class PersonEntityAdapter extends TypeAdapter<PersonEntity> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is PersonEntityAdapter &&
+      other is NotificationEntityAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

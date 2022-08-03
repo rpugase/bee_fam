@@ -1,7 +1,7 @@
 import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/feature/user/data/auth_firebase_error_handler.dart';
 import 'package:birthday_gift/utils/cache/entity/note_entity.dart';
-import 'package:birthday_gift/utils/cache/entity/person_entity.dart';
+import 'package:birthday_gift/utils/cache/entity/notification_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/remind_notification_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/shown_notification_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/user_entity.dart';
@@ -28,7 +28,7 @@ Future _initDi() async {
 
 Future initHive() async {
   await Hive.initFlutter();
-  Hive.registerAdapter(PersonEntityAdapter());
+  Hive.registerAdapter(NotificationEntityAdapter());
   Hive.registerAdapter(UserEntityAdapter());
   Hive.registerAdapter(NoteEntityAdapter());
   Hive.registerAdapter(RemindNotificationEntityAdapter());

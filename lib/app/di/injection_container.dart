@@ -3,6 +3,7 @@ import 'package:birthday_gift/app/domain/get_notifications_for_showing.dart';
 import 'package:birthday_gift/core/cubit/version/get_current_user_cubit.dart';
 import 'package:birthday_gift/core/cubit/version/get_version_with_update_cubit.dart';
 import 'package:birthday_gift/app/domain/approve_notification.dart';
+import 'package:birthday_gift/feature/notification/domain/usecase/delete_notification.dart';
 import 'package:birthday_gift/feature/user/data/firebase_auth_datastore.dart';
 import 'package:birthday_gift/feature/user/domain/auth_with_phone_number.dart';
 import 'package:birthday_gift/feature/user/domain/confirm_phone_number_code.dart';
@@ -12,9 +13,9 @@ import 'package:birthday_gift/feature/user/presentation/auth_cubit.dart';
 import 'package:birthday_gift/utils/cache/dao/settings_dao.dart';
 import 'package:birthday_gift/utils/cache/dao/shown_notification_dao.dart';
 import 'package:birthday_gift/utils/cache/dao/user_dao.dart';
-import 'package:birthday_gift/utils/cache/dao/person_dao.dart';
+import 'package:birthday_gift/utils/cache/dao/notification_dao.dart';
 import 'package:birthday_gift/utils/cache/entity/note_entity.dart';
-import 'package:birthday_gift/utils/cache/entity/person_entity.dart';
+import 'package:birthday_gift/utils/cache/entity/notification_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/remind_notification_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/shown_notification_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/user_entity.dart';
@@ -53,6 +54,7 @@ Future<void> init(
 
   // UseCase
   sl.registerFactory(() => CreateOrUpdateNotification(sl()));
+  sl.registerFactory(() => DeleteNotification(sl()));
   sl.registerFactory(() => ListenNotifications(sl(), sl()));
   sl.registerFactory(() => NotificationsSort());
   sl.registerFactory(() => ApproveNotification(sl()));
@@ -62,7 +64,7 @@ Future<void> init(
   // Service Cubit
   sl.registerFactory(() => GetVersionWithUpdateCubit(sl()));
   sl.registerFactory(() => NotificationListCubit(sl()));
-  sl.registerFactory(() => NotificationManagerCubit(sl()));
+  sl.registerFactory(() => NotificationManagerCubit(sl(), sl()));
   sl.registerFactory(() => NotificationApproveCubit(sl()));
   sl.registerFactory(() => CurrentUserCubit(sl()));
 
@@ -84,12 +86,12 @@ Future<void> _initWorker() async {
 
 Future<void> _initDao() async {
   sl.registerSingleton<Box<UserEntity>>(await UserEntity.createBox());
-  sl.registerSingleton<Box<PersonEntity>>(await PersonEntity.createBox());
+  sl.registerSingleton<Box<NotificationEntity>>(await NotificationEntity.createBox());
   sl.registerSingleton<Box<NoteEntity>>(await NoteEntity.createBox());
   sl.registerSingleton<Box<RemindNotificationEntity>>(await RemindNotificationEntity.createBox());
   sl.registerSingleton<Box<ShownNotificationEntity>>(await ShownNotificationEntity.createBox());
 
-  sl.registerLazySingleton(() => PersonDao(sl()));
+  sl.registerLazySingleton(() => NotificationDao(sl()));
   sl.registerLazySingleton(() => UserDao(sl()));
   sl.registerLazySingleton(() => SettingsDao(sl()));
   sl.registerLazySingleton(() => ShownNotificationDao(sl()));

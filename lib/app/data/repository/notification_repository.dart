@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'package:birthday_gift/core/model/notification_model.dart';
-import 'package:birthday_gift/utils/cache/dao/person_dao.dart';
+import 'package:birthday_gift/utils/cache/dao/notification_dao.dart';
+import 'package:birthday_gift/utils/logger/logger.dart';
 
 class NotificationRepository {
-  final PersonDao _db;
+  final NotificationDao _db;
 
   final _onUpdateNotificationsList = StreamController<Iterable<NotificationModel>>.broadcast();
 
@@ -26,12 +27,18 @@ class NotificationRepository {
   }
 
   Future<void> createNotification(NotificationModel notification) async {
-    await _db.addPerson(notification.toEntity());
+    await _db.addNotification(notification.toEntity());
     _onUpdateNotificationsList.add(await getNotifications());
   }
 
   Future<void> updateNotification(NotificationModel notification) async {
-    await _db.updatePerson(notification.id, notification.toEntity());
+    await _db.updateNotification(notification.id, notification.toEntity());
+    _onUpdateNotificationsList.add(await getNotifications());
+  }
+
+  Future<void> deleteNotification(NotificationModel notification) async {
+    Log.i("Delete notificationEntity=$notification");
+    await _db.deleteNotification(notification.id);
     _onUpdateNotificationsList.add(await getNotifications());
   }
 }
