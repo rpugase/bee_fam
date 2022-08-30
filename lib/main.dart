@@ -4,8 +4,8 @@ import 'package:birthday_gift/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import '../core/ui/resources/colors.dart';
-import '../core/ui/resources/fonts.dart';
+import 'core/ui/resources/colors.dart';
+import 'core/ui/resources/fonts.dart';
 
 
 void main() async {

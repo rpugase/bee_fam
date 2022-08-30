@@ -1,4 +1,3 @@
-import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../entity/notification_entity.dart';
