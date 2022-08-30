@@ -53,7 +53,7 @@ class NotificationDataSource {
     AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
       'main_notification',
       'Main notification',
-      'This notification for notify important information',
+      channelDescription: 'This notification for notify important information',
       importance: Importance.max,
       priority: Priority.high,
       groupKey: "com.andriih.birthday_gift.BIRTHDAY_NOTIFICATION",
