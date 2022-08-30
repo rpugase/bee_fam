@@ -27,11 +27,13 @@ class NotificationRepository {
   }
 
   Future<void> createNotification(NotificationModel notification) async {
+    Log.i("Add notification=$notification");
     await _db.addNotification(notification.toEntity());
     _onUpdateNotificationsList.add(await getNotifications());
   }
 
   Future<void> updateNotification(NotificationModel notification) async {
+    Log.i("Update notification=$notification");
     await _db.updateNotification(notification.id, notification.toEntity());
     _onUpdateNotificationsList.add(await getNotifications());
   }
