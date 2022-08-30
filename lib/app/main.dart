@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
             ),
             scaffoldBackgroundColor: Colors.white,
           ),
-          home: /*usersCount == 0 ? AuthPage() : */MainPage(),
+          home: /*usersCount == 0 ? AuthPage() : */const MainPage(),
         ),
       ),
     );

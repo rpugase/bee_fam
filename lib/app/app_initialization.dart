@@ -7,6 +7,8 @@ import 'package:birthday_gift/utils/cache/entity/shown_notification_entity.dart'
 import 'package:birthday_gift/utils/cache/entity/user_entity.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,6 +20,11 @@ Future initApp() async {
   ErrorHandler.setErrorHandlers([AuthFirebaseErrorHandler()]);
   await initHive();
   await _initDi();
+  await Firebase.initializeApp();
+  // FlutterError.onError = (FlutterErrorDetails details) {
+  //   FlutterError.dumpErrorToConsole(details);
+  //   FirebaseCrashlytics.instance.recordFlutterFatalError;
+  // };
 }
 
 Future _initDi() async {
