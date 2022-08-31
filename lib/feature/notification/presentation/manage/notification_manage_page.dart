@@ -14,8 +14,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-import '../widget/note_input_text_widget.dart';
-import '../widget/person_widgets.dart';
+import '../../../../core/ui/widget/note_input_text_widget.dart';
+import '../../../../core/ui/widget/person_widgets.dart';
 import 'notification_manage_cubit.dart';
 
 class NotificationManagePage extends StatelessWidget {
