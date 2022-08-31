@@ -48,7 +48,7 @@ class ShowTodayNotification extends UseCase<void, NoParams> {
     }));
     for (var notification in notificationsForShowing) {
       if (!notification.birthday.isTodayWithoutYear()) {
-        approveNotification(notification.id);
+        approveNotification.approve(notification.id);
       }
     }
     Log.i("End birthday notification service");

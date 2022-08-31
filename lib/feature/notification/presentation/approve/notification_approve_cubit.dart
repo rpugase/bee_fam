@@ -1,14 +1,16 @@
 import 'package:birthday_gift/core/base_cubit.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
-import 'package:birthday_gift/app/domain/approve_notification.dart';
 import 'package:flutter/material.dart';
 
+import 'notification_approve_interface.dart';
+
 class NotificationApproveCubit extends BaseCubit<NotificationApproveState> implements ErrorHandler {
+
+  final OnApproveNotification _onApproveNotification;
   final _notificationErrorHandler = NotificationApproveErrorHandler();
-  final ApproveNotification _approveNotification;
 
   NotificationApproveCubit(
-    this._approveNotification,
+    this._onApproveNotification,
   ) : super(NotificationApproveState());
 
   @override
@@ -23,7 +25,7 @@ class NotificationApproveCubit extends BaseCubit<NotificationApproveState> imple
 
   void approve(NotificationModel notification) {
     launch(() async {
-      await _approveNotification(notification.id);
+      await _onApproveNotification.approve(notification.id);
     }, null);
   }
 }

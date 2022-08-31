@@ -3,14 +3,13 @@ import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/feature/notification/domain/notification_error_handler.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
-import '../../domain/usecase/delete_notification.dart';
-import '../../domain/usecase/create_or_update_product.dart';
+import 'notification_manage_interface.dart';
 
 class NotificationManagerCubit extends BaseCubit<NotificationManageState> {
-  final CreateOrUpdateNotification _createOrUpdateNotification;
-  final DeleteNotification _deleteNotification;
+  final OnCreateOrUpdateNotification _onCreateOrUpdateNotification;
+  final OnDeleteNotification _onDeleteNotification;
 
-  NotificationManagerCubit(this._createOrUpdateNotification, this._deleteNotification) : super(ApplyData());
+  NotificationManagerCubit(this._onCreateOrUpdateNotification, this._onDeleteNotification) : super(ApplyData());
 
   @override
   BlocError getErrorTemplate(Exception exception) {
@@ -20,7 +19,7 @@ class NotificationManagerCubit extends BaseCubit<NotificationManageState> {
   void createOrUpdateNotification(NotificationModel notification) {
     launch(() async {
       emit(ApplyData());
-      await _createOrUpdateNotification(notification);
+      await _onCreateOrUpdateNotification.createOrUpdateNotification(notification);
       emit(Finish());
     }, null);
   }
@@ -28,7 +27,7 @@ class NotificationManagerCubit extends BaseCubit<NotificationManageState> {
   void deleteNotification(NotificationModel notificationModel) {
     launch(() async {
       emit(ApplyData());
-      await _deleteNotification(notificationModel);
+      await _onDeleteNotification.deleteNotification(notificationModel);
       emit(Finish());
     }, null);
   }

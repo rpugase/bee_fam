@@ -3,16 +3,17 @@ import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/feature/notification/domain/notification_error_handler.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../domain/usecase/listen_notifications.dart';
+import 'notification_list_interface.dart';
+
 
 class NotificationListCubit extends BaseCubit<NotificationsListState> {
-  final ListenNotifications _listenNotifications;
+  final OnListenNotifications _onListenNotifications;
 
-  NotificationListCubit(this._listenNotifications) : super(Loading());
+  NotificationListCubit(this._onListenNotifications) : super(Loading());
 
   @override
   void onInit() {
-    collect<Iterable<NotificationModel>>(_listenNotifications(), _onNotificationsLoaded, null);
+    collect<Iterable<NotificationModel>>(_onListenNotifications.listen(), _onNotificationsLoaded, null);
   }
 
   @override

@@ -3,7 +3,10 @@ import 'package:birthday_gift/app/domain/get_notifications_for_showing.dart';
 import 'package:birthday_gift/core/cubit/version/get_current_user_cubit.dart';
 import 'package:birthday_gift/core/cubit/version/get_version_with_update_cubit.dart';
 import 'package:birthday_gift/app/domain/approve_notification.dart';
-import 'package:birthday_gift/feature/notification/domain/usecase/delete_notification.dart';
+import 'package:birthday_gift/app/domain/delete_notification.dart';
+import 'package:birthday_gift/feature/notification/presentation/approve/notification_approve_interface.dart';
+import 'package:birthday_gift/feature/notification/presentation/list/notification_list_interface.dart';
+import 'package:birthday_gift/feature/notification/presentation/manage/notification_manage_interface.dart';
 import 'package:birthday_gift/feature/user/data/firebase_auth_datastore.dart';
 import 'package:birthday_gift/feature/user/domain/auth_with_phone_number.dart';
 import 'package:birthday_gift/feature/user/domain/confirm_phone_number_code.dart';
@@ -19,9 +22,9 @@ import 'package:birthday_gift/utils/cache/entity/notification_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/remind_notification_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/shown_notification_entity.dart';
 import 'package:birthday_gift/utils/cache/entity/user_entity.dart';
-import 'package:birthday_gift/feature/notification/domain/usecase/create_or_update_product.dart';
-import 'package:birthday_gift/feature/notification/domain/usecase/listen_notifications.dart';
-import 'package:birthday_gift/feature/notification/domain/usecase/notifications_sort.dart';
+import 'package:birthday_gift/app/domain/create_or_update_product.dart';
+import 'package:birthday_gift/app/domain/listen_notifications.dart';
+import 'package:birthday_gift/app/domain/notifications_sort.dart';
 import 'package:birthday_gift/feature/notification/presentation/list/notification_list_cubit.dart';
 import 'package:birthday_gift/feature/notification/presentation/manage/notification_manage_cubit.dart';
 import 'package:birthday_gift/app/data/datasource/notification_datasource.dart';
@@ -53,11 +56,11 @@ Future<void> init(
   sl.registerLazySingleton(() => ShownNotificationRepository(sl()));
 
   // UseCase
-  sl.registerFactory(() => CreateOrUpdateNotification(sl()));
-  sl.registerFactory(() => DeleteNotification(sl()));
-  sl.registerFactory(() => ListenNotifications(sl(), sl()));
+  sl.registerFactory<OnCreateOrUpdateNotification>(() => CreateOrUpdateNotification(sl()));
+  sl.registerFactory<OnDeleteNotification>(() => DeleteNotification(sl()));
+  sl.registerFactory<OnListenNotifications>(() => ListenNotifications(sl(), sl()));
+  sl.registerFactory<OnApproveNotification>(() => ApproveNotification(sl()));
   sl.registerFactory(() => NotificationsSort());
-  sl.registerFactory(() => ApproveNotification(sl()));
   sl.registerFactory(() => ShowTodayNotification(sl(), sl(), sl()));
   sl.registerFactory(() => GetNotificationsForShowing(sl(), sl()));
 
