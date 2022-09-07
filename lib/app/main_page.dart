@@ -2,6 +2,7 @@ import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
+import 'package:birthday_gift/core/ui/widget/animated_click_widget.dart';
 import 'package:birthday_gift/core/ui/widget/create_notification_dialog.dart';
 import 'package:birthday_gift/feature/notification/presentation/approve/notification_approve_dialog.dart';
 import 'package:birthday_gift/feature/notification/presentation/list/notification_list_page.dart';
@@ -191,22 +192,24 @@ class _BottomBarSvgItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool checkedCopy = checked ?? false;
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () => onTap(index),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          SvgPicture.asset(
-            assetName,
-            color: checked != null
-                ? checkedCopy
-                    ? context.colors.activeBottomItem
-                    : context.colors.inactiveBottomItem
-                : null,
-          ),
-          Text(checkedCopy ? _point : ""),
-        ]),
+    return AnimatedClick(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () => onTap(index),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            SvgPicture.asset(
+              assetName,
+              color: checked != null
+                  ? checkedCopy
+                      ? context.colors.activeBottomItem
+                      : context.colors.inactiveBottomItem
+                  : null,
+            ),
+            Text(checkedCopy ? _point : ""),
+          ]),
+        ),
       ),
     );
   }

@@ -72,6 +72,11 @@ ThemeData AppThemeData(BuildContext context) {
         fontSize: 16,
         fontFamily: AppFonts.sfProText,
       ),
+      subtitle2: TextStyle(
+        fontSize: 16,
+        fontFamily: AppFonts.sfProText,
+        fontWeight: FontWeight.w600
+      ),
       bodyText1: TextStyle(
         fontSize: 14,
         fontFamily: AppFonts.sfProText,

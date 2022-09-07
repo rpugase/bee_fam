@@ -1,6 +1,5 @@
 import 'package:birthday_gift/app/di/injection_container.dart';
 import 'package:birthday_gift/core/base_cubit.dart';
-import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/feature/user/domain/exception/user_exceptions.dart';
 import 'package:birthday_gift/app/main_page.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
@@ -34,13 +33,13 @@ class AuthPage extends StatelessWidget {
                 final paddingBottom = isKeyboardVisible ? .0 : screenSize / 4.5;
                 return AnimatedContainer(
                   curve: Curves.easeOut,
-                  duration: Duration(milliseconds: 400),
+                  duration: const Duration(milliseconds: 400),
                   child: Column(
                     children: [
-                      Expanded(child: SizedBox()),
+                      const Expanded(child: SizedBox()),
                       Container(
-                        padding: EdgeInsets.all(20.0),
-                        decoration: BoxDecoration(
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                             topRight: Radius.circular(30),
@@ -50,19 +49,19 @@ class AuthPage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: 20.0),
+                            const SizedBox(height: 20.0),
                             Text(
                               '${context.strings.enter_your_phone_number}:',
                               style: Theme.of(context).textTheme.subtitle1,
                             ),
-                            SizedBox(height: 20.0),
+                            const SizedBox(height: 20.0),
                             BaseBlocConsumer<AuthCubit, AuthState>(
                               context: context,
                               listener: (ctx, state) {
                                 if (state is SuccessCode) {
                                   Navigator.pushAndRemoveUntil(
                                     context,
-                                    MaterialPageRoute(builder: (ctx) => MainPage()),
+                                    MaterialPageRoute(builder: (ctx) => const MainPage()),
                                     (route) => false,
                                   );
                                 }
@@ -110,7 +109,7 @@ class AuthPage extends StatelessWidget {
           errorText: state.error is UserException ? _getErrorMessage(ctx, state.error!) : null,
           autoFocus: true,
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         LoginButton(
           key: _buttonLoginKey,
           onPressed: _onAuthPressedCallback(ctx, state, true),
@@ -123,8 +122,8 @@ class AuthPage extends StatelessWidget {
           readOnly: true,
           controller: _phoneNumberController,
         ),
-        SizedBox(height: 20),
-        CircularProgressIndicator(),
+        const SizedBox(height: 20),
+        const CircularProgressIndicator(),
       ];
 
   List<Widget> _onEnterPhoneCode(BuildContext ctx, AuthState state) => [
@@ -133,7 +132,7 @@ class AuthPage extends StatelessWidget {
           readOnly: true,
           controller: _phoneNumberController,
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         ConfirmationCodeTextField(
           key: _codeConfirmationKey,
           readOnly: false,
@@ -141,7 +140,7 @@ class AuthPage extends StatelessWidget {
           errorText: state.error is UserException ? _getErrorMessage(ctx, state.error!) : null,
           autoFocus: true,
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         LoginButton(
           key: _buttonLoginKey,
           onPressed: _onAuthPressedCallback(ctx, state, true),
@@ -154,14 +153,14 @@ class AuthPage extends StatelessWidget {
           readOnly: true,
           controller: _phoneNumberController,
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         ConfirmationCodeTextField(
           key: _codeConfirmationKey,
           readOnly: true,
           controller: _confirmationCodeController,
         ),
-        SizedBox(height: 20),
-        CircularProgressIndicator(),
+        const SizedBox(height: 20),
+        const CircularProgressIndicator(),
       ];
 
   VoidCallback? _onAuthPressedCallback(BuildContext ctx, AuthState state, bool enable) {

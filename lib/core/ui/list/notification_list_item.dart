@@ -1,3 +1,4 @@
+import 'package:birthday_gift/core/ui/widget/animated_click_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -49,7 +50,7 @@ class NotificationItem extends StatelessWidget {
         top: notification.firstInMonthBlock ? 8.0 : 4.0,
         bottom: notification.lastInMonthBlock ? 32.0 : 8.0,
       ),
-      child: GestureDetector(
+      child: AnimatedClick(
         onTap: () => onTapNotification?.call(notification),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -77,7 +78,7 @@ class NotificationItem extends StatelessWidget {
                     child: Center(
                         child: Text(
                       notification.initials,
-                      style: const TextStyle(color: Colors.white, fontSize: 16.0),
+                      style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.white),
                     )),
                   ),
                 ),

@@ -11,7 +11,7 @@ class ConfirmationCodeTextField extends StatelessWidget {
   final String? errorText;
   final autoFocus;
 
-  ConfirmationCodeTextField({
+  const ConfirmationCodeTextField({
     Key? key,
     required bool readOnly,
     this.controller,
@@ -28,7 +28,7 @@ class ConfirmationCodeTextField extends StatelessWidget {
       readOnly: readOnly,
       keyboardType: TextInputType.number,
       autofocus: autoFocus,
-      decoration: InputDecoration()
+      decoration: const InputDecoration()
           .applyDefaults(Theme.of(context).inputDecorationTheme)
           .copyWith(errorText: errorText),
     );
@@ -48,7 +48,7 @@ class LoginButton extends StatefulWidget {
 }
 
 class _LoginButtonState extends State<LoginButton> with SingleTickerProviderStateMixin {
-  final _animationDuration = Duration(milliseconds: 150);
+  final _animationDuration = const Duration(milliseconds: 150);
   late final _animationController = AnimationController(
     vsync: this,
     duration: _animationDuration,
@@ -83,11 +83,11 @@ class _LoginButtonState extends State<LoginButton> with SingleTickerProviderStat
           width: MediaQuery.of(context).size.height,
           height: 48.0,
           child: ElevatedButton(
-            child: Text(context.strings.login),
             onPressed: widget.onPressed != null ? () {
               _onTap();
               widget.onPressed?.call();
             } : null,
+            child: Text(context.strings.login),
           ),
         ),
       ),
