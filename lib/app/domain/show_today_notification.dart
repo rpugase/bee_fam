@@ -12,30 +12,16 @@ import 'package:birthday_gift/app/data/datasource/notification_datasource.dart';
 import 'approve_notification.dart';
 import 'get_notifications_for_showing.dart';
 
-class ShowTodayNotification extends UseCase<void, NoParams> {
+class GetTodayNotification extends UseCase<void, NoParams> {
   final NotificationDataSource notificationService;
   final GetNotificationsForShowing getNotificationsForShowing;
   final ApproveNotification approveNotification;
 
-  ShowTodayNotification(
+  GetTodayNotification(
     this.notificationService,
     this.getNotificationsForShowing,
     this.approveNotification,
   );
-
-  static Future<ShowTodayNotification> init() async {
-    await initHive();
-    final personRepository = NotificationRepository(NotificationDao(await NotificationEntity.createBox()));
-    final shownNotificationRepository = ShownNotificationRepository(
-      ShownNotificationDao(await ShownNotificationEntity.createBox()),
-    );
-
-    return ShowTodayNotification(
-      NotificationDataSource()..init(),
-      GetNotificationsForShowing(personRepository, shownNotificationRepository),
-      ApproveNotification(shownNotificationRepository),
-    );
-  }
 
   @override
   Future<void> call([NoParams? params]) async {
@@ -52,5 +38,19 @@ class ShowTodayNotification extends UseCase<void, NoParams> {
       }
     }
     Log.i("End birthday notification service");
+  }
+
+  static Future<GetTodayNotification> init() async {
+    await initHive();
+    final personRepository = NotificationRepository(NotificationDao(await NotificationEntity.createBox()));
+    final shownNotificationRepository = ShownNotificationRepository(
+      ShownNotificationDao(await ShownNotificationEntity.createBox()),
+    );
+
+    return GetTodayNotification(
+      NotificationDataSource()..init(),
+      GetNotificationsForShowing(personRepository, shownNotificationRepository),
+      ApproveNotification(shownNotificationRepository),
+    );
   }
 }

@@ -5,13 +5,13 @@ import 'package:birthday_gift/core/model/remind_notification.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/resources/app_icons.dart';
-import 'package:birthday_gift/core/ui/resources/images.dart';
+import 'package:birthday_gift/core/ui/widget/bee_app_bar.dart';
+import 'package:birthday_gift/core/ui/widget/bee_background.dart';
 import 'package:birthday_gift/core/ui/widget/phone_text_field.dart';
 import 'package:birthday_gift/app/di/injection_container.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../../core/ui/widget/note_input_text_widget.dart';
@@ -50,10 +50,8 @@ class NotificationManagePage extends StatelessWidget {
     return BlocProvider(
       create: (context) => sl<NotificationManagerCubit>(),
       child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: context.colors.mainBackground,
-          title: Text(context.strings.notification),
+        appBar: BeeAppBar(
+          context.strings.notification,
           leading: IconButton(
             icon: Icon(
               AppIcons.back,
@@ -116,59 +114,53 @@ class NotificationManagePage extends StatelessWidget {
           ],
         ),
         body: SingleChildScrollView(
-          child: Stack(
-            children: [
-              SvgPicture.asset(
-                Images.bgSvg,
-                fit: BoxFit.fill,
+          child: BeeBackground(
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  PersonTextField(
+                    controller: _nameController,
+                    maxLines: 1,
+                    autofocus: true,
+                    labelText: context.strings.full_name,
+                    icon: const Icon(AppIcons.profile),
+                  ),
+                  const SizedBox(height: 16),
+                  PhoneNumberTextField(
+                    controller: _phoneController,
+                    readOnly: false,
+                  ),
+                  const SizedBox(height: 16),
+                  PersonTextField(
+                    readOnly: true,
+                    controller: _birthdayController,
+                    onTap: () => _showYearDialog(context),
+                    labelText: context.strings.birthday,
+                    icon: const Icon(Icons.calendar_today),
+                  ),
+                  const SizedBox(height: 32),
+                  NotesField(controller: _noteController),
+                  const SizedBox(height: 32),
+                  SizedBox(
+                    width: double.infinity,
+                    child: NotificationSettings(
+                      pickedNotifications: _pickedNotifications,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Builder(
+                    builder: (context) => notification == null
+                        ? const SizedBox()
+                        : OutlinedButton(
+                            onPressed: () =>
+                                context.read<NotificationManagerCubit>().deleteNotification(notification!),
+                            child: Text(context.strings.delete_notification),
+                          ),
+                  ),
+                ],
               ),
-              Container(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    PersonTextField(
-                      controller: _nameController,
-                      maxLines: 1,
-                      autofocus: true,
-                      labelText: context.strings.full_name,
-                      icon: const Icon(AppIcons.profile),
-                    ),
-                    const SizedBox(height: 16),
-                    PhoneNumberTextField(
-                      controller: _phoneController,
-                      readOnly: false,
-                    ),
-                    const SizedBox(height: 16),
-                    PersonTextField(
-                      readOnly: true,
-                      controller: _birthdayController,
-                      onTap: () => _showYearDialog(context),
-                      labelText: context.strings.birthday,
-                      icon: const Icon(Icons.calendar_today),
-                    ),
-                    const SizedBox(height: 32),
-                    NotesField(controller: _noteController),
-                    const SizedBox(height: 32),
-                    SizedBox(
-                      width: double.infinity,
-                      child: NotificationSettings(
-                        pickedNotifications: _pickedNotifications,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Builder(
-                      builder: (context) => notification == null
-                          ? const SizedBox()
-                          : OutlinedButton(
-                              onPressed: () =>
-                                  context.read<NotificationManagerCubit>().deleteNotification(notification!),
-                              child: Text(context.strings.delete_notification),
-                            ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

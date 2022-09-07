@@ -10,7 +10,7 @@ import 'package:birthday_gift/feature/notification/presentation/manage/notificat
 import 'package:birthday_gift/feature/user/data/firebase_auth_datastore.dart';
 import 'package:birthday_gift/feature/user/domain/auth_with_phone_number.dart';
 import 'package:birthday_gift/feature/user/domain/confirm_phone_number_code.dart';
-import 'package:birthday_gift/feature/user/domain/get_current_user.dart';
+import 'package:birthday_gift/app/domain/get_current_user.dart';
 import 'package:birthday_gift/feature/user/domain/user_error_handler.dart';
 import 'package:birthday_gift/feature/user/presentation/auth_cubit.dart';
 import 'package:birthday_gift/utils/cache/dao/settings_dao.dart';
@@ -58,11 +58,11 @@ Future<void> init(
   // UseCase
   sl.registerFactory<OnCreateOrUpdateNotification>(() => CreateOrUpdateNotification(sl()));
   sl.registerFactory<OnDeleteNotification>(() => DeleteNotification(sl()));
-  sl.registerFactory<OnListenNotifications>(() => ListenNotifications(sl(), sl()));
+  sl.registerFactory<OnListenNotifications>(() => ListenNotifications(sl()));
   sl.registerFactory<OnApproveNotification>(() => ApproveNotification(sl()));
-  sl.registerFactory(() => NotificationsSort());
-  sl.registerFactory(() => ShowTodayNotification(sl(), sl(), sl()));
+  sl.registerFactory(() => GetTodayNotification(sl(), sl(), sl()));
   sl.registerFactory(() => GetNotificationsForShowing(sl(), sl()));
+  sl.registerFactory<OnGetCurrentUser>(() => GetCurrentUser(sl()));
 
   // Service Cubit
   sl.registerFactory(() => GetVersionWithUpdateCubit(sl()));
@@ -112,5 +112,4 @@ Future<void> _initUser() async {
   sl.registerFactory(() => AuthWithPhoneNumber(sl()));
   sl.registerFactory(() => ConfirmPhoneNumberCode(sl(), sl()));
   sl.registerFactory(() => AuthCubit(sl(), sl(), sl()));
-  sl.registerFactory(() => GetCurrentUser(sl()));
 }

@@ -1,14 +1,17 @@
 import 'package:birthday_gift/core/model/user.dart';
-import 'package:birthday_gift/feature/user/domain/get_current_user.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+abstract class OnGetCurrentUser {
+  Future<User?> getCurrentUser();
+}
+
 class CurrentUserCubit extends Cubit<CurrentUserState> {
 
-  final GetCurrentUser _getCurrentUser;
+  final OnGetCurrentUser _onGetCurrentUser;
 
-  CurrentUserCubit(this._getCurrentUser) : super(NoUser()) {
-    _getCurrentUser().then((user) => _onUserLoaded(user));
+  CurrentUserCubit(this._onGetCurrentUser) : super(NoUser()) {
+    _onGetCurrentUser.getCurrentUser().then((user) => _onUserLoaded(user));
   }
 
   _onUserLoaded(User? user) {

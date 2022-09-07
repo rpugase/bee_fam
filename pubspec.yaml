@@ -74,4 +74,6 @@ flutter:
         - asset: assets/icon/MyFlutterApp.ttf
     - family: SFProText
       fonts:
-        - asset: assets/font/SFProText-Regular.ttf
+        - asset: assets/font/SF-Pro-Text-Regular.otf
+        - asset: assets/font/SF-Pro-Text-Semibold.otf
+          weight: 600

@@ -40,7 +40,7 @@ callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
     Log.initialize([ConsolePrintLogger()]);
     if (task == WorkerDatasource.everyDayTask) {
-      await (await ShowTodayNotification.init()).call();
+      await (await GetTodayNotification.init()).call();
     }
     print("Native called background task: $task");
     return Future.value(true);

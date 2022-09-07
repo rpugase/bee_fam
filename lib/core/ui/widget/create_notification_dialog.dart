@@ -27,7 +27,7 @@ class CreateNotificationWidget extends StatelessWidget {
           Text(
             context.strings.create_notification,
             style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                  color: AppColors.of(context).createNotification,
+                  color: context.colors.createNotification,
                 ),
           ),
           const SizedBox(height: 36.0),
@@ -37,7 +37,10 @@ class CreateNotificationWidget extends StatelessWidget {
               children: [
                 const Icon(AppIcons.add, size: 24.0),
                 const SizedBox(width: 36.0),
-                Text(context.strings.create_new, style: Theme.of(context).textTheme.subtitle1),
+                Text(
+                  context.strings.create_new,
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
               ],
             ),
           ),
@@ -48,7 +51,10 @@ class CreateNotificationWidget extends StatelessWidget {
               children: [
                 const Icon(AppIcons.profilePlus, size: 24.0),
                 const SizedBox(width: 36.0),
-                Text(context.strings.create_from_contact, style: Theme.of(context).textTheme.subtitle1),
+                Text(
+                  context.strings.create_from_contact,
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
               ],
             ),
           ),

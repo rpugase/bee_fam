@@ -2,7 +2,7 @@ part of '../logger.dart';
 
 abstract class _StringOutputLogger implements Logger {
   _StringOutputLogger([_LogFormatter? logFormatter])
-      : this._formatter = logFormatter ?? _LogFormatter(prettyExtrasPrint: true);
+      : _formatter = logFormatter ?? const _LogFormatter(prettyExtrasPrint: true);
 
   final _LogFormatter _formatter;
 

@@ -67,9 +67,10 @@ class BaseBlocConsumer<B extends BlocBase<S>, S> extends BlocConsumer<B, S> {
   }) : super(key: key, builder: builder, listener: (context, state) {
     final cubit = (context.read<B>() as BaseCubit);
     final error = (state as BlocState).error;
-    Log.i("Unhandled Exception: $cubit; error=$error; listener=${listener?.call(context, state) == true}; "
-        "handleBaseErrorMessage=$handleBaseErrorMessage");
-    if (listener?.call(context, state) == true && handleBaseErrorMessage && error != null) {
+    final isListenerHandled = listener?.call(context, state) == true;
+    Log.i("Unhandled Exception: $cubit; error=$error; "
+        "listener=$isListenerHandled; handleBaseErrorMessage=$handleBaseErrorMessage");
+    if (isListenerHandled && handleBaseErrorMessage && error != null) {
       showDialog(context: context, builder: (context) {
         final errorTemplate = cubit.getErrorTemplate(error);
         return MessageDialog(

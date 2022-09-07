@@ -102,28 +102,29 @@ class _LogFormatter {
     String? packageAndClass = matches.first
         .group(0); //extracted result (package:some_package/main.dart:54:18)
 
-    return packageAndClass != null ? _removePackages(packageAndClass) : null;
+    return packageAndClass;
   }
 
   String _removePackages(String str) =>
       str.substring(str.lastIndexOf('/') + 1).replaceAll(')', '');
 
   String _padString(String message, int padding) {
-    if (message.length >= padding)
+    if (message.length >= padding) {
       return '$message    ';
-    else
+    } else {
       return message.padRight(padding);
+    }
   }
 }
 
 extension FirstWhereNotExtension<E> on List<E> {
   ///Finds index of element which not satisfy [test] function
-  int firstIndexWhereNot(bool test(E element)) {
-    final _iterator = iterator;
+  int firstIndexWhereNot(bool Function(E element) test) {
+    final iterator = this.iterator;
     int index = 0;
 
-    while (_iterator.moveNext()) {
-      if (test(_iterator.current)) {
+    while (iterator.moveNext()) {
+      if (test(iterator.current)) {
         index++;
       } else {
         return index != 0 ? index : -1;

@@ -25,8 +25,7 @@ class NotificationListItem implements ListItem {
     required this.notification,
     required this.firstInMonthBlock,
     required this.lastInMonthBlock,
-  }
-  )   : id = notification.id,
+  })  : id = notification.id,
         name = notification.name,
         initials = notification.initials,
         day = notification.birthday.toDay(),
@@ -75,8 +74,11 @@ class NotificationItem extends StatelessWidget {
                       color: context.colors.primary,
                       borderRadius: const BorderRadius.all(Radius.circular(12.0)),
                     ),
-                    child:
-                        Center(child: Text(notification.initials, style: const TextStyle(color: Colors.white, fontSize: 16.0))),
+                    child: Center(
+                        child: Text(
+                      notification.initials,
+                      style: const TextStyle(color: Colors.white, fontSize: 16.0),
+                    )),
                   ),
                 ),
                 Expanded(
@@ -90,8 +92,10 @@ class NotificationItem extends StatelessWidget {
                       ),
                       Text(
                         context.strings.birthday,
-                        style:
-                            Theme.of(context).textTheme.bodyText2?.copyWith(color: context.colors.personTypeDescription),
+                        style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                              color: context.colors.personTypeDescription,
+                              fontSize: 12,
+                            ),
                       ),
                     ],
                   ),
@@ -106,7 +110,7 @@ class NotificationItem extends StatelessWidget {
                         ),
                         Text(
                           notification.month,
-                          style: Theme.of(context).textTheme.bodyText1?.copyWith(color: context.colors.daysColor),
+                          style: Theme.of(context).textTheme.bodyText2?.copyWith(color: context.colors.daysColor),
                         ),
                       ],
                     ),

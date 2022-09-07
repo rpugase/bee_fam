@@ -8,14 +8,13 @@ import 'notifications_sort.dart';
 
 class ListenNotifications implements OnListenNotifications {
   final NotificationRepository _notificationRepository;
-  final NotificationsSort _notificationsSort;
 
-  const ListenNotifications(this._notificationRepository, this._notificationsSort);
+  const ListenNotifications(this._notificationRepository);
 
   @override
   Stream<Iterable<NotificationModel>> listen() {
     return _notificationRepository.listenNotifications().asyncMap((notificationsList) async {
-      final notificationsResult = await _notificationsSort(notificationsList);
+      final notificationsResult = NotificationsSort(notificationsList);
       Log.i("Notifications: $notificationsResult");
       return notificationsResult;
     });

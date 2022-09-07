@@ -1,3 +1,4 @@
+import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../list/list_item.dart';
@@ -20,7 +21,13 @@ class MonthItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Text(monthListItem.month),
+      child: Text(
+        monthListItem.month,
+        style: Theme.of(context).textTheme.bodyText1
+          ?.copyWith(
+            color: context.colors.textPrimary.withOpacity(0.6),
+          ),
+      ),
     );
   }
 }
