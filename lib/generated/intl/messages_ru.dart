@@ -20,9 +20,12 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
-  static String m0(x) => "За ${x} месяц";
+  static String m0(notificationName) =>
+      "Ты поздравил ${notificationName} с днём рождения?";
 
-  static String m1(x) => "За ${x} неделю";
+  static String m1(x) => "За ${x} месяц";
+
+  static String m2(x) => "За ${x} неделю";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -39,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Создать напоминание"),
         "delete_notification":
             MessageLookupByLibrary.simpleMessage("Удалить напоминание"),
+        "did_you_wish": m0,
         "enter_your_phone_number":
             MessageLookupByLibrary.simpleMessage("Введите ваш номер телефона"),
         "error_birthday_require":
@@ -63,20 +67,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "hello": MessageLookupByLibrary.simpleMessage("Привет! 🎉"),
         "in_day_birthday":
             MessageLookupByLibrary.simpleMessage("В день события"),
-        "in_x_month": m0,
-        "in_x_week": m1,
+        "in_x_month": m1,
+        "in_x_week": m2,
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
         "last_synchronization":
             MessageLookupByLibrary.simpleMessage("Последняя синхронизация"),
         "last_version": MessageLookupByLibrary.simpleMessage("Версия ПО"),
         "login": MessageLookupByLibrary.simpleMessage("Отправьте код"),
         "logout": MessageLookupByLibrary.simpleMessage("Выход"),
-        "not_now": MessageLookupByLibrary.simpleMessage("Не сейчас"),
+        "not_now": MessageLookupByLibrary.simpleMessage("Не сейчас 🗿"),
         "notes": MessageLookupByLibrary.simpleMessage("Заметки"),
         "notification": MessageLookupByLibrary.simpleMessage("Напоминание"),
         "notifications_time":
             MessageLookupByLibrary.simpleMessage("Время нотификаций"),
-        "ok": MessageLookupByLibrary.simpleMessage("Ok"),
+        "ok": MessageLookupByLibrary.simpleMessage("Ок"),
         "phone": MessageLookupByLibrary.simpleMessage("Номер телефона"),
         "phoneCode": MessageLookupByLibrary.simpleMessage("Код"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Номер телефона"),

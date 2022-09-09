@@ -35,12 +35,12 @@ class _MainPageState extends State<MainPage> {
     const SettingsPage(),
   ];
 
-
   @override
   void initState() {
     super.initState();
     sl<GetNotificationsForShowing>().call().then((notifications) {
-      final todayNotification = notifications.where((notification) => notification.isIncludeRemindNotificationForToday()).firstOrNull;
+      final todayNotification =
+          notifications.where((notification) => notification.isIncludeRemindNotificationForToday()).firstOrNull;
       if (todayNotification != null) {
         showDialog(
           context: context,

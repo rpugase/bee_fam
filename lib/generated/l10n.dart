@@ -60,10 +60,20 @@ class S {
     );
   }
 
-  /// `Not now`
+  /// `Yes 🎉`
+  String get yes {
+    return Intl.message(
+      'Yes 🎉',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not now 🗿`
   String get not_now {
     return Intl.message(
-      'Not now',
+      'Not now 🗿',
       name: 'not_now',
       desc: '',
       args: [],
@@ -187,6 +197,16 @@ class S {
       name: 'error_number_not_found',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Did you wish {notificationName} a happy birthday?`
+  String did_you_wish(Object notificationName) {
+    return Intl.message(
+      'Did you wish $notificationName a happy birthday?',
+      name: 'did_you_wish',
+      desc: '',
+      args: [notificationName],
     );
   }
 

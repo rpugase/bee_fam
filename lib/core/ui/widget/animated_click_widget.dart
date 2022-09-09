@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedClick extends StatefulWidget {
@@ -69,7 +68,6 @@ class _AnimatedClickState extends State<AnimatedClick> with SingleTickerProvider
   }
 
   void _onTap() {
-    Log.i("_onTap");
     _decreaseButton();
     Timer(_animationDuration, () {
       _increaseButton();
@@ -77,12 +75,10 @@ class _AnimatedClickState extends State<AnimatedClick> with SingleTickerProvider
   }
 
   void _increaseButton() {
-    Log.i("_increaseButton");
     _animationController.forward();
   }
 
   void _decreaseButton() {
-    Log.i("_decreaseButton");
     _animationController.reverse();
   }
 

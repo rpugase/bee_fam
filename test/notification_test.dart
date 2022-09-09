@@ -8,16 +8,16 @@ void main() {
   final rnWeek = RemindNotification.inWeek();
   final rnMonth = RemindNotification.inMonth();
 
-  final dYesterday = Date().add(Duration(days: -1));
+  final dYesterday = Date().add(const Duration(days: -1));
 
-  final dWeek = Date().add(Duration(days: -7));
-  final dWeekMinusDay = Date().add(Duration(days: -6));
-  final dWeekPlusDay = Date().add(Duration(days: -8));
+  final dWeek = Date().add(const Duration(days: -7));
+  final dWeekMinusDay = Date().add(const Duration(days: -6));
+  final dWeekPlusDay = Date().add(const Duration(days: -8));
 
 
-  final dMonth = Date().add(Duration(days: -30));
-  final dMonthMinusDay = Date().add(Duration(days: -29));
-  final dMonthPlusDay = Date().add(Duration(days: -31));
+  final dMonth = Date().add(const Duration(days: -30));
+  final dMonthMinusDay = Date().add(const Duration(days: -29));
+  final dMonthPlusDay = Date().add(const Duration(days: -31));
 
   test('Notification showing today test', () async {
     final today = NotificationModel.forTest(Date(), [rnToday]).isIncludeRemindNotificationForToday();

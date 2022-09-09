@@ -1,8 +1,9 @@
 {
   "@@locale": "ru",
 
-  "ok" : "Ok",
-  "not_now" : "Не сейчас",
+  "ok" : "Ок",
+  "Yes" : "Да \uD83C\uDF89",
+  "not_now" : "Не сейчас \uD83D\uDDFF",
 
   "phoneNumber" : "Номер телефона",
   "phoneCode" : "Код",
@@ -32,6 +33,7 @@
   "notes" : "Заметки",
   "get_notification" : "Получить уведомление",
   "enter_your_phone_number" : "Введите ваш номер телефона",
+  "did_you_wish" : "Ты поздравил {notificationName} с днём рождения?",
 
   "create_notification" : "Создать напоминание",
   "delete_notification" : "Удалить напоминание",

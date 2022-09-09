@@ -20,9 +20,12 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(x) => "In ${x} month";
+  static String m0(notificationName) =>
+      "Did you wish ${notificationName} a happy birthday?";
 
-  static String m1(x) => "In ${x} week";
+  static String m1(x) => "In ${x} month";
+
+  static String m2(x) => "In ${x} week";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -38,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create notification"),
         "delete_notification":
             MessageLookupByLibrary.simpleMessage("Delete notification"),
+        "did_you_wish": m0,
         "enter_your_phone_number":
             MessageLookupByLibrary.simpleMessage("Enter your phone number"),
         "error_birthday_require":
@@ -63,15 +67,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Get notification"),
         "hello": MessageLookupByLibrary.simpleMessage("Hello! 🎉"),
         "in_day_birthday": MessageLookupByLibrary.simpleMessage("In birthday"),
-        "in_x_month": m0,
-        "in_x_week": m1,
+        "in_x_month": m1,
+        "in_x_week": m2,
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "last_synchronization":
             MessageLookupByLibrary.simpleMessage("Last synchronization"),
         "last_version": MessageLookupByLibrary.simpleMessage("Version"),
         "login": MessageLookupByLibrary.simpleMessage("Send Code"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
-        "not_now": MessageLookupByLibrary.simpleMessage("Not now"),
+        "not_now": MessageLookupByLibrary.simpleMessage("Not now 🗿"),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "notifications_time":
@@ -83,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "short_days": MessageLookupByLibrary.simpleMessage("dy"),
         "short_month": MessageLookupByLibrary.simpleMessage("month"),
-        "soon": MessageLookupByLibrary.simpleMessage("Soon")
+        "soon": MessageLookupByLibrary.simpleMessage("Soon"),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes 🎉")
       };
 }
