@@ -1,4 +1,4 @@
-import 'package:birthday_gift/core/base_cubit.dart';
+import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/src/widgets/framework.dart';

@@ -1,5 +1,5 @@
 import 'package:birthday_gift/app/di/injection_container.dart';
-import 'package:birthday_gift/core/base_cubit.dart';
+import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:birthday_gift/feature/user/domain/exception/user_exceptions.dart';
 import 'package:birthday_gift/app/main_page.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';

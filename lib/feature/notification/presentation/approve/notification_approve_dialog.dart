@@ -3,7 +3,7 @@ import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:birthday_gift/core/base_cubit.dart';
+import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:birthday_gift/core/ui/widget/message_dialog.dart';
 import 'package:birthday_gift/app/di/injection_container.dart';
 import 'notification_approve_cubit.dart';

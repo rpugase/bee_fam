@@ -1,4 +1,4 @@
-import 'package:birthday_gift/core/base_cubit.dart';
+import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/model/remind_notification.dart';

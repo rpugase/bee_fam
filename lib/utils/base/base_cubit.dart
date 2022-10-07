@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'ui/widget/message_dialog.dart';
+import '../../core/ui/widget/message_dialog.dart';
 
 typedef BaseBlocWidgetListener<S> = bool Function(BuildContext context, S state);
 

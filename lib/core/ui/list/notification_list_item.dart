@@ -2,7 +2,7 @@ import 'package:birthday_gift/core/ui/widget/animated_click_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../list/list_item.dart';
+import '../../../utils/base/list_item.dart';
 import '../../model/notification_model.dart';
 import '../resources/colors.dart';
 import '../resources/images.dart';

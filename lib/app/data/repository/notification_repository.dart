@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:birthday_gift/core/model/notification_model.dart';
-import 'package:birthday_gift/utils/cache/dao/notification_dao.dart';
+import 'package:birthday_gift/core/data_source/local_source/dao/notification_dao.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 
 class NotificationRepository {

@@ -2,8 +2,8 @@ import 'package:birthday_gift/utils/dart_extensions.dart';
 import 'package:collection/collection.dart';
 
 import 'remind_notification.dart';
-import 'package:birthday_gift/utils/cache/entity/note_entity.dart';
-import 'package:birthday_gift/utils/cache/entity/notification_entity.dart';
+import 'package:birthday_gift/core/data_source/local_source/entity/note_entity.dart';
+import 'package:birthday_gift/core/data_source/local_source/entity/notification_entity.dart';
 
 import 'date.dart';
 import 'package:equatable/equatable.dart';

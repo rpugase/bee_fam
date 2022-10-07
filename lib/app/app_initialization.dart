@@ -1,10 +1,10 @@
-import 'package:birthday_gift/core/base_cubit.dart';
+import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:birthday_gift/feature/user/data/auth_firebase_error_handler.dart';
-import 'package:birthday_gift/utils/cache/entity/note_entity.dart';
-import 'package:birthday_gift/utils/cache/entity/notification_entity.dart';
-import 'package:birthday_gift/utils/cache/entity/remind_notification_entity.dart';
-import 'package:birthday_gift/utils/cache/entity/shown_notification_entity.dart';
-import 'package:birthday_gift/utils/cache/entity/user_entity.dart';
+import 'package:birthday_gift/core/data_source/local_source/entity/note_entity.dart';
+import 'package:birthday_gift/core/data_source/local_source/entity/notification_entity.dart';
+import 'package:birthday_gift/core/data_source/local_source/entity/remind_notification_entity.dart';
+import 'package:birthday_gift/core/data_source/local_source/entity/shown_notification_entity.dart';
+import 'package:birthday_gift/core/data_source/local_source/entity/user_entity.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';

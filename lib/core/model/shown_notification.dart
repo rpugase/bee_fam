@@ -1,4 +1,4 @@
-import 'package:birthday_gift/utils/cache/entity/shown_notification_entity.dart';
+import 'package:birthday_gift/core/data_source/local_source/entity/shown_notification_entity.dart';
 import 'package:equatable/equatable.dart';
 
 import 'date.dart';

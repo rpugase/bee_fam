@@ -9,7 +9,7 @@ import 'package:birthday_gift/feature/notification/presentation/list/notificatio
 import 'package:birthday_gift/feature/notification/presentation/manage/notification_manage_page.dart';
 import 'package:birthday_gift/feature/setting/settings_page.dart';
 import 'package:birthday_gift/app/di/injection_container.dart';
-import 'package:birthday_gift/utils/contact_service.dart';
+import 'package:birthday_gift/core/data_source/contact_service.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

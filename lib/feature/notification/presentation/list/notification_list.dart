@@ -1,4 +1,4 @@
-import 'package:birthday_gift/core/list/list_item.dart';
+import 'package:birthday_gift/utils/base/list_item.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/ui/list/month_list_item.dart';
 import 'package:birthday_gift/core/ui/list/notification_list_item.dart';

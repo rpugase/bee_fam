@@ -1,5 +1,5 @@
 import 'package:birthday_gift/core/model/shown_notification.dart';
-import 'package:birthday_gift/utils/cache/dao/shown_notification_dao.dart';
+import 'package:birthday_gift/core/data_source/local_source/dao/shown_notification_dao.dart';
 
 class ShownNotificationRepository {
 

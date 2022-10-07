@@ -1,11 +1,11 @@
 import 'package:birthday_gift/app/app_initialization.dart';
 import 'package:birthday_gift/app/data/repository/notification_repository.dart';
 import 'package:birthday_gift/app/data/repository/shown_notification_repository.dart';
-import 'package:birthday_gift/core/use_case.dart';
-import 'package:birthday_gift/utils/cache/dao/notification_dao.dart';
-import 'package:birthday_gift/utils/cache/dao/shown_notification_dao.dart';
-import 'package:birthday_gift/utils/cache/entity/notification_entity.dart';
-import 'package:birthday_gift/utils/cache/entity/shown_notification_entity.dart';
+import 'package:birthday_gift/utils/base/use_case.dart';
+import 'package:birthday_gift/core/data_source/local_source/dao/notification_dao.dart';
+import 'package:birthday_gift/core/data_source/local_source/dao/shown_notification_dao.dart';
+import 'package:birthday_gift/core/data_source/local_source/entity/notification_entity.dart';
+import 'package:birthday_gift/core/data_source/local_source/entity/shown_notification_entity.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:birthday_gift/app/data/datasource/notification_datasource.dart';
 

@@ -1,4 +1,4 @@
-import 'package:birthday_gift/core/use_case.dart';
+import 'package:birthday_gift/utils/base/use_case.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import '../data/firebase_auth_datastore.dart';
 import 'exception/user_exceptions.dart';

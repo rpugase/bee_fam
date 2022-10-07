@@ -1,7 +1,7 @@
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../list/list_item.dart';
+import '../../../utils/base/list_item.dart';
 
 class MonthListItem implements ListItem {
   final String month;

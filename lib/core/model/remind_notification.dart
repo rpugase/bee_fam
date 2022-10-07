@@ -1,5 +1,5 @@
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
-import 'package:birthday_gift/utils/cache/entity/remind_notification_entity.dart';
+import 'package:birthday_gift/core/data_source/local_source/entity/remind_notification_entity.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 

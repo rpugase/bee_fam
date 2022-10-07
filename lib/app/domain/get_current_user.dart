@@ -1,6 +1,6 @@
 import 'package:birthday_gift/core/cubit/version/get_current_user_cubit.dart';
 import 'package:birthday_gift/core/model/user.dart';
-import 'package:birthday_gift/utils/cache/dao/user_dao.dart';
+import 'package:birthday_gift/core/data_source/local_source/dao/user_dao.dart';
 
 class GetCurrentUser implements OnGetCurrentUser {
 

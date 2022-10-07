@@ -1,4 +1,4 @@
-import 'package:birthday_gift/core/base_cubit.dart';
+import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:birthday_gift/feature/user/domain/exception/user_exceptions.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:equatable/equatable.dart';
