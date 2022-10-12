@@ -30,7 +30,7 @@ dependencies:
   result_type: ^0.1.0
 
   # UI
-  syncfusion_flutter_datepicker: ^20.1.56
+  syncfusion_flutter_datepicker: ^20.3.49
   flutter_svg: ^1.0.0
   cupertino_icons: ^1.0.2
   mask_text_input_formatter: ^2.0.0

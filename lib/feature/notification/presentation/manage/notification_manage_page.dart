@@ -175,17 +175,21 @@ class NotificationManagePage extends StatelessWidget {
       builder: (context) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 48.0),
         child: AlertDialog(
-          content: SfDateRangePicker(
-            toggleDaySelection: true,
-            showNavigationArrow: true,
-            showActionButtons: true,
-            view: DateRangePickerView.year,
-            initialSelectedDate: birthdayDateTime,
-            onCancel: () => Navigator.pop(context),
-            onSubmit: (args) {
-              _birthdayController.text = Date(args as DateTime, false).toUIBirthdayString();
-              Navigator.pop(context);
-            },
+          content: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: SfDateRangePicker(
+              toggleDaySelection: true,
+              showNavigationArrow: true,
+              showActionButtons: true,
+              view: DateRangePickerView.year,
+              initialSelectedDate: birthdayDateTime,
+              onCancel: () => Navigator.pop(context),
+              onSubmit: (args) {
+                _birthdayController.text = Date(args as DateTime, false).toUIBirthdayString();
+                Navigator.pop(context);
+              },
+            ),
           ),
         ),
       ),
