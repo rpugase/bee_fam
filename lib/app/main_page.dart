@@ -1,3 +1,4 @@
+import 'package:birthday_gift/app/domain/show_notification_delay.dart';
 import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
@@ -25,9 +26,10 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   static const int _addNotificationIndex = 1;
   int _selectedPageIndex = 0;
+  final showNotificationDelay = ShowNotificationDelay();
 
   final List<Widget> _pages = [
     const NotificationListPage(),
@@ -38,6 +40,30 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState lifecycleState) {
+    super.didChangeAppLifecycleState(lifecycleState);
+    if (lifecycleState == AppLifecycleState.resumed) {
+      if (showNotificationDelay.canShowNotification()) {
+        _showNotification();
+      }
+      showNotificationDelay.stopDelay();
+    } else if (lifecycleState == AppLifecycleState.paused) {
+      showNotificationDelay.startDelay();
+    }
+  }
+
+  void _showNotification() {
     sl<GetNotificationsForShowing>().call().then((notifications) {
       final todayNotification =
           notifications.where((notification) => notification.isIncludeRemindNotificationForToday()).firstOrNull;
