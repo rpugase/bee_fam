@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:flutter/foundation.dart';
 import 'package:workmanager/workmanager.dart';
@@ -16,7 +17,9 @@ class WorkerDatasource {
       callbackDispatcher,
       isInDebugMode: false,
     );
-    await executeEveryHourTask();
+    if (Platform.isAndroid) {
+      await executeEveryHourTask();
+    }
   }
 
   executeEveryHourTask() async {

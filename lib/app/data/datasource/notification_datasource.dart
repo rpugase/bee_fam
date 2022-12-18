@@ -10,15 +10,15 @@ class NotificationDataSource {
 
   init() async {
     const initializationSettingsAndroid = AndroidInitializationSettings('ic_launcher_foreground');
-    const initializationSettingsIOS = IOSInitializationSettings();
-    const initializationSettingsMacOS = MacOSInitializationSettings();
+    const initializationSettingsIOS = DarwinInitializationSettings();
+    const initializationSettingsMacOS = DarwinInitializationSettings();
     const InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
       macOS: initializationSettingsMacOS,
     );
-    await _plugin.initialize(initializationSettings, onSelectNotification: (payload) async {
-      if (payload != null) _onSelectNotification.add(payload);
+    await _plugin.initialize(initializationSettings, onDidReceiveNotificationResponse: (payload) async {
+      _onSelectNotification.add(payload.toString());
     });
   }
 
