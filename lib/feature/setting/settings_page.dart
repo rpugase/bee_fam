@@ -4,6 +4,7 @@ import 'package:birthday_gift/core/cubit/version/get_version_with_update_cubit.d
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/widget/bee_app_bar.dart';
 import 'package:birthday_gift/core/ui/widget/bee_background.dart';
+import 'package:birthday_gift/core/ui/widget/terms_privacy_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +21,7 @@ class SettingsPage extends StatelessWidget {
       child: Scaffold(
         appBar: BeeAppBar(context.strings.settings),
         body: BeeBackground(
-          child: ListView(
+          child: Column(
             children: [
               _phoneNumber(context),
               _version(context),
@@ -28,21 +29,11 @@ class SettingsPage extends StatelessWidget {
                 title: Text(context.strings.last_synchronization),
                 subtitle: Text(context.strings.soon),
               ),
-              // Divider(),
-              // ListTile(
-              //   title: Text(context.strings.notifications_time),
-              //   subtitle: Text(context.strings.soon),
-              // ),
-              // Divider(),
-              // ListTile(
-              //   title: Text(context.strings.language),
-              //   subtitle: Text(context.strings.soon),
-              // ),
-              // Divider(),
-              // ListTile(
-              //   title: Text(context.strings.logout),
-              //   subtitle: Text(context.strings.soon),
-              // ),
+              const Spacer(),
+              const ListTile(
+                subtitle: TermsPrivacyText(),
+              ),
+              const SizedBox(height: 16),
             ],
           ),
         ),

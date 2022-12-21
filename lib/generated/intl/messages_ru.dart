@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Добавляйте особенных людей,\n дни и события"),
         "all_reminders":
             MessageLookupByLibrary.simpleMessage("Все Напоминания"),
+        "back": MessageLookupByLibrary.simpleMessage("Назад"),
         "birthday": MessageLookupByLibrary.simpleMessage("День рождения"),
         "colleagues": MessageLookupByLibrary.simpleMessage("Коллеги"),
         "create_from_contact":
@@ -87,6 +88,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "short_days": MessageLookupByLibrary.simpleMessage("дн."),
         "short_month": MessageLookupByLibrary.simpleMessage("мес."),
-        "soon": MessageLookupByLibrary.simpleMessage("Скоро")
+        "soon": MessageLookupByLibrary.simpleMessage("Скоро"),
+        "terms_and_privacy": MessageLookupByLibrary.simpleMessage(
+            "Используя Bee, вы соглашаетесь с нашими |Условиями| и |Политикой конфиденциальности|.")
       };
 }

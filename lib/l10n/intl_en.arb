@@ -4,6 +4,7 @@
   "ok" : "Ok",
   "yes" : "Yes \uD83C\uDF89",
   "not_now" : "Not now \uD83D\uDDFF",
+  "back" : "Back",
 
   "phoneNumber" : "Phone Number",
   "phoneCode" : "Code",
@@ -11,6 +12,8 @@
 
   "all_reminders" : "All Reminders",
   "settings" : "Settings",
+
+  "terms_and_privacy" : "By using Bee you agree to our |Terms| and |Privacy Policy|",
 
   "last_synchronization" : "Last synchronization",
   "notifications_time" : "Notifications time",

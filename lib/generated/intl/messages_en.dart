@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_people": MessageLookupByLibrary.simpleMessage(
             "Add special people,\n days and events"),
         "all_reminders": MessageLookupByLibrary.simpleMessage("All Reminders"),
+        "back": MessageLookupByLibrary.simpleMessage("Back"),
         "birthday": MessageLookupByLibrary.simpleMessage("Birthday"),
         "colleagues": MessageLookupByLibrary.simpleMessage("Colleagues"),
         "create_from_contact":
@@ -88,6 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "short_days": MessageLookupByLibrary.simpleMessage("dy"),
         "short_month": MessageLookupByLibrary.simpleMessage("month"),
         "soon": MessageLookupByLibrary.simpleMessage("Soon"),
+        "terms_and_privacy": MessageLookupByLibrary.simpleMessage(
+            "By using Bee you agree to our |Terms| and |Privacy Policy|"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes 🎉")
       };
 }

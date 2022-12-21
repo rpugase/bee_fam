@@ -80,6 +80,16 @@ class S {
     );
   }
 
+  /// `Back`
+  String get back {
+    return Intl.message(
+      'Back',
+      name: 'back',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Phone Number`
   String get phoneNumber {
     return Intl.message(
@@ -125,6 +135,16 @@ class S {
     return Intl.message(
       'Settings',
       name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By using Bee you agree to our |Terms| and |Privacy Policy|`
+  String get terms_and_privacy {
+    return Intl.message(
+      'By using Bee you agree to our |Terms| and |Privacy Policy|',
+      name: 'terms_and_privacy',
       desc: '',
       args: [],
     );
