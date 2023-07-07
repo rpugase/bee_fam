@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:io';
+
+import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:flutter/foundation.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:workmanager/workmanager.dart';
 
 import '../../domain/show_today_notification.dart';
@@ -41,11 +44,12 @@ class WorkerDatasource {
 
 callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
+    initializeDateFormatting(Date.defaultLocale);
     Log.initialize([ConsolePrintLogger()]);
     if (task == WorkerDatasource.everyDayTask) {
       await (await GetTodayNotification.init()).call();
     }
-    print("Native called background task: $task");
+    Log.i("Native called background task: $task");
     return Future.value(true);
   });
 }

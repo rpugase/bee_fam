@@ -45,7 +45,7 @@ class _LogFormatter {
 
     if (message != null) buffer.write(' MESSAGE: $message');
 
-    if (trace != null) buffer.writeln(trace);
+    if (trace != null) buffer.writeln(' StackTrace: trace');
 
     return buffer.toString();
   }

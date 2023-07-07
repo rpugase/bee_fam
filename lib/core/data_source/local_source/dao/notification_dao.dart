@@ -1,3 +1,4 @@
+import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../entity/notification_entity.dart';
@@ -12,6 +13,7 @@ class NotificationDao {
   }
 
   Future<int> addNotification(NotificationEntity notificationEntity) {
+    Log.i("Add notificationEntity: $notificationEntity");
     return _boxNotifications.add(notificationEntity);
   }
 

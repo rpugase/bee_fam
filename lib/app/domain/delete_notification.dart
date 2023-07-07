@@ -1,6 +1,5 @@
 import 'package:birthday_gift/app/data/repository/notification_repository.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
-import 'package:birthday_gift/utils/base/use_case.dart';
 import 'package:birthday_gift/feature/notification/presentation/manage/notification_manage_interface.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 
