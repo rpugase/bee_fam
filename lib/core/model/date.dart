@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 class Date extends Equatable {
   final DateTime dateTime;
+  static String defaultLocale = "en";
 
   Date([DateTime? dateTime, bool toUtc = false])
       : dateTime = (toUtc ? dateTime?.toUtc() : dateTime) ?? (toUtc ? DateTime.now() : DateTime.now().toUtc());
@@ -38,9 +39,9 @@ class Date extends Equatable {
 
   Date.defaultBirthday() : dateTime = DateTime.now().toUtc();
 
-  Date.birthdayString(String birthday) : dateTime = DateFormat.yMd().parseCustom(birthday);
+  Date.birthdayString(String birthday) : dateTime = DateFormat.yMd(defaultLocale).parseSafely(birthday);
 
-  Date.uiBirthdayString(String birthday) : dateTime = DateFormat.MMMd().parseCustom(birthday);
+  Date.uiBirthdayString(String birthday) : dateTime = DateFormat.MMMd().parseSafely(birthday);
 
   String getOffset() => dateTime.timeZoneOffset.toString();
 
@@ -60,15 +61,15 @@ class Date extends Equatable {
 
   String toIso8601String() => dateTime.toIso8601String();
 
-  String toBirthdayString() => DateFormat.yMd().format(dateTime);
+  String toBirthdayString() => DateFormat.yMd(defaultLocale).format(dateTime);
 
   String toUIBirthdayString() => DateFormat.MMMd().format(dateTime);
 
-  String toDay() => DateFormat.d().format(dateTime);
+  String toUIDay() => DateFormat.d().format(dateTime);
 
-  String toShortMonth() => DateFormat.MMM().format(dateTime);
+  String toUIShortMonth() => DateFormat.MMM().format(dateTime);
 
-  String toMonth() => DateFormat.MMMM().format(dateTime);
+  String toUIMonth() => DateFormat.MMMM().format(dateTime);
 
   @override
   List<Object?> get props => [dateTime];
@@ -90,11 +91,11 @@ enum LeftType {
 }
 
 extension DateTimeParsing on DateFormat {
-  DateTime parseCustom(String date) {
+  DateTime parseSafely(String date) {
     try {
       return parse(date);
-    } on Exception catch (e) {
-      Log.e(e);
+    } on Exception catch (e, stackTrace) {
+      Log.e(e, stackTrace);
     }
     return invalidDateTime;
   }

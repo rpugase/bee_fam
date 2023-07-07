@@ -4,9 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../utils/base/list_item.dart';
 import '../../model/notification_model.dart';
+import '../resources/app_translations.dart';
 import '../resources/colors.dart';
 import '../resources/images.dart';
-import '../resources/app_translations.dart';
 
 // const _POINT = "⦁";
 
@@ -29,8 +29,8 @@ class NotificationListItem implements ListItem {
   })  : id = notification.id,
         name = notification.name,
         initials = notification.initials,
-        day = notification.birthday.toDay(),
-        month = notification.birthday.toShortMonth();
+        day = notification.birthday.toUIDay(),
+        month = notification.birthday.toUIShortMonth();
 }
 
 class NotificationItem extends StatelessWidget {

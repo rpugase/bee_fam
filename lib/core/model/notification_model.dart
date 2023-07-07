@@ -1,12 +1,11 @@
-import 'package:birthday_gift/utils/dart_extensions.dart';
-import 'package:collection/collection.dart';
-
-import 'remind_notification.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/note_entity.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/notification_entity.dart';
+import 'package:birthday_gift/utils/dart_extensions.dart';
+import 'package:collection/collection.dart';
+import 'package:equatable/equatable.dart';
 
 import 'date.dart';
-import 'package:equatable/equatable.dart';
+import 'remind_notification.dart';
 
 class NotificationModel extends Equatable {
   final int id;
@@ -87,7 +86,7 @@ class NotificationModel extends Equatable {
 
   @override
   String toString() {
-    return "Person(name=$name, birthday=$birthday, phone=$phone, imgUrl=$imgUrl, "
+    return "Notification(name=$name, birthday=$birthday, phone=$phone, imgUrl=$imgUrl, "
         "note=$note,remindNotifications=$remindNotifications,id=$id)";
   }
 }
