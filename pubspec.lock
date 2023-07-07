@@ -381,10 +381,10 @@ packages:
     dependency: transitive
     description:
       name: firebase_auth_web
-      sha256: "7834b46387fd884307987004c2982464e0f8a5973729f71a629a129f0e31fa1d"
+      sha256: b6de47a9059ef51f8d9ae20b765755165155a2c69b369a5ce23378c9de39ca9f
       url: "https://pub.dev"
     source: hosted
-    version: "5.2.1"
+    version: "5.2.3"
   firebase_core:
     dependency: "direct main"
     description:
@@ -1110,18 +1110,18 @@ packages:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
-      sha256: "0d027bd2137ecba3ad058a0ce07353f6e1ce051d03bc569b6cfee99f206fdaa6"
+      sha256: "3979f0b1c5a97422cadae52d476c21fa3e0fb671ef51de6cae1d646d8b99fe1f"
       url: "https://pub.dev"
     source: hosted
-    version: "20.4.38"
+    version: "20.4.54"
   syncfusion_flutter_datepicker:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_datepicker
-      sha256: "33df5919045160ea22adf2683d2da856d7234cf2c4e56e1ed90f6fa26c481cc7"
+      sha256: e4d4794d54f3a315046031d431a27e0d7350544b1bef0bcd1d2acf58f940dd37
       url: "https://pub.dev"
     source: hosted
-    version: "20.4.38"
+    version: "20.4.54"
   term_glyph:
     dependency: transitive
     description:
