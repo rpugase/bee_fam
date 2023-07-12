@@ -1,5 +1,5 @@
-import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:birthday_gift/core/data_source/local_source/dao/settings_dao.dart';
+import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -12,7 +12,11 @@ class GetVersionWithUpdateCubit extends BaseCubit<VersionState> implements Error
   @override
   void onInit() async {
     final lastVersion = _settings.getLastVersion;
-    final currentVersion = (await PackageInfo.fromPlatform()).version;
+    final platform = await PackageInfo.fromPlatform();
+    final currentVersionName = platform.version;
+    final currentVersionCode = platform.buildNumber;
+    final currentVersion = "$currentVersionName ($currentVersionCode)";
+
     final versionUpdated = currentVersion != lastVersion;
 
     emit(HandledVersionState(currentVersion, versionUpdated));
