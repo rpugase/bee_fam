@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "486237083507-o0vm8a4ogmtkbeukr2744me0li4b9rrd.apps.googleusercontent.com",
+          "client_id": "486237083507-gikkoh19gjgp02goq7qmtsafsvjf3v1k.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.andriih.birthday_gift",
-            "certificate_hash": "a5d7ee16940ef1752a5f57b4b0ad81f1c9eb66cd"
+            "certificate_hash": "ef1a4fa8b7e80bc694fe1d58ac4e4e51287ab7e7"
           }
         },
         {

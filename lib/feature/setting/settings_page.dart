@@ -28,6 +28,12 @@ class SettingsPage extends StatelessWidget {
               ListTile(
                 title: Text(context.strings.last_synchronization),
                 subtitle: Text(context.strings.soon),
+                // onTap: () async {
+                //   final authResult = await _auth.startAuth();
+                //   if (authResult) {
+                //     await _auth.syncCalendarData();
+                //   }
+                // }, // TODO IN-9
               ),
               const Spacer(),
               const ListTile(

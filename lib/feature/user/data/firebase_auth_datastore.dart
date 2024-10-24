@@ -104,7 +104,7 @@ class FirebaseAuthDatastoreMock implements FirebaseAuthDatastore {
   @override
   void startAuth(String phoneNumber) async {
     if (_verificationId == null) {
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
       _verificationId = "";
       _phoneNumber = phoneNumber;
       _phoneStreamController.add(CodeSent());
