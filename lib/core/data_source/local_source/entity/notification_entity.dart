@@ -1,7 +1,8 @@
 import 'package:hive/hive.dart';
+
 import '../hive_constants.dart';
-import 'remind_notification_entity.dart';
 import 'note_entity.dart';
+import 'remind_notification_entity.dart';
 
 part 'notification_entity.g.dart';
 
@@ -39,22 +40,30 @@ class NotificationEntity extends HiveObject {
   @HiveField(8)
   final String updatedDate;
 
+  @HiveField(9)
+  final String? remoteId;
+
+  @HiveField(10, defaultValue: true)
+  final bool isSynced;
+
   NotificationEntity(
-    this.name,
-    this.birthday,
-    this.phone,
-    this.imgUrl,
-    this.updateDate,
-    this.note,
-    this.remindNotifications,
-    this.createdDate,
-    this.updatedDate,
+      this.name,
+      this.birthday,
+      this.phone,
+      this.imgUrl,
+      this.updateDate,
+      this.note,
+      this.remindNotifications,
+      this.createdDate,
+      this.updatedDate,
+      this.remoteId,
+      this.isSynced,
   );
 
   @override
   String toString() {
     return "PersonEntity(name=$name, birthday=$birthday, phone=$phone, imgUrl=$imgUrl, updateDate=$updateDate, "
         "note=$note, remindNotifications=${remindNotifications.toList()}, "
-        "createdDate=$createdDate, updatedDate=$updatedDate)";
+        "createdDate=$createdDate, updatedDate=$updatedDate, remoteId=$remoteId, isSynced=$isSynced)";
   }
 }

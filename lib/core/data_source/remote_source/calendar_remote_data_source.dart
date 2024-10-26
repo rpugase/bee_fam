@@ -10,10 +10,10 @@ import 'util/birthday_title.dart';
 
 class CalendarRemoteDataSource {
 
-  Future<void> getCalendarEvents() async {
+  Future<Iterable<CalendarBirthdayEvent>> getCalendarEvents() async {
     final events = await _getGoogleCalendarData();
+    final savedEvents = <CalendarBirthdayEvent>{};
     if (events.isNotEmpty) {
-      final savedEvents = <CalendarBirthdayEvent>{};
       for (var event in events) {
         final summary = event.summary ?? "";
         final summaryLowerCase = event.summary?.toLowerCase() ?? "";
@@ -33,6 +33,8 @@ class CalendarRemoteDataSource {
     } else {
       Log.i("Not found events");
     }
+
+    return savedEvents;
   }
   
   Future<List<Event>> _getGoogleCalendarData() async {
@@ -55,6 +57,10 @@ class CalendarRemoteDataSource {
 extension GoogleEventExtension on Event {
   String getResultId() {
     final arr = id!.split("_");
-    return arr[arr.length - 2];
+    if (arr.length == 1) {
+      return arr[0];
+    } else {
+      return arr[arr.length - 2];
+    }
   }
 }

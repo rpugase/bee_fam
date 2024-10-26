@@ -26,13 +26,15 @@ class NotificationEntityAdapter extends TypeAdapter<NotificationEntity> {
       (fields[6] as List).cast<RemindNotificationEntity>(),
       fields[7] as String,
       fields[8] as String,
+      fields[9] as String?,
+      fields[10] == null ? true : fields[10] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, NotificationEntity obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -50,7 +52,11 @@ class NotificationEntityAdapter extends TypeAdapter<NotificationEntity> {
       ..writeByte(7)
       ..write(obj.createdDate)
       ..writeByte(8)
-      ..write(obj.updatedDate);
+      ..write(obj.updatedDate)
+      ..writeByte(9)
+      ..write(obj.remoteId)
+      ..writeByte(10)
+      ..write(obj.isSynced);
   }
 
   @override

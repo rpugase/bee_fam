@@ -1,7 +1,7 @@
 import 'package:birthday_gift/app/data/datasource/notification_datasource.dart';
 import 'package:birthday_gift/app/data/repository/shown_notification_repository.dart';
 import 'package:birthday_gift/app/domain/approve_notification.dart';
-import 'package:birthday_gift/app/domain/create_or_update_product.dart';
+import 'package:birthday_gift/app/domain/create_or_update_notification.dart';
 import 'package:birthday_gift/app/domain/delete_notification.dart';
 import 'package:birthday_gift/app/domain/get_current_user.dart';
 import 'package:birthday_gift/app/domain/get_notifications_for_showing.dart';
@@ -21,6 +21,8 @@ import 'package:birthday_gift/core/data_source/remote_source/calendar_remote_dat
 import 'package:birthday_gift/core/data_source/remote_source/firebase_auth_remote_source.dart';
 import 'package:birthday_gift/feature/notification/presentation/approve/notification_approve_cubit.dart';
 import 'package:birthday_gift/feature/notification/presentation/approve/notification_approve_interface.dart';
+import 'package:birthday_gift/feature/notification/presentation/calendar_sync/calendar_sync_cubit.dart';
+import 'package:birthday_gift/feature/notification/presentation/calendar_sync/calendar_sync_feature.dart';
 import 'package:birthday_gift/feature/notification/presentation/list/notification_list_cubit.dart';
 import 'package:birthday_gift/feature/notification/presentation/list/notification_list_interface.dart';
 import 'package:birthday_gift/feature/notification/presentation/manage/notification_manage_cubit.dart';
@@ -55,7 +57,7 @@ Future<void> init(
   sl.registerFactory(() => FirebaseAuthRemoteSource());
 
   // Repository
-  sl.registerLazySingleton(() => NotificationRepository(sl()));
+  sl.registerLazySingleton(() => NotificationRepository(sl(), sl()));
   sl.registerLazySingleton(() => ShownNotificationRepository(sl()));
 
   // UseCase
@@ -66,6 +68,8 @@ Future<void> init(
   sl.registerFactory(() => GetTodayNotification(sl(), sl(), sl()));
   sl.registerFactory(() => GetNotificationsForShowing(sl(), sl()));
   sl.registerFactory<OnGetCurrentUser>(() => GetCurrentUser(sl()));
+  sl.registerFactory(() => CalendarSyncFeature(sl(), sl()));
+  sl.registerFactory<OnSyncNotificationList>(() => sl<NotificationRepository>());
 
   // Service Cubit
   sl.registerFactory(() => GetVersionWithUpdateCubit(sl()));
@@ -73,6 +77,7 @@ Future<void> init(
   sl.registerFactory(() => NotificationManagerCubit(sl(), sl()));
   sl.registerFactory(() => NotificationApproveCubit(sl()));
   sl.registerFactory(() => CurrentUserCubit(sl()));
+  sl.registerFactory(() => CalendarSyncCubit(sl(), sl(), sl()));
 
   await _initUser();
 }

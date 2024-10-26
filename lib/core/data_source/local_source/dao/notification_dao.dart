@@ -8,7 +8,7 @@ class NotificationDao {
 
   const NotificationDao(this._boxNotifications);
 
-  Future<Map<int, NotificationEntity>> getPersons() async {
+  Future<Map<int, NotificationEntity>> getNotifications() async {
     return { for (var e in _boxNotifications.keys) e as int : _boxNotifications.get(e)! };
   }
 
@@ -17,11 +17,19 @@ class NotificationDao {
     return _boxNotifications.add(notificationEntity);
   }
 
+  Future<Iterable<int>> addNotifications(Iterable<NotificationEntity> notificationEntities) {
+    return _boxNotifications.addAll(notificationEntities);
+  }
+
   Future<void> updateNotification(int key, NotificationEntity notificationEntity) {
     return _boxNotifications.put(key, notificationEntity);
   }
 
   Future<void> deleteNotification(int key) {
     return _boxNotifications.delete(key);
+  }
+
+  Future<void> deleteNotifications(Iterable<int> ids) {
+    return _boxNotifications.deleteAll(ids);
   }
 }

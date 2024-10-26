@@ -12,6 +12,7 @@
 
   "all_reminders" : "All Reminders",
   "settings" : "Settings",
+  "choose_event" : "Choose events",
 
   "terms_and_privacy" : "By using Bee you agree to our |Terms| and |Privacy Policy|",
 
@@ -42,6 +43,7 @@
   "delete_notification" : "Delete notification",
   "create_new" : "Create new",
   "create_from_contact" : "Create from contacts",
+  "create_from_calendar" : "Create from calendar",
   "in_day_birthday" : "In birthday",
   "in_x_week" : "In {x} week",
   "in_x_month" : "In {x} month",

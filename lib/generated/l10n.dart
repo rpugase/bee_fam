@@ -1,6 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -135,6 +136,16 @@ class S {
     return Intl.message(
       'Settings',
       name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose events`
+  String get choose_event {
+    return Intl.message(
+      'Choose events',
+      name: 'choose_event',
       desc: '',
       args: [],
     );
@@ -385,6 +396,16 @@ class S {
     return Intl.message(
       'Create from contacts',
       name: 'create_from_contact',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create from calendar`
+  String get create_from_calendar {
+    return Intl.message(
+      'Create from calendar',
+      name: 'create_from_calendar',
       desc: '',
       args: [],
     );

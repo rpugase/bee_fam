@@ -1,4 +1,6 @@
+import 'package:birthday_gift/app/di/injection_container.dart';
 import 'package:birthday_gift/app/domain/show_notification_delay.dart';
+import 'package:birthday_gift/core/data_source/contact_service.dart';
 import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
@@ -6,11 +8,10 @@ import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/core/ui/widget/animated_click_widget.dart';
 import 'package:birthday_gift/core/ui/widget/create_notification_dialog.dart';
 import 'package:birthday_gift/feature/notification/presentation/approve/notification_approve_dialog.dart';
+import 'package:birthday_gift/feature/notification/presentation/calendar_sync/calendar_sync_feature.dart';
 import 'package:birthday_gift/feature/notification/presentation/list/notification_list_page.dart';
 import 'package:birthday_gift/feature/notification/presentation/manage/notification_manage_page.dart';
 import 'package:birthday_gift/feature/setting/settings_page.dart';
-import 'package:birthday_gift/app/di/injection_container.dart';
-import 'package:birthday_gift/core/data_source/contact_service.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -96,6 +97,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
             child: CreateNotificationWidget(
               onTapCreateNotification: () => _navigateToCreateNotification(context),
               onTapCreateNotificationFromContacts: () => _navigateToPersonLoading(context),
+              onTapCreateNotificationFromCalendar: () => _navigateToCalendarSync(context),
             ),
           ),
         );
@@ -128,6 +130,10 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         );
       }
     });
+  }
+
+  Future<void> _navigateToCalendarSync(BuildContext context) async {
+    await sl<CalendarSyncFeature>().start(context);
   }
 }
 

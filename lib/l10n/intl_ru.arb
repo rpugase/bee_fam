@@ -12,6 +12,7 @@
 
   "all_reminders" : "Все Напоминания",
   "settings" : "Настройки",
+  "choose_event" : "Выберите события",
 
   "terms_and_privacy" : "Используя Bee, вы соглашаетесь с нашими |Условиями| и |Политикой конфиденциальности|.",
 
@@ -42,6 +43,7 @@
   "delete_notification" : "Удалить напоминание",
   "create_new" : "Создать новое",
   "create_from_contact" : "Добавить из контактов",
+  "create_from_calendar" : "Добавить с календаря",
   "in_day_birthday" : "В день события",
   "in_x_week" : "За {x} неделю",
   "in_x_month" : "За {x} месяц",

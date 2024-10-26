@@ -29,6 +29,7 @@ dependencies:
   collection: ^1.16.0
   shared_preferences: ^2.0.15
   result_type: ^0.1.0
+  connectivity_plus: ^5.0.2
 
   # UI
   syncfusion_flutter_datepicker: ^20.4.44

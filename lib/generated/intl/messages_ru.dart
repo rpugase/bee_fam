@@ -35,7 +35,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Все Напоминания"),
         "back": MessageLookupByLibrary.simpleMessage("Назад"),
         "birthday": MessageLookupByLibrary.simpleMessage("День рождения"),
+        "choose_event":
+            MessageLookupByLibrary.simpleMessage("Выберите события"),
         "colleagues": MessageLookupByLibrary.simpleMessage("Коллеги"),
+        "create_from_calendar":
+            MessageLookupByLibrary.simpleMessage("Добавить с календаря"),
         "create_from_contact":
             MessageLookupByLibrary.simpleMessage("Добавить из контактов"),
         "create_new": MessageLookupByLibrary.simpleMessage("Создать новое"),

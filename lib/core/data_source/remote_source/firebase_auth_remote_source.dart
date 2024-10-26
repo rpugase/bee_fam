@@ -1,19 +1,16 @@
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:googleapis/calendar/v3.dart';
+
+import 'google_sign_in_config.dart';
 
 class FirebaseAuthRemoteSource {
 
-  final _googleSignIn = GoogleSignIn(
-    scopes: [CalendarApi.calendarScope],
-  );
-
   Future<bool> startAuth() async {
-    final currentUser = _googleSignIn.currentUser;
+    final currentUser = googleSignIn.currentUser;
 
     if (currentUser == null) {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
       print("Successful google auth");
       if (googleUser != null) {
@@ -36,7 +33,7 @@ class FirebaseAuthRemoteSource {
   }
 
   Future<GoogleSignInAccount?> getAuthorizedUser() async {
-    final user = await _googleSignIn.signInSilently();
+    final user = await googleSignIn.signInSilently();
     Log.i("Authorized user email=${user?.email}");
     return user;
   }
