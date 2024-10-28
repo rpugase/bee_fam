@@ -54,67 +54,38 @@ class NotificationRepository implements OnSyncNotificationList {
 
   @override
   Future<void> syncRemoteNotifications(Iterable<NotificationModel> notifications) async {
-    if (notifications.isNotEmpty) {
-      final dbNotifications = await getNotifications();
-      final dbNotificationsRemoteIds = dbNotifications.map((e) => e.remoteId).whereNotNull().toSet();
-      final notificationsRemoteIds = notifications.map((e) => e.remoteId).whereNotNull().toSet();
-      final remoteNotification = notifications.toList();
+    final dbNotifications = await getNotifications();
+    final dbNotificationsRemoteIds = dbNotifications.map((e) => e.remoteId).whereNotNull().toSet();
+    final notificationsRemoteIds = notifications.map((e) => e.remoteId).whereNotNull().toSet();
+    final remoteNotification = notifications.toList();
 
-      // check for duplicates
-      remoteNotification.removeWhere((notification) => dbNotificationsRemoteIds.contains(notification.remoteId));
+    // check for duplicates
+    remoteNotification.removeWhere((notification) => dbNotificationsRemoteIds.contains(notification.remoteId));
 
-      // check for remove
-      final notificationsForRemoveRemoteIds = dbNotificationsRemoteIds.whereNot((remoteId) => notificationsRemoteIds.contains(remoteId));
-      final notificationsForRemoveIds = dbNotifications
-          .where((element) => notificationsForRemoveRemoteIds.contains(element.remoteId))
-          .map((e) => e.id);
-      Log.i("notificationsForRemoveIds=$notificationsForRemoveIds");
+    // check for remove
+    final notificationsForRemoveRemoteIds = dbNotificationsRemoteIds.whereNot((remoteId) => notificationsRemoteIds.contains(remoteId));
+    final notificationsForRemoveIds = dbNotifications
+        .where((element) => notificationsForRemoveRemoteIds.contains(element.remoteId))
+        .map((e) => e.id);
+    Log.i("notificationsForRemoveIds=$notificationsForRemoveIds");
 
-      bool isNeedToUpdateNotificationsList = false;
-      // add to db
-      if (remoteNotification.isNotEmpty) {
-        _db.addNotifications(remoteNotification.map((e) => e.toEntity()));
-        isNeedToUpdateNotificationsList = true;
-      }
+    bool isNeedToUpdateNotificationsList = false;
+    // add to db
+    if (remoteNotification.isNotEmpty) {
+      _db.addNotifications(remoteNotification.map((e) => e.toEntity()));
+      isNeedToUpdateNotificationsList = true;
+    }
 
-      // remove from db
-      if (notificationsForRemoveIds.isNotEmpty) {
-        _db.deleteNotifications(notificationsForRemoveIds);
-        isNeedToUpdateNotificationsList = true;
-      }
+    // remove from db
+    if (notificationsForRemoveIds.isNotEmpty) {
+      _db.deleteNotifications(notificationsForRemoveIds);
+      isNeedToUpdateNotificationsList = true;
+    }
 
-      if (isNeedToUpdateNotificationsList) {
-        _onUpdateNotificationsList.add(await getNotifications());
-      }
+    if (isNeedToUpdateNotificationsList) {
+      _onUpdateNotificationsList.add(await getNotifications());
     }
   }
-
-  Future<List<NotificationListItem>> getNotificationsFromCalendar() async { // TODO IN-9 return NotificationModel
-    final calendarEvents = await _calendarSource.getCalendarEvents();
-    final remoteEventsIds = (await getNotifications())
-        .map((e) => e.remoteId)
-        .whereNotNull()
-        .toSet();
-
-    final List<NotificationListItem> notificationListItems = List.empty(growable: true);
-    calendarEvents.toList().asMap().forEach((index, event) => notificationListItems.add(
-        NotificationListItem(
-          notification: NotificationModel(
-            remoteId: event.googleEventId,
-            name: event.title,
-            birthday: event.birthdayDate,
-            remindNotifications: [RemindNotification.inBirthday()],
-          ),
-          firstInMonthBlock: index == 0,
-          lastInMonthBlock: index == calendarEvents.length - 1,
-          isChooseMode: true,
-          isChosen: remoteEventsIds.contains(event.googleEventId),
-        )
-    ));
-
-    return notificationListItems;
-  }
-
 }
 
 extension CalendarEventToNotificationListItemMapper on Iterable<CalendarBirthdayEvent> {
