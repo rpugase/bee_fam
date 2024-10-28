@@ -8,6 +8,7 @@ import 'package:birthday_gift/core/util/internet_connection_check.dart';
 import 'package:birthday_gift/feature/notification/presentation/manage/notification_manage_interface.dart';
 import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:birthday_gift/utils/base/list_item.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 
 
@@ -54,11 +55,14 @@ class CalendarSyncCubit extends BaseCubit<CalendarSyncState> {
   }
 
   void onTapDone() {
-    final notifications = (state as EventsCalendarSyncState).listItem
-        .whereType<NotificationListItem>()
+    final notificationsListItems = (state as EventsCalendarSyncState).listItem
+        .whereType<NotificationListItem>();
+    final notifications = notificationsListItems
         .where((listItem) => listItem.isChosen)
         .map((e) => e.notification);
-    unawaited(_syncNotifications.syncRemoteNotifications(notifications)
+    final allRemoteIds = notificationsListItems.map((e) => e.notification.remoteId)
+        .whereNotNull().toSet();
+    unawaited(_syncNotifications.syncRemoteNotifications(notifications, allRemoteIds)
         .then((value) => emit(FinishCalendarSyncState())));
   }
 }

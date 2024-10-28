@@ -55,16 +55,27 @@ class NotificationRepository implements OnSyncNotificationList {
   }
 
   @override
-  Future<void> syncRemoteNotifications(Iterable<NotificationModel> notifications) async {
+  Future<void> syncRemoteNotifications(
+      Iterable<NotificationModel> notifications,
+      Set<String> allRemoteIds,
+  ) async {
     final dbNotifications = await getNotifications();
-    final dbNotificationsRemoteIds = dbNotifications.map((e) => e.remoteId).whereNotNull().toSet();
-    final notificationsRemoteIds = notifications.map((e) => e.remoteId).whereNotNull().toSet();
+    final notificationsRemoteIds = notifications
+        .map((e) => e.remoteId)
+        .whereNotNull()
+        .toSet();
+    final dbNotificationsRemoteIds = dbNotifications
+        .map((dbNotification) => dbNotification.remoteId)
+        .whereNotNull()
+        .where((dbRemoteId) => allRemoteIds.contains(dbRemoteId))
+        .toSet();
     final remoteNotification = notifications.toList();
 
     // check for duplicates
     remoteNotification.removeWhere((notification) => dbNotificationsRemoteIds.contains(notification.remoteId));
 
     // check for remove
+    final idToSkip = dbNotificationsRemoteIds.whereNot((remoteId) => notificationsRemoteIds.contains(remoteId));
     final notificationsForRemoveRemoteIds = dbNotificationsRemoteIds.whereNot((remoteId) => notificationsRemoteIds.contains(remoteId));
     final notificationsForRemoveIds = dbNotifications
         .where((element) => notificationsForRemoveRemoteIds.contains(element.remoteId))

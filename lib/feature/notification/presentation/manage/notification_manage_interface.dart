@@ -9,5 +9,8 @@ abstract class OnDeleteNotification {
 }
 
 abstract class OnSyncNotificationList {
-  Future<void> syncRemoteNotifications(Iterable<NotificationModel> notifications);
+  Future<void> syncRemoteNotifications(
+      Iterable<NotificationModel> notifications,
+      Set<String> allRemoteIds,
+  );
 }
