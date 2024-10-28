@@ -56,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Code is incorrect"),
         "error_name_require":
             MessageLookupByLibrary.simpleMessage("Name is require"),
+        "error_no_have_events":
+            MessageLookupByLibrary.simpleMessage("Your calendar is empty 🙏"),
         "error_no_internet":
             MessageLookupByLibrary.simpleMessage("No internet connection"),
         "error_number_not_found":

@@ -57,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Код не правильный"),
         "error_name_require":
             MessageLookupByLibrary.simpleMessage("Введите имя"),
+        "error_no_have_events":
+            MessageLookupByLibrary.simpleMessage("Ваш календарь пуст 🙏"),
         "error_no_internet": MessageLookupByLibrary.simpleMessage("Нет сети"),
         "error_number_not_found":
             MessageLookupByLibrary.simpleMessage("Номер не найден"),

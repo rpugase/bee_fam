@@ -39,7 +39,7 @@ class CalendarSyncPage extends StatelessWidget {
                       AppIcons.done,
                       color: context.colors.buttonsPrimarySecondary,
                     ),
-                    onPressed: () => context.read<CalendarSyncCubit>().syncEvents(),
+                    onPressed: () => context.read<CalendarSyncCubit>().onTapDone(),
                   );
                 }
                 return Container();
@@ -53,6 +53,8 @@ class CalendarSyncPage extends StatelessWidget {
             builder: (context, state) {
               if (state is EventsCalendarSyncState) {
                 return _showEventList(context, state.notificationListItem);
+              } else if (state is LoadingCalendarSyncState) {
+                return const Center(child: CircularProgressIndicator());
               } else {
                 return const SizedBox();
               }
@@ -65,13 +67,27 @@ class CalendarSyncPage extends StatelessWidget {
 
   Widget _showEventList(
       BuildContext context,
-      List<NotificationListItem> notificationListItem,
-      ) {
-    return NotificationListWidget(
-      listItems: notificationListItem,
-      onNotificationTap: (notification) {
-        BlocProvider.of<CalendarSyncCubit>(context).onNotificationTap(notification);
-      },
-    );
+      List<NotificationListItem> notificationListItem) {
+    if (notificationListItem.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: Text(
+            context.strings.error_no_have_events,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.center,
+          )
+        ),
+      );
+    } else {
+      return NotificationListWidget(
+        listItems: notificationListItem,
+        onNotificationTap: (notification) {
+          BlocProvider.of<CalendarSyncCubit>(context).onNotificationTap(notification);
+        },
+      );
+    }
   }
 }

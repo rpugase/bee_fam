@@ -19,7 +19,7 @@ class CalendarSyncCubit extends BaseCubit<CalendarSyncState> {
   CalendarSyncCubit(
       this._calendarRemoteDataSource,
       this._notificationRepository,
-      this._syncNotifications) : super(ClearCalendarSyncState()) {
+      this._syncNotifications) : super(LoadingCalendarSyncState()) {
     unawaited(_init());
   }
 
@@ -52,19 +52,18 @@ class CalendarSyncCubit extends BaseCubit<CalendarSyncState> {
     return CalendarSyncError(exception, CalendarSyncErrorHandler());
   }
 
-  void syncEvents() {
+  void onTapDone() {
     final notifications = (state as EventsCalendarSyncState).notificationListItem
         .where((listItem) => listItem.isChosen)
         .map((e) => e.notification);
     unawaited(_syncNotifications.syncRemoteNotifications(notifications)
-        .then((value) => emit(FinishCalendarSyncState()))
-    );
+        .then((value) => emit(FinishCalendarSyncState())));
   }
 }
 
 class CalendarSyncState extends BlocState {}
 
-class ClearCalendarSyncState extends CalendarSyncState {}
+class LoadingCalendarSyncState extends CalendarSyncState {}
 
 class FinishCalendarSyncState extends CalendarSyncState {}
 

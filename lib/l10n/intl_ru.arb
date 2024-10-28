@@ -55,5 +55,6 @@
   "error_code_empty" : "Введите код",
   "error_code_incorrect" : "Код не правильный",
   "error_unknown" : "Что-то пошло не так, попробуйте ещё раз",
-  "error_no_internet" : "Нет сети"
+  "error_no_internet" : "Нет сети",
+  "error_no_have_events" : "Ваш календарь пуст \uD83D\uDE4F"
 }

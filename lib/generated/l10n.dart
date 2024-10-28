@@ -520,6 +520,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Your calendar is empty 🙏`
+  String get error_no_have_events {
+    return Intl.message(
+      'Your calendar is empty 🙏',
+      name: 'error_no_have_events',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
