@@ -34,6 +34,11 @@ class CalendarRemoteDataSource {
       Log.i("Not found events");
     }
 
+    final res = events
+        .where((element) => element.start?.date != null)
+        .map((e) => "${e.summary}")
+        .toSet();
+    Log.i("events=$res");
     return savedEvents;
   }
   

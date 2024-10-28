@@ -7,6 +7,7 @@ import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/util/internet_connection_check.dart';
 import 'package:birthday_gift/feature/notification/presentation/manage/notification_manage_interface.dart';
 import 'package:birthday_gift/utils/base/base_cubit.dart';
+import 'package:birthday_gift/utils/base/list_item.dart';
 import 'package:flutter/widgets.dart';
 
 
@@ -34,8 +35,8 @@ class CalendarSyncCubit extends BaseCubit<CalendarSyncState> {
   }
 
   void onNotificationTap(NotificationListItem notificationListItem) {
-    final resultList = (state as EventsCalendarSyncState).notificationListItem.map((listItem) {
-      if (listItem.notification.remoteId == notificationListItem.notification.remoteId
+    final resultList = (state as EventsCalendarSyncState).listItem.map((listItem) {
+      if (listItem is NotificationListItem && listItem.notification.remoteId == notificationListItem.notification.remoteId
           && notificationListItem.name == notificationListItem.name) {
         return listItem.copyWith(
           isChosen: !listItem.isChosen,
@@ -53,7 +54,8 @@ class CalendarSyncCubit extends BaseCubit<CalendarSyncState> {
   }
 
   void onTapDone() {
-    final notifications = (state as EventsCalendarSyncState).notificationListItem
+    final notifications = (state as EventsCalendarSyncState).listItem
+        .whereType<NotificationListItem>()
         .where((listItem) => listItem.isChosen)
         .map((e) => e.notification);
     unawaited(_syncNotifications.syncRemoteNotifications(notifications)
@@ -69,9 +71,9 @@ class FinishCalendarSyncState extends CalendarSyncState {}
 
 class EventsCalendarSyncState extends CalendarSyncState {
 
-  final List<NotificationListItem> notificationListItem;
+  final List<ListItem> listItem;
 
-  EventsCalendarSyncState(this.notificationListItem);
+  EventsCalendarSyncState(this.listItem);
 }
 
 

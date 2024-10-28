@@ -5,8 +5,10 @@ import 'package:birthday_gift/core/data_source/remote_source/calendar_remote_dat
 import 'package:birthday_gift/core/data_source/remote_source/model/calenar_remote_event.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/model/remind_notification.dart';
+import 'package:birthday_gift/core/ui/list/month_list_item.dart';
 import 'package:birthday_gift/core/ui/list/notification_list_item.dart';
 import 'package:birthday_gift/feature/notification/presentation/manage/notification_manage_interface.dart';
+import 'package:birthday_gift/utils/base/list_item.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:collection/collection.dart';
 
@@ -89,12 +91,31 @@ class NotificationRepository implements OnSyncNotificationList {
 }
 
 extension CalendarEventToNotificationListItemMapper on Iterable<CalendarBirthdayEvent> {
-  Iterable<NotificationListItem> toListItems(Iterable<NotificationModel> allNotifications) {
+  Iterable<ListItem> toListItems(Iterable<NotificationModel> allLocalNotifications) {
     final calendarEvents = this;
-    final remoteEventsIds = (allNotifications)
+
+    final List<ListItem> notificationListItems = List.empty(growable: true);
+
+    final birthdayEvents = calendarEvents.where((event) => event.isCompletelyBirthdayEvent);
+    final otherEvents = calendarEvents.where((event) => !event.isCompletelyBirthdayEvent);
+    final hasAllTypeOfEvents = birthdayEvents.isNotEmpty && otherEvents.isNotEmpty;
+
+    if (hasAllTypeOfEvents) notificationListItems.add(MonthListItem("Birthday")); // TODO IN-9 From translation
+    notificationListItems.addAll(birthdayEvents._toListItemsInternal(allLocalNotifications));
+
+    if (hasAllTypeOfEvents) notificationListItems.add(MonthListItem("Other")); // TODO IN-9 From translation
+    notificationListItems.addAll(otherEvents._toListItemsInternal(allLocalNotifications));
+
+    return notificationListItems;
+  }
+
+  Iterable<NotificationListItem> _toListItemsInternal(Iterable<NotificationModel> allLocalNotifications) {
+    final calendarEvents = this;
+    final remoteEventsIds = allLocalNotifications
         .map((e) => e.remoteId)
         .whereNotNull()
         .toSet();
+
     final List<NotificationListItem> notificationListItems = List.empty(growable: true);
     calendarEvents.toList().asMap().forEach((index, event) => notificationListItems.add(
         NotificationListItem(
@@ -110,7 +131,6 @@ extension CalendarEventToNotificationListItemMapper on Iterable<CalendarBirthday
           isChosen: remoteEventsIds.contains(event.googleEventId),
         )
     ));
-
     return notificationListItems;
   }
 }

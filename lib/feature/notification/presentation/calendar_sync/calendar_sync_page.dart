@@ -1,5 +1,4 @@
 import 'package:birthday_gift/app/di/injection_container.dart';
-import 'package:birthday_gift/core/ui/list/notification_list_item.dart';
 import 'package:birthday_gift/core/ui/resources/app_icons.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
@@ -8,6 +7,7 @@ import 'package:birthday_gift/core/ui/widget/bee_background.dart';
 import 'package:birthday_gift/feature/notification/presentation/calendar_sync/calendar_sync_cubit.dart';
 import 'package:birthday_gift/feature/notification/presentation/list/notification_list.dart';
 import 'package:birthday_gift/utils/base/base_cubit.dart';
+import 'package:birthday_gift/utils/base/list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -52,7 +52,7 @@ class CalendarSyncPage extends StatelessWidget {
             context: context,
             builder: (context, state) {
               if (state is EventsCalendarSyncState) {
-                return _showEventList(context, state.notificationListItem);
+                return _showEventList(context, state.listItem);
               } else if (state is LoadingCalendarSyncState) {
                 return const Center(child: CircularProgressIndicator());
               } else {
@@ -67,7 +67,8 @@ class CalendarSyncPage extends StatelessWidget {
 
   Widget _showEventList(
       BuildContext context,
-      List<NotificationListItem> notificationListItem) {
+      List<ListItem> notificationListItem,
+  ) {
     if (notificationListItem.isEmpty) {
       return Padding(
         padding: const EdgeInsets.all(16.0),
