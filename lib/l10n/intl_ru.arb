@@ -16,7 +16,8 @@
 
   "terms_and_privacy" : "Используя Bee, вы соглашаетесь с нашими |Условиями| и |Политикой конфиденциальности|.",
 
-  "last_synchronization" : "Последняя синхронизация",
+  "from_google_calendar" : "Импорт с Google Календаря",
+  "from_contacts" : "Импорт с Контактов",
   "notifications_time" : "Время нотификаций",
   "language" : "Язык",
   "logout" : "Выход",

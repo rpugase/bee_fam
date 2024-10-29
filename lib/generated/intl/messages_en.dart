@@ -68,6 +68,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phone number is require"),
         "error_unknown": MessageLookupByLibrary.simpleMessage(
             "Something went wrong. Try again"),
+        "from_contacts": MessageLookupByLibrary.simpleMessage("From Contacts"),
+        "from_google_calendar":
+            MessageLookupByLibrary.simpleMessage("From Google Calendar"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full Name"),
         "get_notification":
             MessageLookupByLibrary.simpleMessage("Get notification"),
@@ -76,8 +79,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "in_x_month": m1,
         "in_x_week": m2,
         "language": MessageLookupByLibrary.simpleMessage("Language"),
-        "last_synchronization":
-            MessageLookupByLibrary.simpleMessage("Last synchronization"),
         "last_version": MessageLookupByLibrary.simpleMessage("Version"),
         "login": MessageLookupByLibrary.simpleMessage("Send Code"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),

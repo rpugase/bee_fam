@@ -16,7 +16,8 @@
 
   "terms_and_privacy" : "By using Bee you agree to our |Terms| and |Privacy Policy|",
 
-  "last_synchronization" : "Last synchronization",
+  "from_google_calendar" : "From Google Calendar",
+  "from_contacts" : "From Contacts",
   "notifications_time" : "Notifications time",
   "language" : "Language",
   "logout" : "Logout",

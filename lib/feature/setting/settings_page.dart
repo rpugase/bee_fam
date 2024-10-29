@@ -1,6 +1,8 @@
 import 'package:birthday_gift/app/di/injection_container.dart';
 import 'package:birthday_gift/core/cubit/version/get_current_user_cubit.dart';
 import 'package:birthday_gift/core/cubit/version/get_version_with_update_cubit.dart';
+import 'package:birthday_gift/core/feature/calendar_sync_feature.dart';
+import 'package:birthday_gift/core/feature/contacts_sync_feature.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/widget/bee_app_bar.dart';
 import 'package:birthday_gift/core/ui/widget/bee_background.dart';
@@ -26,14 +28,17 @@ class SettingsPage extends StatelessWidget {
               _phoneNumber(context),
               _version(context),
               ListTile(
-                title: Text(context.strings.last_synchronization),
-                subtitle: Text(context.strings.soon),
-                // onTap: () async {
-                //   final authResult = await _auth.startAuth();
-                //   if (authResult) {
-                //     await _auth.syncCalendarData();
-                //   }
-                // }, // TODO IN-9
+                title: Text(context.strings.from_google_calendar),
+                onTap: () async {
+                  await sl<CalendarSyncFeature>().start(context, callNavigationPop: false);
+                },
+              ),
+              const Divider(),
+              ListTile(
+                title: Text(context.strings.from_contacts),
+                onTap: () {
+                  sl<ContactsSyncFeature>().start(context, callNavigationPop: false);
+                },
               ),
               const Spacer(),
               const ListTile(

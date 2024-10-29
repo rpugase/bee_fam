@@ -68,6 +68,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Введите номер телефона"),
         "error_unknown": MessageLookupByLibrary.simpleMessage(
             "Что-то пошло не так, попробуйте ещё раз"),
+        "from_contacts":
+            MessageLookupByLibrary.simpleMessage("Импорт с Контактов"),
+        "from_google_calendar":
+            MessageLookupByLibrary.simpleMessage("Импорт с Google Календаря"),
         "full_name": MessageLookupByLibrary.simpleMessage("Имя, Фамилия"),
         "get_notification":
             MessageLookupByLibrary.simpleMessage("Получить уведомление"),
@@ -77,8 +81,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "in_x_month": m1,
         "in_x_week": m2,
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
-        "last_synchronization":
-            MessageLookupByLibrary.simpleMessage("Последняя синхронизация"),
         "last_version": MessageLookupByLibrary.simpleMessage("Версия ПО"),
         "login": MessageLookupByLibrary.simpleMessage("Отправьте код"),
         "logout": MessageLookupByLibrary.simpleMessage("Выход"),

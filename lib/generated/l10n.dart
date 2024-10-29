@@ -161,11 +161,21 @@ class S {
     );
   }
 
-  /// `Last synchronization`
-  String get last_synchronization {
+  /// `From Google Calendar`
+  String get from_google_calendar {
     return Intl.message(
-      'Last synchronization',
-      name: 'last_synchronization',
+      'From Google Calendar',
+      name: 'from_google_calendar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From Contacts`
+  String get from_contacts {
+    return Intl.message(
+      'From Contacts',
+      name: 'from_contacts',
       desc: '',
       args: [],
     );
