@@ -14,6 +14,22 @@ class CalendarBirthdayEvent extends Equatable {
     required this.isCompletelyBirthdayEvent,
   });
 
+  static const invalidId = "";
+
+  CalendarBirthdayEvent copyWith({
+    String? googleEventId,
+    String? title,
+    Date? birthdayDate,
+    bool? isCompletelyBirthdayEvent,
+  }) {
+    return CalendarBirthdayEvent(
+      googleEventId: googleEventId ?? this.googleEventId,
+      title: title ?? this.title,
+      birthdayDate: birthdayDate ?? this.birthdayDate,
+      isCompletelyBirthdayEvent: isCompletelyBirthdayEvent ?? this.isCompletelyBirthdayEvent,
+    );
+  }
+
   @override
   List<Object?> get props => [googleEventId];
 

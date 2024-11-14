@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:birthday_gift/core/data_source/local_source/dao/notification_dao.dart';
 import 'package:birthday_gift/core/data_source/remote_source/calendar_remote_data_source.dart';
 import 'package:birthday_gift/core/data_source/remote_source/model/calenar_remote_event.dart';
+import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/model/remind_notification.dart';
 import 'package:birthday_gift/core/ui/list/month_list_item.dart';
@@ -54,31 +55,58 @@ class NotificationRepository implements OnSyncNotificationList {
     _onUpdateNotificationsList.add(await getNotifications());
   }
 
+  Future<void> syncToRemote() async {
+    Log.i("Start initialize sync to remote source");
+    final googleNotifications = (await _db.getNotifications())
+        .entries
+        .where((notification) => notification.value.googleRemoteId == null);
+
+    Log.i("${googleNotifications.length} found to sync");
+
+    for (final notificationEntry in googleNotifications) {
+      final notificationId = notificationEntry.key;
+      final notification = notificationEntry.value;
+      Log.i("Start sync ${notification.name}");
+      final result = await _calendarSource.createCalendarEvent(
+        notification.name,
+        Date.birthdayString(notification.birthday),
+      );
+      if (result.isSuccess) {
+        final googleId = result.success;
+        _db.updateNotification(notificationId, notification.copyWith(googleRemoteId: googleId));
+        Log.i("Event ${notification.name} created with googleId=$googleId");
+      } else {
+        Log.w("Sync failed");
+        Log.e(result.failure);
+      }
+    }
+  }
+
   @override
-  Future<void> syncRemoteNotifications(
+  Future<void> syncFromRemoteNotifications(
       Iterable<NotificationModel> notifications,
       Set<String> allRemoteIds,
   ) async {
     final dbNotifications = await getNotifications();
     final notificationsRemoteIds = notifications
-        .map((e) => e.remoteId)
+        .map((e) => e.googleRemoteId)
         .whereNotNull()
         .toSet();
     final dbNotificationsRemoteIds = dbNotifications
-        .map((dbNotification) => dbNotification.remoteId)
+        .map((dbNotification) => dbNotification.googleRemoteId)
         .whereNotNull()
         .where((dbRemoteId) => allRemoteIds.contains(dbRemoteId))
         .toSet();
     final remoteNotification = notifications.toList();
 
     // check for duplicates
-    remoteNotification.removeWhere((notification) => dbNotificationsRemoteIds.contains(notification.remoteId));
+    remoteNotification.removeWhere((notification) => dbNotificationsRemoteIds.contains(notification.googleRemoteId));
 
     // check for remove
     final idToSkip = dbNotificationsRemoteIds.whereNot((remoteId) => notificationsRemoteIds.contains(remoteId));
     final notificationsForRemoveRemoteIds = dbNotificationsRemoteIds.whereNot((remoteId) => notificationsRemoteIds.contains(remoteId));
     final notificationsForRemoveIds = dbNotifications
-        .where((element) => notificationsForRemoveRemoteIds.contains(element.remoteId))
+        .where((element) => notificationsForRemoveRemoteIds.contains(element.googleRemoteId))
         .map((e) => e.id);
     Log.i("notificationsForRemoveIds=$notificationsForRemoveIds");
 
@@ -123,7 +151,7 @@ extension CalendarEventToNotificationListItemMapper on Iterable<CalendarBirthday
   Iterable<NotificationListItem> _toListItemsInternal(Iterable<NotificationModel> allLocalNotifications) {
     final calendarEvents = this;
     final remoteEventsIds = allLocalNotifications
-        .map((e) => e.remoteId)
+        .map((e) => e.googleRemoteId)
         .whereNotNull()
         .toSet();
 
@@ -131,7 +159,7 @@ extension CalendarEventToNotificationListItemMapper on Iterable<CalendarBirthday
     calendarEvents.toList().asMap().forEach((index, event) => notificationListItems.add(
         NotificationListItem(
           notification: NotificationModel(
-            remoteId: event.googleEventId,
+            googleRemoteId: event.googleEventId,
             name: event.title,
             birthday: event.birthdayDate,
             remindNotifications: [RemindNotification.inBirthday()],

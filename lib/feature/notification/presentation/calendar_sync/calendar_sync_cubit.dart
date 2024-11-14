@@ -37,7 +37,7 @@ class CalendarSyncCubit extends BaseCubit<CalendarSyncState> {
 
   void onNotificationTap(NotificationListItem notificationListItem) {
     final resultList = (state as EventsCalendarSyncState).listItem.map((listItem) {
-      if (listItem is NotificationListItem && listItem.notification.remoteId == notificationListItem.notification.remoteId
+      if (listItem is NotificationListItem && listItem.notification.googleRemoteId == notificationListItem.notification.googleRemoteId
           && notificationListItem.name == notificationListItem.name) {
         return listItem.copyWith(
           isChosen: !listItem.isChosen,
@@ -60,9 +60,9 @@ class CalendarSyncCubit extends BaseCubit<CalendarSyncState> {
     final notifications = notificationsListItems
         .where((listItem) => listItem.isChosen)
         .map((e) => e.notification);
-    final allRemoteIds = notificationsListItems.map((e) => e.notification.remoteId)
+    final allRemoteIds = notificationsListItems.map((e) => e.notification.googleRemoteId)
         .whereNotNull().toSet();
-    unawaited(_syncNotifications.syncRemoteNotifications(notifications, allRemoteIds)
+    unawaited(_syncNotifications.syncFromRemoteNotifications(notifications, allRemoteIds)
         .then((value) => emit(FinishCalendarSyncState())));
   }
 }

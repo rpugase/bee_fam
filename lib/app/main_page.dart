@@ -1,5 +1,4 @@
 import 'package:birthday_gift/app/di/injection_container.dart';
-import 'package:birthday_gift/app/domain/show_notification_delay.dart';
 import 'package:birthday_gift/core/feature/calendar_sync_feature.dart';
 import 'package:birthday_gift/core/feature/contacts_sync_feature.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
@@ -14,7 +13,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'domain/get_notifications_for_showing.dart';
+import 'domain/notification/get_notifications_for_showing.dart';
+import 'domain/notification/show_notification_delay.dart';
 
 const _point = "⦁";
 

@@ -7,7 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:workmanager/workmanager.dart';
 
-import '../../domain/show_today_notification.dart';
+import '../../domain/notification/show_today_notification.dart';
+
 
 class WorkerDatasource {
 

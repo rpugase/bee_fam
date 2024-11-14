@@ -41,10 +41,7 @@ class NotificationEntity extends HiveObject {
   final String updatedDate;
 
   @HiveField(9)
-  final String? remoteId;
-
-  @HiveField(10, defaultValue: true)
-  final bool isSynced;
+  final String? googleRemoteId;
 
   NotificationEntity(
       this.name,
@@ -56,14 +53,40 @@ class NotificationEntity extends HiveObject {
       this.remindNotifications,
       this.createdDate,
       this.updatedDate,
-      this.remoteId,
-      this.isSynced,
+      this.googleRemoteId,
   );
+
+
+  NotificationEntity copyWith({
+    String? name,
+    String? birthday,
+    String? phone,
+    String? imgUrl,
+    String? updateDate,
+    List<NoteEntity>? note,
+    List<RemindNotificationEntity>? remindNotifications,
+    String? createdDate,
+    String? updatedDate,
+    String? googleRemoteId,
+  }) {
+    return NotificationEntity(
+      name ?? this.name,
+      birthday ?? this.birthday,
+      phone ?? this.phone,
+      imgUrl ?? this.imgUrl,
+      updateDate ?? this.updateDate,
+      note ?? this.note,
+      remindNotifications ?? this.remindNotifications,
+      createdDate ?? this.createdDate,
+      updatedDate ?? this.updatedDate,
+      googleRemoteId ?? this.googleRemoteId,
+    );
+  }
 
   @override
   String toString() {
     return "PersonEntity(name=$name, birthday=$birthday, phone=$phone, imgUrl=$imgUrl, updateDate=$updateDate, "
         "note=$note, remindNotifications=${remindNotifications.toList()}, "
-        "createdDate=$createdDate, updatedDate=$updatedDate, remoteId=$remoteId, isSynced=$isSynced)";
+        "createdDate=$createdDate, updatedDate=$updatedDate, googleRemoteId=$googleRemoteId)";
   }
 }

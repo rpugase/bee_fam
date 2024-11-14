@@ -1,10 +1,12 @@
+import 'dart:async';
+
 import 'package:birthday_gift/app/data/repository/notification_repository.dart';
 import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/feature/notification/presentation/manage/notification_manage_interface.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 
-import '../../feature/notification/domain/exception/require_person_field_exception.dart';
+import '../../../../feature/notification/domain/exception/require_person_field_exception.dart';
 
 class CreateOrUpdateNotification implements OnCreateOrUpdateNotification {
   final NotificationRepository _notificationRepository;
@@ -26,6 +28,7 @@ class CreateOrUpdateNotification implements OnCreateOrUpdateNotification {
     if (notification.id == NotificationModel.invalidId) {
       Log.i("Create notification: $notification");
       await _notificationRepository.createNotification(notification);
+      unawaited(_notificationRepository.syncToRemote());
     } else {
       Log.i("Update notification: $notification");
       await _notificationRepository.updateNotification(notification);

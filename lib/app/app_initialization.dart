@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:birthday_gift/app/data/repository/notification_repository.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/note_entity.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/notification_entity.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/remind_notification_entity.dart';
@@ -37,8 +38,19 @@ Future _initDi() async {
 }
 
 Future _asyncInit() async {
-  final firebaseAuthRemoteSource = sl<FirebaseAuthRemoteSource>();
-  await firebaseAuthRemoteSource.getAuthorizedUser();
+  try {
+    final firebaseAuthRemoteSource = sl<FirebaseAuthRemoteSource>();
+    await firebaseAuthRemoteSource.getAuthorizedUser();
+  } catch (e) {
+    Log.w(e);
+  }
+
+  try {
+    final notificationRepository = sl<NotificationRepository>();
+    await notificationRepository.syncToRemote();
+  } catch (e) {
+    Log.w(e);
+  }
 }
 
 Future initHive() async {

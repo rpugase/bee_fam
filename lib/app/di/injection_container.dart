@@ -1,11 +1,11 @@
 import 'package:birthday_gift/app/data/datasource/notification_datasource.dart';
 import 'package:birthday_gift/app/data/repository/shown_notification_repository.dart';
-import 'package:birthday_gift/app/domain/approve_notification.dart';
-import 'package:birthday_gift/app/domain/create_or_update_notification.dart';
-import 'package:birthday_gift/app/domain/delete_notification.dart';
-import 'package:birthday_gift/app/domain/get_current_user.dart';
-import 'package:birthday_gift/app/domain/get_notifications_for_showing.dart';
-import 'package:birthday_gift/app/domain/listen_notifications.dart';
+import 'package:birthday_gift/app/domain/notification/approve_notification.dart';
+import 'package:birthday_gift/app/domain/notification/crud/create_or_update_notification.dart';
+import 'package:birthday_gift/app/domain/notification/crud/delete_notification.dart';
+import 'package:birthday_gift/app/domain/notification/crud/listen_notifications.dart';
+import 'package:birthday_gift/app/domain/notification/get_notifications_for_showing.dart';
+import 'package:birthday_gift/app/domain/user/get_current_user.dart';
 import 'package:birthday_gift/core/cubit/version/get_current_user_cubit.dart';
 import 'package:birthday_gift/core/cubit/version/get_version_with_update_cubit.dart';
 import 'package:birthday_gift/core/data_source/local_source/dao/notification_dao.dart';
@@ -41,7 +41,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/datasource/worker_datasource.dart';
 import '../data/repository/notification_repository.dart';
-import '../domain/show_today_notification.dart';
+import '../domain/notification/show_today_notification.dart';
 
 final sl = GetIt.instance;
 
