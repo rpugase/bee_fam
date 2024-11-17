@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:birthday_gift/core/data_source/local_source/dao/notification_dao.dart';
-import 'package:birthday_gift/core/data_source/remote_source/calendar_remote_data_source.dart';
+import 'package:birthday_gift/core/data_source/remote_source/google_remote_data_source.dart';
 import 'package:birthday_gift/core/data_source/remote_source/model/calenar_remote_event.dart';
 import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
@@ -12,14 +12,17 @@ import 'package:birthday_gift/feature/notification/presentation/manage/notificat
 import 'package:birthday_gift/utils/base/list_item.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:collection/collection.dart';
+import 'package:synchronized/synchronized.dart';
 
 class NotificationRepository implements OnSyncNotificationList {
   final NotificationDao _db;
-  final CalendarRemoteDataSource _calendarSource;
+  final GoogleRemoteDataSource _googleSource;
+
+  final Lock syncToRemoteLock = Lock();
 
   final _onUpdateNotificationsList = StreamController<Iterable<NotificationModel>>.broadcast();
 
-  NotificationRepository(this._db, this._calendarSource);
+  NotificationRepository(this._db, this._googleSource);
 
   Stream<Iterable<NotificationModel>> listenNotifications() async* {
     yield await getNotifications();
@@ -29,7 +32,8 @@ class NotificationRepository implements OnSyncNotificationList {
   Future<Iterable<NotificationModel>> getNotifications() async {
     return (await _db.getNotifications())
         .entries
-        .map((person) => NotificationModel.fromEntity(person.value, person.key));
+        .where((notification) => !notification.value.isDeleted)
+        .map((notification) => NotificationModel.fromEntity(notification.value, notification.key));
   }
 
   Future<NotificationModel?> getNotification(int notificationId) async {
@@ -51,35 +55,62 @@ class NotificationRepository implements OnSyncNotificationList {
 
   Future<void> deleteNotification(NotificationModel notification) async {
     Log.i("Delete notificationEntity=$notification");
-    await _db.deleteNotification(notification.id);
+    await _db.updateNotification(notification.id, notification.toEntity().copyWith(isDeleted: true));
     _onUpdateNotificationsList.add(await getNotifications());
+    unawaited(syncToRemote());
   }
 
   Future<void> syncToRemote() async {
-    Log.i("Start initialize sync to remote source");
-    final googleNotifications = (await _db.getNotifications())
-        .entries
-        .where((notification) => notification.value.googleRemoteId == null);
+    await syncToRemoteLock.synchronized(() async {
+      Log.i("Start initialize sync to remote source");
+      final dbNotifications = await _db.getNotifications();
+      final notificationsToSend = dbNotifications
+          .entries
+          .where((notification) => notification.value.googleRemoteId == null);
 
-    Log.i("${googleNotifications.length} found to sync");
+      final notificationToDelete = dbNotifications
+          .entries
+          .where((notification) => notification.value.isDeleted);
 
-    for (final notificationEntry in googleNotifications) {
-      final notificationId = notificationEntry.key;
-      final notification = notificationEntry.value;
-      Log.i("Start sync ${notification.name}");
-      final result = await _calendarSource.createCalendarEvent(
-        notification.name,
-        Date.birthdayString(notification.birthday),
-      );
-      if (result.isSuccess) {
-        final googleId = result.success;
-        _db.updateNotification(notificationId, notification.copyWith(googleRemoteId: googleId));
-        Log.i("Event ${notification.name} created with googleId=$googleId");
-      } else {
-        Log.w("Sync failed");
-        Log.e(result.failure);
+      Log.i("${notificationsToSend.length} found to create");
+      Log.i("${notificationToDelete.length} found to delete");
+
+      for (final notificationEntry in notificationsToSend) {
+        final notificationId = notificationEntry.key;
+        final notification = notificationEntry.value;
+        Log.i("Start sync event creation \"${notification.name}\"");
+        final result = await _googleSource.createCalendarEvent(
+          notification.name,
+          Date.birthdayString(notification.birthday),
+        );
+        if (result.isSuccess) {
+          final googleId = result.success;
+          _db.updateNotification(notificationId, notification.copyWith(googleRemoteId: googleId));
+          _onUpdateNotificationsList.add(await getNotifications());
+          Log.i("Event ${notification.name} created with googleId=$googleId");
+        } else {
+          Log.w("Sync failed");
+          Log.e(result.failure);
+        }
       }
-    }
+
+      for (final notificationEntry in notificationToDelete) {
+        final notificationId = notificationEntry.key;
+        final notification = notificationEntry.value;
+        final googleRemoteId = notification.googleRemoteId;
+
+        Log.i("Start sync event deletion ${notification.name}");
+
+        final isDeleted = (googleRemoteId != null) ? await _googleSource.deleteNotification(googleRemoteId) : true;
+
+        if (isDeleted) {
+          Log.i("Event successfully deleted");
+          await _db.deleteNotification(notificationId);
+        } else {
+          Log.i("Event wasn't deleted");
+        }
+      }
+    });
   }
 
   @override

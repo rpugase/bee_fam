@@ -43,6 +43,9 @@ class NotificationEntity extends HiveObject {
   @HiveField(9)
   final String? googleRemoteId;
 
+  @HiveField(10, defaultValue: false)
+  final bool isDeleted; // document will be deleted after remote synchronization
+
   NotificationEntity(
       this.name,
       this.birthday,
@@ -54,6 +57,7 @@ class NotificationEntity extends HiveObject {
       this.createdDate,
       this.updatedDate,
       this.googleRemoteId,
+      this.isDeleted,
   );
 
 
@@ -68,18 +72,20 @@ class NotificationEntity extends HiveObject {
     String? createdDate,
     String? updatedDate,
     String? googleRemoteId,
+    bool? isDeleted,
   }) {
     return NotificationEntity(
-      name ?? this.name,
-      birthday ?? this.birthday,
-      phone ?? this.phone,
-      imgUrl ?? this.imgUrl,
-      updateDate ?? this.updateDate,
-      note ?? this.note,
-      remindNotifications ?? this.remindNotifications,
-      createdDate ?? this.createdDate,
-      updatedDate ?? this.updatedDate,
-      googleRemoteId ?? this.googleRemoteId,
+        name ?? this.name,
+        birthday ?? this.birthday,
+        phone ?? this.phone,
+        imgUrl ?? this.imgUrl,
+        updateDate ?? this.updateDate,
+        note ?? this.note,
+        remindNotifications ?? this.remindNotifications,
+        createdDate ?? this.createdDate,
+        updatedDate ?? this.updatedDate,
+        googleRemoteId ?? this.googleRemoteId,
+        isDeleted ?? this.isDeleted,
     );
   }
 

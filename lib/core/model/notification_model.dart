@@ -71,6 +71,7 @@ class NotificationModel extends Equatable {
   }
 
   NotificationEntity toEntity() {
+    const isDeleted = false;
     return NotificationEntity(
       name,
       birthday.toBirthdayString(),
@@ -82,6 +83,7 @@ class NotificationModel extends Equatable {
       Date().toIso8601String(),
       Date().toIso8601String(),
       googleRemoteId,
+      isDeleted,
     );
   }
 

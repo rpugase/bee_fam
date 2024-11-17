@@ -4,6 +4,8 @@ import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:collection/collection.dart';
 import 'package:extension_google_sign_in_as_googleapis_auth/extension_google_sign_in_as_googleapis_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/calendar/v3.dart';
 import 'package:result_type/result_type.dart';
 
@@ -13,7 +15,55 @@ import 'util/birthday_title.dart';
 
 typedef NotificationId = String;
 
-class CalendarRemoteDataSource {
+class GoogleRemoteDataSource {
+
+  Future<GoogleSignInAccount?> startAuth() async {
+    final currentUser = googleSignIn.currentUser;
+
+    if (currentUser == null) {
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+      print("Successful google auth");
+      if (googleUser != null) {
+        final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+        final OAuthCredential googleCredential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        await FirebaseAuth.instance.signInWithCredential(googleCredential);
+
+        print("Successful firebase auth");
+      }
+      return googleUser;
+    } else {
+      print("Current user=${currentUser.displayName}");
+    }
+
+    return currentUser;
+  }
+
+  Future<GoogleSignInAccount?> getAuthorizedUser() async {
+    final silentUser = await googleSignIn.signInSilently();
+    if (silentUser != null) {
+      final user = await startAuth();
+      Log.i("Authorized user email=${user?.email}");
+      return user;
+    }
+    return null;
+  }
+
+  Stream<User> listenAuth() {
+    return FirebaseAuth.instance.userChanges()
+        .asyncMap((User? user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!; ${user.email} ${user.displayName} ${user.refreshToken}');
+      }
+      return Future.value(user);
+    });
+  }
 
   Future<Result<NotificationId, Exception>> createCalendarEvent(
       String notificationTitle,
@@ -59,6 +109,21 @@ class CalendarRemoteDataSource {
         );
       }
       return Failure(exception);
+    }
+  }
+
+  Future<bool> deleteNotification(NotificationId remoteId) async {
+    final calendar = await _getGoogleCalendar();
+    if (calendar != null) {
+      try {
+        calendar.events.delete("primary", remoteId);
+      } on Exception catch(e) {
+        Log.e(e);
+        return false;
+      }
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -132,8 +197,8 @@ class CalendarRemoteDataSource {
 
   Future<bool> _handleTokenExpired(Exception exception) async {
     if (exception.toString().contains("www-authenticate")) {
-      // await googleSignIn.disconnect(); // TODO IN-9 wait for token expiration and uncomment it for testing
-      // await googleSignIn.signInSilently(reAuthenticate: true);
+      await googleSignIn.disconnect();
+      await startAuth();
       return true;
     } else {
       return false;

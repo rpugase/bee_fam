@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:birthday_gift/app/data/repository/notification_repository.dart';
-import 'package:birthday_gift/core/data_source/remote_source/calendar_remote_data_source.dart';
+import 'package:birthday_gift/core/data_source/remote_source/google_remote_data_source.dart';
 import 'package:birthday_gift/core/ui/list/notification_list_item.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/util/internet_connection_check.dart';
@@ -15,18 +15,18 @@ import 'package:flutter/widgets.dart';
 class CalendarSyncCubit extends BaseCubit<CalendarSyncState> {
 
   final NotificationRepository _notificationRepository;
-  final CalendarRemoteDataSource _calendarRemoteDataSource;
+  final GoogleRemoteDataSource _googleSource;
   final OnSyncNotificationList _syncNotifications;
 
   CalendarSyncCubit(
-      this._calendarRemoteDataSource,
+      this._googleSource,
       this._notificationRepository,
       this._syncNotifications) : super(LoadingCalendarSyncState()) {
     unawaited(_init());
   }
 
   Future<void> _init() async {
-    final notificationListItems = await _calendarRemoteDataSource.getCalendarEvents();
+    final notificationListItems = await _googleSource.getCalendarEvents();
 
     emit(EventsCalendarSyncState(
         notificationListItems.toListItems(

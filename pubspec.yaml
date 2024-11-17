@@ -24,6 +24,7 @@ dependencies:
   device_info_plus: ^6.0.0
   package_info_plus: ^2.0.0
   webview_flutter: ^4.0.0
+  synchronized: ^3.0.1
 
   url_launcher: ^6.1.6
   collection: ^1.16.0
