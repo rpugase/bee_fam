@@ -28,6 +28,8 @@
   "hello" : "Привет! \uD83C\uDF89",
   "add_people" : "Добавляйте особенных людей,\n дни и события",
   "birthday" : "День рождения",
+  "birthdays" : "Дни рождения",
+  "others" : "Другие",
   "colleagues" : "Коллеги",
   "short_days" : "дн.",
   "short_month" : "мес.",

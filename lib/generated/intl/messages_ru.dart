@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Все Напоминания"),
         "back": MessageLookupByLibrary.simpleMessage("Назад"),
         "birthday": MessageLookupByLibrary.simpleMessage("День рождения"),
+        "birthdays": MessageLookupByLibrary.simpleMessage("Дни рождения"),
         "choose_event":
             MessageLookupByLibrary.simpleMessage("Выберите события"),
         "colleagues": MessageLookupByLibrary.simpleMessage("Коллеги"),
@@ -90,6 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notifications_time":
             MessageLookupByLibrary.simpleMessage("Время нотификаций"),
         "ok": MessageLookupByLibrary.simpleMessage("Ок"),
+        "others": MessageLookupByLibrary.simpleMessage("Другие"),
         "phone": MessageLookupByLibrary.simpleMessage("Номер телефона"),
         "phoneCode": MessageLookupByLibrary.simpleMessage("Код"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Номер телефона"),

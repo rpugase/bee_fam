@@ -281,6 +281,26 @@ class S {
     );
   }
 
+  /// `Birthdays`
+  String get birthdays {
+    return Intl.message(
+      'Birthdays',
+      name: 'birthdays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other`
+  String get others {
+    return Intl.message(
+      'Other',
+      name: 'others',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Colleagues`
   String get colleagues {
     return Intl.message(

@@ -29,6 +29,8 @@
   "hello" : "Hello! 🎉",
   "add_people" : "Add special people,\n days and events",
   "birthday" : "Birthday",
+  "birthdays" : "Birthdays",
+  "others" : "Other",
   "colleagues" : "Colleagues",
   "short_days" : "dy",
   "short_month" : "month",

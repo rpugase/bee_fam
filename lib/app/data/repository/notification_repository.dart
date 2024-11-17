@@ -6,8 +6,9 @@ import 'package:birthday_gift/core/data_source/remote_source/model/calenar_remot
 import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/model/remind_notification.dart';
-import 'package:birthday_gift/core/ui/list/month_list_item.dart';
+import 'package:birthday_gift/core/ui/list/header_list_item.dart';
 import 'package:birthday_gift/core/ui/list/notification_list_item.dart';
+import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/feature/notification/presentation/manage/notification_manage_interface.dart';
 import 'package:birthday_gift/utils/base/list_item.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
@@ -170,10 +171,10 @@ extension CalendarEventToNotificationListItemMapper on Iterable<CalendarBirthday
     final otherEvents = calendarEvents.where((event) => !event.isCompletelyBirthdayEvent);
     final hasAllTypeOfEvents = birthdayEvents.isNotEmpty && otherEvents.isNotEmpty;
 
-    if (hasAllTypeOfEvents) notificationListItems.add(MonthListItem("Birthday")); // TODO IN-9 From translation
+    if (hasAllTypeOfEvents) notificationListItems.add(HeaderListItem((context) => context.strings.birthdays));
     notificationListItems.addAll(birthdayEvents._toListItemsInternal(allLocalNotifications));
 
-    if (hasAllTypeOfEvents) notificationListItems.add(MonthListItem("Other")); // TODO IN-9 From translation
+    if (hasAllTypeOfEvents) notificationListItems.add(HeaderListItem((context) => context.strings.others));
     notificationListItems.addAll(otherEvents._toListItemsInternal(allLocalNotifications));
 
     return notificationListItems;

@@ -1,5 +1,5 @@
 import 'package:birthday_gift/core/model/notification_model.dart';
-import 'package:birthday_gift/core/ui/list/month_list_item.dart';
+import 'package:birthday_gift/core/ui/list/header_list_item.dart';
 import 'package:birthday_gift/core/ui/list/notification_list_item.dart';
 import 'package:birthday_gift/utils/base/list_item.dart';
 import 'package:collection/collection.dart';
@@ -21,7 +21,7 @@ class NotificationListWidget extends StatelessWidget {
         itemCount: listItems.length,
         itemBuilder: (BuildContext context, int index) {
           final listItem = listItems[index];
-          return listItem is MonthListItem
+          return listItem is HeaderListItem
               ? MonthItem(monthListItem: listItem)
               : (listItem is NotificationListItem)
                   ? NotificationItem(
@@ -39,7 +39,7 @@ extension NotificationListMapper on Iterable<NotificationModel> {
     final notificationsByMonth = groupListsBy((element) => element.birthday.toUIMonth());
 
     notificationsByMonth.forEach((month, notifications) {
-      items.add(MonthListItem(month));
+      items.add(HeaderListItem((context) => month));
       notifications.forEachIndexed((index, notification) {
         items.add(NotificationListItem(
           notification: notification,
