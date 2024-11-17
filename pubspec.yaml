@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.5
   mask_text_input_formatter: ^2.4.0
   country_picker: ^2.0.16
+  lottie: ^2.3.2
 
   # Firebase
   firebase_core: ^2.4.0
@@ -77,6 +78,7 @@ flutter:
   assets:
     - assets/svg/
     - assets/png/
+    - assets/lottie/
 
   fonts:
     - family: MyFlutterApp

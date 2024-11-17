@@ -1,15 +1,16 @@
-import 'package:birthday_gift/utils/base/base_cubit.dart';
-import 'package:birthday_gift/utils/base/list_item.dart';
+import 'package:birthday_gift/app/di/injection_container.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
-import 'package:birthday_gift/app/di/injection_container.dart';
+import 'package:birthday_gift/core/ui/widget/app_loader.dart';
 import 'package:birthday_gift/core/ui/widget/bee_app_bar.dart';
 import 'package:birthday_gift/core/ui/widget/bee_background.dart';
+import 'package:birthday_gift/utils/base/base_cubit.dart';
+import 'package:birthday_gift/utils/base/list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'notification_list.dart';
 import '../manage/notification_manage_page.dart';
+import 'notification_list.dart';
 import 'notification_list_cubit.dart';
 
 class NotificationListPage extends StatelessWidget {
@@ -28,7 +29,7 @@ class NotificationListPage extends StatelessWidget {
               if (state is EmptyList) {
                 return _showNoPersons(context);
               } else if (state is Loading) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: AppLoader());
               } else if (state is NotificationsList) {
                 return NotificationListWidget(
                   listItems: state.notifications.toListItems() as List<ListItem>,

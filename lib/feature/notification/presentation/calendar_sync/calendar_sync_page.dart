@@ -2,6 +2,7 @@ import 'package:birthday_gift/app/di/injection_container.dart';
 import 'package:birthday_gift/core/ui/resources/app_icons.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
+import 'package:birthday_gift/core/ui/widget/app_loader.dart';
 import 'package:birthday_gift/core/ui/widget/bee_app_bar.dart';
 import 'package:birthday_gift/core/ui/widget/bee_background.dart';
 import 'package:birthday_gift/feature/notification/presentation/calendar_sync/calendar_sync_cubit.dart';
@@ -54,7 +55,7 @@ class CalendarSyncPage extends StatelessWidget {
               if (state is EventsCalendarSyncState) {
                 return _showEventList(context, state.listItem);
               } else if (state is LoadingCalendarSyncState) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: AppLoader());
               } else {
                 return const SizedBox();
               }
