@@ -21,11 +21,30 @@ class NotificationListItem implements ListItem {
   final NotificationModel notification;
   final bool firstInMonthBlock;
   final bool lastInMonthBlock;
+  final bool isChooseMode;
+  final bool isChosen; // only if choose mode enabled
+
+  NotificationListItem copyWith({
+    NotificationModel? notification,
+    bool? firstInMonthBlock,
+    bool? lastInMonthBlock,
+    bool? isChooseMode,
+    bool? isChosen,
+  }) => NotificationListItem(
+      notification: notification ?? this.notification,
+      firstInMonthBlock: firstInMonthBlock ?? this.firstInMonthBlock,
+      lastInMonthBlock: lastInMonthBlock ?? this.lastInMonthBlock,
+      isChooseMode: isChooseMode ?? this.isChooseMode,
+      isChosen: isChosen ?? this.isChosen,
+  );
+
 
   NotificationListItem({
     required this.notification,
     required this.firstInMonthBlock,
     required this.lastInMonthBlock,
+    this.isChooseMode = false,
+    this.isChosen = false,
   })  : id = notification.id,
         name = notification.name,
         initials = notification.initials,
@@ -45,6 +64,8 @@ class NotificationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final backgroundColor = (notification.isChosen) ? context.colors.primary.withOpacity(0.1) : context.colors.mainBackground;
+
     return Padding(
       padding: EdgeInsets.only(
         top: notification.firstInMonthBlock ? 8.0 : 4.0,
@@ -57,7 +78,7 @@ class NotificationItem extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: context.colors.mainBackground,
+              color: backgroundColor,
               borderRadius: const BorderRadius.all(Radius.circular(14.0)),
               border: Border.all(
                 color: context.colors.border,
@@ -77,9 +98,10 @@ class NotificationItem extends StatelessWidget {
                     ),
                     child: Center(
                         child: Text(
-                      notification.initials,
-                      style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.white),
-                    )),
+                          notification.initials,
+                          style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.white),
+                        ),
+                    ),
                   ),
                 ),
                 Expanded(
@@ -116,7 +138,7 @@ class NotificationItem extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(width: 14.0),
-                    SvgPicture.asset(Images.arrowRightSvg),
+                    if (!notification.isChooseMode) SvgPicture.asset(Images.arrowRightSvg)
                   ],
                 ),
               ],

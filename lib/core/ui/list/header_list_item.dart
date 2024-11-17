@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/base/list_item.dart';
 
-class MonthListItem implements ListItem {
-  final String month;
+typedef OnGetHeader = String Function(BuildContext context);
 
-  MonthListItem(this.month);
+class HeaderListItem implements ListItem {
+  final OnGetHeader onGetHeader;
+
+  HeaderListItem(this.onGetHeader);
 }
 
 class MonthItem extends StatelessWidget {
-  final MonthListItem monthListItem;
+  final HeaderListItem monthListItem;
 
   const MonthItem({
     Key? key,
@@ -22,7 +24,7 @@ class MonthItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Text(
-        monthListItem.month,
+        monthListItem.onGetHeader(context),
         style: Theme.of(context).textTheme.bodyText1
           ?.copyWith(
             color: context.colors.textPrimary.withOpacity(0.6),

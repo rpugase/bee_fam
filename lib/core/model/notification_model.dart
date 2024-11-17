@@ -9,6 +9,7 @@ import 'remind_notification.dart';
 
 class NotificationModel extends Equatable {
   final int id;
+  final String? googleRemoteId;
   final String name;
   final Date birthday;
   final String note;
@@ -50,6 +51,7 @@ class NotificationModel extends Equatable {
     this.note = "",
     this.remindNotifications = const [],
     this.id = invalidId,
+    this.googleRemoteId,
   });
 
   factory NotificationModel.forTest(Date birthday, List<RemindNotification> remindNotifications) =>
@@ -64,10 +66,12 @@ class NotificationModel extends Equatable {
       note: entity.note.firstOrNull?.text.ifEmpty(() => "") ?? "",
       remindNotifications: entity.remindNotifications.map((it) => RemindNotification.fromEntity(it)).toList(),
       id: id,
+      googleRemoteId: entity.googleRemoteId,
     );
   }
 
   NotificationEntity toEntity() {
+    const isDeleted = false;
     return NotificationEntity(
       name,
       birthday.toBirthdayString(),
@@ -78,6 +82,8 @@ class NotificationModel extends Equatable {
       remindNotifications.map((it) => it.toEntity()).toList(),
       Date().toIso8601String(),
       Date().toIso8601String(),
+      googleRemoteId,
+      isDeleted,
     );
   }
 

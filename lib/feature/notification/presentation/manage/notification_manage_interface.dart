@@ -7,3 +7,10 @@ abstract class OnCreateOrUpdateNotification {
 abstract class OnDeleteNotification {
   Future<void> deleteNotification(NotificationModel notification);
 }
+
+abstract class OnSyncNotificationList {
+  Future<void> syncFromRemoteNotifications(
+      Iterable<NotificationModel> notifications,
+      Set<String> allRemoteIds,
+  );
+}

@@ -12,10 +12,12 @@
 
   "all_reminders" : "Все Напоминания",
   "settings" : "Настройки",
+  "choose_event" : "Выберите события",
 
   "terms_and_privacy" : "Используя Bee, вы соглашаетесь с нашими |Условиями| и |Политикой конфиденциальности|.",
 
-  "last_synchronization" : "Последняя синхронизация",
+  "from_google_calendar" : "Импорт с Google Календаря",
+  "from_contacts" : "Импорт с Контактов",
   "notifications_time" : "Время нотификаций",
   "language" : "Язык",
   "logout" : "Выход",
@@ -26,6 +28,8 @@
   "hello" : "Привет! \uD83C\uDF89",
   "add_people" : "Добавляйте особенных людей,\n дни и события",
   "birthday" : "День рождения",
+  "birthdays" : "Дни рождения",
+  "others" : "Другие",
   "colleagues" : "Коллеги",
   "short_days" : "дн.",
   "short_month" : "мес.",
@@ -42,6 +46,7 @@
   "delete_notification" : "Удалить напоминание",
   "create_new" : "Создать новое",
   "create_from_contact" : "Добавить из контактов",
+  "create_from_calendar" : "Добавить с календаря",
   "in_day_birthday" : "В день события",
   "in_x_week" : "За {x} неделю",
   "in_x_month" : "За {x} месяц",
@@ -53,5 +58,6 @@
   "error_code_empty" : "Введите код",
   "error_code_incorrect" : "Код не правильный",
   "error_unknown" : "Что-то пошло не так, попробуйте ещё раз",
-  "error_no_internet" : "Нет сети"
+  "error_no_internet" : "Нет сети",
+  "error_no_have_events" : "Ваш календарь пуст \uD83D\uDE4F"
 }

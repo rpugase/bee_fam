@@ -12,10 +12,12 @@
 
   "all_reminders" : "All Reminders",
   "settings" : "Settings",
+  "choose_event" : "Choose events",
 
   "terms_and_privacy" : "By using Bee you agree to our |Terms| and |Privacy Policy|",
 
-  "last_synchronization" : "Last synchronization",
+  "from_google_calendar" : "From Google Calendar",
+  "from_contacts" : "From Contacts",
   "notifications_time" : "Notifications time",
   "language" : "Language",
   "logout" : "Logout",
@@ -27,6 +29,8 @@
   "hello" : "Hello! 🎉",
   "add_people" : "Add special people,\n days and events",
   "birthday" : "Birthday",
+  "birthdays" : "Birthdays",
+  "others" : "Other",
   "colleagues" : "Colleagues",
   "short_days" : "dy",
   "short_month" : "month",
@@ -42,6 +46,7 @@
   "delete_notification" : "Delete notification",
   "create_new" : "Create new",
   "create_from_contact" : "Create from contacts",
+  "create_from_calendar" : "Create from calendar",
   "in_day_birthday" : "In birthday",
   "in_x_week" : "In {x} week",
   "in_x_month" : "In {x} month",
@@ -53,5 +58,6 @@
   "error_code_empty" : "Code is require",
   "error_code_incorrect" : "Code is incorrect",
   "error_unknown" : "Something went wrong. Try again",
-  "error_no_internet" : "No internet connection"
+  "error_no_internet" : "No internet connection",
+  "error_no_have_events" : "Your calendar is empty \uD83D\uDE4F"
 }

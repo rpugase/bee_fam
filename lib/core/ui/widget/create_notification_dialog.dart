@@ -6,15 +6,18 @@ import '../resources/colors.dart';
 
 typedef OnTapCreateNotification = Function();
 typedef OnTapCreateNotificationFromContacts = Function();
+typedef OnTapCreateNotificationFromCalendar = Function();
 
 class CreateNotificationWidget extends StatelessWidget {
   final OnTapCreateNotification onTapCreateNotification;
   final OnTapCreateNotificationFromContacts onTapCreateNotificationFromContacts;
+  final OnTapCreateNotificationFromCalendar onTapCreateNotificationFromCalendar;
 
   const CreateNotificationWidget({
     Key? key,
     required this.onTapCreateNotification,
     required this.onTapCreateNotificationFromContacts,
+    required this.onTapCreateNotificationFromCalendar,
   }) : super(key: key);
 
   @override
@@ -53,6 +56,20 @@ class CreateNotificationWidget extends StatelessWidget {
                 const SizedBox(width: 36.0),
                 Text(
                   context.strings.create_from_contact,
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 36.0),
+          GestureDetector(
+            onTap: onTapCreateNotificationFromCalendar,
+            child: Row(
+              children: [
+                const Icon(Icons.perm_contact_calendar_rounded, size: 24.0),
+                const SizedBox(width: 36.0),
+                Text(
+                  context.strings.create_from_calendar,
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
               ],

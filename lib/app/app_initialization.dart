@@ -1,18 +1,21 @@
-import 'package:birthday_gift/utils/base/base_cubit.dart';
-import 'package:birthday_gift/feature/user/data/auth_firebase_error_handler.dart';
+import 'dart:async';
+
+import 'package:birthday_gift/app/data/repository/notification_repository.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/note_entity.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/notification_entity.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/remind_notification_entity.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/shown_notification_entity.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/user_entity.dart';
+import 'package:birthday_gift/core/data_source/remote_source/google_remote_data_source.dart';
+import 'package:birthday_gift/feature/user/data/auth_firebase_error_handler.dart';
+import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'di/injection_container.dart' as di;
+import 'di/injection_container.dart';
 
 Future initApp() async {
   await Firebase.initializeApp();
@@ -21,6 +24,7 @@ Future initApp() async {
   await initHive();
   await _initDi();
   await Firebase.initializeApp();
+  unawaited(_asyncInit());
   // FlutterError.onError = (FlutterErrorDetails details) {
   //   FlutterError.dumpErrorToConsole(details);
   //   FirebaseCrashlytics.instance.recordFlutterFatalError;
@@ -31,6 +35,22 @@ Future _initDi() async {
   await di.init(
       await SharedPreferences.getInstance(),
   );
+}
+
+Future _asyncInit() async {
+  try {
+    final googleSource = sl<GoogleRemoteDataSource>();
+    await googleSource.getAuthorizedUser();
+  } catch (e) {
+    Log.w(e);
+  }
+
+  try {
+    final notificationRepository = sl<NotificationRepository>();
+    await notificationRepository.syncToRemote();
+  } catch (e) {
+    Log.w(e);
+  }
 }
 
 Future initHive() async {

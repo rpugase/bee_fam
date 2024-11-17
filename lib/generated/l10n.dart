@@ -1,6 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -140,6 +141,16 @@ class S {
     );
   }
 
+  /// `Choose events`
+  String get choose_event {
+    return Intl.message(
+      'Choose events',
+      name: 'choose_event',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `By using Bee you agree to our |Terms| and |Privacy Policy|`
   String get terms_and_privacy {
     return Intl.message(
@@ -150,11 +161,21 @@ class S {
     );
   }
 
-  /// `Last synchronization`
-  String get last_synchronization {
+  /// `From Google Calendar`
+  String get from_google_calendar {
     return Intl.message(
-      'Last synchronization',
-      name: 'last_synchronization',
+      'From Google Calendar',
+      name: 'from_google_calendar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From Contacts`
+  String get from_contacts {
+    return Intl.message(
+      'From Contacts',
+      name: 'from_contacts',
       desc: '',
       args: [],
     );
@@ -255,6 +276,26 @@ class S {
     return Intl.message(
       'Birthday',
       name: 'birthday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Birthdays`
+  String get birthdays {
+    return Intl.message(
+      'Birthdays',
+      name: 'birthdays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other`
+  String get others {
+    return Intl.message(
+      'Other',
+      name: 'others',
       desc: '',
       args: [],
     );
@@ -390,6 +431,16 @@ class S {
     );
   }
 
+  /// `Create from calendar`
+  String get create_from_calendar {
+    return Intl.message(
+      'Create from calendar',
+      name: 'create_from_calendar',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `In birthday`
   String get in_day_birthday {
     return Intl.message(
@@ -495,6 +546,16 @@ class S {
     return Intl.message(
       'No internet connection',
       name: 'error_no_internet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your calendar is empty 🙏`
+  String get error_no_have_events {
+    return Intl.message(
+      'Your calendar is empty 🙏',
+      name: 'error_no_have_events',
       desc: '',
       args: [],
     );

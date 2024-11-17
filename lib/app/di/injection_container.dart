@@ -1,42 +1,46 @@
+import 'package:birthday_gift/app/data/datasource/notification_datasource.dart';
 import 'package:birthday_gift/app/data/repository/shown_notification_repository.dart';
-import 'package:birthday_gift/app/domain/get_notifications_for_showing.dart';
+import 'package:birthday_gift/app/domain/notification/approve_notification.dart';
+import 'package:birthday_gift/app/domain/notification/crud/create_or_update_notification.dart';
+import 'package:birthday_gift/app/domain/notification/crud/delete_notification.dart';
+import 'package:birthday_gift/app/domain/notification/crud/listen_notifications.dart';
+import 'package:birthday_gift/app/domain/notification/get_notifications_for_showing.dart';
+import 'package:birthday_gift/app/domain/user/get_current_user.dart';
 import 'package:birthday_gift/core/cubit/version/get_current_user_cubit.dart';
 import 'package:birthday_gift/core/cubit/version/get_version_with_update_cubit.dart';
-import 'package:birthday_gift/app/domain/approve_notification.dart';
-import 'package:birthday_gift/app/domain/delete_notification.dart';
-import 'package:birthday_gift/feature/notification/presentation/approve/notification_approve_interface.dart';
-import 'package:birthday_gift/feature/notification/presentation/list/notification_list_interface.dart';
-import 'package:birthday_gift/feature/notification/presentation/manage/notification_manage_interface.dart';
-import 'package:birthday_gift/feature/user/data/firebase_auth_datastore.dart';
-import 'package:birthday_gift/feature/user/domain/auth_with_phone_number.dart';
-import 'package:birthday_gift/feature/user/domain/confirm_phone_number_code.dart';
-import 'package:birthday_gift/app/domain/get_current_user.dart';
-import 'package:birthday_gift/feature/user/domain/user_error_handler.dart';
-import 'package:birthday_gift/feature/user/presentation/auth_cubit.dart';
+import 'package:birthday_gift/core/data_source/local_source/dao/notification_dao.dart';
 import 'package:birthday_gift/core/data_source/local_source/dao/settings_dao.dart';
 import 'package:birthday_gift/core/data_source/local_source/dao/shown_notification_dao.dart';
 import 'package:birthday_gift/core/data_source/local_source/dao/user_dao.dart';
-import 'package:birthday_gift/core/data_source/local_source/dao/notification_dao.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/note_entity.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/notification_entity.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/remind_notification_entity.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/shown_notification_entity.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/user_entity.dart';
-import 'package:birthday_gift/app/domain/create_or_update_product.dart';
-import 'package:birthday_gift/app/domain/listen_notifications.dart';
+import 'package:birthday_gift/core/data_source/remote_source/google_remote_data_source.dart';
+import 'package:birthday_gift/core/feature/calendar_sync_feature.dart';
+import 'package:birthday_gift/core/feature/contacts_sync_feature.dart';
+import 'package:birthday_gift/feature/notification/presentation/approve/notification_approve_cubit.dart';
+import 'package:birthday_gift/feature/notification/presentation/approve/notification_approve_interface.dart';
+import 'package:birthday_gift/feature/notification/presentation/calendar_sync/calendar_sync_cubit.dart';
 import 'package:birthday_gift/feature/notification/presentation/list/notification_list_cubit.dart';
+import 'package:birthday_gift/feature/notification/presentation/list/notification_list_interface.dart';
 import 'package:birthday_gift/feature/notification/presentation/manage/notification_manage_cubit.dart';
-import 'package:birthday_gift/app/data/datasource/notification_datasource.dart';
+import 'package:birthday_gift/feature/notification/presentation/manage/notification_manage_interface.dart';
+import 'package:birthday_gift/feature/user/data/firebase_auth_datastore.dart';
+import 'package:birthday_gift/feature/user/domain/auth_with_phone_number.dart';
+import 'package:birthday_gift/feature/user/domain/confirm_phone_number_code.dart';
+import 'package:birthday_gift/feature/user/domain/user_error_handler.dart';
+import 'package:birthday_gift/feature/user/presentation/auth_cubit.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:birthday_gift/feature/notification/presentation/approve/notification_approve_cubit.dart';
 
 import '../data/datasource/worker_datasource.dart';
 import '../data/repository/notification_repository.dart';
-import '../domain/show_today_notification.dart';
+import '../domain/notification/show_today_notification.dart';
 
 final sl = GetIt.instance;
 
@@ -49,9 +53,10 @@ Future<void> init(
   await _initDao();
   await _initWorker();
   await _initNotificationService();
+  sl.registerFactory(() => GoogleRemoteDataSource());
 
   // Repository
-  sl.registerLazySingleton(() => NotificationRepository(sl()));
+  sl.registerLazySingleton(() => NotificationRepository(sl(), sl()));
   sl.registerLazySingleton(() => ShownNotificationRepository(sl()));
 
   // UseCase
@@ -62,6 +67,11 @@ Future<void> init(
   sl.registerFactory(() => GetTodayNotification(sl(), sl(), sl()));
   sl.registerFactory(() => GetNotificationsForShowing(sl(), sl()));
   sl.registerFactory<OnGetCurrentUser>(() => GetCurrentUser(sl()));
+  sl.registerFactory<OnSyncNotificationList>(() => sl<NotificationRepository>());
+
+  // Feature runner
+  sl.registerFactory(() => CalendarSyncFeature(sl()));
+  sl.registerFactory(() => ContactsSyncFeature());
 
   // Service Cubit
   sl.registerFactory(() => GetVersionWithUpdateCubit(sl()));
@@ -69,6 +79,7 @@ Future<void> init(
   sl.registerFactory(() => NotificationManagerCubit(sl(), sl()));
   sl.registerFactory(() => NotificationApproveCubit(sl()));
   sl.registerFactory(() => CurrentUserCubit(sl()));
+  sl.registerFactory(() => CalendarSyncCubit(sl(), sl(), sl()));
 
   await _initUser();
 }

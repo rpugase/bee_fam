@@ -34,7 +34,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "all_reminders": MessageLookupByLibrary.simpleMessage("All Reminders"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "birthday": MessageLookupByLibrary.simpleMessage("Birthday"),
+        "birthdays": MessageLookupByLibrary.simpleMessage("Birthdays"),
+        "choose_event": MessageLookupByLibrary.simpleMessage("Choose events"),
         "colleagues": MessageLookupByLibrary.simpleMessage("Colleagues"),
+        "create_from_calendar":
+            MessageLookupByLibrary.simpleMessage("Create from calendar"),
         "create_from_contact":
             MessageLookupByLibrary.simpleMessage("Create from contacts"),
         "create_new": MessageLookupByLibrary.simpleMessage("Create new"),
@@ -53,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Code is incorrect"),
         "error_name_require":
             MessageLookupByLibrary.simpleMessage("Name is require"),
+        "error_no_have_events":
+            MessageLookupByLibrary.simpleMessage("Your calendar is empty 🙏"),
         "error_no_internet":
             MessageLookupByLibrary.simpleMessage("No internet connection"),
         "error_number_not_found":
@@ -63,6 +69,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phone number is require"),
         "error_unknown": MessageLookupByLibrary.simpleMessage(
             "Something went wrong. Try again"),
+        "from_contacts": MessageLookupByLibrary.simpleMessage("From Contacts"),
+        "from_google_calendar":
+            MessageLookupByLibrary.simpleMessage("From Google Calendar"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full Name"),
         "get_notification":
             MessageLookupByLibrary.simpleMessage("Get notification"),
@@ -71,8 +80,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "in_x_month": m1,
         "in_x_week": m2,
         "language": MessageLookupByLibrary.simpleMessage("Language"),
-        "last_synchronization":
-            MessageLookupByLibrary.simpleMessage("Last synchronization"),
         "last_version": MessageLookupByLibrary.simpleMessage("Version"),
         "login": MessageLookupByLibrary.simpleMessage("Send Code"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
@@ -82,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notifications_time":
             MessageLookupByLibrary.simpleMessage("Notifications time"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
+        "others": MessageLookupByLibrary.simpleMessage("Other"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "phoneCode": MessageLookupByLibrary.simpleMessage("Code"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),

@@ -1,14 +1,14 @@
-import 'package:birthday_gift/utils/base/base_cubit.dart';
+import 'package:birthday_gift/app/di/injection_container.dart';
 import 'package:birthday_gift/core/model/date.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/model/remind_notification.dart';
+import 'package:birthday_gift/core/ui/resources/app_icons.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
-import 'package:birthday_gift/core/ui/resources/app_icons.dart';
 import 'package:birthday_gift/core/ui/widget/bee_app_bar.dart';
 import 'package:birthday_gift/core/ui/widget/bee_background.dart';
 import 'package:birthday_gift/core/ui/widget/phone_text_field.dart';
-import 'package:birthday_gift/app/di/injection_container.dart';
+import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,13 +52,6 @@ class NotificationManagePage extends StatelessWidget {
       child: Scaffold(
         appBar: BeeAppBar(
           context.strings.notification,
-          leading: IconButton(
-            icon: Icon(
-              AppIcons.back,
-              color: context.colors.buttonsPrimarySecondary,
-            ),
-            onPressed: () => Navigator.pop(context),
-          ),
           actions: [
             BaseBlocConsumer<NotificationManagerCubit, NotificationManageState>(
               context: context,

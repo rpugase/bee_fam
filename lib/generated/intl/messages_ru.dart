@@ -35,7 +35,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Все Напоминания"),
         "back": MessageLookupByLibrary.simpleMessage("Назад"),
         "birthday": MessageLookupByLibrary.simpleMessage("День рождения"),
+        "birthdays": MessageLookupByLibrary.simpleMessage("Дни рождения"),
+        "choose_event":
+            MessageLookupByLibrary.simpleMessage("Выберите события"),
         "colleagues": MessageLookupByLibrary.simpleMessage("Коллеги"),
+        "create_from_calendar":
+            MessageLookupByLibrary.simpleMessage("Добавить с календаря"),
         "create_from_contact":
             MessageLookupByLibrary.simpleMessage("Добавить из контактов"),
         "create_new": MessageLookupByLibrary.simpleMessage("Создать новое"),
@@ -53,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Код не правильный"),
         "error_name_require":
             MessageLookupByLibrary.simpleMessage("Введите имя"),
+        "error_no_have_events":
+            MessageLookupByLibrary.simpleMessage("Ваш календарь пуст 🙏"),
         "error_no_internet": MessageLookupByLibrary.simpleMessage("Нет сети"),
         "error_number_not_found":
             MessageLookupByLibrary.simpleMessage("Номер не найден"),
@@ -62,6 +69,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Введите номер телефона"),
         "error_unknown": MessageLookupByLibrary.simpleMessage(
             "Что-то пошло не так, попробуйте ещё раз"),
+        "from_contacts":
+            MessageLookupByLibrary.simpleMessage("Импорт с Контактов"),
+        "from_google_calendar":
+            MessageLookupByLibrary.simpleMessage("Импорт с Google Календаря"),
         "full_name": MessageLookupByLibrary.simpleMessage("Имя, Фамилия"),
         "get_notification":
             MessageLookupByLibrary.simpleMessage("Получить уведомление"),
@@ -71,8 +82,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "in_x_month": m1,
         "in_x_week": m2,
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
-        "last_synchronization":
-            MessageLookupByLibrary.simpleMessage("Последняя синхронизация"),
         "last_version": MessageLookupByLibrary.simpleMessage("Версия ПО"),
         "login": MessageLookupByLibrary.simpleMessage("Отправьте код"),
         "logout": MessageLookupByLibrary.simpleMessage("Выход"),
@@ -82,6 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notifications_time":
             MessageLookupByLibrary.simpleMessage("Время нотификаций"),
         "ok": MessageLookupByLibrary.simpleMessage("Ок"),
+        "others": MessageLookupByLibrary.simpleMessage("Другие"),
         "phone": MessageLookupByLibrary.simpleMessage("Номер телефона"),
         "phoneCode": MessageLookupByLibrary.simpleMessage("Код"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Номер телефона"),
