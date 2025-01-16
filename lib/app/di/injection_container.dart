@@ -18,6 +18,7 @@ import 'package:birthday_gift/core/data_source/local_source/entity/remind_notifi
 import 'package:birthday_gift/core/data_source/local_source/entity/shown_notification_entity.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/user_entity.dart';
 import 'package:birthday_gift/core/data_source/remote_source/google_remote_data_source.dart';
+import 'package:birthday_gift/core/data_source/remote_source/subscription_data_source.dart';
 import 'package:birthday_gift/core/feature/calendar_sync_feature.dart';
 import 'package:birthday_gift/core/feature/contacts_sync_feature.dart';
 import 'package:birthday_gift/feature/notification/presentation/approve/notification_approve_cubit.dart';
@@ -54,6 +55,7 @@ Future<void> init(
   await _initWorker();
   await _initNotificationService();
   sl.registerFactory(() => GoogleRemoteDataSource());
+  sl.registerFactory(() => SubscriptionDataSource());
 
   // Repository
   sl.registerLazySingleton(() => NotificationRepository(sl(), sl()));
