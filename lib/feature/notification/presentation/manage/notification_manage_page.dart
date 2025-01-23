@@ -28,7 +28,7 @@ class NotificationManagePage extends StatelessWidget {
 
   final NotificationModel? notification;
 
-  NotificationManagePage({Key? key, this.notification}) : super(key: key) {
+  NotificationManagePage({super.key, this.notification}) {
     final notification = this.notification;
     Log.i("Notification to manage: $notification");
     if (notification != null) {

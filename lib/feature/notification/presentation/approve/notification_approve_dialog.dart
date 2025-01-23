@@ -1,17 +1,18 @@
+import 'package:birthday_gift/app/di/injection_container.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
+import 'package:birthday_gift/core/ui/widget/message_dialog.dart';
+import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:birthday_gift/utils/base/base_cubit.dart';
-import 'package:birthday_gift/core/ui/widget/message_dialog.dart';
-import 'package:birthday_gift/app/di/injection_container.dart';
+
 import 'notification_approve_cubit.dart';
 
 class NotificationApproveDialog extends StatelessWidget {
   final NotificationModel notification;
 
-  const NotificationApproveDialog({Key? key, required this.notification}) : super(key: key);
+  const NotificationApproveDialog({super.key, required this.notification});
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +28,12 @@ class NotificationApproveDialog extends StatelessWidget {
         builder: (context, state) => MessageDialog(
           messageWidget: RichText(
             text: TextSpan(children: [
-              TextSpan(text: messageSplit[0], style: textTheme.subtitle1),
+              TextSpan(text: messageSplit[0], style: textTheme.titleMedium),
               TextSpan(
                 text: notification.name,
-                style: textTheme.subtitle2?.copyWith(color: context.colors.primary),
+                style: textTheme.titleSmall?.copyWith(color: context.colors.primary),
               ),
-              TextSpan(text: messageSplit[1], style: textTheme.subtitle1),
+              TextSpan(text: messageSplit[1], style: textTheme.titleMedium),
             ]),
           ),
           okMessage: context.strings.yes,

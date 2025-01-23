@@ -12,15 +12,15 @@ ThemeData AppThemeData(BuildContext context) {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(context.colors.primary),
-        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-        textStyle: MaterialStateProperty.all<TextStyle>(
+        backgroundColor: WidgetStateProperty.all<Color>(context.colors.primary),
+        foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+        textStyle: WidgetStateProperty.all<TextStyle>(
           const TextStyle(
             fontSize: 15.0,
             fontFamily: AppFonts.sfProText,
           ),
         ),
-        shape: MaterialStateProperty.all(
+        shape: WidgetStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14.0),
           ),
@@ -58,31 +58,31 @@ ThemeData AppThemeData(BuildContext context) {
       ),
     ),
     textTheme: const TextTheme(
-      headline5: TextStyle(
+      headlineSmall: TextStyle(
         fontSize: 24,
         fontFamily: AppFonts.sfProText,
         fontWeight: FontWeight.w600,
       ),
-      headline6: TextStyle(
+      titleLarge: TextStyle(
         fontSize: 18,
         fontFamily: AppFonts.sfProText,
         fontWeight: FontWeight.w600,
       ),
-      subtitle1: TextStyle(
+      titleMedium: TextStyle(
         fontSize: 16,
         fontFamily: AppFonts.sfProText,
       ),
-      subtitle2: TextStyle(
+      titleSmall: TextStyle(
         fontSize: 16,
         fontFamily: AppFonts.sfProText,
         fontWeight: FontWeight.w600
       ),
-      bodyText1: TextStyle(
+      bodyLarge: TextStyle(
         fontSize: 14,
         fontFamily: AppFonts.sfProText,
         fontWeight: FontWeight.w600,
       ),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
         fontSize: 14,
         fontFamily: AppFonts.sfProText,
       ),

@@ -4,8 +4,8 @@ import 'package:birthday_gift/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'core/ui/resources/colors.dart';
 import 'app/theme_data.dart';
+import 'core/ui/resources/colors.dart';
 
 
 void main() async {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 
   final int usersCount;
 
-  const MyApp({Key? key, required this.usersCount}) : super(key: key);
+  const MyApp({super.key, required this.usersCount});
 
   @override
   Widget build(BuildContext context) {

@@ -11,7 +11,7 @@ class MessageDialog extends StatelessWidget {
   final ShapeBorder? shapeBorder;
 
   const MessageDialog({
-    Key? key,
+    super.key,
     this.message,
     this.messageWidget,
     this.okMessage,
@@ -19,7 +19,7 @@ class MessageDialog extends StatelessWidget {
     this.onPressedOk,
     this.onPressedCancel,
     this.shapeBorder,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class MessageDialog extends StatelessWidget {
       title: messageWidget ??
           Text(
             message ?? "",
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.titleMedium,
             textAlign: TextAlign.center,
           ),
       actions: [

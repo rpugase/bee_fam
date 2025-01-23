@@ -47,5 +47,5 @@ class HandledVersionState extends VersionState {
 }
 
 class VersionErrorState extends BlocError {
-  const VersionErrorState(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
+  const VersionErrorState(super.exception, super.errorHandler);
 }

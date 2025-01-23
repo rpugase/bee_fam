@@ -13,7 +13,7 @@ class _FormatterStringSizes {
 class _LogFormatter {
   const _LogFormatter({
     bool prettyExtrasPrint = false,
-    this.stringSizes = const _FormatterStringSizes.defaultSizes(),
+  this.stringSizes = const _FormatterStringSizes.defaultSizes(),
   });
 
   final _FormatterStringSizes stringSizes;

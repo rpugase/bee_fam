@@ -12,13 +12,12 @@ class PhoneNumberTextField extends StatefulWidget {
   final bool autoFocus;
 
   const PhoneNumberTextField({
-    Key? key,
+    super.key,
     required bool readOnly,
     this.controller,
     this.errorText,
     this.autoFocus = false,
-  })  : _readOnly = readOnly,
-        super(key: key);
+  })  : _readOnly = readOnly;
 
   @override
   State<PhoneNumberTextField> createState() => _PhoneNumberTextFieldState();
@@ -57,7 +56,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
             child: Center(
               child: Text(
                 getCountryEmoji(countryCode),
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
           ),

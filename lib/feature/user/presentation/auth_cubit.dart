@@ -1,9 +1,5 @@
 import 'package:birthday_gift/utils/base/base_cubit.dart';
-import 'package:birthday_gift/feature/user/domain/exception/user_exceptions.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
-import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../data/firebase_auth_datastore.dart';
 import '../domain/auth_with_phone_number.dart';
@@ -55,5 +51,5 @@ class EnterCode extends AuthState {}
 class SuccessCode extends AuthState {}
 
 class AuthError extends BlocError {
-  AuthError(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
+  const AuthError(super.exception, super.errorHandler);
 }

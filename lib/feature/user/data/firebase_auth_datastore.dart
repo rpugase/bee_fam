@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'auth_user_credentials.dart';
 
 const _COUNTER_FORCE_RESENDING_TOKEN = 1;
-const _SMS_TIMEOUT = const Duration(minutes: 2);
+const _SMS_TIMEOUT = Duration(minutes: 2);
 
 abstract class FirebaseAuthDatastore {
 

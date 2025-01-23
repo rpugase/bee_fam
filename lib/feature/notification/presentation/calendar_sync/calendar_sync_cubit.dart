@@ -93,5 +93,5 @@ class CalendarSyncErrorHandler extends ErrorHandler {
 }
 
 class CalendarSyncError extends BlocError {
-  const CalendarSyncError(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
+  const CalendarSyncError(super.exception, super.errorHandler);
 }

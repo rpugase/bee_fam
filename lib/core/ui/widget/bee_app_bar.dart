@@ -9,10 +9,10 @@ class BeeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? actions;
 
   const BeeAppBar(this.title, {
-    Key? key,
+    super.key,
     this.leading,
     this.actions,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

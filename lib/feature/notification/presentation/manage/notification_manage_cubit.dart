@@ -1,8 +1,9 @@
-import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/feature/notification/domain/notification_error_handler.dart';
+import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
+
 import 'notification_manage_interface.dart';
 
 class NotificationManagerCubit extends BaseCubit<NotificationManageState> {
@@ -50,7 +51,7 @@ class ApplyData extends NotificationManageState {}
 class NoApplyData extends NotificationManageState {}
 
 class NotificationError extends BlocError {
-  const NotificationError(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
+  const NotificationError(super.exception, super.errorHandler);
 }
 
 class Finish extends NotificationManageState {}

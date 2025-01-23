@@ -1,15 +1,16 @@
 import 'package:birthday_gift/app/di/injection_container.dart';
-import 'package:birthday_gift/utils/base/base_cubit.dart';
-import 'package:birthday_gift/feature/user/domain/exception/user_exceptions.dart';
 import 'package:birthday_gift/app/main_page.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/images.dart';
 import 'package:birthday_gift/core/ui/widget/phone_text_field.dart';
+import 'package:birthday_gift/feature/user/domain/exception/user_exceptions.dart';
+import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'widget/auth_widgets.dart';
+
 import 'auth_cubit.dart';
+import 'widget/auth_widgets.dart';
 
 class AuthPage extends StatelessWidget {
   final _phoneNumberController = TextEditingController();
@@ -18,6 +19,8 @@ class AuthPage extends StatelessWidget {
   final _phoneNumberKey = UniqueKey();
   final _codeConfirmationKey = UniqueKey();
   final _buttonLoginKey = UniqueKey();
+
+  AuthPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +55,7 @@ class AuthPage extends StatelessWidget {
                             const SizedBox(height: 20.0),
                             Text(
                               '${context.strings.enter_your_phone_number}:',
-                              style: Theme.of(context).textTheme.subtitle1,
+                              style: Theme.of(context).textTheme.titleMedium,
                             ),
                             const SizedBox(height: 20.0),
                             BaseBlocConsumer<AuthCubit, AuthState>(

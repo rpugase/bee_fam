@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class TermsPrivacyText extends StatelessWidget {
-  const TermsPrivacyText({Key? key}) : super(key: key);
+  const TermsPrivacyText({super.key});
 
   final privacy = "https://docs.google.com/document/d/1NqB_l9uixHtMkqc4ymHqv7AgQsDeF5p5f5uaJ6YBbB8/edit?usp=sharing";
   final terms = "https://docs.google.com/document/d/1ky1B8sHB-OiQqaqe14FnqlSVlbX0TeslAl9FUjwUT_A/edit?usp=sharing";

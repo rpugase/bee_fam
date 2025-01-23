@@ -1,6 +1,6 @@
-import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/feature/notification/domain/notification_error_handler.dart';
+import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:equatable/equatable.dart';
 
 import 'notification_list_interface.dart';
@@ -45,5 +45,5 @@ class NotificationsList extends NotificationsListState implements Equatable {
 }
 
 class NotificationError extends BlocError {
-  const NotificationError(Exception exception, ErrorHandler errorHandler) : super(exception, errorHandler);
+  const NotificationError(super.exception, super.errorHandler);
 }

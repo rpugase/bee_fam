@@ -10,13 +10,13 @@ class AnimatedClick extends StatefulWidget {
   final double upperBound;
 
   const AnimatedClick({
-    Key? key,
+    super.key,
     required this.child,
     this.onTap,
     this.animationDuration = 150,
     this.lowerBound = 0.95,
     this.upperBound = 1.0,
-  }) : super(key: key);
+  });
 
   @override
   State<AnimatedClick> createState() => _AnimatedClickState();

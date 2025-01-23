@@ -19,7 +19,7 @@ import 'domain/notification/show_notification_delay.dart';
 const _point = "⦁";
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -117,7 +117,7 @@ class BottomBar extends StatelessWidget {
   final int selectedPageIndex;
   final ValueChanged<int> onTap;
 
-  const BottomBar(this.selectedPageIndex, this.onTap, {Key? key}) : super(key: key);
+  const BottomBar(this.selectedPageIndex, this.onTap, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -191,11 +191,10 @@ class _BottomBarSvgItem extends StatelessWidget {
 
   const _BottomBarSvgItem(
     this.assetName, {
-    Key? key,
     required this.index,
     required this.onTap,
     this.checked,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -10,10 +10,10 @@ class NotificationListWidget extends StatelessWidget {
   final OnNotificationTap? onNotificationTap;
 
   const NotificationListWidget({
-    Key? key,
+    super.key,
     required this.listItems,
     this.onNotificationTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -13,9 +13,9 @@ class SubscriptionDataSource {
   Future<bool> isSubscriptionEnabled() async {
     try {
       CustomerInfo customerInfo = await Purchases.getCustomerInfo();
-      customerInfo.entitlements.all.values.forEach((entitlement) {
+      for (var entitlement in customerInfo.entitlements.all.values) {
         log.Log.i("Entitlement ${entitlement.identifier}: isActive=${entitlement.isActive}, isSandbox=${entitlement.isSandbox}");
-      });
+      }
       return customerInfo.entitlements.active.isNotEmpty;
     } on Exception catch (e) {
       log.Log.e(e);

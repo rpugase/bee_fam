@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
-import 'package:birthday_gift/utils/logger/logger.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 class ConfirmationCodeTextField extends StatelessWidget {
   final bool readOnly;
@@ -12,13 +10,12 @@ class ConfirmationCodeTextField extends StatelessWidget {
   final autoFocus;
 
   const ConfirmationCodeTextField({
-    Key? key,
+    super.key,
     required bool readOnly,
     this.controller,
     this.errorText,
     this.autoFocus = false,
-  })  : readOnly = readOnly,
-        super(key: key);
+  })  : readOnly = readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +35,10 @@ class ConfirmationCodeTextField extends StatelessWidget {
 class LoginButton extends StatefulWidget {
   final VoidCallback? onPressed;
 
-  LoginButton({
-    Key? key,
+  const LoginButton({
+    super.key,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   State<LoginButton> createState() => _LoginButtonState();

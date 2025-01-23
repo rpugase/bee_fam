@@ -15,9 +15,9 @@ class MonthItem extends StatelessWidget {
   final HeaderListItem monthListItem;
 
   const MonthItem({
-    Key? key,
+    super.key,
     required this.monthListItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class MonthItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Text(
         monthListItem.onGetHeader(context),
-        style: Theme.of(context).textTheme.bodyText1
+        style: Theme.of(context).textTheme.bodyLarge
           ?.copyWith(
             color: context.colors.textPrimary.withOpacity(0.6),
           ),

@@ -86,11 +86,10 @@ class LightAppColorsData implements AppColorsData {
 
 class AppColors extends InheritedWidget {
   AppColors({
-    Key? key,
+    super.key,
     Brightness brightness = Brightness.light,
-    required Widget child,
-  })  : colors = AppColorsData.fromBrightness(brightness),
-        super(key: key, child: child);
+    required super.child,
+  })  : colors = AppColorsData.fromBrightness(brightness);
 
   static AppColorsData of(BuildContext context) {
     final AppColors? result = context.dependOnInheritedWidgetOfExactType<AppColors>();
