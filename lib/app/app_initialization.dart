@@ -7,6 +7,7 @@ import 'package:birthday_gift/core/data_source/local_source/entity/remind_notifi
 import 'package:birthday_gift/core/data_source/local_source/entity/shown_notification_entity.dart';
 import 'package:birthday_gift/core/data_source/local_source/entity/user_entity.dart';
 import 'package:birthday_gift/core/data_source/remote_source/google_remote_data_source.dart';
+import 'package:birthday_gift/core/data_source/remote_source/subscription_data_source.dart';
 import 'package:birthday_gift/feature/user/data/auth_firebase_error_handler.dart';
 import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
@@ -39,6 +40,8 @@ Future _initDi() async {
 
 Future _asyncInit() async {
   try {
+    final subscriptionDataSource = sl<SubscriptionDataSource>();
+    subscriptionDataSource.initPlatformState();
     final googleSource = sl<GoogleRemoteDataSource>();
     await googleSource.getAuthorizedUser();
   } catch (e) {

@@ -72,7 +72,7 @@ Future<void> init(
   sl.registerFactory<OnSyncNotificationList>(() => sl<NotificationRepository>());
 
   // Feature runner
-  sl.registerFactory(() => CalendarSyncFeature(sl()));
+  sl.registerFactory(() => CalendarSyncFeature(sl(), sl()));
   sl.registerFactory(() => ContactsSyncFeature());
 
   // Service Cubit

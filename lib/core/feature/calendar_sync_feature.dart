@@ -1,4 +1,5 @@
 import 'package:birthday_gift/core/data_source/remote_source/google_remote_data_source.dart';
+import 'package:birthday_gift/core/data_source/remote_source/subscription_data_source.dart';
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/util/internet_connection_check.dart';
 import 'package:birthday_gift/feature/notification/presentation/calendar_sync/calendar_sync_page.dart';
@@ -8,8 +9,9 @@ import 'package:flutter/material.dart';
 class CalendarSyncFeature {
 
   final GoogleRemoteDataSource _googleSource;
+  final SubscriptionDataSource _subscriptionDataSource;
 
-  CalendarSyncFeature(this._googleSource);
+  CalendarSyncFeature(this._googleSource, this._subscriptionDataSource);
 
   Future<void> start(BuildContext context, {required bool callNavigationPop}) async {
     if (await noInternetConnection()) {
@@ -23,6 +25,12 @@ class CalendarSyncFeature {
       );
       return;
     }
+
+    if (!(await _subscriptionDataSource.isSubscriptionEnabled())) {
+      _subscriptionDataSource.showPaywall();
+      return;
+    }
+
     final authorizedUser = await _googleSource.getAuthorizedUser();
     if (authorizedUser == null) {
       final googleUser = await _googleSource.startAuth();

@@ -1,5 +1,6 @@
 import 'package:birthday_gift/utils/logger/logger.dart' as log;
 import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
 
 class SubscriptionDataSource {
 
@@ -21,6 +22,10 @@ class SubscriptionDataSource {
       log.Log.e(e);
       return false;
     }
+  }
+
+  Future<void> showPaywall() async {
+    await RevenueCatUI.presentPaywall();
   }
 
   static const _revenueCatKey = "goog_QRewhqwPxjUqetOxMAvIzVWtypy";
