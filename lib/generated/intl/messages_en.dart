@@ -21,17 +21,21 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   static String m0(notificationName) =>
+      "Are you sure you want to delete ${notificationName}?";
+
+  static String m1(notificationName) =>
       "Did you wish ${notificationName} a happy birthday?";
 
-  static String m1(x) => "In ${x} month";
+  static String m2(x) => "In ${x} month";
 
-  static String m2(x) => "In ${x} week";
+  static String m3(x) => "In ${x} week";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "add_people": MessageLookupByLibrary.simpleMessage(
             "Add special people,\n days and events"),
         "all_reminders": MessageLookupByLibrary.simpleMessage("All Reminders"),
+        "ask_to_delete": m0,
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "birthday": MessageLookupByLibrary.simpleMessage("Birthday"),
         "birthdays": MessageLookupByLibrary.simpleMessage("Birthdays"),
@@ -46,7 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create notification"),
         "delete_notification":
             MessageLookupByLibrary.simpleMessage("Delete notification"),
-        "did_you_wish": m0,
+        "did_you_wish": m1,
         "enter_your_phone_number":
             MessageLookupByLibrary.simpleMessage("Enter your phone number"),
         "error_birthday_require":
@@ -77,8 +81,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Get notification"),
         "hello": MessageLookupByLibrary.simpleMessage("Hello! 🎉"),
         "in_day_birthday": MessageLookupByLibrary.simpleMessage("In birthday"),
-        "in_x_month": m1,
-        "in_x_week": m2,
+        "in_x_month": m2,
+        "in_x_week": m3,
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "last_version": MessageLookupByLibrary.simpleMessage("Version"),
         "login": MessageLookupByLibrary.simpleMessage("Send Code"),

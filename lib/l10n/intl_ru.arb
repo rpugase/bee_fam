@@ -41,6 +41,7 @@
   "get_notification" : "Получить уведомление",
   "enter_your_phone_number" : "Введите ваш номер телефона",
   "did_you_wish" : "Ты поздравил {notificationName} с днём рождения?",
+  "ask_to_delete" : "Вы хотите удалить {notificationName}?",
 
   "create_notification" : "Создать напоминание",
   "delete_notification" : "Удалить напоминание",

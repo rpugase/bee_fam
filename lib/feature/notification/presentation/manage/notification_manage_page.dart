@@ -7,6 +7,7 @@ import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:birthday_gift/core/ui/resources/colors.dart';
 import 'package:birthday_gift/core/ui/widget/bee_app_bar.dart';
 import 'package:birthday_gift/core/ui/widget/bee_background.dart';
+import 'package:birthday_gift/core/ui/widget/message_dialog.dart';
 import 'package:birthday_gift/core/ui/widget/phone_text_field.dart';
 import 'package:birthday_gift/utils/base/base_cubit.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
@@ -19,6 +20,33 @@ import '../../../../core/ui/widget/person_widgets.dart';
 import 'notification_manage_cubit.dart';
 
 class NotificationManagePage extends StatelessWidget {
+
+  final NotificationModel? notification;
+
+  const NotificationManagePage({super.key, this.notification});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => sl<NotificationManagerCubit>(),
+      child: NotificationManageView(notification: notification),
+    );
+  }
+}
+
+class NotificationManageView extends StatefulWidget {
+  final NotificationModel? notification;
+
+  const NotificationManageView({super.key, this.notification});
+
+  @override
+  State<NotificationManageView> createState() => _NotificationManagePageState();
+}
+
+class _NotificationManagePageState extends State<NotificationManageView> {
+
+  late final NotificationManagerCubit _cubit;
+
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _noteController = TextEditingController();
@@ -26,10 +54,10 @@ class NotificationManagePage extends StatelessWidget {
 
   final List<RemindNotification> _pickedNotifications = [];
 
-  final NotificationModel? notification;
-
-  NotificationManagePage({super.key, this.notification}) {
-    final notification = this.notification;
+  @override
+  void initState() {
+    super.initState();
+    final notification = widget.notification;
     Log.i("Notification to manage: $notification");
     if (notification != null) {
       _nameController.text = notification.name;
@@ -43,116 +71,115 @@ class NotificationManagePage extends StatelessWidget {
     } else {
       _pickedNotifications.add(const RemindNotification());
     }
+
+    _initCubit();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<NotificationManagerCubit>(),
-      child: Scaffold(
-        appBar: BeeAppBar(
-          context.strings.notification,
-          actions: [
-            BaseBlocConsumer<NotificationManagerCubit, NotificationManageState>(
-              context: context,
-              listener: (ctx, state) {
-                if (state is Finish) {
-                  Navigator.pop(context);
-                }
-                return state is! Finish;
-              },
-              builder: (context, state) {
-                return Row(
-                  children: [
-                    Builder(builder: (context) {
-                      return notification != null
-                          ? IconButton(
-                              icon: Icon(
-                                Icons.call,
-                                color: context.colors.buttonsPrimarySecondary,
-                              ),
-                              onPressed: () => context.read<NotificationManagerCubit>().callNumber(notification!.phone),
-                            )
-                          : Container();
-                    }),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 16.0),
-                      child: Builder(
-                        builder: (context) {
-                          if (state is ApplyData) {
-                            return IconButton(
-                              enableFeedback: false,
-                              icon: Icon(
-                                AppIcons.done,
-                                color: context.colors.buttonsPrimarySecondary,
-                              ),
-                              onPressed: () => _createOrUpdateNotification(context),
-                            );
-                          } else {
-                            return IconButton(
-                              icon: Icon(
-                                AppIcons.done,
-                                color: context.colors.buttonsPrimarySecondary,
-                              ),
-                              onPressed: () => _createOrUpdateNotification(context),
-                            );
-                          }
-                        },
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: BeeBackground(
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              child: Column(
+    return Scaffold(
+      appBar: BeeAppBar(
+        context.strings.notification,
+        actions: [
+          BaseBlocConsumer<NotificationManagerCubit, NotificationManageState>(
+            context: context,
+            listener: (ctx, state) {
+              if (state is Finish) {
+                Navigator.pop(context);
+              }
+              return state is! Finish;
+            },
+            builder: (context, state) {
+              return Row(
                 children: [
-                  PersonTextField(
-                    controller: _nameController,
-                    maxLines: 1,
-                    autofocus: true,
-                    labelText: context.strings.full_name,
-                    icon: const Icon(AppIcons.profile),
-                  ),
-                  const SizedBox(height: 16),
-                  PhoneNumberTextField(
-                    controller: _phoneController,
-                    readOnly: false,
-                  ),
-                  const SizedBox(height: 16),
-                  PersonTextField(
-                    readOnly: true,
-                    controller: _birthdayController,
-                    onTap: () => _showYearDialog(context),
-                    labelText: context.strings.birthday,
-                    icon: const Icon(Icons.calendar_today),
-                  ),
-                  const SizedBox(height: 32),
-                  NotesField(controller: _noteController),
-                  const SizedBox(height: 32),
-                  SizedBox(
-                    width: double.infinity,
-                    child: NotificationSettings(
-                      pickedNotifications: _pickedNotifications,
+                  Builder(builder: (context) {
+                    return widget.notification != null
+                        ? IconButton(
+                            icon: Icon(
+                              Icons.call,
+                              color: context.colors.buttonsPrimarySecondary,
+                            ),
+                            onPressed: () => _cubit.callNumber(widget.notification!.phone),
+                          )
+                        : Container();
+                  }),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: Builder(
+                      builder: (context) {
+                        if (state is ApplyData) {
+                          return IconButton(
+                            enableFeedback: false,
+                            icon: Icon(
+                              AppIcons.done,
+                              color: context.colors.buttonsPrimarySecondary,
+                            ),
+                            onPressed: () => _createOrUpdateNotification(context),
+                          );
+                        } else {
+                          return IconButton(
+                            icon: Icon(
+                              AppIcons.done,
+                              color: context.colors.buttonsPrimarySecondary,
+                            ),
+                            onPressed: () => _createOrUpdateNotification(context),
+                          );
+                        }
+                      },
                     ),
-                  ),
-                  const SizedBox(height: 12),
-                  Builder(
-                    builder: (context) => notification == null
-                        ? const SizedBox()
-                        : OutlinedButton(
-                            onPressed: () =>
-                                context.read<NotificationManagerCubit>().deleteNotification(notification!),
-                            child: Text(context.strings.delete_notification),
-                          ),
                   ),
                 ],
-              ),
+              );
+            },
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: BeeBackground(
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                PersonTextField(
+                  controller: _nameController,
+                  maxLines: 1,
+                  autofocus: true,
+                  labelText: context.strings.full_name,
+                  icon: const Icon(AppIcons.profile),
+                ),
+                const SizedBox(height: 16),
+                PhoneNumberTextField(
+                  controller: _phoneController,
+                  readOnly: false,
+                ),
+                const SizedBox(height: 16),
+                PersonTextField(
+                  readOnly: true,
+                  controller: _birthdayController,
+                  onTap: () => _showYearDialog(context),
+                  labelText: context.strings.birthday,
+                  icon: const Icon(Icons.calendar_today),
+                ),
+                const SizedBox(height: 32),
+                NotesField(controller: _noteController),
+                const SizedBox(height: 32),
+                SizedBox(
+                  width: double.infinity,
+                  child: NotificationSettings(
+                    pickedNotifications: _pickedNotifications,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Builder(
+                  builder: (context) => widget.notification == null
+                      ? const SizedBox()
+                      : OutlinedButton(
+                          onPressed: () =>
+                              _cubit.askToDelete(widget.notification!),
+                          child: Text(context.strings.delete_notification),
+                        ),
+                ),
+              ],
             ),
           ),
         ),
@@ -191,7 +218,7 @@ class NotificationManagePage extends StatelessWidget {
 
   _createOrUpdateNotification(BuildContext context) {
     final notification = NotificationModel(
-      id: this.notification?.id ?? NotificationModel.invalidId,
+      id: this.widget.notification?.id ?? NotificationModel.invalidId,
       name: _nameController.text,
       birthday: Date.uiBirthdayString(_birthdayController.text),
       phone: _phoneController.text,
@@ -199,5 +226,38 @@ class NotificationManagePage extends StatelessWidget {
       remindNotifications: _pickedNotifications,
     );
     context.read<NotificationManagerCubit>().createOrUpdateNotification(notification);
+  }
+
+  _initCubit() {
+    _cubit = context.read<NotificationManagerCubit>();
+    _cubit.sideEffects.listen((effect) {
+      if (effect is AskToDelete) {
+        final notification = effect.notificationModel;
+        final messageSplit = context.strings.ask_to_delete(notification.name).split(notification.name);
+        final textTheme = Theme.of(context).textTheme;
+        showDialog(
+          context: context,
+          builder: (ctx) => MessageDialog(
+            messageWidget: RichText(
+              text: TextSpan(children: [
+                TextSpan(text: messageSplit[0], style: textTheme.titleMedium),
+                TextSpan(
+                  text: notification.name,
+                  style: textTheme.titleSmall?.copyWith(color: context.colors.primary),
+                ),
+                TextSpan(text: messageSplit[1], style: textTheme.titleMedium),
+              ]),
+            ),
+            onPressedOk: () {
+              _cubit.deleteNotification(effect.notificationModel);
+              Navigator.pop(ctx);
+            },
+            onPressedCancel: () {
+              Navigator.pop(ctx);
+            },
+          ),
+        );
+      }
+    });
   }
 }

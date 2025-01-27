@@ -241,16 +241,6 @@ class S {
     );
   }
 
-  /// `Did you wish {notificationName} a happy birthday?`
-  String did_you_wish(Object notificationName) {
-    return Intl.message(
-      'Did you wish $notificationName a happy birthday?',
-      name: 'did_you_wish',
-      desc: '',
-      args: [notificationName],
-    );
-  }
-
   /// `Hello! 🎉`
   String get hello {
     return Intl.message(
@@ -388,6 +378,26 @@ class S {
       name: 'enter_your_phone_number',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Did you wish {notificationName} a happy birthday?`
+  String did_you_wish(Object notificationName) {
+    return Intl.message(
+      'Did you wish $notificationName a happy birthday?',
+      name: 'did_you_wish',
+      desc: '',
+      args: [notificationName],
+    );
+  }
+
+  /// `Are you sure you want to delete {notificationName}?`
+  String ask_to_delete(Object notificationName) {
+    return Intl.message(
+      'Are you sure you want to delete $notificationName?',
+      name: 'ask_to_delete',
+      desc: '',
+      args: [notificationName],
     );
   }
 

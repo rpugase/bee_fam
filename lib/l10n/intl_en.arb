@@ -24,7 +24,6 @@
   "soon" : "Soon",
   "last_version" : "Version",
   "error_number_not_found" : "Number not found",
-  "did_you_wish" : "Did you wish {notificationName} a happy birthday?",
 
   "hello" : "Hello! 🎉",
   "add_people" : "Add special people,\n days and events",
@@ -41,6 +40,8 @@
   "notes" : "Notes",
   "get_notification" : "Get notification",
   "enter_your_phone_number" : "Enter your phone number",
+  "did_you_wish" : "Did you wish {notificationName} a happy birthday?",
+  "ask_to_delete" : "Are you sure you want to delete {notificationName}?",
 
   "create_notification" : "Create notification",
   "delete_notification" : "Delete notification",

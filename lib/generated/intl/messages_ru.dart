@@ -21,11 +21,14 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
   static String m0(notificationName) =>
+      "Вы хотите удалить ${notificationName}?";
+
+  static String m1(notificationName) =>
       "Ты поздравил ${notificationName} с днём рождения?";
 
-  static String m1(x) => "За ${x} месяц";
+  static String m2(x) => "За ${x} месяц";
 
-  static String m2(x) => "За ${x} неделю";
+  static String m3(x) => "За ${x} неделю";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -33,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Добавляйте особенных людей,\n дни и события"),
         "all_reminders":
             MessageLookupByLibrary.simpleMessage("Все Напоминания"),
+        "ask_to_delete": m0,
         "back": MessageLookupByLibrary.simpleMessage("Назад"),
         "birthday": MessageLookupByLibrary.simpleMessage("День рождения"),
         "birthdays": MessageLookupByLibrary.simpleMessage("Дни рождения"),
@@ -48,7 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Создать напоминание"),
         "delete_notification":
             MessageLookupByLibrary.simpleMessage("Удалить напоминание"),
-        "did_you_wish": m0,
+        "did_you_wish": m1,
         "enter_your_phone_number":
             MessageLookupByLibrary.simpleMessage("Введите ваш номер телефона"),
         "error_birthday_require":
@@ -79,8 +83,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "hello": MessageLookupByLibrary.simpleMessage("Привет! 🎉"),
         "in_day_birthday":
             MessageLookupByLibrary.simpleMessage("В день события"),
-        "in_x_month": m1,
-        "in_x_week": m2,
+        "in_x_month": m2,
+        "in_x_week": m3,
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
         "last_version": MessageLookupByLibrary.simpleMessage("Версия ПО"),
         "login": MessageLookupByLibrary.simpleMessage("Отправьте код"),

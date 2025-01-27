@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:birthday_gift/core/model/notification_model.dart';
 import 'package:birthday_gift/feature/notification/domain/notification_error_handler.dart';
 import 'package:birthday_gift/utils/base/base_cubit.dart';
@@ -9,6 +11,9 @@ import 'notification_manage_interface.dart';
 class NotificationManagerCubit extends BaseCubit<NotificationManageState> {
   final OnCreateOrUpdateNotification _onCreateOrUpdateNotification;
   final OnDeleteNotification _onDeleteNotification;
+
+  final _sideEffectsController = StreamController<NotificationManageSideEffect>();
+  Stream<NotificationManageSideEffect> get sideEffects => _sideEffectsController.stream;
 
   NotificationManagerCubit(this._onCreateOrUpdateNotification, this._onDeleteNotification) : super(ApplyData());
 
@@ -23,6 +28,10 @@ class NotificationManagerCubit extends BaseCubit<NotificationManageState> {
       await _onCreateOrUpdateNotification.createOrUpdateNotification(notification);
       emit(Finish());
     }, null);
+  }
+
+  void askToDelete(NotificationModel notificationModel) {
+    _sideEffectsController.add(AskToDelete(notificationModel));
   }
 
   void deleteNotification(NotificationModel notificationModel) {
@@ -42,6 +51,19 @@ class NotificationManagerCubit extends BaseCubit<NotificationManageState> {
       addError(Exception("No find "));
     }
   }
+
+  @override
+  Future<void> close() {
+    _sideEffectsController.close();
+    return super.close();
+  }
+}
+
+abstract class NotificationManageSideEffect extends BlocState {}
+
+class AskToDelete extends NotificationManageSideEffect {
+  final NotificationModel notificationModel;
+  AskToDelete(this.notificationModel);
 }
 
 abstract class NotificationManageState extends BlocState {}
