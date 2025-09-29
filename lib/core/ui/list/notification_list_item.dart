@@ -99,7 +99,7 @@ class NotificationItem extends StatelessWidget {
                     child: Center(
                         child: Text(
                           notification.initials,
-                          style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.white),
+                          style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Colors.white),
                         ),
                     ),
                   ),
@@ -111,11 +111,11 @@ class NotificationItem extends StatelessWidget {
                     children: [
                       Text(
                         notification.name,
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       Text(
                         context.strings.birthday,
-                        style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: context.colors.personTypeDescription,
                               fontSize: 12,
                             ),
@@ -129,11 +129,11 @@ class NotificationItem extends StatelessWidget {
                       children: [
                         Text(
                           notification.day,
-                          style: Theme.of(context).textTheme.headline5?.copyWith(color: context.colors.daysColor),
+                          style: Theme.of(context).textTheme.displayMedium?.copyWith(color: context.colors.daysColor),
                         ),
                         Text(
                           notification.month,
-                          style: Theme.of(context).textTheme.bodyText2?.copyWith(color: context.colors.daysColor),
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: context.colors.daysColor),
                         ),
                       ],
                     ),

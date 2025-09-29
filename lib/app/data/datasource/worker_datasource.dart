@@ -37,7 +37,7 @@ class WorkerDatasource {
       initialDelay: initialDelay,
       frequency: duration,
       constraints: Constraints(
-        networkType: NetworkType.not_required,
+        networkType: NetworkType.notRequired,
       ),
     );
   }

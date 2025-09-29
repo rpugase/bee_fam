@@ -52,7 +52,7 @@ class AuthPage extends StatelessWidget {
                             const SizedBox(height: 20.0),
                             Text(
                               '${context.strings.enter_your_phone_number}:',
-                              style: Theme.of(context).textTheme.subtitle1,
+                              style: Theme.of(context).textTheme.titleMedium,
                             ),
                             const SizedBox(height: 20.0),
                             BaseBlocConsumer<AuthCubit, AuthState>(

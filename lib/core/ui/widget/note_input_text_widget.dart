@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:birthday_gift/core/ui/resources/app_translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,11 +32,11 @@ class _NotesFieldState extends State<NotesField> {
             Expanded(
                 child: Text(
                   "${context.strings.notes}:",
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 )),
             Text(
               "${_textCount - _ignoreCount}/$maxLength",
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.bodyLarge,
             )
           ],
         ),

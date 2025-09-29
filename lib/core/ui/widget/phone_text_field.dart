@@ -57,7 +57,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
             child: Center(
               child: Text(
                 getCountryEmoji(countryCode),
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.displayMedium,
               ),
             ),
           ),

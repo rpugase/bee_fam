@@ -25,7 +25,7 @@ class MonthItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Text(
         monthListItem.onGetHeader(context),
-        style: Theme.of(context).textTheme.bodyText1
+        style: Theme.of(context).textTheme.bodyLarge
           ?.copyWith(
             color: context.colors.textPrimary.withOpacity(0.6),
           ),

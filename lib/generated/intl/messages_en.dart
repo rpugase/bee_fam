@@ -29,76 +29,94 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "add_people": MessageLookupByLibrary.simpleMessage(
-            "Add special people,\n days and events"),
-        "all_reminders": MessageLookupByLibrary.simpleMessage("All Reminders"),
-        "back": MessageLookupByLibrary.simpleMessage("Back"),
-        "birthday": MessageLookupByLibrary.simpleMessage("Birthday"),
-        "birthdays": MessageLookupByLibrary.simpleMessage("Birthdays"),
-        "choose_event": MessageLookupByLibrary.simpleMessage("Choose events"),
-        "colleagues": MessageLookupByLibrary.simpleMessage("Colleagues"),
-        "create_from_calendar":
-            MessageLookupByLibrary.simpleMessage("Create from calendar"),
-        "create_from_contact":
-            MessageLookupByLibrary.simpleMessage("Create from contacts"),
-        "create_new": MessageLookupByLibrary.simpleMessage("Create new"),
-        "create_notification":
-            MessageLookupByLibrary.simpleMessage("Create notification"),
-        "delete_notification":
-            MessageLookupByLibrary.simpleMessage("Delete notification"),
-        "did_you_wish": m0,
-        "enter_your_phone_number":
-            MessageLookupByLibrary.simpleMessage("Enter your phone number"),
-        "error_birthday_require":
-            MessageLookupByLibrary.simpleMessage("Birthday is require"),
-        "error_code_empty":
-            MessageLookupByLibrary.simpleMessage("Code is require"),
-        "error_code_incorrect":
-            MessageLookupByLibrary.simpleMessage("Code is incorrect"),
-        "error_name_require":
-            MessageLookupByLibrary.simpleMessage("Name is require"),
-        "error_no_have_events":
-            MessageLookupByLibrary.simpleMessage("Your calendar is empty 🙏"),
-        "error_no_internet":
-            MessageLookupByLibrary.simpleMessage("No internet connection"),
-        "error_number_not_found":
-            MessageLookupByLibrary.simpleMessage("Number not found"),
-        "error_phone_incorrect":
-            MessageLookupByLibrary.simpleMessage("Phone number is incorrect"),
-        "error_phone_number_empty":
-            MessageLookupByLibrary.simpleMessage("Phone number is require"),
-        "error_unknown": MessageLookupByLibrary.simpleMessage(
-            "Something went wrong. Try again"),
-        "from_contacts": MessageLookupByLibrary.simpleMessage("From Contacts"),
-        "from_google_calendar":
-            MessageLookupByLibrary.simpleMessage("From Google Calendar"),
-        "full_name": MessageLookupByLibrary.simpleMessage("Full Name"),
-        "get_notification":
-            MessageLookupByLibrary.simpleMessage("Get notification"),
-        "hello": MessageLookupByLibrary.simpleMessage("Hello! 🎉"),
-        "in_day_birthday": MessageLookupByLibrary.simpleMessage("In birthday"),
-        "in_x_month": m1,
-        "in_x_week": m2,
-        "language": MessageLookupByLibrary.simpleMessage("Language"),
-        "last_version": MessageLookupByLibrary.simpleMessage("Version"),
-        "login": MessageLookupByLibrary.simpleMessage("Send Code"),
-        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
-        "not_now": MessageLookupByLibrary.simpleMessage("Not now 🗿"),
-        "notes": MessageLookupByLibrary.simpleMessage("Notes"),
-        "notification": MessageLookupByLibrary.simpleMessage("Notification"),
-        "notifications_time":
-            MessageLookupByLibrary.simpleMessage("Notifications time"),
-        "ok": MessageLookupByLibrary.simpleMessage("Ok"),
-        "others": MessageLookupByLibrary.simpleMessage("Other"),
-        "phone": MessageLookupByLibrary.simpleMessage("Phone"),
-        "phoneCode": MessageLookupByLibrary.simpleMessage("Code"),
-        "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
-        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
-        "short_days": MessageLookupByLibrary.simpleMessage("dy"),
-        "short_month": MessageLookupByLibrary.simpleMessage("month"),
-        "soon": MessageLookupByLibrary.simpleMessage("Soon"),
-        "terms_and_privacy": MessageLookupByLibrary.simpleMessage(
-            "By using Bee you agree to our |Terms| and |Privacy Policy|"),
-        "yes": MessageLookupByLibrary.simpleMessage("Yes 🎉")
-      };
+    "add_people": MessageLookupByLibrary.simpleMessage(
+      "Add special people,\n days and events",
+    ),
+    "all_reminders": MessageLookupByLibrary.simpleMessage("All Reminders"),
+    "back": MessageLookupByLibrary.simpleMessage("Back"),
+    "birthday": MessageLookupByLibrary.simpleMessage("Birthday"),
+    "birthdays": MessageLookupByLibrary.simpleMessage("Birthdays"),
+    "choose_event": MessageLookupByLibrary.simpleMessage("Choose events"),
+    "colleagues": MessageLookupByLibrary.simpleMessage("Colleagues"),
+    "create_from_calendar": MessageLookupByLibrary.simpleMessage(
+      "Create from calendar",
+    ),
+    "create_from_contact": MessageLookupByLibrary.simpleMessage(
+      "Create from contacts",
+    ),
+    "create_new": MessageLookupByLibrary.simpleMessage("Create new"),
+    "create_notification": MessageLookupByLibrary.simpleMessage(
+      "Create notification",
+    ),
+    "delete_notification": MessageLookupByLibrary.simpleMessage(
+      "Delete notification",
+    ),
+    "did_you_wish": m0,
+    "enter_your_phone_number": MessageLookupByLibrary.simpleMessage(
+      "Enter your phone number",
+    ),
+    "error_birthday_require": MessageLookupByLibrary.simpleMessage(
+      "Birthday is require",
+    ),
+    "error_code_empty": MessageLookupByLibrary.simpleMessage("Code is require"),
+    "error_code_incorrect": MessageLookupByLibrary.simpleMessage(
+      "Code is incorrect",
+    ),
+    "error_name_require": MessageLookupByLibrary.simpleMessage(
+      "Name is require",
+    ),
+    "error_no_have_events": MessageLookupByLibrary.simpleMessage(
+      "Your calendar is empty 🙏",
+    ),
+    "error_no_internet": MessageLookupByLibrary.simpleMessage(
+      "No internet connection",
+    ),
+    "error_number_not_found": MessageLookupByLibrary.simpleMessage(
+      "Number not found",
+    ),
+    "error_phone_incorrect": MessageLookupByLibrary.simpleMessage(
+      "Phone number is incorrect",
+    ),
+    "error_phone_number_empty": MessageLookupByLibrary.simpleMessage(
+      "Phone number is require",
+    ),
+    "error_unknown": MessageLookupByLibrary.simpleMessage(
+      "Something went wrong. Try again",
+    ),
+    "from_contacts": MessageLookupByLibrary.simpleMessage("From Contacts"),
+    "from_google_calendar": MessageLookupByLibrary.simpleMessage(
+      "From Google Calendar",
+    ),
+    "full_name": MessageLookupByLibrary.simpleMessage("Full Name"),
+    "get_notification": MessageLookupByLibrary.simpleMessage(
+      "Get notification",
+    ),
+    "hello": MessageLookupByLibrary.simpleMessage("Hello! 🎉"),
+    "in_day_birthday": MessageLookupByLibrary.simpleMessage("In birthday"),
+    "in_x_month": m1,
+    "in_x_week": m2,
+    "language": MessageLookupByLibrary.simpleMessage("Language"),
+    "last_version": MessageLookupByLibrary.simpleMessage("Version"),
+    "login": MessageLookupByLibrary.simpleMessage("Send Code"),
+    "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+    "not_now": MessageLookupByLibrary.simpleMessage("Not now 🗿"),
+    "notes": MessageLookupByLibrary.simpleMessage("Notes"),
+    "notification": MessageLookupByLibrary.simpleMessage("Notification"),
+    "notifications_time": MessageLookupByLibrary.simpleMessage(
+      "Notifications time",
+    ),
+    "ok": MessageLookupByLibrary.simpleMessage("Ok"),
+    "others": MessageLookupByLibrary.simpleMessage("Other"),
+    "phone": MessageLookupByLibrary.simpleMessage("Phone"),
+    "phoneCode": MessageLookupByLibrary.simpleMessage("Code"),
+    "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+    "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+    "short_days": MessageLookupByLibrary.simpleMessage("dy"),
+    "short_month": MessageLookupByLibrary.simpleMessage("month"),
+    "soon": MessageLookupByLibrary.simpleMessage("Soon"),
+    "terms_and_privacy": MessageLookupByLibrary.simpleMessage(
+      "By using Bee you agree to our |Terms| and |Privacy Policy|",
+    ),
+    "yes": MessageLookupByLibrary.simpleMessage("Yes 🎉"),
+  };
 }

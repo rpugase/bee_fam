@@ -29,7 +29,7 @@ class CreateNotificationWidget extends StatelessWidget {
         children: [
           Text(
             context.strings.create_notification,
-            style: Theme.of(context).textTheme.subtitle1?.copyWith(
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: context.colors.createNotification,
                 ),
           ),
@@ -42,7 +42,7 @@ class CreateNotificationWidget extends StatelessWidget {
                 const SizedBox(width: 36.0),
                 Text(
                   context.strings.create_new,
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ],
             ),
@@ -56,7 +56,7 @@ class CreateNotificationWidget extends StatelessWidget {
                 const SizedBox(width: 36.0),
                 Text(
                   context.strings.create_from_contact,
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ],
             ),
@@ -70,7 +70,7 @@ class CreateNotificationWidget extends StatelessWidget {
                 const SizedBox(width: 36.0),
                 Text(
                   context.strings.create_from_calendar,
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ],
             ),

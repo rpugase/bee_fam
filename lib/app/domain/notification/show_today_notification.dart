@@ -1,11 +1,8 @@
-import 'package:birthday_gift/app/app_initialization.dart';
 import 'package:birthday_gift/app/data/datasource/notification_datasource.dart';
 import 'package:birthday_gift/app/data/repository/notification_repository.dart';
 import 'package:birthday_gift/app/data/repository/shown_notification_repository.dart';
 import 'package:birthday_gift/core/data_source/local_source/dao/notification_dao.dart';
 import 'package:birthday_gift/core/data_source/local_source/dao/shown_notification_dao.dart';
-import 'package:birthday_gift/core/data_source/local_source/entity/notification_entity.dart';
-import 'package:birthday_gift/core/data_source/local_source/entity/shown_notification_entity.dart';
 import 'package:birthday_gift/core/data_source/remote_source/google_remote_data_source.dart';
 import 'package:birthday_gift/utils/base/use_case.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
@@ -42,13 +39,13 @@ class GetTodayNotification extends UseCase<void, NoParams> {
   }
 
   static Future<GetTodayNotification> init() async {
-    await initHive();
+    // await initHive();
     final personRepository = NotificationRepository(
-      NotificationDao(await NotificationEntity.createBox()),
+      NotificationDao(),
       GoogleRemoteDataSource(),
     );
     final shownNotificationRepository = ShownNotificationRepository(
-      ShownNotificationDao(await ShownNotificationEntity.createBox()),
+      ShownNotificationDao(),
     );
 
     return GetTodayNotification(

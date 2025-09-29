@@ -12,11 +12,6 @@ import 'package:birthday_gift/core/data_source/local_source/dao/notification_dao
 import 'package:birthday_gift/core/data_source/local_source/dao/settings_dao.dart';
 import 'package:birthday_gift/core/data_source/local_source/dao/shown_notification_dao.dart';
 import 'package:birthday_gift/core/data_source/local_source/dao/user_dao.dart';
-import 'package:birthday_gift/core/data_source/local_source/entity/note_entity.dart';
-import 'package:birthday_gift/core/data_source/local_source/entity/notification_entity.dart';
-import 'package:birthday_gift/core/data_source/local_source/entity/remind_notification_entity.dart';
-import 'package:birthday_gift/core/data_source/local_source/entity/shown_notification_entity.dart';
-import 'package:birthday_gift/core/data_source/local_source/entity/user_entity.dart';
 import 'package:birthday_gift/core/data_source/remote_source/google_remote_data_source.dart';
 import 'package:birthday_gift/core/feature/calendar_sync_feature.dart';
 import 'package:birthday_gift/core/feature/contacts_sync_feature.dart';
@@ -35,7 +30,6 @@ import 'package:birthday_gift/feature/user/presentation/auth_cubit.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/datasource/worker_datasource.dart';
@@ -98,16 +92,16 @@ Future<void> _initWorker() async {
 }
 
 Future<void> _initDao() async {
-  sl.registerSingleton<Box<UserEntity>>(await UserEntity.createBox());
-  sl.registerSingleton<Box<NotificationEntity>>(await NotificationEntity.createBox());
-  sl.registerSingleton<Box<NoteEntity>>(await NoteEntity.createBox());
-  sl.registerSingleton<Box<RemindNotificationEntity>>(await RemindNotificationEntity.createBox());
-  sl.registerSingleton<Box<ShownNotificationEntity>>(await ShownNotificationEntity.createBox());
+  // sl.registerSingleton<Box<UserEntity>>(await UserEntity.createBox());
+  // sl.registerSingleton<Box<NotificationEntity>>(await NotificationEntity.createBox());
+  // sl.registerSingleton<Box<NoteEntity>>(await NoteEntity.createBox());
+  // sl.registerSingleton<Box<RemindNotificationEntity>>(await RemindNotificationEntity.createBox());
+  // sl.registerSingleton<Box<ShownNotificationEntity>>(await ShownNotificationEntity.createBox());
 
-  sl.registerLazySingleton(() => NotificationDao(sl()));
-  sl.registerLazySingleton(() => UserDao(sl()));
+  sl.registerLazySingleton(() => NotificationDao());
+  sl.registerLazySingleton(() => UserDao());
   sl.registerLazySingleton(() => SettingsDao(sl()));
-  sl.registerLazySingleton(() => ShownNotificationDao(sl()));
+  sl.registerLazySingleton(() => ShownNotificationDao());
 }
 
 Future<void> _initUser() async {

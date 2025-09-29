@@ -58,12 +58,12 @@ class NotificationListPage extends StatelessWidget {
                 children: [
                   Text(
                     context.strings.hello,
-                    style: Theme.of(context).textTheme.headline5,
+                    style: Theme.of(context).textTheme.displayMedium,
                   ),
                   const SizedBox(height: 16),
                   Text(
                     context.strings.add_people,
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).textTheme.titleMedium,
                     textAlign: TextAlign.center,
                   ),
                 ],

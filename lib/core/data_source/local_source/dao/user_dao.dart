@@ -1,15 +1,14 @@
+import 'package:birthday_gift/core/data_source/local_source/dao/Box.dart';
 import 'package:birthday_gift/utils/logger/logger.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import '../entity/user_entity.dart';
 
 class UserDao {
-  final Box<UserEntity> _boxUser;
-
-  const UserDao(this._boxUser);
+  final Box<UserEntity> _boxUser = Box();
 
   Future<Map<int, UserEntity>> getUsers() async {
-    return { for (var e in _boxUser.keys) e as int : _boxUser.get(e)! };
+    return _boxUser.all;
+    // return { for (var e in _boxUser.keys) e as int : _boxUser.get(e)! };
   }
 
   Future<int> addUser(UserEntity userEntity) async {
@@ -19,11 +18,11 @@ class UserDao {
 
   Future<void> updateUser(int index, UserEntity userEntity) async {
     Log.i("Update userEntity=$userEntity");
-    return _boxUser.putAt(index, userEntity);
+    return _boxUser.put(index, userEntity);
   }
 
   Future<void> deleteUser(int index) async {
     Log.i("Delete userEntity=$index");
-    return _boxUser.deleteAt(index);
+    return _boxUser.delete(index);
   }
 }

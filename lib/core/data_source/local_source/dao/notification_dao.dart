@@ -1,15 +1,14 @@
 import 'package:birthday_gift/utils/logger/logger.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import '../entity/notification_entity.dart';
+import 'Box.dart';
 
 class NotificationDao {
-  final Box<NotificationEntity> _boxNotifications;
-
-  const NotificationDao(this._boxNotifications);
+  final Box<NotificationEntity> _boxNotifications = Box();
 
   Future<Map<int, NotificationEntity>> getNotifications() async {
-    return { for (var e in _boxNotifications.keys) e as int : _boxNotifications.get(e)! };
+    return _boxNotifications.all;
+    // return { for (var e in _boxNotifications.keys) e as int : _boxNotifications.get(e)! };
   }
 
   Future<int> addNotification(NotificationEntity notificationEntity) {

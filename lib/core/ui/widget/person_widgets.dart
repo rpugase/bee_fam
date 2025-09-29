@@ -85,7 +85,7 @@ class _NotificationSettingsState extends State<NotificationSettings> {
       children: [
         Text(
           '${context.strings.get_notification}:',
-          style: Theme.of(context).textTheme.headline6?.copyWith(fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 20),
         Column(

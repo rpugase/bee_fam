@@ -58,31 +58,31 @@ ThemeData AppThemeData(BuildContext context) {
       ),
     ),
     textTheme: const TextTheme(
-      headline5: TextStyle(
+      displayMedium: TextStyle(
         fontSize: 24,
         fontFamily: AppFonts.sfProText,
         fontWeight: FontWeight.w600,
       ),
-      headline6: TextStyle(
+      titleLarge: TextStyle(
         fontSize: 18,
         fontFamily: AppFonts.sfProText,
         fontWeight: FontWeight.w600,
       ),
-      subtitle1: TextStyle(
+      titleMedium: TextStyle(
         fontSize: 16,
         fontFamily: AppFonts.sfProText,
       ),
-      subtitle2: TextStyle(
+      titleSmall: TextStyle(
         fontSize: 16,
         fontFamily: AppFonts.sfProText,
         fontWeight: FontWeight.w600
       ),
-      bodyText1: TextStyle(
+      bodyLarge: TextStyle(
         fontSize: 14,
         fontFamily: AppFonts.sfProText,
         fontWeight: FontWeight.w600,
       ),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
         fontSize: 14,
         fontFamily: AppFonts.sfProText,
       ),
